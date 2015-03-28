@@ -20,14 +20,14 @@
     <br />
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1"><%= f.label :start %></span>
-      <%= f.text_field :start, :class => "form-control",
-           "aria-describedby" => "basic-addon1" %>
+      <%= f.select :start,
+          options_for_select(@start_options.collect { |w| [w[0].humanize, w[0]] }), selected: @task.start, class: 'select-box' %>
     </div>
     <br />
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1"><%= f.label :end %></span>
-      <%= f.text_field :end, :class => "form-control",
-           "aria-describedby" => "basic-addon1" %>
+      <%= f.select :end,
+          options_for_select(@end_options.collect { |w| [w[0].humanize, w[0]] }), selected: @task.end, class: 'select-box' %>
     </div>
     <br />
     <div class="input-group">

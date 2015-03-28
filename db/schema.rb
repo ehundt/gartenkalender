@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150328084340) do
+ActiveRecord::Schema.define(version: 20150328110504) do
 
   create_table "plants", force: :cascade do |t|
     t.string   "name"
@@ -38,13 +38,13 @@ ActiveRecord::Schema.define(version: 20150328084340) do
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title"
-    t.string   "start"
-    t.string   "end"
+    t.integer  "start",      default: 0
+    t.integer  "end",        default: 0
     t.text     "desc"
     t.integer  "repeat"
     t.integer  "plant_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   add_index "tasks", ["plant_id"], name: "index_tasks_on_plant_id"

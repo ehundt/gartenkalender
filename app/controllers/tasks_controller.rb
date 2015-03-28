@@ -9,11 +9,17 @@ class TasksController < ApplicationController
 
   def new
    @plant = Plant.find(params[:plant_id])
+   @start_options = Task.starts
+   @end_options = Task.ends
+   @repeat_options = Task.repeats
   end
 
   def edit
     @task = Task.find(params[:id])
     @plant = Plant.find(params[:plant_id])
+    @start_options = Task.starts
+    @end_options = Task.ends
+    @repeat_options = Task.repeat
   end
 
   def create

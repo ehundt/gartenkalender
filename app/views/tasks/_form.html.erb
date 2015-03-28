@@ -4,34 +4,32 @@
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1">Titel</span>
       <%= f.text_field :title, :class => "form-control",
-           :placeholder => "Titel",
            "aria-describedby" => "basic-addon1" %>
     </div>
     <br />
     <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1"><%= f.label :desc %></span>
+      <span class="input-group-addon" id="basic-addon1">Beschreibung</span>
       <%= f.text_area :desc, :class => "form-control",
-           :placeholder => "Beschreibung",
            "aria-describedby" => "basic-addon1"  %>
     </div>
     <br />
     <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1"><%= f.label :start %></span>
-      <%= f.text_field :start, :class => "form-control",
-           :placeholder => "Start",
-           "aria-describedby" => "basic-addon1" %>
+      <span class="input-group-addon" id="basic-addon1">frühestens</span>
+      <%= f.select :start,
+          options_for_select(@start_options.collect { |w| [w[0].humanize, w[0]] }), class: 'select-box' %>
     </div>
     <br />
     <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1"><%= f.label :end %></span>
-      <%= f.text_field :end, :class => "form-control",
-           :placeholder => "Ende",
-           "aria-describedby" => "basic-addon1" %>
+      <span class="input-group-addon" id="basic-addon1">bis spätestens</span>
+      <%= f.select :end,
+          options_for_select(@end_options.collect { |w| [w[0].humanize, w[0]] }), class: 'select-box' %>
     </div>
     <br />
     <div class="input-group">
       <span class="input-group-addon" id="basic-addon1"><%= f.label :repeat %></span>
-      <%= f.text_field :repeat, :class => "form-control",
+      <%= f.select :repeat,
+          options_for_select(@repeat_options.collect { |w| [w[0].humanize, w[0]] }), class: 'select-box' %>
+      <%#= f.text_field :repeat, :class => "form-control",
            :placeholder => "Wiederholung",
            "aria-describedby" => "basic-addon1" %>
     </div>
