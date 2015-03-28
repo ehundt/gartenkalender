@@ -1,0 +1,16 @@
+<h1><%= "#{@user.first_name} #{@user.last_name}" %></h1>
+
+<table>
+    <tr>
+        <td>Email Adresse</td>
+        <td><%= @user.email %></td>
+    </tr>
+    <tr>
+        <td>Administrator:</td>
+        <td><%= @user.admin %></td>
+    </tr>
+</table>
+
+<br>
+<br>
+<%= link_to "Liste aller Benutzer", users_path %>

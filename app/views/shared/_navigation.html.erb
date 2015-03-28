@@ -1,0 +1,11 @@
+<ul class="nav nav-pills nav-stacked" role="navigation">
+  <li role="navigation" <%= active_class(root_path) %>>
+    <%= link_to 'Home', root_path %>
+  </li>
+  <li role="navigation" <%= active_class(plants_path) %>>
+    <%= link_to "Meine Pflanzen", plants_path %>
+  </li>
+  <li role="navigation" <%= active_class(new_plant_path) %>>
+    <%= link_to "Neue Pflanze", new_plant_path %>
+  </li>
+</ul>

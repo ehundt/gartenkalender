@@ -1,0 +1,8 @@
+<% if @plant %>
+  <div class="row sidebar">
+    <div class="col-xs-12">
+      <%= image_tag @plant.main_image, style: :medium, class: "sidebar-image" %>
+      <%= link_to 'Pflanze bearbeiten', edit_plant_path(@plant), class: 'btn btn-success sidebar-button' %>
+    </div>
+  </div>
+<% end %>

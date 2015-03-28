@@ -1,0 +1,22 @@
+<% if plant.desc %>
+  <button class="btn btn-link" data-toggle="modal" data-target="#plant-<%= plant.id %>-desc">
+    Beschreibung
+  </button>
+
+  <!-- Modal -->
+  <div class="modal fade" id="plant-<%= plant.id %>-desc" tabindex="-1" role="dialog" aria-labelledby="plant-<%= plant.id %>-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="plant-<%= plant.id %>-label">Beschreibung</h4>
+        </div>
+        <div class="modal-body">
+          <%= plant.desc %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

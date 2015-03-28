@@ -1,0 +1,23 @@
+<h1><%= @plant.name %></h1>
+<p>
+  <%= @plant.subtitle %>
+</p>
+<p>
+  <%= @plant.desc %>
+</p>
+
+<h2>Aufgaben</h2>
+<table class="table">
+  <tr>
+    <th></th>
+    <th>Titel</th>
+    <th>von</th>
+    <th>bis</th>
+    <th>Wiederholung</th>
+    <th></th>
+  </tr>
+  <%= render @plant.tasks %>
+</table>
+
+<%= link_to "Aufgabe hinzufügen", new_plant_task_path(@plant), class: "btn btn-success" %>
+<br />

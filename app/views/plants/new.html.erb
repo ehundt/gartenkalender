@@ -1,0 +1,35 @@
+<h2>Neue Pflanze anlegen</h2>
+<br />
+<%= form_for :plant, url: plants_path do |f| %>
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">Pflanzenname</span>
+    <%= f.text_field :name, :class => "form-control",
+       :placeholder => "Pflanzenname",
+       "aria-describedby" => "basic-addon1" %>
+</div>
+<br />
+  <div class="input-group">
+    <%= f.file_field :main_image, :class => "form-control",
+       "aria-describedby" => "basic-addon1" %>
+  </div>
+<br />
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">Kurze Beschreibung</span>
+    <%= f.text_field :subtitle, :class => "form-control",
+       :placeholder => "Kurze Beschreibung",
+       "aria-describedby" => "basic-addon1" %>
+</div>
+<br />
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">Beschreibung</span>
+    <%= f.text_area :desc, :class => "form-control",
+       :placeholder => "Beschreibung",
+       "aria-describedby" => "basic-addon1" %>
+</div>
+<br />
+<div class="input-group">
+  <span class="input-group-btn">
+    <%= f.submit :class => "btn btn-default" %>
+  </span>
+</div>
+<% end %>

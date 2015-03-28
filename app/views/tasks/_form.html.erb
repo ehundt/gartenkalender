@@ -1,0 +1,46 @@
+<div class="new-task-form">
+  <%= form_for([@plant, @plant.tasks.build]) do |f| %>
+
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">Titel</span>
+      <%= f.text_field :title, :class => "form-control",
+           :placeholder => "Titel",
+           "aria-describedby" => "basic-addon1" %>
+    </div>
+    <br />
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1"><%= f.label :desc %></span>
+      <%= f.text_area :desc, :class => "form-control",
+           :placeholder => "Beschreibung",
+           "aria-describedby" => "basic-addon1"  %>
+    </div>
+    <br />
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1"><%= f.label :start %></span>
+      <%= f.text_field :start, :class => "form-control",
+           :placeholder => "Start",
+           "aria-describedby" => "basic-addon1" %>
+    </div>
+    <br />
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1"><%= f.label :end %></span>
+      <%= f.text_field :end, :class => "form-control",
+           :placeholder => "Ende",
+           "aria-describedby" => "basic-addon1" %>
+    </div>
+    <br />
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1"><%= f.label :repeat %></span>
+      <%= f.text_field :repeat, :class => "form-control",
+           :placeholder => "Wiederholung",
+           "aria-describedby" => "basic-addon1" %>
+    </div>
+    <br />
+    <div class="input-group">
+      <span class="input-group-btn">
+        <%= f.submit :class => "btn btn-success" %>
+      </span>
+    </div>
+  <% end %>
+</div>
+

@@ -1,0 +1,7 @@
+<h1>Edit user</h1>
+
+<% if current_user == @user.id || ( current_user && current_user.admin == 1 ) %>
+  <%= render 'form' %>
+<% else %>
+  pflanzen hinzufügen??
+<% end %>

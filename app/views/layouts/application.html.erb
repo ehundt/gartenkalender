@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Socialgardener</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% flash.each do |name, msg| -%>
+  <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+<% end -%>
+
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<div id="main-container" class="container-fluid">
+  <div class="row">
+
+    <div id="navi" class="col-xs-2">
+      <%= render 'shared/navigation' %>
+    </div>
+    <div id="content" class="col-xs-7">
+       <%= display_tabs %>
+       <%= yield %>
+    </div>
+    <div id="sidebar" class="col-xs-3">
+      <%= render 'shared/sidebar' %>
+    </div>
+  </div>
+</div>
+</body>
+</html>
