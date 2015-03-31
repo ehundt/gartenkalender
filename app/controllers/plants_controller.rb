@@ -1,6 +1,6 @@
 class PlantsController < ApplicationController
 
-  before_action :authenticate_user!
+  authorize_resource
 
   def index
     @plants = current_user.plants.order(:name)

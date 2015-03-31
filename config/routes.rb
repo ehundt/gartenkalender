@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     resources :tasks
   end
 
-  resources :users
+  resources :users, except: :new
 
   # Example resource route with options:
   #   resources :products do

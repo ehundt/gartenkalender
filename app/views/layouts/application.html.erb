@@ -12,12 +12,13 @@
   <%= content_tag :div, msg, class: "alert alert-#{name}" %>
 <% end -%>
 
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-
 <div id="main-container" class="container-fluid">
   <div class="row">
-
+    <div class="col-xs-12 logged-in-status">
+      <%= show_logged_in_status %>
+    </div>
+  </div>
+  <div class="row">
     <div id="navi" class="col-xs-2">
       <%= render 'shared/navigation' %>
     </div>

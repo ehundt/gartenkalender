@@ -1,4 +1,7 @@
 class TasksController < ApplicationController
+
+  load_and_authorize_resource
+
   def index
     @tasks = task.all
   end
@@ -19,7 +22,7 @@ class TasksController < ApplicationController
     @plant = Plant.find(params[:plant_id])
     @start_options = Task.starts
     @end_options = Task.ends
-    @repeat_options = Task.repeat
+    @repeat_options = Task.repeats
   end
 
   def create

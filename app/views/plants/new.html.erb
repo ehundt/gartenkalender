@@ -1,6 +1,6 @@
 <h2>Neue Pflanze anlegen</h2>
 <br />
-<%= form_for :plant, url: plants_path do |f| %>
+<%= form_for :plant, url: {action: "create"} do |f| %>
 <div class="input-group">
   <span class="input-group-addon" id="basic-addon1">Pflanzenname</span>
     <%= f.text_field :name, :class => "form-control",

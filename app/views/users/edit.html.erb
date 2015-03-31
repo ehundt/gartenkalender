@@ -1,7 +1,49 @@
 <h1>Edit user</h1>
 
-<% if current_user == @user.id || ( current_user && current_user.admin == 1 ) %>
-  <%= render 'form' %>
-<% else %>
-  pflanzen hinzufügen??
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-group">
+    <span class="input-group-addon">
+      <%= f.label :first_name %>
+    </span>
+    <%= f.text_field :first_name, :class => "form-control" %>
+  </div>
+  <br />
+  <div class="input-group">
+    <span class="input-group-addon">
+      <%= f.label :last_name %>
+    </span>
+    <%= f.text_field :last_name, :class => "form-control" %>
+  </div>
+  <br />
+  <div class="input-group">
+    <span class="input-group-addon">
+      <%= f.label :email %>
+    </span>
+    <%= f.text_field :email, :class => "form-control" %>
+  </div>
+  <br />
+  <div class="input-group">
+    <span class="input-group-addon">
+      <%= f.label :admin %>
+    </span>
+    <%= radio_button("user", "admin", "1") %>Ja
+    <%= radio_button("user", "admin", "0") %>Nein
+  </div>
+  <div class="input-group">
+    <span class="input-group-btn">
+      <%= f.submit :class => "btn btn-success" %>
+    </span>
+  </div>
 <% end %>

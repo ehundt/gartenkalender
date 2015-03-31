@@ -1,37 +1,38 @@
 <div class="new-task-form">
-  <%= form_for([@plant, @plant.tasks.build]) do |f| %>
+  <% if (defined? @task)
+       form_param = @task
+     else
+       form_param = @plant.tasks.build
+     end
+  %>
+  <%= form_for([@plant, form_param]) do |f| %>
 
     <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1">Titel</span>
-      <%= f.text_field :title, :class => "form-control",
-           "aria-describedby" => "basic-addon1" %>
+      <span class="input-group-addon">Titel</span>
+      <%= f.text_field :title, :class => "form-control" %>
     </div>
     <br />
     <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1">Beschreibung</span>
-      <%= f.text_area :desc, :class => "form-control",
-           "aria-describedby" => "basic-addon1"  %>
+      <span class="input-group-addon">Beschreibung</span>
+      <%= f.text_area :desc, :class => "form-control" %>
     </div>
     <br />
     <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1">frühestens</span>
+      <span class="input-group-addon">frühestens</span>
       <%= f.select :start,
           options_for_select(@start_options.collect { |w| [w[0].humanize, w[0]] }), class: 'select-box' %>
     </div>
     <br />
     <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1">bis spätestens</span>
+      <span class="input-group-addon">bis spätestens</span>
       <%= f.select :end,
           options_for_select(@end_options.collect { |w| [w[0].humanize, w[0]] }), class: 'select-box' %>
     </div>
     <br />
     <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1"><%= f.label :repeat %></span>
+      <span class="input-group-addon"><%= f.label :repeat %></span>
       <%= f.select :repeat,
           options_for_select(@repeat_options.collect { |w| [w[0].humanize, w[0]] }), class: 'select-box' %>
-      <%#= f.text_field :repeat, :class => "form-control",
-           :placeholder => "Wiederholung",
-           "aria-describedby" => "basic-addon1" %>
     </div>
     <br />
     <div class="input-group">

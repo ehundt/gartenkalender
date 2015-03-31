@@ -4,43 +4,6 @@
 <span class="task-title"><%= @task.title %></span></h3>
 
 <div class="task-form">
-  <%= form_for([@plant, @task]) do |f| %>
-
-    <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1"><%= f.label :title %></span>
-      <%= f.text_field :title, :class => "form-control",
-           "aria-describedby" => "basic-addon1" %>
-    </div>
-    <br />
-    <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1"><%= f.label :desc %></span>
-      <%= f.text_area :desc, :class => "form-control",
-           "aria-describedby" => "basic-addon1"  %>
-    </div>
-    <br />
-    <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1"><%= f.label :start %></span>
-      <%= f.select :start,
-          options_for_select(@start_options.collect { |w| [w[0].humanize, w[0]] }), selected: @task.start, class: 'select-box' %>
-    </div>
-    <br />
-    <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1"><%= f.label :end %></span>
-      <%= f.select :end,
-          options_for_select(@end_options.collect { |w| [w[0].humanize, w[0]] }), selected: @task.end, class: 'select-box' %>
-    </div>
-    <br />
-    <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1"><%= f.label :repeat %></span>
-      <%= f.text_field :repeat, :class => "form-control",
-           "aria-describedby" => "basic-addon1" %>
-    </div>
-    <br />
-    <div class="input-group">
-      <span class="input-group-btn">
-        <%= f.submit :class => "btn btn-success" %>
-      </span>
-    </div>
-  <% end %>
+  <%= render partial: "form" %>
 </div>
 

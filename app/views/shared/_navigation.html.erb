@@ -8,4 +8,9 @@
   <li role="navigation" <%= active_class(new_plant_path) %>>
     <%= link_to "Neue Pflanze", new_plant_path %>
   </li>
+  <% if (current_user && current_user.admin?) %>
+  <li role="navigation" <%= active_class(users_path) %>>
+    <%= link_to "Benutzer", users_path %>
+  </li>
+  <% end %>
 </ul>
