@@ -1,0 +1,14 @@
+$(document).ready(function(){
+  $('#new_task').on('click', 'button', function(){
+    //$('.new-task-form').fadeIn();
+    //$("#new_task").children(1).load("/plants/1/tasks/new");
+  });
+
+  $('.active-button').on('click', function(){
+    var activeIcon = $(this).children("img");
+    if ($(activeIcon).attr("src") == "<%= image_url('icon_tulip.gif') %>")
+      $(activeIcon).attr("src", "<%= image_url('red_cross.gif') %>");
+    else
+      $(activeIcon).attr("src", "<%= image_url('icon_tulip.gif') %>");
+  });
+});
