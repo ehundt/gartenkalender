@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150328110504) do
+ActiveRecord::Schema.define(version: 20150401112128) do
 
   create_table "plants", force: :cascade do |t|
     t.string   "name"
@@ -27,8 +27,8 @@ ActiveRecord::Schema.define(version: 20150328110504) do
   end
 
   create_table "plants_users", id: false, force: :cascade do |t|
-    t.integer  "plant_id"
-    t.integer  "user_id"
+    t.integer  "plant_id",   null: false
+    t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20150328110504) do
     t.integer  "end",        default: 0
     t.text     "desc"
     t.integer  "repeat"
-    t.integer  "plant_id"
+    t.integer  "plant_id",               null: false
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end

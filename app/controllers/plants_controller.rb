@@ -7,7 +7,7 @@ class PlantsController < ApplicationController
   end
 
   def show
-    @plant = Plant.find(params[:id])
+    @plant = Plant.find(params[:id]) # TODO: rather only look for current_user's plants
   end
 
   def new
