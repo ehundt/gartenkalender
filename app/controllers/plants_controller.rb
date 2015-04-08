@@ -1,5 +1,7 @@
 class PlantsController < ApplicationController
 
+  before_filter :authenticate_user!
+
   authorize_resource
 
   def index
@@ -44,6 +46,6 @@ class PlantsController < ApplicationController
 private
 
   def plant_params
-    params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks)
+    params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active)
   end
 end

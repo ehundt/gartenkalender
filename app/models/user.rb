@@ -9,4 +9,12 @@ class User < ActiveRecord::Base
   def admin?
     admin == 1 || false
   end
+
+  def username
+    if (first_name && last_name)
+      status = "#{first_name} #{last_name}"
+    else
+      status = email
+    end
+  end
 end
