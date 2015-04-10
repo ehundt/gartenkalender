@@ -5,18 +5,7 @@ class StartpageController < ApplicationController
     unless current_user
       render template: "startpage/logged_out/index"
     else
-      @current_tasks = Task.for_user(current_user)
-                        .where('start <= ? AND end >= ?',
-                                current_season,
-                                current_season)
-                        .includes(:plant)
+      @current_tasks = Task.current_tasks_for_user(current_user)
     end
   end
-
-private
-
-  def current_season
-    3 # TODO
-  end
-
 end

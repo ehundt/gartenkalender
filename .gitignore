@@ -39,3 +39,5 @@ bower.json
 
 # Ignore pow environment settings
 .powenv
+
+/draft.odt

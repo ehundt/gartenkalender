@@ -7,6 +7,8 @@ $(document).ready(function(){
   $('.active-button').on('click', function(){
     var activeIcon = $(this).children("img");
     if ($(activeIcon).attr("src") == "<%= image_url('icon_tulip.gif') %>")
+    // TODO: ajax.load(@plant, method: :patch, data: { active: false })
+    // only if loaded correctly, switch icon
       $(activeIcon).attr("src", "<%= image_url('red_cross.gif') %>");
     else
       $(activeIcon).attr("src", "<%= image_url('icon_tulip.gif') %>");

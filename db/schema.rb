@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401142000) do
+ActiveRecord::Schema.define(version: 20150410112025) do
+
+  create_table "done_tasks", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.integer  "season",     null: false
+    t.integer  "year",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "done_tasks", ["task_id"], name: "index_done_tasks_on_task_id"
+  add_index "done_tasks", ["user_id"], name: "index_done_tasks_on_user_id"
 
   create_table "plants", force: :cascade do |t|
     t.string   "name"
@@ -40,15 +52,18 @@ ActiveRecord::Schema.define(version: 20150401142000) do
   create_table "tasks", force: :cascade do |t|
     t.string   "title"
     t.integer  "start",      default: 0
-    t.integer  "end",        default: 0
+    t.integer  "stop",       default: 0
     t.text     "desc"
     t.integer  "repeat"
-    t.integer  "plant_id",               null: false
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.integer  "plant_id",                   null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "user_id"
+    t.boolean  "hide",       default: false, null: false
   end
 
   add_index "tasks", ["plant_id"], name: "index_tasks_on_plant_id"
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"

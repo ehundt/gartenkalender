@@ -25,12 +25,12 @@
     <br />
     <div class="input-group">
       <span class="input-group-addon">bis spätestens</span>
-      <%= f.select :end,
-          options_for_select(@end_options.collect { |w| [w[0].humanize, w[0]] }), class: 'select-box' %>
+      <%= f.select :stop,
+          options_for_select(@stop_options.collect { |w| [w[0].humanize, w[0]] }), class: 'select-box' %>
     </div>
     <br />
     <div class="input-group">
-      <span class="input-group-addon"><%= f.label :repeat %></span>
+      <span class="input-group-addon">Wiederholung</span>
       <%= f.select :repeat,
           options_for_select(@repeat_options.collect { |w| [w[0].humanize, w[0]] }), class: 'select-box' %>
     </div>

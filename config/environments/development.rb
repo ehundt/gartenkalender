@@ -42,6 +42,9 @@ Rails.application.configure do
   # for devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
+### Todo: needed? config.action_mailer.delivery_method = :smtp
+### Todo: needed? config.action_mailer.smtp_settings = {:address => "localhost", :port => 1025}
+
   # for paperclick defining the path to imageMagic (which convert)
   Paperclip.options[:command_path] = "/usr/local/bin/"
 end

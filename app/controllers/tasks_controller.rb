@@ -7,7 +7,7 @@ class TasksController < ApplicationController
   def new
    @plant = Plant.find(params[:plant_id])
    @start_options = Task.starts
-   @end_options = Task.ends
+   @stop_options = Task.stops
    @repeat_options = Task.repeats
   end
 
@@ -15,7 +15,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @plant = Plant.find(params[:plant_id])
     @start_options  = Task.starts
-    @end_options    = Task.ends
+    @stop_options    = Task.stops
     @repeat_options = Task.repeats
   end
 
@@ -49,6 +49,6 @@ class TasksController < ApplicationController
 private
 
   def task_params
-    params.require(:task).permit(:title, :desc, :end, :repeat, :start, :plant_id)
+    params.require(:task).permit(:title, :desc, :start, :stop, :repeat, :plant_id)
   end
 end
