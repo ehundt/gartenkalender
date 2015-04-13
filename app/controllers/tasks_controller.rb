@@ -20,7 +20,7 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params.merge(plant_id: params[:plant_id]))
+    @task = Task.new(task_params.merge(plant_id: params[:plant_id], user_id: current_user.id))
     @plant = Plant.find(params[:plant_id])
 
     if @task.save
@@ -46,9 +46,16 @@ class TasksController < ApplicationController
     redirect_to Plant.find(params[:plant_id])
   end
 
+  def hide
+    @task = Task.find(params[:id])
+    @task.update(hide: true)
+
+    redirect_to root_url
+  end
+
 private
 
   def task_params
-    params.require(:task).permit(:title, :desc, :start, :stop, :repeat, :plant_id)
+    params.require(:task).permit(:title, :desc, :start, :stop, :repeat, :plant_id, :user_id, :hide)
   end
 end

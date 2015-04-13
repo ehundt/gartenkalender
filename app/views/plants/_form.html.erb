@@ -14,7 +14,6 @@
 
 
 <div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">Pflanzenname</span>
     <%= f.text_field :name, :class => "form-control",
        :placeholder => "Username",
        "aria-describedby" => "basic-addon1" %>
@@ -41,6 +40,13 @@
     <%= f.text_area :desc, :class => "form-control",
        :placeholder => "Beschreibung",
        "aria-describedby" => "basic-addon1" %>
+</div>
+<br />
+<div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">Aktivieren?</span>
+   <%= radio_button("plant", "active", true) %> Ja
+   <%= radio_button("plant", "active", false) %> Nein
+
 </div>
 <br />
 <div class="input-group">

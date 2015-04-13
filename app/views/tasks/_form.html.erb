@@ -36,6 +36,15 @@
     </div>
     <br />
     <div class="input-group">
+      <span class="input-group-addon">Anzeige</span>
+      <%= radio_button("task", "hide", false) %> Aufgabe in der Aufgabenliste anzeigen<br />
+      <%= radio_button("task", "hide", true) %> Aufgabe in der Aufgabenliste <b>nicht</b> anzeigen
+    </div>
+    <br />
+    <div class="input-group">
+      <span class="input-group-btn">
+        <a href="<%= plant_path(@plant) %>"><button type="button" class="btn btn-default">Abbrechen</button></a>
+      </span>
       <span class="input-group-btn">
         <%= f.submit :class => "btn btn-success" %>
       </span>

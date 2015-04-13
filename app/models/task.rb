@@ -1,5 +1,6 @@
 class Task < ActiveRecord::Base
   belongs_to :plant
+  has_many :done_task
 
   PHAENOLOG_SEASONS = [ :vorfrühling, :erstfrühling, :vollfrühling,
                         :frühsommer, :hochsommer, :spätsommer,
@@ -9,12 +10,12 @@ class Task < ActiveRecord::Base
   enum stop:  PHAENOLOG_SEASONS.map{ |s| ("ende_" + s.to_s).to_sym }
   enum repeat: [:einmalig, :jährlich]
 
-  def self.all_for_user(user)
+  def self.all_for_user(user, hide=false)
     # TODO: should be cached; does not work
     @all_for_user ||= self.where(hide: false).where('plant_id IN (?)', user.plants.select(:id))
   end
 
-  def self.current_tasks_for_user(user)
+  def self.upcoming_tasks_for_user(user)
     repeating_task_ids = self.all_for_user(user)
                         .where('start <= ? AND stop >= ?', current_season, current_season)
                         .where(repeat: self.repeats[:jährlich])
@@ -22,14 +23,15 @@ class Task < ActiveRecord::Base
 
     # TODO: year is not correct since it could be
     # a task that should be made in winter sometime but has already been done last year (in winter)
-    task_ids = repeating_task_ids - user.done_tasks.where(year: Date.today.year).pluck(:id)
+    done_repeating_tasks = DoneTask.where('task_id in (?)', repeating_task_ids).where(year: Date.today.year).pluck(:id)
+    task_ids = repeating_task_ids - done_repeating_tasks
 
     single_task_ids = self.all_for_user(user)
                         .where('start <= ? AND stop >= ?', current_season, current_season)
                         .where(repeat: self.repeats[:einmalig])
                         .pluck(:id)
 
-    task_ids += single_task_ids - user.done_tasks.pluck(:id)
+    task_ids += single_task_ids - DoneTask.where('task_id in (?)', single_task_ids).pluck(:id)
     self.where('id in (?)', task_ids).includes(:plant)
   end
 

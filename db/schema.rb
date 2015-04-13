@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150410112025) do
+ActiveRecord::Schema.define(version: 20150410130815) do
 
   create_table "done_tasks", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "task_id"
     t.integer  "season",     null: false
     t.integer  "year",       null: false
@@ -23,7 +22,6 @@ ActiveRecord::Schema.define(version: 20150410112025) do
   end
 
   add_index "done_tasks", ["task_id"], name: "index_done_tasks_on_task_id"
-  add_index "done_tasks", ["user_id"], name: "index_done_tasks_on_user_id"
 
   create_table "plants", force: :cascade do |t|
     t.string   "name"
@@ -37,17 +35,10 @@ ActiveRecord::Schema.define(version: 20150410112025) do
     t.datetime "main_image_updated_at"
     t.string   "subtitle"
     t.boolean  "active",                  default: true, null: false
+    t.integer  "user_id"
   end
 
-  create_table "plants_users", id: false, force: :cascade do |t|
-    t.integer  "plant_id",   null: false
-    t.integer  "user_id",    null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "plants_users", ["plant_id"], name: "index_plants_users_on_plant_id"
-  add_index "plants_users", ["user_id"], name: "index_plants_users_on_user_id"
+  add_index "plants", ["user_id"], name: "index_plants_on_user_id"
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title"

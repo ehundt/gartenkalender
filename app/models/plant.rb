@@ -1,6 +1,6 @@
 class Plant < ActiveRecord::Base
   has_many :tasks, :dependent => :destroy
-  has_and_belongs_to_many :users
+  belongs_to :user
 
   has_attached_file :main_image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
   validates_attachment :main_image,
@@ -11,5 +11,8 @@ class Plant < ActiveRecord::Base
     # see https://github.com/thoughtbot/paperclip for further information!!
 
   accepts_nested_attributes_for :tasks, allow_destroy: true
-  accepts_nested_attributes_for :users, allow_destroy: false ### TODO: correct?
+
+  # TODO: when people start sharing i have to take care of tasks
+  # being selected only for this user!! So far all tasks/plants will
+  # only belong to this user
 end

@@ -4,8 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_and_belongs_to_many :plants
-  has_many :done_tasks
+  has_many :plants
 
   def admin?
     admin == 1 || false

@@ -5,7 +5,7 @@ class StartpageController < ApplicationController
     unless current_user
       render template: "startpage/logged_out/index"
     else
-      @current_tasks = Task.current_tasks_for_user(current_user)
+      @upcoming_tasks = Task.upcoming_tasks_for_user(current_user)
     end
   end
 end

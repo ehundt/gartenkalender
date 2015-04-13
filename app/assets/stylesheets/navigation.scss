@@ -9,3 +9,15 @@
 .sidebar-button {
   margin-top: 30px;
 }
+
+.nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+  background-color: #cccccc;
+}
+
+.nav-tabs > li > a {
+  color: #095;
+}
+
+#content table a {
+  color: #095;
+}

@@ -14,7 +14,14 @@
 
 <div id="main-container" class="container-fluid">
   <div class="row">
-    <div class="col-xs-12 logged-in-status">
+    <div class="col-xs-2 logo">
+      <a href="<%= root_url %>" class="logo">
+      <img src="<%= image_url("logo.png") %>"><br />
+      <b>Intelligenter Gartenkalender</b></a>
+    </div>
+    <div class="col-xs-7 head">
+    </div>
+    <div class="col-xs-3 logged-in-status">
       <% if current_user %>
         <%= current_user.username %>
         <% if current_user.admin? %> (Administrator)<% end %>
@@ -27,8 +34,7 @@
     </div>
   </div>
   <div class="row">
-    <div id="navi" class="col-xs-2">
-      <%= render 'shared/navigation' %>
+    <div class="col-xs-2">
     </div>
     <div id="content" class="col-xs-7">
        <%= display_tabs %>
