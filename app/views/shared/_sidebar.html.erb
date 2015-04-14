@@ -1,7 +1,7 @@
 <% if @plant %>
   <div class="row sidebar">
     <div class="col-xs-12">
-      <%= image_tag @plant.main_image, style: :medium, class: "sidebar-image" %>
+      <%= link_to image_tag(@plant.main_image, style: :medium, class: "sidebar-image"), @plant  %>
     </div>
   </div>
 <% end %>

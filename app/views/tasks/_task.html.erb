@@ -1,6 +1,6 @@
 <tr class="info">
   <td><% if task.hide %>versteckt<% else %><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><% end %></td>
-  <td id="task_title"><%= task.title %></td>
+  <td id="task_title"><%= link_to task.title, plant_task_path(task.plant, task) %></td>
   <td><%= task.start.humanize %></td>
   <td><%= task.stop.humanize.titleize %></td>
   <td><%= task.repeat.humanize %></td>
