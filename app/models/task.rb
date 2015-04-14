@@ -12,7 +12,7 @@ class Task < ActiveRecord::Base
 
   def self.all_for_user(user, hide=false)
     # TODO: should be cached; does not work
-    @all_for_user ||= self.where(hide: false).where('plant_id IN (?)', user.plants.select(:id))
+    @all_for_user ||= self.where(hide: false).where('plant_id IN (?)', user.plants.where(active: true).select(:id))
   end
 
   def self.upcoming_tasks_for_user(user)
@@ -31,7 +31,7 @@ class Task < ActiveRecord::Base
                         .where(repeat: self.repeats[:einmalig])
                         .pluck(:id)
 
-    task_ids += single_task_ids - DoneTask.where('task_id in (?)', single_task_ids).pluck(:id)
+    task_ids += single_task_ids - DoneTask.where('task_id in (?)', single_task_ids).pluck(:task_id)
     self.where('id in (?)', task_ids).includes(:plant)
   end
 

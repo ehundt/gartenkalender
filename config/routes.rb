@@ -22,6 +22,7 @@ Rails.application.routes.draw do
       member do
         patch 'hide'
       end
+      resources :done_tasks
     end
   end
 
