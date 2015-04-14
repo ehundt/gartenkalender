@@ -20,19 +20,19 @@
     <div class="input-group">
       <span class="input-group-addon">frühestens</span>
       <%= f.select :start,
-          options_for_select(@start_options.collect { |w| [w[0].humanize, w[0]] }), class: 'select-box' %>
+          select_options_for(@task, :starts), class: 'select-box' %>
     </div>
     <br />
     <div class="input-group">
       <span class="input-group-addon">bis spätestens</span>
       <%= f.select :stop,
-          options_for_select(@stop_options.collect { |w| [w[0].humanize, w[0]] }), class: 'select-box' %>
+          select_options_for(@task, :stops), class: 'select-box' %>
     </div>
     <br />
     <div class="input-group">
       <span class="input-group-addon">Wiederholung</span>
       <%= f.select :repeat,
-          options_for_select(@repeat_options.collect { |w| [w[0].humanize, w[0]] }), class: 'select-box' %>
+          select_options_for(@task, :repeats), class: 'select-box' %>
     </div>
     <br />
     <div class="input-group">
