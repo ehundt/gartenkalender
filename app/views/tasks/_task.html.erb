@@ -2,8 +2,8 @@
   <td><% if task.hide %>versteckt<% else %><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><% end %></td>
   <td id="task_title"><%= task.title %></td>
   <td><%= task.start.humanize %></td>
-  <td><%= task.stop.humanize %></td>
-  <td><%= task.repeat %></td>
+  <td><%= task.stop.humanize.titleize %></td>
+  <td><%= task.repeat.humanize %></td>
   <td>
     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
         <%= link_to 'Ändern', edit_plant_task_path({ id: task.id, plant_id: task.plant_id }) %>&nbsp;
@@ -13,6 +13,6 @@
 </tr>
 <tr class="task-desc">
   <td></td>
-  <td colspan="7"><%= task.desc %></td>
+  <td colspan="7"><%= raw markdown.render(task.desc) %></td>
 </tr>
 

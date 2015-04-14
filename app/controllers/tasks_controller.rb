@@ -4,6 +4,11 @@ class TasksController < ApplicationController
 
   load_and_authorize_resource
 
+  def show
+    @task = Task.find(params[:id])
+    @plant = @task.plant
+  end
+
   def new
    @plant = Plant.find(params[:plant_id])
    @repeat_options = Task.repeats

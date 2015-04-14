@@ -1,5 +1,4 @@
 class PlantsController < ApplicationController
-
   before_filter :authenticate_user!
 
   authorize_resource

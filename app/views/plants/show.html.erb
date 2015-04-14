@@ -18,7 +18,7 @@
   <%= @plant.subtitle %>
 </p>
 <p>
-  <%= @plant.desc %>
+  <%= raw markdown.render(@plant.desc) %>
 </p>
 
 <br />
@@ -35,5 +35,17 @@
   <%= render @plant.tasks %>
 </table>
 
-<%= link_to "Aufgabe hinzufügen", new_plant_task_path(@plant), class: "btn btn-success" %>
+<%= link_to "Neue Aufgabe", new_plant_task_path(@plant), class: "btn btn-success" %>
 <br />
+<br />
+<h4>Erledigte</h4>
+<table class="table">
+  <tr>
+    <th>Aufgabe</th>
+    <th>erledigt am</th>
+  </tr>
+  <% @plant.tasks.order(updated_at: :desc).each do |task| %>
+    <%= render task.done_task %>
+  <% end %>
+</table>
+

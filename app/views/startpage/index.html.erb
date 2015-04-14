@@ -1,25 +1,26 @@
 <h3>Anstehende Aufgaben</h3>
-<br />
+
+<table class="table plant-list">
 <% @upcoming_tasks.each do |task| %>
-<div class="row">
-  <div class="col-xs-2">
+<tr>
+  <td>
     <% if task.plant.main_image.file? %><%= link_to image_tag(task.plant.main_image.url(:thumb)), task.plant %><% end %>
-  </div>
-  <div class="col-xs-2">
-    <%= task.plant.name %>
-  </div>
-  <div class="col-xs-2">
-    <%= task.title %>
-  </div>
-  <div class="col-xs-2">
-    <%= task.desc %>
-  </div>
-  <div class="col-xs-2">
+  </td>
+  <td>
+    <%= link_to task.plant.name, task.plant %>
+  </td>
+  <td>
+    <%= link_to task.title, plant_task_path(task.plant, task) %>
+  </td>
+  <td>
     <%= link_to "erledigt", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id}), method: :post, class: "action-link" %>
-  </div>
-  <div class="col-xs-2">
-    <%= link_to 'Nicht mehr auflisten', hide_plant_task_path(task.plant,task), method: :patch, class: "action-link" %>
-  </div>
-</div>
-<br />
+  </td>
+  <%# TODO: skip task %>
+  <td>
+    <%= link_to 'nie anzeigen', hide_plant_task_path(task.plant,task), method: :patch, class: "action-link" %>
+  </td>
+</tr>
 <% end %>
+
+</table>
+<br />

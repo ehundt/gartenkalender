@@ -13,7 +13,7 @@
       <td><%= check_box_tag 'plant_ids[]', plant.id, :id => "plant_ids_#{plant.id}", :checked => false -%></td>
       <td><%= link_to( image_tag(plant.image.url(:thumb)), plant) %></td>
       <td><%= link_to plant.name, plant %></td>
-      <td><%= plant.desc %></td>
+      <td><%= raw markdown.render(plant.desc) %></td>
     </tr>
   <% end %>
   </table>

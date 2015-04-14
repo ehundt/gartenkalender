@@ -43,10 +43,10 @@
     <br />
     <div class="input-group">
       <span class="input-group-btn">
-        <a href="<%= plant_path(@plant) %>"><button type="button" class="btn btn-default">Abbrechen</button></a>
+        <%= f.submit :class => "btn btn-success" %>
       </span>
       <span class="input-group-btn">
-        <%= f.submit :class => "btn btn-success" %>
+        <a href="<%= plant_path(@plant) %>"><button type="button" class="btn btn-default">Abbrechen</button></a>
       </span>
     </div>
   <% end %>
