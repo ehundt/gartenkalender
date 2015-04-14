@@ -2,12 +2,8 @@ class Task < ActiveRecord::Base
   belongs_to :plant
   has_many :done_task
 
-  PHAENOLOG_SEASONS = [ :vorfrühling, :erstfrühling, :vollfrühling,
-                        :frühsommer, :hochsommer, :spätsommer,
-                        :frühherbst, :vollherbst, :spätherbst,
-                        :winter ]
-  enum start: PHAENOLOG_SEASONS
-  enum stop:  PHAENOLOG_SEASONS.map{ |s| ("ende_" + s.to_s).to_sym }
+  enum start: Season::PHAENOLOG_SEASONS
+  enum stop:  Season::PHAENOLOG_SEASONS.map{ |s| ("ende_" + s.to_s).to_sym }
   enum repeat: [:einmalig, :jährlich]
 
   def self.all_for_user(user, hide=false)
