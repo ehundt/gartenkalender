@@ -1,0 +1,42 @@
+<h3>Freunde, mit denen ich Pflanzen teile</h3>
+
+<% unless @requesting_user_connections.empty? %>
+  <h4>Anfragen an mich</h4>
+  <table class="table plant-list">
+  <% @requesting_user_connections.each do |connection| %>
+    <tr>
+      <td><%= connection.requesting_user.display_name %></td>
+      <td><% if connection.confirmed %>
+            bestätigt
+          <% else %>
+            noch nicht bestätigt
+          <% end %>
+      </td>
+      <td>
+        <!-- Single button -->
+        <div class="btn-group">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#"><%= link_to "bestätigen", user_connection_path(connection, confirmed: true), method: :patch %></a></li>
+            <li><a href="#">ablehnen</a></li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
+
+<% unless @sharing_user_connections.empty? %>
+  <h4>Meine Anfragen</h4>
+  <table class="table plant-list">
+  <% @sharing_user_connections.each do |connection| %>
+    <tr>
+      <td><%= connection.sharing_user.display_name %></td>
+      <td><%= connection.confirmed %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>

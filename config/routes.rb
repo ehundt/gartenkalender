@@ -26,6 +26,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :user_connections
+
   resources :users, except: :new
 
   # Example resource route with options:

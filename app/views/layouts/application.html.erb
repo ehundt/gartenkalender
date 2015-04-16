@@ -23,7 +23,7 @@
     </div>
     <div class="col-xs-3 logged-in-status">
       <% if current_user %>
-        <%= current_user.username %>
+        <%= current_user.display_name %>
         <% if current_user.admin? %> (Administrator)<% end %>
         <%= link_to "Ausloggen", destroy_user_session_path, :method => :delete %>
       <% else %>
