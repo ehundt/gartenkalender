@@ -8,6 +8,8 @@
       <td><%= connection.requesting_user.display_name %></td>
       <td><% if connection.confirmed %>
             bestätigt
+          <% elsif connection.confirmed == false %>
+            abgelehnt
           <% else %>
             noch nicht bestätigt
           <% end %>
@@ -20,7 +22,7 @@
           </button>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#"><%= link_to "bestätigen", user_connection_path(connection, confirmed: true), method: :patch %></a></li>
-            <li><a href="#">ablehnen</a></li>
+            <li><a href="#"><%= link_to "ablehnen", user_connection_path(connection, confirmed: false), method: :patch %></a></li>
           </ul>
         </div>
       </td>

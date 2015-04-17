@@ -9,7 +9,8 @@ module NavigationHelper
     output = "<ul class=\"nav nav-tabs\" role=\"tablist\">"
     output += display_tab(root_path, "Aufgabenliste")
     output += display_tab(plants_path, "Pflanzenliste")
-    output += display_tab(new_plant_path, "Neue Pflanze anlegen")
+    output += display_tab(new_plant_path, "Neue Pflanze")
+    output += display_tab(user_connections_path, "Freunde")
     if (current_user && current_user.admin?)
       output += display_tab(users_path, "Benutzer")
     end

@@ -17,6 +17,8 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
+    require 'logger'
+    Logger.new("log/debug.log").debug(user_params)
     @user.update(user_params)
     redirect_to users_path
   end
@@ -31,6 +33,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :admin)
+    params.require(:user).permit(:first_name, :last_name, :email, :latitude, :longitude, :admin)
   end
 end

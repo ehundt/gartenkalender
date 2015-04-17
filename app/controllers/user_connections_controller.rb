@@ -8,9 +8,6 @@ class UserConnectionsController < ApplicationController
     @sharing_user_connections = current_user.sharing_users
   end
 
-  def show
-  end
-
   def new
   end
 
@@ -25,11 +22,9 @@ class UserConnectionsController < ApplicationController
       end
       redirect_to action: "index"
     else
+      # TODO: open confirmation window: send email and invite?
       flash[:danger] = "Diese Email Adresse konnte nicht gefunden werden."
     end
-  end
-
-  def edit
   end
 
   def update
@@ -38,10 +33,7 @@ class UserConnectionsController < ApplicationController
     redirect_to action: "index"
   end
 
-  def destroy
-  end
-
-  private
+private
 
   def user_connection_params
     params.permit(:email, :confirmed)

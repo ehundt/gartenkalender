@@ -1,3 +1,11 @@
+<br />
+<h4>Suche nach Pflanzen befreundeter GärtnerInnen</h4>
+<%= form_tag("/search", method: "get") do %>
+  <%= text_field_tag(:search) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<br />
 <h2>Neue Pflanze anlegen</h2>
 <br />
 <%= form_for :plant, url: {action: "create"} do |f| %>

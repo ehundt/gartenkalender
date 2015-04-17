@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150415083227) do
+ActiveRecord::Schema.define(version: 20150417092238) do
 
   create_table "done_tasks", force: :cascade do |t|
     t.integer  "task_id"
@@ -92,6 +92,8 @@ ActiveRecord::Schema.define(version: 20150415083227) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
