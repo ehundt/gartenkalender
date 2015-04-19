@@ -12,6 +12,16 @@ class PlantsController < ApplicationController
   end
 
   def new
+    connections = UserConnection.confirmed_connections_for(current_user)
+    user_ids = connections.collect { |c| c.sharing_user_for(current_user).id }
+    if params[:search].present?
+      search = Plant.search do
+        fulltext params[:search]
+          without(:user_id, current_user.id)
+          with(:user_id, user_ids)
+      end
+      @plants = search.results
+    end
   end
 
   def edit

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150417092238) do
+ActiveRecord::Schema.define(version: 20150418194021) do
 
   create_table "done_tasks", force: :cascade do |t|
     t.integer  "task_id"
@@ -67,14 +67,14 @@ ActiveRecord::Schema.define(version: 20150417092238) do
 
   create_table "user_connections", force: :cascade do |t|
     t.integer  "requesting_user_id"
-    t.integer  "sharing_user_id"
+    t.integer  "requested_user_id"
     t.boolean  "confirmed"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
 
+  add_index "user_connections", ["requested_user_id"], name: "index_user_connections_on_requested_user_id"
   add_index "user_connections", ["requesting_user_id"], name: "index_user_connections_on_requesting_user_id"
-  add_index "user_connections", ["sharing_user_id"], name: "index_user_connections_on_sharing_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"

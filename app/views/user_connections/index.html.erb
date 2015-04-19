@@ -1,18 +1,34 @@
-<h3>Freunde, mit denen ich Pflanzen teile</h3>
+<div class="new-share-desc">
+  Willst Du Deine Pflanzen inklusive Aufgaben mit jemandem teilen?
+  Dann gebe hier seine/ihre Email Adresse ein.
+  Wenn diese(r) GärtnerIn zugestimmt hat, könnt ihr anfangen zu teilen.
+</div>
 
-<% unless @requesting_user_connections.empty? %>
+<%= form_tag(action: "create") do |f| %>
+  <%= email_field(:user, :email) %>
+  <%= submit_tag "anfragen" %>
+<% end %>
+<br />
+<% unless @sharing_connections.empty? %>
+  <h4>GärtnerInnen, mit denen ich bereits Pflanzen teile</h4>
+  <table class="table plant-list">
+    <% @sharing_connections.each do |connection| %>
+      <tr>
+        <td>
+          <%= connection.sharing_user_for(current_user).display_name %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<% unless @requesting_connections.empty? %>
   <h4>Anfragen an mich</h4>
   <table class="table plant-list">
-  <% @requesting_user_connections.each do |connection| %>
+  <% @requesting_connections.each do |connection| %>
     <tr>
       <td><%= connection.requesting_user.display_name %></td>
-      <td><% if connection.confirmed %>
-            bestätigt
-          <% elsif connection.confirmed == false %>
-            abgelehnt
-          <% else %>
-            noch nicht bestätigt
-          <% end %>
+      <td>bestätigen?
       </td>
       <td>
         <!-- Single button -->
@@ -31,13 +47,12 @@
   </table>
 <% end %>
 
-<% unless @sharing_user_connections.empty? %>
-  <h4>Meine Anfragen</h4>
+<% unless @requested_connections.empty? %>
+  <h4>Meine noch nicht bestätigten Anfragen</h4>
   <table class="table plant-list">
-  <% @sharing_user_connections.each do |connection| %>
+  <% @requested_connections.each do |connection| %>
     <tr>
-      <td><%= connection.sharing_user.display_name %></td>
-      <td><%= connection.confirmed %></td>
+      <td><%= connection.requested_user.display_name %></td>
     </tr>
   <% end %>
   </table>
