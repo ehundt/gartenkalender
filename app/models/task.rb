@@ -36,6 +36,10 @@ class Task < ActiveRecord::Base
     ( repeat == :jährlich && DoneTask.where(task_id: :id, year: Date.today.year).exists?)
   end
 
+  def upcoming?
+    Task.starts[start] <= Task.current_season #&& stop >= Task.current_season && !done?
+  end
+
 private
 
   def self.current_season

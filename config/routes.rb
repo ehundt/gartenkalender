@@ -24,9 +24,12 @@ Rails.application.routes.draw do
       end
       resources :done_tasks
     end
+    member do
+      post 'clone'
+    end
   end
 
-  resources :user_connections
+  resources :contacts
 
   resources :users, except: :new
 

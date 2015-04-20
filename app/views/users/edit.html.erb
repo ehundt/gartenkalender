@@ -1,4 +1,4 @@
-<h3>Edit user</h3>
+<h4>Edit user</h4>
 
 <%= form_for(@user) do |f| %>
   <% if @user.errors.any? %>
@@ -13,6 +13,13 @@
     </div>
   <% end %>
 
+  <div class="input-group">
+    <span class="input-group-addon">
+      <%= f.label :picture %>
+    </span>
+    <%= f.file_field :picture %>
+  </div>
+  <br />
   <div class="input-group">
     <span class="input-group-addon">
       <%= f.label :first_name %>
@@ -35,8 +42,10 @@
   </div>
   <br />
 
+<% if @user.latitude.nil? %>
   <%= f.hidden_field :latitude %>
   <%= f.hidden_field :longitude %>
+<% end %>
 
   <div class="input-group">
     <span class="input-group-addon">
@@ -52,9 +61,11 @@
   </div>
 <% end %>
 
+<% if @user.latitude.nil? %>
 <script>
   navigator.geolocation.getCurrentPosition(function(position) {
     document.querySelector('#user_latitude').value = position.coords.latitude;
     document.querySelector('#user_longitude').value = position.coords.longitude;
   });
 </script>
+<% end %>

@@ -1,6 +1,7 @@
 class Plant < ActiveRecord::Base
   has_many :tasks, :dependent => :destroy
   belongs_to :user
+  belongs_to :creator, class_name: 'User', foreign_key: :creator_id, validate: true
 
   has_attached_file :main_image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
   validates_attachment :main_image,

@@ -1,9 +1,7 @@
-<h3><%= @task.plant.name %></h3>
+<h4><%= @task.plant.name %></h4>
 
-<h3>Aufgabe bearbeiten:
-<span class="task-title"><%= @task.title %></span></h3>
+<h4>Aufgabe bearbeiten:
+<span class="task-title"><%= @task.title %></span></h4>
 
-<div class="task-form">
-  <%= render partial: "form" %>
-</div>
+<%= render partial: "form" %>
 

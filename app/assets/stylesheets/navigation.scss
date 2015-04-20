@@ -21,3 +21,7 @@
 #content table a {
   color: #095;
 }
+
+a:link, a:hover, a:visited, a:active {
+  color: #095 !important;
+}

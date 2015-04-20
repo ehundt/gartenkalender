@@ -1,26 +1,34 @@
-<h3>Anstehende Aufgaben</h3>
-
-<table class="table plant-list">
-<% @upcoming_tasks.each do |task| %>
-<tr>
-  <td>
-    <% if task.plant.main_image.file? %><%= link_to image_tag(task.plant.main_image.url(:thumb)), task.plant %><% end %>
-  </td>
-  <td>
-    <%= link_to task.plant.name, task.plant %>
-  </td>
-  <td>
-    <%= link_to task.title, plant_task_path(task.plant, task) %>
-  </td>
-  <td>
-    <%= link_to "erledigt", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id}), method: :post, class: "action-link" %>
-  </td>
-  <%# TODO: skip task %>
-  <td>
-    <%= link_to 'nie anzeigen', hide_plant_task_path(task.plant,task), method: :patch, class: "action-link" %>
-  </td>
-</tr>
+<% if current_user.plants.empty? %>
+  <%= render "welcome" %>
+<% else %>
+  <h4>Anstehende Aufgaben</h4>
 <% end %>
 
-</table>
-<br />
+<% if @upcoming_tasks.empty? %>
+  <p>Geniesse Deinen Garten, es gibt nichts zu tun!</p>
+
+<% else %>
+  <table class="table">
+  <% @upcoming_tasks.each do |task| %>
+  <tr>
+    <td>
+      <% if task.plant.main_image.file? %><%= link_to image_tag(task.plant.main_image.url(:thumb)), task.plant %><% end %>
+    </td>
+    <td>
+      <%= link_to task.plant.name, task.plant %>
+    </td>
+    <td>
+      <%= link_to task.title, plant_task_path(task.plant, task) %>
+    </td>
+    <td>
+      <%= link_to "erledigt", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id}), method: :post, class: "action-link" %>
+    </td>
+    <%# TODO: skip task %>
+    <td>
+      <%= link_to 'nie anzeigen', hide_plant_task_path(task.plant,task), method: :patch, class: "action-link" %>
+    </td>
+  </tr>
+  <% end %>
+
+  </table>
+<% end %>

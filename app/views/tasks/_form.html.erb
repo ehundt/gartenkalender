@@ -1,54 +1,87 @@
-<div class="new-task-form">
-  <% if (defined? @task)
-       form_param = @task
-     else
-       form_param = @plant.tasks.build
-     end
-  %>
-  <%= form_for([@plant, form_param]) do |f| %>
-
-    <div class="input-group">
-      <span class="input-group-addon">Titel</span>
-      <%= f.text_field :title, :class => "form-control" %>
+<% if (defined? @task)
+     form_param = @task
+   else
+     form_param = @plant.tasks.build
+   end
+%>
+<%= form_for([@plant, form_param]) do |f| %>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">Titel</span>
+        <%= f.text_field :title, :class => "form-control" %>
+      </div>
     </div>
-    <br />
-    <div class="input-group">
-      <span class="input-group-addon">Beschreibung</span>
-      <%= f.text_area :desc, :class => "form-control" %>
+  </div>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">frühestens</span>
+        <%= f.select :start,
+            select_options_for(@task, :starts), class: 'select-box' %>
+      </div>
     </div>
-    <br />
-    <div class="input-group">
-      <span class="input-group-addon">frühestens</span>
-      <%= f.select :start,
-          select_options_for(@task, :starts), class: 'select-box' %>
+  </div>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">bis spätestens</span>
+        <%= f.select :stop,
+            select_options_for(@task, :stops), class: 'select-box' %>
+      </div>
     </div>
-    <br />
-    <div class="input-group">
-      <span class="input-group-addon">bis spätestens</span>
-      <%= f.select :stop,
-          select_options_for(@task, :stops), class: 'select-box' %>
+  </div>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">Wiederholung</span>
+        <%= f.select :repeat,
+            select_options_for(@task, :repeats), class: 'select-box' %>
+      </div>
     </div>
-    <br />
-    <div class="input-group">
-      <span class="input-group-addon">Wiederholung</span>
-      <%= f.select :repeat,
-          select_options_for(@task, :repeats), class: 'select-box' %>
+  </div>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">Beschreibung</span>
+        <%= f.text_area :desc, :class => "form-control" %>
+      </div>
     </div>
-    <br />
-    <div class="input-group">
-      <span class="input-group-addon">Anzeige</span>
-      <%= radio_button("task", "hide", false) %> Aufgabe in der Aufgabenliste anzeigen<br />
-      <%= radio_button("task", "hide", true) %> Aufgabe in der Aufgabenliste <b>nicht</b> anzeigen
+  </div>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <input type="radio" value="false" name="task[hide]" id="task_hide_false"<% unless @task.hide %> checked="checked"<% end %>>
+        </span>
+        <span class="form-control">
+          Aufgabe in der Aufgabenliste anzeigen
+        </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+  </div>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <input type="radio" value="false" name="task[hide]" id="task_hide_true"<% if @task.hide %> checked="checked"<% end %>>
+        </span>
+        <span class="form-control">
+          Aufgabe in der Aufgabenliste <b>nicht</b> anzeigen
+        </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+  </div>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <%= f.submit :class => "btn btn-success" %>
+        </span>
+        <span class="input-group-btn">
+          <a href="<%= plant_path(@plant) %>"><button type="button" class="btn btn-default">Abbrechen</button></a>
+        </span>
+      </div>
     </div>
-    <br />
-    <div class="input-group">
-      <span class="input-group-btn">
-        <%= f.submit :class => "btn btn-success" %>
-      </span>
-      <span class="input-group-btn">
-        <a href="<%= plant_path(@plant) %>"><button type="button" class="btn btn-default">Abbrechen</button></a>
-      </span>
-    </div>
-  <% end %>
-</div>
-
+  </div>
+<% end %>

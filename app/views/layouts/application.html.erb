@@ -5,6 +5,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 
@@ -22,15 +23,7 @@
     <div class="col-xs-7 head">
     </div>
     <div class="col-xs-3 logged-in-status">
-      <% if current_user %>
-        <%= current_user.display_name %>
-        <% if current_user.admin? %> (Administrator)<% end %>
-        <%= link_to "Ausloggen", destroy_user_session_path, :method => :delete %>
-      <% else %>
-        <%= link_to 'Einloggen', new_user_session_path %>
-        oder
-        <%= link_to 'Registrieren', new_user_registration_path %>
-      <% end %>
+      <%= render 'shared/logged_in_status' %>
     </div>
   </div>
   <div class="row">
@@ -38,6 +31,7 @@
     </div>
     <div id="content" class="col-xs-7">
        <%= display_tabs %>
+       <br />
        <%= yield %>
     </div>
     <div id="sidebar" class="col-xs-3">

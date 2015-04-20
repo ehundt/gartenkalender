@@ -11,7 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150418194021) do
+ActiveRecord::Schema.define(version: 20150420081030) do
+
+  create_table "contacts", force: :cascade do |t|
+    t.integer  "requesting_user_id"
+    t.integer  "requested_user_id"
+    t.boolean  "confirmed"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "contacts", ["requested_user_id"], name: "index_contacts_on_requested_user_id"
+  add_index "contacts", ["requesting_user_id"], name: "index_contacts_on_requesting_user_id"
 
   create_table "done_tasks", force: :cascade do |t|
     t.integer  "task_id"
@@ -36,6 +47,7 @@ ActiveRecord::Schema.define(version: 20150418194021) do
     t.string   "subtitle"
     t.boolean  "active",                  default: true, null: false
     t.integer  "user_id"
+    t.integer  "creator_id"
   end
 
   add_index "plants", ["user_id"], name: "index_plants_on_user_id"
@@ -65,17 +77,6 @@ ActiveRecord::Schema.define(version: 20150418194021) do
   add_index "tasks", ["plant_id"], name: "index_tasks_on_plant_id"
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
 
-  create_table "user_connections", force: :cascade do |t|
-    t.integer  "requesting_user_id"
-    t.integer  "requested_user_id"
-    t.boolean  "confirmed"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-  end
-
-  add_index "user_connections", ["requested_user_id"], name: "index_user_connections_on_requested_user_id"
-  add_index "user_connections", ["requesting_user_id"], name: "index_user_connections_on_requesting_user_id"
-
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -94,6 +95,10 @@ ActiveRecord::Schema.define(version: 20150418194021) do
     t.string   "last_sign_in_ip"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

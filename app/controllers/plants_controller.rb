@@ -4,16 +4,24 @@ class PlantsController < ApplicationController
   authorize_resource
 
   def index
-    @plants = current_user.plants.order(:name)
+    if params[:search].present?
+      search = Plant.search do
+        fulltext params[:search]
+          with(:user_id, current_user.id)
+      end
+      @plants = search.results
+    else
+      @plants = current_user.plants.order(:name)
+    end
   end
 
   def show
-    @plant = Plant.find(params[:id]) # TODO: rather only look for current_user's plants
+    @plant = Plant.find(params[:id]) # User should only see plants of himself and his friends'!!!
   end
 
   def new
-    connections = UserConnection.confirmed_connections_for(current_user)
-    user_ids = connections.collect { |c| c.sharing_user_for(current_user).id }
+    contacts = Contact.confirmed_contacts_for(current_user)
+    user_ids = contacts.collect { |c| c.sharing_user_for(current_user).id }
     if params[:search].present?
       search = Plant.search do
         fulltext params[:search]
@@ -29,7 +37,8 @@ class PlantsController < ApplicationController
   end
 
   def create
-    @plant = current_user.plants.create(plant_params)
+    params = plant_params.merge(creator_id: current_user.id)
+    @plant = current_user.plants.create(params)
     if @plant.save
       flash[:success] = "Pflanze wurde erfolgreich gespeichert."
       redirect_to @plant
@@ -50,6 +59,16 @@ class PlantsController < ApplicationController
     @plant.destroy
 
     redirect_to plants_path
+  end
+
+  def clone
+    @plant = Plant.find(params[:id])
+    @cloned_plant = @plant.dup
+    @cloned_plant.user_id = current_user.id
+    @cloned_plant.main_image = @plant.main_image
+    @cloned_plant.save
+
+    redirect_to @cloned_plant
   end
 
 private
