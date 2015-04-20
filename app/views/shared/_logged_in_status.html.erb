@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-xs-12">
+    <% if current_user %>
+      <%= current_user.display_name %>
+      <% if current_user.admin? %> (Administrator)<% end %>
+      <%= link_to "Ausloggen", destroy_user_session_path, :method => :delete %>
+    <% else %>
+      <%= link_to 'Einloggen', new_user_session_path %>
+      oder
+      <%= link_to 'Registrieren', new_user_registration_path %>
+    <% end %>
+  </div>
+  <% if current_user %>
+    <div class="col-xs-12">
+      <%= link_to "Profil", edit_user_path(current_user) %>
+    </div>
+  <% end %>
+</div>
