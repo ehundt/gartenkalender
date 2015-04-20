@@ -63,12 +63,11 @@ class PlantsController < ApplicationController
 
   def clone
     @plant = Plant.find(params[:id])
-    @cloned_plant = @plant.dup
-    @cloned_plant.user_id = current_user.id
-    @cloned_plant.main_image = @plant.main_image
-    @cloned_plant.save
-
-    redirect_to @cloned_plant
+    if @plant
+      redirect_to @plant.clone_for(current_user)
+    else
+      redirect_to root
+    end
   end
 
 private

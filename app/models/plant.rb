@@ -22,4 +22,19 @@ class Plant < ActiveRecord::Base
   # TODO: when people start sharing i have to take care of tasks
   # being selected only for this user!! So far all tasks/plants will
   # only belong to this user
+  def clone_for(user)
+    cloned_plant = self.dup
+    cloned_plant.user_id = user.id
+    cloned_plant.main_image = main_image
+    cloned_plant.save
+
+    tasks.each do |task|
+      cloned_task = task.dup
+      cloned_task.plant_id = cloned_plant.id
+      cloned_task.user_id = user.id
+      cloned_task.save
+    end
+# TODO: do we need a creator column in tasks table?
+    cloned_plant
+  end
 end
