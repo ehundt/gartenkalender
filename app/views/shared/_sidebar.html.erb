@@ -1,8 +1,10 @@
 <% if @plant %>
-  <div class="row sidebar">
+  <div class="row sidebar-plant">
     <div class="col-xs-12">
       <%= link_to image_tag(@plant.main_image, style: :medium, class: "sidebar-image"), @plant  %>
     </div>
+  </div>
+  <div class="row sidebar-plant">
     <div class="col-xs-12">
       <% if @plant.active %>
         <%= image_tag "plant_active.gif", height: '42px', width: '30px' %> aktiv
@@ -12,6 +14,15 @@
     </div>
     <div class="col-xs-12">
       von <%= @plant.creator.display_name %>
+    </div>
+  </div>
+<% end %>
+
+<% if current_page?(controller: 'contacts') %>
+<%# TODO: add a nice image here? %>
+  <div class="row sidebar-contacts">
+    <div class="col-xs-12">
+      <%= render 'new' %>
     </div>
   </div>
 <% end %>

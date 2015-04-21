@@ -9,10 +9,6 @@
 </head>
 <body>
 
-<% flash.each do |name, msg| -%>
-  <%= content_tag :div, msg, class: "alert alert-#{name}" %>
-<% end -%>
-
 <div id="main-container" class="container-fluid">
   <div class="row">
     <div class="col-xs-2 logo">
@@ -32,6 +28,11 @@
     <div id="content" class="col-xs-7">
        <%= display_tabs %>
        <br />
+
+       <% flash.each do |name, msg| -%>
+         <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+       <% end -%>
+
        <%= yield %>
     </div>
     <div id="sidebar" class="col-xs-3">

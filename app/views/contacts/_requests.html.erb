@@ -1,0 +1,12 @@
+<% unless @requesting_contacts.empty? %>
+  <h4>Anfragen von Freunden</h4>
+  <p>Folgende GärtnerInnen fragen, ob Du ihre Pflanzen mit ihnen teilen möchtest?</p>
+  <table class="table">
+
+  <% @requesting_contacts.each do |contact| %>
+    <% user = contact.requesting_user %>
+    <%= render partial: "entry", locals: { contact: contact, user: user } %>
+  <% end %>
+</table>
+
+<% end %>

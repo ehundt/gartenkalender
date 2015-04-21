@@ -1,0 +1,21 @@
+<tr>
+  <td>
+    <% if user.picture.file? %>
+      <%= link_to image_tag(user.picture.url(:small)), user %>
+    <% end %>
+  </td>
+  <td>
+    <strong><%= user.display_name %></strong>
+  </td>
+  <td><%= user.plants.count %> Pflanzen</td>
+  <% if contact.confirmed.nil? %>
+  <td>
+    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+    <%= link_to "bestätigen", contact_path(contact, confirmed: true), method: :patch %>
+  </td>
+  <% end %>
+  <td>
+    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+    <%= link_to "ablehnen", contact_path(contact, confirmed: false), method: :patch, class: "delete-link" %>
+  </td>
+</tr>
