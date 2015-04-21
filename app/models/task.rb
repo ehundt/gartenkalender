@@ -8,7 +8,7 @@ class Task < ActiveRecord::Base
 
   def self.all_for_user(user, hide=false)
     # TODO: should be cached; does not work
-    @all_for_user ||= self.where(hide: false).where('plant_id IN (?)', user.plants.where(active: true).select(:id))
+    @all_for_user ||= self.where(hide: hide).where('plant_id IN (?)', user.plants.where(active: true).select(:id))
   end
 
   def self.upcoming_tasks_for_user(user)
@@ -19,7 +19,7 @@ class Task < ActiveRecord::Base
 
     # TODO: year is not correct since it could be
     # a task that should be made in winter sometime but has already been done last year (in winter)
-    done_repeating_tasks = DoneTask.where('task_id in (?)', repeating_task_ids).where(year: Date.today.year).pluck(:id)
+    done_repeating_tasks = DoneTask.where('task_id in (?)', repeating_task_ids).where(year: Date.today.year).pluck(:task_id)
     task_ids = repeating_task_ids - done_repeating_tasks
 
     single_task_ids = self.all_for_user(user)
