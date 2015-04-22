@@ -1,30 +1,12 @@
-<% unless current_user.friends.empty? %>
-  <div class="row">
-    <div class="col-xs-12">
-      <h4>Suche nach Pflanzen befreundeter GärtnerInnen</h4>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-8">
-      <%= form_tag(new_plant_path, method: "get") do %>
-        <%= text_field_tag(:search) %>
-        <%= submit_tag("Search") %>
-      <% end %>
-    </div>
-    <div class="col-xs-4">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-      <%= link_to "Freunde hinzufügen", contacts_path %>
-    </div>
-  </div>
-<% end %>
-<br />
-
 <% unless (@plants.nil? || @plants.empty?) %>
+  <div class="page-header">
+    <h4>Pflanzen befreundeter GärtnerInnen</h4>
+  </div>
   <table class="table">
 
   <% @plants.each do |plant| %>
     <tr>
-      <td><% if plant.main_image.file? %><%= link_to image_tag(plant.main_image.url(:thumb)), plant %><% end %></td>
+      <td><% if plant.main_image.file? %><%= link_to image_tag(plant.main_image.url(:thumb), class: "img-rounded img-responsive"), plant %><% end %></td>
       <td><%= link_to plant.name, plant %></td>
       <td><%= plant.subtitle %></td>
       <td><%= plant.user.display_name %></td>
@@ -40,32 +22,51 @@
 <h4>Neue Pflanze anlegen</h4>
 <br />
 <%= form_for :plant, url: {action: "create"} do |f| %>
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">Pflanzenname</span>
-    <%= f.text_field :name, :class => "form-control",
-       "aria-describedby" => "basic-addon1" %>
-</div>
-<br />
-  <div class="input-group">
-    <%= f.file_field :main_image, :class => "form-control",
-       "aria-describedby" => "basic-addon1" %>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Pflanzenname</span>
+          <%= f.text_field :name, :class => "form-control",
+             "aria-describedby" => "basic-addon1" %>
+      </div>
+    </div>
   </div>
-<br />
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">Lateinische Bezeichnung</span>
-    <%= f.text_field :subtitle, :class => "form-control",
-       "aria-describedby" => "basic-addon1" %>
-</div>
-<br />
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">Beschreibung</span>
-    <%= f.text_area :desc, :class => "form-control",
-       "aria-describedby" => "basic-addon1" %>
-</div>
-<br />
-<div class="input-group">
-  <span class="input-group-btn">
-    <%= f.submit :class => "btn btn-default" %>
-  </span>
-</div>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <%= f.file_field :main_image, :class => "form-control",
+           "aria-describedby" => "basic-addon1" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Lateinische Bezeichnung</span>
+          <%= f.text_field :subtitle, :class => "form-control",
+             "aria-describedby" => "basic-addon1" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Beschreibung</span>
+          <%= f.text_area :desc, :class => "form-control",
+             "aria-describedby" => "basic-addon1" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="pull-right">
+          <a href="<%= plants_path %>">Abbrechen</a>&nbsp;
+          <%= f.submit :class => "btn btn-success" %>
+      </div>
+    </div>
+  </div>
 <% end %>

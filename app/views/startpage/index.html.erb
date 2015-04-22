@@ -12,7 +12,7 @@
   <% @upcoming_tasks.each do |task| %>
   <tr>
     <td>
-      <% if task.plant.main_image.file? %><%= link_to image_tag(task.plant.main_image.url(:thumb)), task.plant %><% end %>
+      <% if task.plant.main_image.file? %><%= link_to image_tag(task.plant.main_image.url(:thumb), class: "img-rounded img-responsive"), task.plant %><% end %>
     </td>
     <td>
       <%= link_to task.plant.name, task.plant %>
@@ -21,11 +21,20 @@
       <%= link_to task.title, plant_task_path(task.plant, task) %>
     </td>
     <td>
-      <%= link_to "erledigt", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id}), method: :post, class: "action-link" %>
-    </td>
-    <%# TODO: skip task %>
-    <td>
-      <%= link_to 'nie anzeigen', hide_plant_task_path(task.plant,task), method: :patch, class: "action-link" %>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          <li role="presentation">
+            <%= link_to "erledigt", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id}), method: :post, role: "menuitem", tabindex: "-1" %>
+          </li>
+          <li role="presentation">
+            <%= link_to 'nie anzeigen', hide_plant_task_path(task.plant,task), method: :patch, role: "menuitem", tabindex: "-1" %>
+          </li>
+          <%# TODO? skip task? %>
+        </ul>
+      </div>
     </td>
   </tr>
   <% end %>

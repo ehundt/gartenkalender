@@ -1,3 +1,4 @@
+<%# TODO: was ist das? %>
 <h4>Meine Pflanzensammlung</h4>
 <%= form_tag "/users/#{current_user.id}/delete_plants" do %>
   <table>
@@ -11,7 +12,7 @@
   <% current_user.plants.each do |plant| %>
     <tr>
       <td><%= check_box_tag 'plant_ids[]', plant.id, :id => "plant_ids_#{plant.id}", :checked => false -%></td>
-      <td><%= link_to( image_tag(plant.image.url(:thumb)), plant) %></td>
+      <td><%= link_to( image_tag(plant.image.url(:thumb), class: "img-rounded img-responsive"), plant) %></td>
       <td><%= link_to plant.name, plant %></td>
       <td><%= raw markdown.render(plant.desc) %></td>
     </tr>

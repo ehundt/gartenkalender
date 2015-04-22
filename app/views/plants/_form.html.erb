@@ -12,46 +12,69 @@
     </div>
   <% end %>
 
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+         <span class="input-group-addon" id="basic-addon1">Pflanzenname</span>
+          <%= f.text_field :name, :class => "form-control",
+             "aria-label" => "Pflanzenname" %>
+      </div>
+    </div>
+  </div>
 
-<div class="input-group">
-    <%= f.text_field :name, :class => "form-control",
-       :placeholder => "Username",
-       "aria-describedby" => "basic-addon1" %>
-</div>
-<br />
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <%= image_tag @plant.main_image.url(:thumb), class: "img-rounded img-responsive" %>
+    </div>
+  </div>
 
-<%= image_tag @plant.main_image.url(:thumb) %>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Bild</span>
+        <%= f.file_field :main_image, :class => "form-control",
+           :placeholder => "Main image",
+           "aria-label" => "Bild" %>
+      </div>
+    </div>
+  </div>
 
-<div class="input-group">
-  <%= f.file_field :main_image, :class => "form-control",
-     :placeholder => "Main image",
-     "aria-describedby" => "basic-addon1" %>
-</div>
-<br />
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">Kurze Beschreibung</span>
-    <%= f.text_field :subtitle, :class => "form-control",
-       :placeholder => "Lateinische Bezeichnung",
-       "aria-describedby" => "basic-addon1" %>
-</div>
-<br />
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">Beschreibung</span>
-    <%= f.text_area :desc, :class => "form-control",
-       :placeholder => "Beschreibung",
-       "aria-describedby" => "basic-addon1" %>
-</div>
-<br />
-<div class="input-group">
-  <span class="input-group-addon" id="basic-addon1">Aktivieren?</span>
-   <%= radio_button("plant", "active", true) %> Ja
-   <%= radio_button("plant", "active", false) %> Nein
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Lateinische Bezeichnung</span>
+          <%= f.text_field :subtitle, :class => "form-control",
+             "aria-label" => "Lateinische-Bezeichnung" %>
+      </div>
+    </div>
+  </div>
 
-</div>
-<br />
-<div class="input-group">
-  <span class="input-group-btn">
-    <%= f.submit :class => "btn btn-success" %>
-  </span>
-</div>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Beschreibung</span>
+          <%= f.text_area :desc, :class => "form-control",
+             "aria-label" => "Beschreibung" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Aktivieren?</span>
+          <%= f.select :active, options_for_select([["Ja", true], ["Nein", false]], @plant.active), {}, { class: 'form-control' } %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <a href="<%= plant_path(@plant) %>">Abbrechen</a>&nbsp;
+        <%= f.submit "Pflanze speichern", :class => "btn btn-success" %>
+      </div>
+    </div>
+  </div>
+  <br>
 <% end %>

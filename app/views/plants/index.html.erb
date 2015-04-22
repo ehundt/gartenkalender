@@ -13,11 +13,12 @@
   <table class="table">
   <% @plants.each do |plant| %>
     <tr>
-      <td><% if plant.main_image.file? %><%= link_to image_tag(plant.main_image.url(:thumb)), plant %><% end %></td>
+      <td><% if plant.main_image.file? %><%= link_to image_tag(plant.main_image.url(:thumb), class: "img-rounded img-responsive"), plant %><% end %></td>
       <td><%= link_to plant.name, plant %></td>
       <td><%= plant.creator.first_name %></td>
       <td class="active-button">
         <% if plant.active %>
+        <%# TODO: class: "img-rounded img-responsive" %>
           <%= image_tag "plant_active.gif", height: '42px', width: '30px' %>
         <% else %>
           <%= image_tag "plant_inactive.gif", height: '42px', width: '30px' %>
@@ -29,7 +30,7 @@
       </td>
       <td>
         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-        <%= link_to 'Entfernen', plant, method: :delete, data: { confirm: 'Sind Sie sicher?' } %>
+        <%= link_to 'Entfernen', plant, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "delete-link" %>
       </td>
     </tr>
   <% end %>

@@ -1,11 +1,12 @@
-<h4>Befreundete GärtnerInnen kontaktieren</h4>
-<p>
-  Willst Du Deine Pflanzen inklusive Aufgaben mit jemandem teilen?
-  Dann gebe hier seine/ihre Email Adresse ein.
-  Wenn diese(r) GärtnerIn zugestimmt hat, könnt ihr anfangen zu teilen.
-</p>
-
 <%= form_tag(action: "create") do |f| %>
-  <%= email_field(:user, :email) %>
-  <%= submit_tag "anfragen" %>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <%= email_field(:user, :email, class: "form-control", placeholder: "Email") %>
+        <span class="input-group-btn">
+          <%= submit_tag "anfragen", class: "btn btn-default" %>
+        </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+  </div><!-- /.row -->
 <% end %>

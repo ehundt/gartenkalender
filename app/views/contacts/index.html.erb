@@ -1,8 +1,9 @@
 <%# TODO: search for contacts %>
 <%= render "requests" %>
-
+<br>
 <% unless @sharing_contacts.empty? %>
   <h4>GärtnerInnen, mit denen ich Pflanzenbeschreibungen teile</h4>
+  <br>
   <table class="table">
     <% @sharing_contacts.each do |contact| %>
       <% user = contact.sharing_user_for(current_user) %>
@@ -10,10 +11,11 @@
     <% end %>
   </table>
 <% end %>
-
+<br>
 <%# we don't want to show the images here for privacy reasons %>
 <% unless @requested_contacts.empty? %>
   <h4>Meine noch nicht bestätigten Anfragen</h4>
+  <br>
   <table class="table">
   <% @requested_contacts.each do |contact| %>
     <tr>

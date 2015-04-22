@@ -18,7 +18,7 @@
 
 <br />
 <h4>Aufgaben</h4>
-<table class="table table-hover">
+<table class="table">
   <tr>
     <th>Anzeigen</th>
     <th>Titel</th>
@@ -28,9 +28,16 @@
   <%= render @plant.tasks %>
 </table>
 
-<%= link_to "Neue Aufgabe", new_plant_task_path(@plant), class: "btn btn-success" %>
-<br />
-<br />
+<div class="row">
+  <div class="col-xs-12">
+    <div class="pull-right">
+      <%= link_to "Neue Aufgabe", new_plant_task_path(@plant), class: "btn btn-success" %>
+    </div>
+  </div>
+</div>
+<br>
+<br>
+
 <h4>Erledigte Aufgaben</h4>
 <table class="table">
   <tr>

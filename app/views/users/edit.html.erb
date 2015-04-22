@@ -42,18 +42,21 @@
   </div>
   <br />
 
-<% if @user.latitude.nil? %>
-  <%= f.hidden_field :latitude %>
-  <%= f.hidden_field :longitude %>
-<% end %>
+  <% if @user.latitude.nil? %>
+    <%= f.hidden_field :latitude %>
+    <%= f.hidden_field :longitude %>
+  <% end %>
 
-  <div class="input-group">
-    <span class="input-group-addon">
-      <%= f.label :admin %>
-    </span>
-    <%= radio_button("user", "admin", "1") %>Ja
-    <%= radio_button("user", "admin", "0") %>Nein
-  </div>
+  <% if @user.admin? %>
+    <div class="input-group">
+      <span class="input-group-addon">
+        <%= f.label :admin %>
+      </span>
+      <%= radio_button("user", "admin", "1") %>Ja
+      <%= radio_button("user", "admin", "0") %>Nein
+    </div>
+  <% end %>
+
   <div class="input-group">
     <span class="input-group-btn">
       <%= f.submit :class => "btn btn-success" %>

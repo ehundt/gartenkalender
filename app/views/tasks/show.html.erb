@@ -10,19 +10,19 @@
   </div>
   <div class="col-xs-3 edit-plant-link">
    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-    <%= link_to 'Entfernen', [@task.plant, @task], method: :delete, data: { confirm: 'Sind Sie sicher?' } %>
+    <%= link_to 'Entfernen', [@task.plant, @task], method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "delete-link" %>
   </div>
 </div>
 
 
 <table class="table">
   <tr>
-    <th>Anzeigen</th>
+    <th>Anzeige</th>
     <th>von</th>
     <th>bis</th>
     <th>Wiederholung</th>
   </tr>
-<tr class="info">
+<tr>
   <td><% if @task.hide %>versteckt<% else %><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span><% end %></td>
   <td><%= @task.start.humanize %></td>
   <td><%= @task.stop.humanize.titleize %></td>

@@ -4,6 +4,7 @@
      form_param = @plant.tasks.build
    end
 %>
+
 <%= form_for([@plant, form_param]) do |f| %>
   <div class="row form-space">
     <div class="col-xs-12">
@@ -18,7 +19,7 @@
       <div class="input-group">
         <span class="input-group-addon">frühestens</span>
         <%= f.select :start,
-            select_options_for(@task, :starts), class: 'select-box' %>
+            select_options_for(@task, :starts), {}, { class: 'form-control' } %>
       </div>
     </div>
   </div>
@@ -27,7 +28,7 @@
       <div class="input-group">
         <span class="input-group-addon">bis spätestens</span>
         <%= f.select :stop,
-            select_options_for(@task, :stops), class: 'select-box' %>
+            select_options_for(@task, :stops), {}, { class: 'form-control' } %>
       </div>
     </div>
   </div>
@@ -36,7 +37,7 @@
       <div class="input-group">
         <span class="input-group-addon">Wiederholung</span>
         <%= f.select :repeat,
-            select_options_for(@task, :repeats), class: 'select-box' %>
+            select_options_for(@task, :repeats), {}, { class: 'form-control' } %>
       </div>
     </div>
   </div>
@@ -74,14 +75,11 @@
   </div>
   <div class="row form-space">
     <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-btn">
+      <div class="pull-right">
+          <a href="<%= plant_path(@plant) %>">Abbrechen</a>&nbsp;
           <%= f.submit :class => "btn btn-success" %>
-        </span>
-        <span class="input-group-btn">
-          <a href="<%= plant_path(@plant) %>"><button type="button" class="btn btn-default">Abbrechen</button></a>
-        </span>
       </div>
     </div>
   </div>
+  <br>
 <% end %>

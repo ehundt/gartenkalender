@@ -1,5 +1,5 @@
-<tr class="info">
-  <td id="task_title"><%= done_task.task.title %></td>
+<tr>
+  <td id="task_title"><%= link_to done_task.task.title, plant_task_path(done_task.task.plant, done_task.task) %></td>
   <td><%= I18n.l done_task.updated_at %></td>
 </tr>
 

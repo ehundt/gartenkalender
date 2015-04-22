@@ -1,7 +1,7 @@
 <tr>
   <td>
     <% if user.picture.file? %>
-      <%= link_to image_tag(user.picture.url(:small)), user %>
+      <%= link_to image_tag(user.picture.url(:small), class: "img-rounded img-responsive"), user %>
     <% end %>
   </td>
   <td>

@@ -26,7 +26,7 @@ class ContactsController < ApplicationController
 # TODO      UserMailer.invite_email(current_user).deliver_later # TODO: must be requested_user instead!!
 
       # TODO: open confirmation window: send email and invite?
-      flash[:danger] = "Diese Email Adresse konnte nicht gefunden werden."
+      flash[:danger] = "Es wurde kein(e) GärtnerIn mit dieser Email Adresse gefunden. Bitten Sie Ihren Kontakt zuerst, sich im Gartenkalender zu registrieren."
     end
     redirect_to action: "index"
   end
