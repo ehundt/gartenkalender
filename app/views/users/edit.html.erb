@@ -13,34 +13,49 @@
     </div>
   <% end %>
 
-  <div class="input-group">
-    <span class="input-group-addon">
-      <%= f.label :picture %>
-    </span>
-    <%= f.file_field :picture %>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Bild</span>
+        <%= f.file_field :picture, :class => "form-control",
+           "aria-label" => "Bild" %>
+      </div>
+    </div>
   </div>
-  <br />
-  <div class="input-group">
-    <span class="input-group-addon">
-      <%= f.label :first_name %>
-    </span>
-    <%= f.text_field :first_name, :class => "form-control" %>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <%= f.label :first_name %>
+        </span>
+        <%= f.text_field :first_name, :class => "form-control" %>
+      </div>
+    </div>
   </div>
-  <br />
-  <div class="input-group">
-    <span class="input-group-addon">
-      <%= f.label :last_name %>
-    </span>
-    <%= f.text_field :last_name, :class => "form-control" %>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <%= f.label :last_name %>
+        </span>
+        <%= f.text_field :last_name, :class => "form-control" %>
+      </div>
+    </div>
   </div>
-  <br />
-  <div class="input-group">
-    <span class="input-group-addon">
-      <%= f.label :email %>
-    </span>
-    <%= f.text_field :email, :class => "form-control" %>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <%= f.label :email %>
+        </span>
+        <%= f.text_field :email, :class => "form-control" %>
+      </div>
+    </div>
   </div>
-  <br />
 
   <% if @user.latitude.nil? %>
     <%= f.hidden_field :latitude %>
@@ -48,19 +63,23 @@
   <% end %>
 
   <% if @user.admin? %>
-    <div class="input-group">
-      <span class="input-group-addon">
-        <%= f.label :admin %>
-      </span>
-      <%= radio_button("user", "admin", "1") %>Ja
-      <%= radio_button("user", "admin", "0") %>Nein
+    <div class="row form-space">
+      <div class="col-xs-12">
+        <div class="input-group">
+          <span class="input-group-addon" id="basic-addon1">Administrator</span>
+            <%= f.select :admin, options_for_select([["Ja", 1], ["Nein", 0]], @user.admin), {}, { class: 'form-control' } %>
+        </div>
+      </div>
     </div>
   <% end %>
 
-  <div class="input-group">
-    <span class="input-group-btn">
-      <%= f.submit :class => "btn btn-success" %>
-    </span>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="pull-right">
+        <a href="<%= user_path(@user) %>">Abbrechen</a>&nbsp;
+        <%= f.submit "Profil speichern", :class => "btn btn-success" %>
+      </div>
+    </div>
   </div>
 <% end %>
 

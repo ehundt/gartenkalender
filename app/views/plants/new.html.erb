@@ -25,9 +25,9 @@
   <div class="row form-space">
     <div class="col-xs-12">
       <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Pflanzenname</span>
+        <span class="input-group-addon">Pflanzenname</span>
           <%= f.text_field :name, :class => "form-control",
-             "aria-describedby" => "basic-addon1" %>
+             "aria-label" => "Pflanzenname" %>
       </div>
     </div>
   </div>
@@ -35,8 +35,9 @@
   <div class="row form-space">
     <div class="col-xs-12">
       <div class="input-group">
+        <span class="input-group-addon">Bild</span>
         <%= f.file_field :main_image, :class => "form-control",
-           "aria-describedby" => "basic-addon1" %>
+           "aria-label" => "Bild" %>
       </div>
     </div>
   </div>
@@ -44,9 +45,9 @@
   <div class="row form-space">
     <div class="col-xs-12">
       <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Lateinische Bezeichnung</span>
+        <span class="input-group-addon">Lateinische Bezeichnung</span>
           <%= f.text_field :subtitle, :class => "form-control",
-             "aria-describedby" => "basic-addon1" %>
+             "aria-label" => "Lateinische-Bezeichnung" %>
       </div>
     </div>
   </div>
@@ -54,9 +55,18 @@
   <div class="row form-space">
     <div class="col-xs-12">
       <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Beschreibung</span>
+        <span class="input-group-addon">Beschreibung</span>
           <%= f.text_area :desc, :class => "form-control",
-             "aria-describedby" => "basic-addon1" %>
+             "aria-label" => "Beschreibung" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">Aktivieren?</span>
+          <%= f.select :active, options_for_select([["Ja", true], ["Nein", false]], true), {}, { class: 'form-control', "aria-label" => "Aktivieren?" } %>
       </div>
     </div>
   </div>

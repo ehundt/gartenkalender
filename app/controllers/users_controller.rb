@@ -20,7 +20,7 @@ class UsersController < ApplicationController
     require 'logger'
     Logger.new("log/debug.log").debug(user_params)
     @user.update(user_params)
-    redirect_to users_path
+    redirect_to @user
   end
 
   def destroy

@@ -1,7 +1,7 @@
 <h4><%= @task.plant.name %></h4>
 
 <h4>Aufgabe bearbeiten:
-<span class="task-title"><%= @task.title %></span></h4>
+<span class="task-title"><%= link_to @task.title, plant_task_path(@task.plant, @task) %></span></h4>
 
 <%= render partial: "form" %>
 
