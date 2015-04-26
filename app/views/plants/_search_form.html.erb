@@ -2,7 +2,8 @@
   <%= form_tag(new_plant_path, method: "get") do %>
     <div class="row">
       <div class="col-xs-12">
-        <p><strong>Suche nach Pflanzen befreundeter GärtnerInnen</strong></p>
+        <h4>Suche</h4>
+        <p><strong>nach Pflanzen befreundeter GärtnerInnen</strong></p>
       </div>
     </div>
     <div class="row">
@@ -10,7 +11,7 @@
         <div class="input-group">
           <%= text_field_tag(:search, "", class: "form-control", placeholder: "z.B. Möhre")  %>
           <span class="input-group-btn">
-            <%= submit_tag("suchen", class: "btn btn-default", type: "button") %>
+            <%= submit_tag("suchen", class: "btn btn-default") %>
           </span>
         </div><!-- /input-group -->
       </div><!-- /.col-xs-12 -->

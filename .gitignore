@@ -44,3 +44,9 @@ bower.json
 /todos.txt
 /public/assets
 /solr/default/data
+.DS_Store
+/app/.DS_Store
+/app/assets/.DS_Store
+/app/assets/images/.DS_Store
+/solr/pids/development/sunspot-solr-development.pid
+/solr/default/data/index/segments.gen

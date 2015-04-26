@@ -1,3 +1,9 @@
+<% content_for :sidebar do %>
+  <% if @user.picture.file? %>
+    <%= link_to image_tag(@user.picture.url(:medium), class: "img-rounded img-responsive"), @user %>
+  <% end %>
+<% end %>
+
 <h4>Edit user</h4>
 
 <%= form_for(@user) do |f| %>

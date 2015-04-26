@@ -9,8 +9,10 @@ class PlantsController < ApplicationController
         fulltext params[:search]
           with(:user_id, current_user.id)
       end
-      @plants = search.results
-    else
+      @searched_plants = search.results
+      @search_text = params[:search]
+    end
+    if @searched_plants.blank?
       @plants = current_user.plants.order(:name)
     end
   end

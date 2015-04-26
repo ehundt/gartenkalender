@@ -1,14 +1,40 @@
-<% if @plants.empty? %>
-  <h4>Pflanzenliste</h4>
-  <p>Eigene Pflanzen werden hier aufgelistet, sobald Du entweder
-     selbst welche erstellt hast oder Dir von Freunden welche kopiert hast.
-     </p>
-<% else %>
-  <h4>Meine Pflanzen</h4>
+<% content_for :sidebar do %>
   <%= form_tag(plants_path, method: "get") do %>
-    <%= text_field_tag(:search) %>
-    <%= submit_tag("Suchen") %>
+    <div class="row sidebar-contacts">
+      <div class="col-xs-12">
+        <h4>Suche</h4>
+        <p><strong>in meiner Pflanzenliste</strong><p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="input-group">
+          <%= text_field_tag(:search, "", class: "form-control", placeholder: "z.B. Möhre")  %>
+          <span class="input-group-btn">
+            <%= submit_tag("suchen", class: "btn btn-default") %>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-xs-12 -->
+    </div><!-- /.row -->
   <% end %>
+<% end %>
+
+<h4>Meine Pflanzen</h4>
+
+<% if @search_text %>
+  <% if @searched_plants.empty? %>
+    <p><h5>Suchergebnis: </h5>Keine "<strong><%= @search_text %></strong>" gefunden.</p>
+  <% else %>
+    <% @plants = @searched_plants %>
+  <% end %>
+
+<% elsif @plants.empty? %>
+    <p>Eigene Pflanzen werden hier aufgelistet, sobald Du entweder
+       selbst welche erstellt hast oder Dir von Freunden welche kopiert hast.
+    </p>
+<% end %>
+
+<% unless @plants.empty? %>
   <br />
   <table class="table">
   <% @plants.each do |plant| %>

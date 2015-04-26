@@ -1,8 +1,21 @@
+<% content_for :sidebar do %>
+  <% if current_user %>
+    <div class="row sidebar-contacts">
+      <div class="col-xs-12">
+        <h4>Neuer Kontakt</h4>
+        <p><strong>Befreundete GärtnerInnen kontaktieren</strong><p>
+        <%= render 'new' %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+
 <%# TODO: search for contacts %>
 <%= render "requests" %>
 <br>
 <% unless @sharing_contacts.empty? %>
-  <h4>GärtnerInnen, mit denen ich Pflanzenbeschreibungen teile</h4>
+  <h4>Meine Gartenfreunde</h4>
   <br>
   <table class="table">
     <% @sharing_contacts.each do |contact| %>
@@ -14,7 +27,7 @@
 <br>
 <%# we don't want to show the images here for privacy reasons %>
 <% unless @requested_contacts.empty? %>
-  <h4>Meine noch nicht bestätigten Anfragen</h4>
+  <h4>Noch nicht bestätigte Anfragen</h4>
   <br>
   <table class="table">
   <% @requested_contacts.each do |contact| %>
