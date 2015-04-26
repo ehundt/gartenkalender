@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20150420081030) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "contacts", force: :cascade do |t|
     t.integer  "requesting_user_id"
     t.integer  "requested_user_id"
@@ -21,8 +24,8 @@ ActiveRecord::Schema.define(version: 20150420081030) do
     t.datetime "updated_at",         null: false
   end
 
-  add_index "contacts", ["requested_user_id"], name: "index_contacts_on_requested_user_id"
-  add_index "contacts", ["requesting_user_id"], name: "index_contacts_on_requesting_user_id"
+  add_index "contacts", ["requested_user_id"], name: "index_contacts_on_requested_user_id", using: :btree
+  add_index "contacts", ["requesting_user_id"], name: "index_contacts_on_requesting_user_id", using: :btree
 
   create_table "done_tasks", force: :cascade do |t|
     t.integer  "task_id"
@@ -32,7 +35,7 @@ ActiveRecord::Schema.define(version: 20150420081030) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "done_tasks", ["task_id"], name: "index_done_tasks_on_task_id"
+  add_index "done_tasks", ["task_id"], name: "index_done_tasks_on_task_id", using: :btree
 
   create_table "plants", force: :cascade do |t|
     t.string   "name"
@@ -50,7 +53,7 @@ ActiveRecord::Schema.define(version: 20150420081030) do
     t.integer  "creator_id"
   end
 
-  add_index "plants", ["user_id"], name: "index_plants_on_user_id"
+  add_index "plants", ["user_id"], name: "index_plants_on_user_id", using: :btree
 
   create_table "seasons", force: :cascade do |t|
     t.integer  "season",     null: false
@@ -74,8 +77,8 @@ ActiveRecord::Schema.define(version: 20150420081030) do
     t.boolean  "hide",       default: false, null: false
   end
 
-  add_index "tasks", ["plant_id"], name: "index_tasks_on_plant_id"
-  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
+  add_index "tasks", ["plant_id"], name: "index_tasks_on_plant_id", using: :btree
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
@@ -101,7 +104,7 @@ ActiveRecord::Schema.define(version: 20150420081030) do
     t.datetime "picture_updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
