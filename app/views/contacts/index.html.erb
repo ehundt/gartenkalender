@@ -10,6 +10,14 @@
   <% end %>
 <% end %>
 
+<% if @sharing_contacts.empty? && @requesting_contacts.empty? && @requested_contacts.empty? %>
+  <h4>Meine Gartenfreunde</h4>
+  <div class="row">
+    <div class="col-xs-12">
+      Hier wirst Du die Liste Deiner Gartenfreunde sehen, sobald Du angefangen hast, zu teilen.
+    </div>
+  </div>
+<% end %>
 
 <%# TODO: search for contacts %>
 <%= render "requests" %>

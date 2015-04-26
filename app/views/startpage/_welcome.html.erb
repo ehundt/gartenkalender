@@ -1,9 +1,23 @@
-<h4>Herzlich willkommen zu unserem Gartenkalender!</h4>
-
-<p>Hier wirst Du nach der Eingabe von Pflanzen, die Du in Deinem Garten pflanzt, eine Liste von Aufgaben sehen, die in dieser Jahreszeit erledigt werden müssen. Diese Aufgaben kannst Du selbst anlegen oder sie von einem Freund/einer Freundin kopieren.</p>
-
-<p>Wie möchtest Du starten?</p>
-<%= link_to "Teilen", contacts_path, class: "btn btn-default", role: "button" %>
-<%= link_to "Neue Pflanze", new_plant_path, class: "btn btn-default", role: "button" %>
-<%= link_to "Profil bearbeiten", edit_user_path(current_user), class: "btn btn-default", role: "button" %>
+<div class="row welcome">
+  <div class="col-md-12">
+    <h4>Herzlich willkommen zu unserem Gartenkalender!</h4>
+  </div>
+</div>
+<div class="row welcome">
+  <div class="col-md-12">
+    Hier wirst Du nach der Eingabe von Pflanzen, die Du in Deinem Garten pflanzt, eine Liste von Aufgaben sehen, die in dieser Jahreszeit erledigt werden müssen. Diese Aufgaben kannst Du selbst anlegen oder sie von einem Freund/einer Freundin kopieren.
+  </div>
+</div>
+<div class="row welcome">
+  <div class="col-md-12">
+    Wie möchtest Du starten?
+  </div>
+</div>
+<div class="row welcome">
+  <div class="col-md-12">
+    <%= link_to "Pflanzen anlegen", new_plant_path, class: "btn btn-default", role: "button" %>
+    <%= link_to "Teilen", contacts_path, class: "btn btn-default", role: "button" %>
+    <%= link_to "Profil bearbeiten", edit_user_path(current_user), class: "btn btn-default", role: "button" %>
+  </div>
+</div>
 

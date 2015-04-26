@@ -1,43 +1,44 @@
 <% if current_user.plants.empty? %>
   <%= render "welcome" %>
+
 <% else %>
   <h4>Anstehende Aufgaben</h4>
-<% end %>
 
-<% if @upcoming_tasks.empty? %>
-  <p>Geniesse Deinen Garten, es gibt nichts zu tun!</p>
+  <% if @upcoming_tasks.empty? %>
+    <p>Geniesse Deinen Garten, es gibt nichts zu tun!</p>
 
-<% else %>
-  <table class="table">
-  <% @upcoming_tasks.each do |task| %>
-  <tr>
-    <td>
-      <% if task.plant.main_image.file? %><%= link_to image_tag(task.plant.main_image.url(:thumb), class: "img-rounded img-responsive"), task.plant %><% end %>
-    </td>
-    <td>
-      <%= link_to task.plant.name, task.plant %>
-    </td>
-    <td>
-      <%= link_to task.title, plant_task_path(task.plant, task) %>
-    </td>
-    <td>
-      <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-          <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-          <li role="presentation">
-            <%= link_to "erledigt", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id}), method: :post, role: "menuitem", tabindex: "-1" %>
-          </li>
-          <li role="presentation">
-            <%= link_to 'nie anzeigen', hide_plant_task_path(task.plant,task), method: :patch, role: "menuitem", tabindex: "-1" %>
-          </li>
-          <%# TODO? skip task? %>
-        </ul>
-      </div>
-    </td>
-  </tr>
+  <% else %>
+    <table class="table">
+    <% @upcoming_tasks.each do |task| %>
+    <tr>
+      <td>
+        <% if task.plant.main_image.file? %><%= link_to image_tag(task.plant.main_image.url(:thumb), class: "img-rounded img-responsive"), task.plant %><% end %>
+      </td>
+      <td>
+        <%= link_to task.plant.name, task.plant %>
+      </td>
+      <td>
+        <%= link_to task.title, plant_task_path(task.plant, task) %>
+      </td>
+      <td>
+        <div class="dropdown">
+          <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+            <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+            <li role="presentation">
+              <%= link_to "erledigt", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id}), method: :post, role: "menuitem", tabindex: "-1" %>
+            </li>
+            <li role="presentation">
+              <%= link_to 'nie anzeigen', hide_plant_task_path(task.plant,task), method: :patch, role: "menuitem", tabindex: "-1" %>
+            </li>
+            <%# TODO? skip task? %>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    <% end %>
+
+    </table>
   <% end %>
-
-  </table>
 <% end %>
