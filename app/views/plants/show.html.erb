@@ -40,6 +40,7 @@
   <%= raw markdown.render(@plant.desc) %>
 </p>
 
+<% unless @plant.tasks.empty? %>
 <br />
 <h4>Aufgaben</h4>
 <table class="table">
@@ -51,10 +52,11 @@
   </tr>
   <%= render @plant.tasks %>
 </table>
+<% end %>
 
 <div class="row">
   <div class="col-xs-12">
-    <div class="pull-right">
+    <div class="<% if @plant.tasks.empty? %>pull-left<% else %>pull-right<% end %>">
       <% if can? :update, @plant %>
       <%= link_to "Neue Aufgabe", new_plant_task_path(@plant), class: "btn btn-success" %>
       <% end %>
@@ -65,14 +67,16 @@
 <br>
 
 <% if @plant.user == current_user %>
-<h4>Erledigte Aufgaben</h4>
-<table class="table">
-  <tr>
-    <th>Aufgabe</th>
-    <th>erledigt am</th>
-  </tr>
-  <% @plant.tasks.order(updated_at: :desc).each do |task| %>
-    <%= render task.done_task %>
+  <% unless @done_tasks.empty? %>
+    <h4>Erledigte Aufgaben</h4>
+    <table class="table">
+      <tr>
+        <th>Aufgabe</th>
+        <th>erledigt am</th>
+      </tr>
+      <% @plant.tasks.order(updated_at: :desc).each do |task| %>
+        <%= render task.done_task %> <%# TODO: should be done_tasks plural! %>
+      <% end %>
+    </table>
   <% end %>
-</table>
 <% end %>

@@ -13,8 +13,10 @@ class Season < ActiveRecord::Base
     # for a good forecast for the next years,
     # we use the oldest entry 1990 which is actually a mean value for the years
     # between 1961 and 1990
+    # region: 0 == Germany
     output = {}
-    seasons = Season.where(region: 0).group(:season).order(:start).limit(Task.starts.length)
+    seasons = Season.where(region: 0).group(:season).order(:season).limit(Task.starts.length).select(:season, "max(start) AS start", "max(stop) AS stop")
+
     seasons.each do |season|
       output[season.season] = season
     end

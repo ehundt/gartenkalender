@@ -19,6 +19,10 @@ class PlantsController < ApplicationController
 
   def show
     @plant = Plant.find(params[:id]) # User should only see plants of himself and his friends'!!!
+    @done_tasks = []
+    @plant.tasks.order(updated_at: :desc).each do |task|
+      @done_tasks.push(task.done_task)
+    end
   end
 
   def new
