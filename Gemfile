@@ -47,6 +47,8 @@ gem 'cancancan', '~> 1.10'
 # gem 'capistrano-rails', group: :development
 gem 'capistrano', '~> 3.3.0'
 
+gem 'puma'
+
 group :development, :test do
 #  gem 'sunspot_rails'
 #  gem 'sunspot_solr' # is the pre-packaged development version of Solr
