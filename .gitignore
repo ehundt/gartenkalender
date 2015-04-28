@@ -50,3 +50,4 @@ bower.json
 /app/assets/images/.DS_Store
 /solr/pids/development/sunspot-solr-development.pid
 /solr/default/data/index/segments.gen
+.env
