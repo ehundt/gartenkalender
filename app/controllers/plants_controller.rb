@@ -5,11 +5,13 @@ class PlantsController < ApplicationController
 
   def index
     if params[:search].present?
-      search = Plant.search do
-        fulltext params[:search]
-          with(:user_id, current_user.id)
-      end
-      @searched_plants = search.results
+      @searched_plants = current_user.plants.where(name: params[:search]).order(:name)
+      # when using solr
+      # search = Plant.search do
+      #   fulltext params[:search]
+      #     with(:user_id, current_user.id)
+      # end
+      # @searched_plants = search.results
       @search_text = params[:search]
     end
     if @searched_plants.blank?
@@ -19,9 +21,11 @@ class PlantsController < ApplicationController
 
   def show
     @plant = Plant.find(params[:id]) # User should only see plants of himself and his friends'!!!
-    @done_tasks = []
+    @done_tasks = Array.new()
     @plant.tasks.order(updated_at: :desc).each do |task|
-      @done_tasks.push(task.done_task)
+      unless task.done_tasks.empty?
+        @done_tasks.push(task.done_tasks)
+      end
     end
   end
 
@@ -29,12 +33,15 @@ class PlantsController < ApplicationController
     contacts = Contact.confirmed_contacts_for(current_user)
     user_ids = contacts.collect { |c| c.sharing_user_for(current_user).id }
     if params[:search].present?
-      search = Plant.search do
-        fulltext params[:search]
-          without(:user_id, current_user.id)
-          with(:user_id, user_ids)
-      end
-      @plants = search.results
+      # TODO: security issue?? params[:search]???
+      @plants = Plant.where(name: params[:search]).where('user_id in (?)', user_ids)
+      # search = Plant.search do
+      #   fulltext params[:search]
+      #     without(:user_id, current_user.id)
+      #     with(:user_id, user_ids)
+      # end
+# TODO: add search!
+#      @plants = search.results
     end
   end
 

@@ -48,8 +48,8 @@ gem 'cancancan', '~> 1.10'
 gem 'capistrano', '~> 3.3.0'
 
 group :development, :test do
-  gem 'sunspot_rails'
-  gem 'sunspot_solr' # is the pre-packaged development version of Solr
+#  gem 'sunspot_rails'
+#  gem 'sunspot_solr' # is the pre-packaged development version of Solr
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

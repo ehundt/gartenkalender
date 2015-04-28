@@ -43,7 +43,7 @@
 <% unless @plant.tasks.empty? %>
 <br />
 <h4>Aufgaben</h4>
-<table class="table">
+<table class="table task-list">
   <tr>
     <th>Anzeigen</th>
     <th>Titel</th>
@@ -54,15 +54,14 @@
 </table>
 <% end %>
 
-<div class="row">
-  <div class="col-xs-12">
-    <div class="<% if @plant.tasks.empty? %>pull-left<% else %>pull-right<% end %>">
-      <% if can? :update, @plant %>
-      <%= link_to "Neue Aufgabe", new_plant_task_path(@plant), class: "btn btn-success" %>
-      <% end %>
+<% if can? :update, @plant %>
+  <div class="row">
+    <div class="col-xs-12">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+        <%= link_to "Neue Aufgabe", new_plant_task_path(@plant) %>
     </div>
   </div>
-</div>
+<% end %>
 <br>
 <br>
 
@@ -75,7 +74,7 @@
         <th>erledigt am</th>
       </tr>
       <% @plant.tasks.order(updated_at: :desc).each do |task| %>
-        <%= render task.done_task %> <%# TODO: should be done_tasks plural! %>
+        <%= render task.done_tasks %>
       <% end %>
     </table>
   <% end %>

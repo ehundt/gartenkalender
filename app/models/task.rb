@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
   belongs_to :plant
-  has_many :done_task
+  has_many :done_tasks
 
   enum start: Season::PHAENOLOG_SEASONS
   enum stop:  Season::PHAENOLOG_SEASONS.map{ |s| ("ende_" + s.to_s).to_sym }
@@ -32,11 +32,17 @@ class Task < ActiveRecord::Base
   end
 
   def done?
-    ( repeat == :einmalig && DoneTask.where(task_id: :id).exists? ) ||
-    ( repeat == :jährlich && DoneTask.where(task_id: :id, year: Date.today.year).exists?)
+    ( repeat == :einmalig && DoneTask.where(task_id: :id, skipped: false).exists? ) ||
+    ( repeat == :jährlich && DoneTask.where(task_id: :id, skipped: false, year: Date.today.year).exists?)
+  end
+
+  def skipped?
+    ( repeat == :einmalig && DoneTask.where(task_id: :id, skipped: true).exists? ) ||
+    ( repeat == :jährlich && DoneTask.where(task_id: :id, skipped: true, year: Date.today.year).exists?)
   end
 
   def upcoming?
+
     Task.starts[start] <= Task.current_season #&& stop >= Task.current_season && !done?
   end
 

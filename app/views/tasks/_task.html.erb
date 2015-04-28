@@ -4,6 +4,8 @@
   <td>
     <% if task.done? %>
       erledigt
+    <% elsif task.skipped? %>
+      übersprungen
     <% elsif task.upcoming? %>
       wartet auf Ausführung
     <% else %>

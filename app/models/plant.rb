@@ -13,11 +13,11 @@ class Plant < ActiveRecord::Base
 
   accepts_nested_attributes_for :tasks, allow_destroy: true
 
-  searchable do
-    text :name, boost: 5.0
-    text :subtitle
-    integer (:user_id), :multiple => true
-  end
+  # searchable do
+  #   text :name, boost: 5.0
+  #   text :subtitle
+  #   integer (:user_id), :multiple => true
+  # end
 
   # TODO: when people start sharing i have to take care of tasks
   # being selected only for this user!! So far all tasks/plants will
