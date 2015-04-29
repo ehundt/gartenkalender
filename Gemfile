@@ -24,6 +24,8 @@ gem 'autoprefixer-rails'
 # gem 'therubyracer', platforms: :ruby
 
 gem "paperclip", "~> 4.2"
+# Amazon webservices S3
+gem 'aws-sdk'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -54,6 +56,10 @@ group :development, :test do
 #  gem 'sunspot_rails'
 #  gem 'sunspot_solr' # is the pre-packaged development version of Solr
 
+  gem 'rspec-rails', '~> 3.0'
+  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'database_cleaner'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
@@ -76,10 +82,6 @@ gem 'redcarpet'
 #   gem 'capybara-firebug',   '~> 1.3.0'
 #   gem 'selenium-webdriver', '~> 2.32.1'
 #   gem 'poltergeist',        '~> 1.3.0'
-#   gem 'factory_girl_rails', '~> 4.5.0'
+#
 #    gem "spork-rails", "~> 3.2.1"
 #end
-#--------------------------
-# for facebook api
-#--------------------------
-#--------------------------
