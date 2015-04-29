@@ -22,4 +22,8 @@ class Season < ActiveRecord::Base
     end
     output
   end
+
+  def self.current
+    3
+  end
 end

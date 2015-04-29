@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150428142801) do
+ActiveRecord::Schema.define(version: 20150429142927) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,11 +29,12 @@ ActiveRecord::Schema.define(version: 20150428142801) do
 
   create_table "done_tasks", force: :cascade do |t|
     t.integer  "task_id"
-    t.integer  "season",                     null: false
-    t.integer  "year",                       null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "skipped",    default: false, null: false
+    t.integer  "season",                                     null: false
+    t.integer  "year",                                       null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.boolean  "skipped",    default: false,                 null: false
+    t.datetime "date",       default: '2015-04-29 00:00:00', null: false
   end
 
   add_index "done_tasks", ["task_id"], name: "index_done_tasks_on_task_id", using: :btree

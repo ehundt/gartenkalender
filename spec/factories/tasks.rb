@@ -6,7 +6,7 @@ FactoryGirl.define do
     start 1
     stop  3
     desc "Das geht so und so."
-    repeat 1
+    repeat 0
     hide false
   end
 end
