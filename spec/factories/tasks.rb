@@ -4,7 +4,7 @@ FactoryGirl.define do
     user_id 1
     title "Säen"
     start 1
-    stop  3
+    stop  8
     desc "Das geht so und so."
     repeat 0
     hide false

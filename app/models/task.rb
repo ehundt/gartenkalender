@@ -8,7 +8,6 @@ class Task < ActiveRecord::Base
   enum repeat: [:einmalig, :täglich, :wöchentlich, :monatlich, :halbjährlich, :jährlich]
 
   def self.all_for_user(user, hide=false)
-    # TODO: should be cached?
     self.where(hide: hide).where('plant_id IN (?)', user.plants.where(active: true).select(:id))
   end
 
@@ -16,7 +15,7 @@ class Task < ActiveRecord::Base
     current_tasks = self.all_for_user(user)
                     .where('start <= ? AND stop >= ?', Season::current, Season::current)
                     .includes(:done_tasks, :plant)
-                    .where("done_tasks.year = ?", Date.today.year) # TODO
+                    .where("done_tasks.year = ? OR done_tasks.year IS NULL", Date.today.year)
                     .references(:done_tasks)
     upcoming_tasks = []
     current_tasks.each do |task|
@@ -24,27 +23,7 @@ class Task < ActiveRecord::Base
     end
     upcoming_tasks
   end
-  # def self.upcoming_tasks_for_user(user)
-  #   repeating_task_ids = self.all_for_user(user)
-  #                       .where('start <= ? AND stop >= ?', Season::current, Season::current)
-  #                       .where(repeat: self.repeats[:jährlich])
-  #                       .pluck(:id)
 
-  #   # TODO: year is not correct since it could be
-  #   # a task that should be made in winter sometime but has already been done last year (in winter)
-  #   done_repeating_tasks = DoneTask.where('task_id in (?)', repeating_task_ids).where(year: Date.today.year).pluck(:task_id)
-  #   task_ids = repeating_task_ids - done_repeating_tasks
-
-  #   single_task_ids = self.all_for_user(user)
-  #                       .where('start <= ? AND stop >= ?', Season::current, Season::current)
-  #                       .where(repeat: self.repeats[:einmalig])
-  #                       .pluck(:id)
-
-  #   task_ids += single_task_ids - DoneTask.where('task_id in (?)', single_task_ids).pluck(:task_id)
-  #   self.where('id in (?)', task_ids).includes(:plant)
-  # end
-
-  # TODO: rename done_task to sth. else
   def current_done_task
     current_done_task = case repeat
       when :einmalig     then single_done_task

@@ -32,6 +32,7 @@ RSpec.describe Task, type: :model do
 
     context "tasks exist for different users and active and inactive plants" do
       it "returns only upcoming tasks for this user" do
+        allow(Season).to receive(:current).and_return(2)
         expect(Task.upcoming_tasks_for_user(user1)).to contain_exactly(active_task1)
       end
     end
@@ -42,7 +43,6 @@ RSpec.describe Task, type: :model do
     #     expect(Task.upcoming_tasks_for_user(user1)).to contain_exactly(active_task1)
     #   end
     # end
-
 
     context "tasks out of season" do
       it "returns only upcoming tasks" do
