@@ -21,6 +21,8 @@
         <%= link_to task.title, plant_task_path(task.plant, task) %>
       </td>
       <td>
+        <%= link_to truncate(task.desc), plant_task_path(task.plant, task) %>
+      <td>
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
             <span class="caret"></span>
