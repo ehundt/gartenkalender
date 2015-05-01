@@ -1,0 +1,21 @@
+<% content_for :sidebar do %>
+  <% if current_user && @plant %>
+    <div class="row sidebar-plant">
+      <div class="col-xs-12">
+        <%= link_to image_tag(@plant.main_image, style: :medium, class: "sidebar-image img-rounded img-responsive"), @plant  %>
+      </div>
+    </div>
+    <div class="row sidebar-plant">
+      <div class="col-xs-12">
+        <% if @plant.active %>
+          <%= image_tag "plant_active.gif", height: '42px', width: '30px' %> aktiv
+        <% else %>
+          <%= image_tag "plant_inactive.gif", height: '42px', width: '30px' %> nicht aktiv
+        <% end %>
+      </div>
+      <div class="col-xs-12">
+        von <%= @plant.creator.display_name %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

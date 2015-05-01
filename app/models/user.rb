@@ -23,10 +23,10 @@ class User < ActiveRecord::Base
   end
 
   def display_name
-    if (first_name && last_name)
-      status = "#{first_name} #{last_name}"
+    if (first_name.blank? && last_name.blank?)
+      email
     else
-      status = email
+      "#{first_name} #{last_name}"
     end
   end
 

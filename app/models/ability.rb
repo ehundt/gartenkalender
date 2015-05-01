@@ -13,7 +13,7 @@ class Ability
       can :read,   User, :id => friend_ids
 
       can :manage, Plant, :user_id => user.id
-      can :read, Plant,   :user_id => friend_ids
+      can :read, Plant,   :creator_id => friend_ids
 
       can :new, Task
       can :create, Task
@@ -27,6 +27,7 @@ class Ability
       can :manage, Contact, requested_user_id: user.id
 
       can :read, Startpage
+      can :read, :static_pages
     end
 
     # Define abilities for the passed in user here. For example:

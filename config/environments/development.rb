@@ -48,5 +48,4 @@ Rails.application.configure do
 
   # for paperclick defining the path to imageMagic (which convert)
   Paperclip.options[:command_path] = "/usr/local/bin/"
-}
 end
