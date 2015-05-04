@@ -1,4 +1,6 @@
 class Plant < ActiveRecord::Base
+  acts_as_paranoid
+
   has_many :tasks, :dependent => :destroy
   belongs_to :user
   belongs_to :creator, class_name: 'User', foreign_key: :creator_id, validate: true

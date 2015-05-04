@@ -1,4 +1,6 @@
 class Task < ActiveRecord::Base
+  acts_as_paranoid
+
   belongs_to :plant
   has_many :done_tasks
   has_many :skipped_tasks, -> {where(skipped: true)}, class_name: "DoneTask"

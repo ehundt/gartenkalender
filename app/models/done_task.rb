@@ -1,5 +1,7 @@
 class DoneTask < ActiveRecord::Base
-  belongs_to :task
+  acts_as_paranoid
+
+  belongs_to :task, -> { with_deleted }
 
   enum season: Season::PHAENOLOG_SEASONS
 

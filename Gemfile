@@ -28,6 +28,7 @@ gem "paperclip", "~> 4.2"
 # newer version is buggy, see:
 # http://ruby.awsblog.com/post/TxFKSK2QJE6RPZ/Upcoming-Stable-Release-of-AWS-SDK-for-Ruby-Version-2
 gem 'aws-sdk', '< 2.0'
+gem "paranoia", "~> 2.0"
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

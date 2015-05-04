@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150429142927) do
+ActiveRecord::Schema.define(version: 20150504110031) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,8 +35,10 @@ ActiveRecord::Schema.define(version: 20150429142927) do
     t.datetime "updated_at",                                 null: false
     t.boolean  "skipped",    default: false,                 null: false
     t.datetime "date",       default: '2015-05-04 09:32:25', null: false
+    t.datetime "deleted_at"
   end
 
+  add_index "done_tasks", ["deleted_at"], name: "index_done_tasks_on_deleted_at", using: :btree
   add_index "done_tasks", ["task_id"], name: "index_done_tasks_on_task_id", using: :btree
 
   create_table "plants", force: :cascade do |t|
@@ -53,8 +55,10 @@ ActiveRecord::Schema.define(version: 20150429142927) do
     t.boolean  "active",                  default: true, null: false
     t.integer  "user_id"
     t.integer  "creator_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "plants", ["deleted_at"], name: "index_plants_on_deleted_at", using: :btree
   add_index "plants", ["user_id"], name: "index_plants_on_user_id", using: :btree
 
   create_table "seasons", force: :cascade do |t|
@@ -77,15 +81,17 @@ ActiveRecord::Schema.define(version: 20150429142927) do
     t.datetime "updated_at",                 null: false
     t.boolean  "hide",       default: false, null: false
     t.integer  "user_id"
+    t.datetime "deleted_at"
   end
 
+  add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree
   add_index "tasks", ["plant_id"], name: "index_tasks_on_plant_id", using: :btree
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
-    t.integer  "admin"
+    t.integer  "admin",                  default: 0
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "email",                  default: "", null: false
