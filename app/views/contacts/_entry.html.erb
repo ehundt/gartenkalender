@@ -7,7 +7,7 @@
   <td>
     <strong><%= user.display_name %></strong>
   </td>
-  <td><%= user.plants.count %> Pflanzen</td>
+  <td><%= user.plants.count %> <%= link_to "Pflanzen", user_plants_path(user) %></td>
   <% if contact.confirmed.nil? %>
   <td>
     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
@@ -16,6 +16,10 @@
   <% end %>
   <td>
     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-    <%= link_to "ablehnen", contact_path(contact, confirmed: false), method: :patch, class: "delete-link" %>
+    <% if contact.confirmed.nil? %>
+      <%= link_to "ablehnen", contact_path(contact, confirmed: false), method: :patch, class: "delete-link" %>
+    <% else %>
+      <%= link_to "löschen", contact_path(contact, confirmed: false), method: :patch, class: "delete-link" %>
+    <% end %>
   </td>
 </tr>

@@ -35,7 +35,9 @@ Rails.application.routes.draw do
 
   resources :contacts
 
-  resources :users, except: :new
+  resources :users, except: :new do
+    resources :plants, only: :index
+  end
 
   # Example resource route with options:
   #   resources :products do

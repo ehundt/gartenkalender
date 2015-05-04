@@ -17,8 +17,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    require 'logger'
-    Logger.new("log/debug.log").debug(user_params)
     @user.update(user_params)
     redirect_to @user
   end

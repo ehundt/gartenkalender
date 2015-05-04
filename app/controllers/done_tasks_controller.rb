@@ -4,7 +4,7 @@ class DoneTasksController < ApplicationController
   load_and_authorize_resource
 
   def create
-    @done_task = DoneTask.new(task_id: params[:task_id], season: 2, year: Date.today.year)
+    @done_task = DoneTask.new(task_id: params[:task_id], season: 2)
     if @done_task.save
       flash[:success] = "Aufgabe erfolgreich erledigt!"
       redirect_to root_path

@@ -19,9 +19,6 @@ class Plant < ActiveRecord::Base
   #   integer (:user_id), :multiple => true
   # end
 
-  # TODO: when people start sharing i have to take care of tasks
-  # being selected only for this user!! So far all tasks/plants will
-  # only belong to this user
   def clone_for(user)
     cloned_plant = self.dup
     cloned_plant.user_id = user.id

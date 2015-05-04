@@ -26,52 +26,58 @@ class Task < ActiveRecord::Base
 
   def current_done_task
     current_done_task = case repeat
-      when :einmalig     then single_done_task
-      when :jährlich     then yearly_done_task
-      when :täglich      then daily_done_task
-      when :wöchentlich  then weekly_done_task
-      when :monatlich    then monthly_done_task
-      when :halbjährlich then half_yearly_done_task
+      when "einmalig"     then single_done_task
+      when "jährlich"     then yearly_done_task
+      when "täglich"      then daily_done_task
+      when "wöchentlich"  then weekly_done_task
+      when "monatlich"    then monthly_done_task
+      when "halbjährlich" then half_yearly_done_task
     end
+    current_done_task
   end
 
   def single_done_task
-    if task.done_tasks.empty?
+    if done_tasks.empty?
       nil
     else
-      task.done_tasks.first
+      done_tasks.first
     end
   end
 
   def yearly_done_task
-    task.done_tasks.each do |done_task|
+    done_tasks.each do |done_task|
       return done_task if done_task.year == Date.today.year
       # TODO: not correct in winter!!
     end
+    nil
   end
 
   def daily_done_task
-    task.done_tasks.each do |done_task|
+    done_tasks.each do |done_task|
       return done_task if done_task.date == Date.today
     end
+    nil
   end
 
   def weekly_done_task
-    task.done_tasks.each do |done_task|
+    done_tasks.each do |done_task|
       return done_task if done_task.date + 7.days >= Date.today
     end
+    nil
   end
 
   def monthly_done_task
-    task.done_tasks.each do |done_task|
+    done_tasks.each do |done_task|
       return done_task if done_task.date + 1.month >= Date.today
     end
+    nil
   end
 
   def half_yearly_done_task
-    task.done_tasks.each do |done_task|
+    done_tasks.each do |done_task|
       return done_task if done_task.date + 6.months >= Date.today
     end
+    nil
   end
 
   def done?

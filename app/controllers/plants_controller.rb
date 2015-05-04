@@ -1,21 +1,28 @@
 class PlantsController < ApplicationController
   before_filter :authenticate_user!
 
-  authorize_resource
+  load_and_authorize_resource
 
   def index
-    if params[:search].present?
-      @searched_plants = current_user.plants.where(name: params[:search]).order(:name)
-      # when using solr
-      # search = Plant.search do
-      #   fulltext params[:search]
-      #     with(:user_id, current_user.id)
-      # end
-      # @searched_plants = search.results
-      @search_text = params[:search]
-    end
-    if @searched_plants.blank?
-      @plants = current_user.plants.order(:name)
+    if params[:user_id].present?
+      @friend = User.find(params[:user_id])
+      @plants = @friend.plants.order(:name) # unless @friend.nil?
+    else
+
+      if params[:search].present?
+        @searched_plants = current_user.plants.where(name: params[:search]).order(:name)
+        # when using solr
+        # search = Plant.search do
+        #   fulltext params[:search]
+        #     with(:user_id, current_user.id)
+        # end
+        # @searched_plants = search.results
+        @search_text = params[:search]
+      end
+
+      if @searched_plants.blank?
+        @plants = current_user.plants.order(:name)
+      end
     end
   end
 

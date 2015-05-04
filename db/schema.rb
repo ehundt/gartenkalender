@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20150429142927) do
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.boolean  "skipped",    default: false,                 null: false
-    t.datetime "date",       default: '2015-04-29 00:00:00', null: false
+    t.datetime "date",       default: '2015-05-04 09:32:25', null: false
   end
 
   add_index "done_tasks", ["task_id"], name: "index_done_tasks_on_task_id", using: :btree

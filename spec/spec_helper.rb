@@ -22,7 +22,7 @@ require 'faker'
 
 RSpec.configure do |config|
   config.include FactoryGirl::Syntax::Methods
-  config.include Devise::TestHelpers
+  config.include Devise::TestHelpers, type: :controller
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

@@ -4,6 +4,6 @@ FactoryGirl.define do
     season     2
     year       Date.today.year
     skipped    false
-    date       Date.today
+    date       DateTime.now
   end
 end

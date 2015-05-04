@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+#ruby '2.2.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
@@ -53,6 +53,8 @@ gem 'cancancan', '~> 1.10'
 gem 'capistrano', '~> 3.3.0'
 
 gem 'puma'
+
+gem 'default_value_for', '~> 3.0.0'
 
 group :development, :test do
 #  gem 'sunspot_rails'

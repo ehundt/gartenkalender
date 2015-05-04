@@ -4,6 +4,7 @@ RSpec.describe Task, type: :model do
   describe '#all_for_user' do
     context "tasks for active and inactive plants" do
       let!(:user){ create(:user) }
+
       let!(:active_plant){ create(:plant, user_id: user.id, active: true) }
       let!(:task1){ create(:task, plant_id: active_plant.id, user_id: user.id) }
 
@@ -66,15 +67,26 @@ RSpec.describe Task, type: :model do
 
         it "returns daily repeating tasks even when task has been done within this season once" do
           allow(Season).to receive(:current).and_return(2)
-          current_task2 = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 1, stop: 3, repeat: 4)
+          current_task2 = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 1, stop: 3, repeat: Task.repeats["täglich"])
           done_task = create(:done_task, task_id: current_task2.id, created_at: (Date.today - 2.days))
 
           expect(Task.upcoming_tasks_for_user(user1)).to contain_exactly(active_task1, current_task2)
         end
       end
 
-      context "yearly" do
+#      context "yearly" do
+ #     end
+    end
 
+    context "done tasks" do
+      context "repeating yearly" do
+        it "does not return the done task" do
+          allow(Season).to receive(:current).and_return(2)
+          current_task = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 1, stop: 3, repeat: Task.repeats["jährlich"])
+          done_task = create(:done_task, task_id: current_task.id, created_at: (Date.today - 1.day))
+
+          expect(Task.upcoming_tasks_for_user(user1)).to contain_exactly(active_task1)
+        end
       end
     end
   end
