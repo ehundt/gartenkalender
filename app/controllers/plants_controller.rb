@@ -90,9 +90,21 @@ class PlantsController < ApplicationController
     end
   end
 
+  # TODO: ajax call, routes, etc.
+  def vote
+    @plant = Plant.find(params[:id])
+    if @plant
+      if plant_params[:vote] == "like"
+        @plant.liked_by current_user
+      elsif plant_params[:vote] == "dislike"
+        @plant.disliked_by current_user
+      end
+    end
+  end
+
 private
 
   def plant_params
-    params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active)
+    params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active, :vote)
   end
 end

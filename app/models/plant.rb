@@ -1,5 +1,6 @@
 class Plant < ActiveRecord::Base
   acts_as_paranoid
+  acts_as_votable
 
   has_many :tasks, :dependent => :destroy
   belongs_to :user
@@ -9,7 +10,7 @@ class Plant < ActiveRecord::Base
   validates_attachment :main_image,
     :content_type => { :content_type => ["image/jpeg", "image/gif", "image/png"] },
     :size         => { :in => 0..2.megabytes },
-    :file_name    => { :matches => [/png\Z/, /jpe?g\Z/] }
+    :file_name    => { :matches => [/png\Z/, /jpe?g\Z/, /JPE?G\Z/] }
     # TODO: Files on the local filesystem (and in the Rails app's public directory) will be available to the internet at large. If you require access control, it's possible to place your files in a different location.
     # see https://github.com/thoughtbot/paperclip for further information!!
 

@@ -64,6 +64,9 @@
           <%= link_to 'Entfernen', plant, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "delete-link" %>
         </td>
       <% end %>
+      <td>
+        Voted: <strong><%= plant.get_likes.size - plant.get_dislikes.size %></strong>
+      </td>
     </tr>
   <% end %>
   </table>

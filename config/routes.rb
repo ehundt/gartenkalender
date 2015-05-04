@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     end
     member do
       post 'clone'
+      post 'vote'
     end
   end
 
