@@ -26,6 +26,7 @@ class Plant < ActiveRecord::Base
     cloned_plant = self.dup
     cloned_plant.user_id = user.id
     cloned_plant.main_image = main_image
+    cloned_plant.orig_id = id
     cloned_plant.save
 
     tasks.each do |task|
@@ -36,5 +37,13 @@ class Plant < ActiveRecord::Base
     end
 # TODO: do we need a creator column in tasks table?
     cloned_plant
+  end
+
+  def original
+    unless orig_id.nil?
+      Plant.find(orig_id)
+    else
+      self
+    end
   end
 end
