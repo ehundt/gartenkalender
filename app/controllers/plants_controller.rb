@@ -94,17 +94,14 @@ class PlantsController < ApplicationController
   def vote
     @plant = Plant.find(params[:id])
     if @plant
-      if plant_params[:vote] == "like"
-        @plant.liked_by current_user
-      elsif plant_params[:vote] == "dislike"
-        @plant.disliked_by current_user
-      end
+      @plant.liked_by current_user
     end
+    redirect_to @plant
   end
 
 private
 
   def plant_params
-    params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active, :vote)
+    params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active)
   end
 end

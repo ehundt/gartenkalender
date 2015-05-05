@@ -5,17 +5,34 @@
         <%= link_to image_tag(@plant.main_image, style: :medium, class: "sidebar-image img-rounded img-responsive"), @plant  %>
       </div>
     </div>
-    <div class="row sidebar-plant">
-      <div class="col-xs-12">
-        <% if @plant.active %>
-          <%= image_tag "plant_active.gif", height: '42px', width: '30px' %> aktiv
-        <% else %>
-          <%= image_tag "plant_inactive.gif", height: '42px', width: '30px' %> nicht aktiv
-        <% end %>
+    <% if @plant.user == current_user && @plant.creator != current_user %>
+      <div class="row sidebar-plant">
+        <div class="col-xs-12">
+          <% if @plant.active %>
+            <%= image_tag "plant_active.gif", height: '42px', width: '30px' %> aktiv
+          <% else %>
+            <%= image_tag "plant_inactive.gif", height: '42px', width: '30px' %> nicht aktiv
+          <% end %>
+        </div>
       </div>
-      <div class="col-xs-12">
-        von <%= @plant.creator.display_name %>
+      <div class="row sidebar-plant">
+        <div class="col-xs-12">
+          Kopiert von
+        </div>
       </div>
-    </div>
+      <% if @plant.creator.picture.file? %>
+        <div class="row sidebar-plant">
+          <div class="col-xs-12">
+              <%= link_to image_tag(@plant.creator.picture.url(:thumb), class: "img-rounded"), @plant.creator %>
+          </div>
+        </div>
+      <% end %>
+      <div class="row sidebar-plant">
+        <div class="col-xs-12">
+          <%= @plant.creator.display_name %>
+        </div>
+      </div>
+    <% end %>
+
   <% end %>
 <% end %>

@@ -14,6 +14,8 @@ class Ability
 
       can :manage, Plant, :user_id    => user.id
       can :read,   Plant, :creator_id => friend_ids
+      can :vote,   Plant, :creator_id => friend_ids
+      can :clone,  Plant, :creator_id => friend_ids
 
       can :new, Task
       can :create, Task

@@ -18,6 +18,8 @@ class User < ActiveRecord::Base
   has_attached_file :picture, :styles => { :medium => "300x300>", :small => "100x100", :thumb => "50x50>" }, :default_url => "/images/:style/missing.png"
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
 
+  acts_as_voter
+
   def admin?
     admin == 1 || false
   end
