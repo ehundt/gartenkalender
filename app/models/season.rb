@@ -24,6 +24,6 @@ class Season < ActiveRecord::Base
   end
 
   def self.current
-    3
+    4
   end
 end

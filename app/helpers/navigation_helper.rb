@@ -14,8 +14,6 @@ module NavigationHelper
     if (current_user && current_user.admin?)
       output += display_tab(users_path, "Benutzer")
     end
-    output += display_tab(static_pages_recommendations_path, "Empfehlungen")
-    output += display_tab(static_pages_help_path, "Hilfe")
     output += "</ul>"
     output.html_safe
   end

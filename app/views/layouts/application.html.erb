@@ -12,6 +12,7 @@
 <div id="main-container" class="container-fluid">
   <div class="row">
     <div class="col-xs-3">
+      <%= render 'shared/help_menu' %>
     </div>
     <div class="col-xs-9 logged-in-status">
       <%= render 'shared/logged_in_status' %>
@@ -20,8 +21,8 @@
   <div class="row">
     <div class="col-xs-3 logo">
       <a href="<%= root_url %>" class="logo">
-      <img src="<%= image_url("logo.png") %>"><br />
-      <b>Intelligenter Gartenkalender</b></a>
+        <%= image_tag("logo.jpg", class: "img-responsive") %>
+      <strong>Intelligenter Gartenkalender</strong></a>
     </div>
     <div class="col-xs-9 head">
     </div>
