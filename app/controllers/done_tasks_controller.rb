@@ -4,7 +4,7 @@ class DoneTasksController < ApplicationController
   load_and_authorize_resource
 
   def create
-    dt_params = done_task_params.merge(task_id: params[:task_id], season: Season::current)
+    dt_params = done_task_params.merge(task_id: params[:task_id])
     @done_task = DoneTask.new(dt_params)
 
     if @done_task.save

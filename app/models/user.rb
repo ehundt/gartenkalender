@@ -36,4 +36,9 @@ class User < ActiveRecord::Base
   def friends
     Contact.confirmed_contacts_for(self).collect { |c| c.sharing_user_for(self) }
   end
+
+  def region
+    # get region for user with user.latitude and user.longitude, default: 0 = Germany
+    0
+  end
 end

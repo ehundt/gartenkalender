@@ -14,10 +14,11 @@ class Task < ActiveRecord::Base
   end
 
   def self.upcoming_tasks_for_user(user)
+    season = Season::current.season_index
+
     current_tasks = self.all_for_user(user)
-                    .where('start <= ? AND stop >= ?', Season::current, Season::current)
+                    .where('start <= ? AND stop >= ?', season, season)
                     .includes(:done_tasks, :plant)
-                    .where("done_tasks.year = ? OR done_tasks.year IS NULL", Date.today.year)
                     .references(:done_tasks)
     upcoming_tasks = []
     current_tasks.each do |task|
@@ -48,7 +49,7 @@ class Task < ActiveRecord::Base
 
   def yearly_done_task
     done_tasks.each do |done_task|
-      return done_task if done_task.year == Date.today.year
+      return done_task if done_task.date.year == Date.today.year
       # TODO: not correct in winter!!
     end
     nil
@@ -56,7 +57,7 @@ class Task < ActiveRecord::Base
 
   def daily_done_task
     done_tasks.each do |done_task|
-      return done_task if done_task.date == Date.today
+      return done_task if done_task.date.to_date == Date.today
     end
     nil
   end
@@ -91,6 +92,7 @@ class Task < ActiveRecord::Base
   end
 
   def upcoming?
-    current_done_task.nil? && Task.starts[start] <= Season::current && Task.stops[stop] >= Season::current
+    p Season::current.season_index
+    current_done_task.nil? && Task.starts[start] <= Season::current.season_index && Task.stops[stop] >= Season::current.season_index
   end
 end

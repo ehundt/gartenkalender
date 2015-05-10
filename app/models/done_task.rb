@@ -6,5 +6,5 @@ class DoneTask < ActiveRecord::Base
   enum season: Season::PHAENOLOG_SEASONS
 
   default_value_for :date, DateTime.now
-  default_value_for :year, Date.today.year
+  #default_value_for :year, Date.today.year
 end

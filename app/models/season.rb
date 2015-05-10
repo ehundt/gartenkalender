@@ -24,6 +24,19 @@ class Season < ActiveRecord::Base
   end
 
   def self.current
-    4
+    self.season_for(Date.today)
+  end
+
+  def self.season_for(date, region=0)
+    season = self.where('start <= ? and stop >= ?', date, date).where(region: region).first
+    if season.nil?
+      old_date = Date.new(1990, date.month, date.day)
+      season = self.where('start <= ? and stop >= ?', old_date, old_date).where(region: region).first
+    end
+    season
+  end
+
+  def season_index
+    Season.seasons[self.season]
   end
 end
