@@ -13,7 +13,7 @@ class DoneTasksController < ApplicationController
       else
         flash[:success] = "Aufgabe erfolgreich erledigt!"
       end
-      redirect_to root_path
+      redirect_to request.referer
     end
   end
 

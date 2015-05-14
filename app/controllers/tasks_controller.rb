@@ -51,7 +51,14 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.update(hide: true)
 
-    redirect_to root_url
+    redirect_to request.referer
+  end
+
+  def unhide
+    @task = Task.find(params[:id])
+    @task.update(hide: false)
+
+    redirect_to request.referer
   end
 
 private

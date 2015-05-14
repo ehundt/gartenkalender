@@ -33,25 +33,29 @@
     </div>
   </div>
 <% end %>
-<p>
-  <h4><%= @plant.subtitle %></h4>
-</p>
-<p>
-  <%= raw markdown.render(@plant.desc) %>
-</p>
+<div class="row">
+  <div class="col-xs-12">
+    <strong><%= @plant.subtitle %></strong>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-xs-12">
+    <%= raw markdown.render(@plant.desc) %>
+  </div>
+</div>
 
 <% unless @plant.tasks.empty? %>
-<br />
-<h4>Aufgaben</h4>
-<table class="table task-list">
-  <tr>
-    <th>Anzeigen</th>
-    <th>Titel</th>
-    <th>Status</th>
-    <th></th>
-  </tr>
-  <%= render @plant.tasks %>
-</table>
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>Aufgaben</h4>
+
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <%= render @plant.tasks %>
+      </div>
+
+    </div>
+  </div>
 <% end %>
 
 <% if can? :update, @plant %>
@@ -71,6 +75,7 @@
     <table class="table">
       <tr>
         <th>Aufgabe</th>
+        <th>Notiz</th>
         <th>erledigt am</th>
       </tr>
       <% @plant.tasks.order(updated_at: :desc).each do |task| %>

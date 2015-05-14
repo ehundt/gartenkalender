@@ -3,7 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .task-title {
-  color: #0cc
+  color: #0cc;
 }
 
 .task-desc {
@@ -12,4 +12,14 @@
 
 .form-space {
   margin-top: 20px;
+}
+
+.task-action-links {
+  text-align: right;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.task-warning {
+  color: red;
 }
