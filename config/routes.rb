@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     member do
       post 'clone'
       post 'vote'
+      patch 'activate'
+      patch 'inactivate'
     end
   end
 

@@ -1,16 +1,27 @@
 $(document).ready(function(){
-  $('#new_task').on('click', 'button', function(){
-    //$('.new-task-form').fadeIn();
-    //$("#new_task").children(1).load("/plants/1/tasks/new");
-  });
-
   $('.active-button').on('click', function(){
+    var plant_id = $(this).data("id");
     var activeIcon = $(this).children("img");
     if ($(activeIcon).attr("src") == "<%= image_url('plant_active.gif') %>")
-    // TODO: ajax.load(@plant, method: :patch, data: { active: false })
-    // only if loaded correctly, switch icon
-      $(activeIcon).attr("src", "<%= image_url('plant_inactive.gif') %>");
-    else
-      $(activeIcon).attr("src", "<%= image_url('plant_active.gif') %>");
+      $.ajax({
+        url:      "plants/" + plant_id + "/inactivate",
+        type:     "PATCH",
+        dataType: "json",
+        data:     { plant: {id: 14} },
+        success:  function(data, status){
+                    $(activeIcon).attr("src", "<%= image_url('plant_inactive.gif') %>");
+                  }
+      });
+
+    if ($(activeIcon).attr("src") == "<%= image_url('plant_inactive.gif') %>")
+      $.ajax({
+        url:      "plants/" + plant_id + "/activate",
+        type:     "PATCH",
+        dataType: "json",
+        data:     { plant: {id: 14} },
+        success:  function(data, status){
+                    $(activeIcon).attr("src", "<%= image_url('plant_active.gif') %>");
+                  }
+      });
   });
 });

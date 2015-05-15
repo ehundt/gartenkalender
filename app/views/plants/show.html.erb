@@ -23,22 +23,27 @@
     <% end %>
   </div>
 </div>
-<% if @plant.creator != current_user && @plant.user != current_user %>
-  <div class="row">
-    <div class="col-xs-12">
-      <% if @plant.creator.picture.file? %>
-        <%= link_to image_tag(@plant.creator.picture.url(:thumb), class: "img-rounded"), @plant.creator %>
-      <% end %>
-      von <%= @plant.creator.display_name %>
-    </div>
-  </div>
-<% end %>
+
 <div class="row">
   <div class="col-xs-12">
     <strong><%= @plant.subtitle %></strong>
   </div>
 </div>
 <br>
+
+<% if @plant.creator != current_user %>
+  <div class="row">
+    <div class="col-xs-12">
+      AutorIn:&nbsp;
+      <% if @plant.creator.picture.file? %>
+        <%#= link_to image_tag(@plant.creator.picture.url(:thumb), class: "img-rounded"), @plant.creator %>
+      <% end %>
+      <%= link_to @plant.creator.display_name, @plant.creator %>
+    </div>
+  </div>
+  <br>
+<% end %>
+
 <div class="row">
   <div class="col-xs-12">
     <%= raw markdown.render(@plant.desc) %>

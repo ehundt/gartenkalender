@@ -15,35 +15,19 @@
           <% end %>
         </div>
       </div>
-      <div class="row sidebar-plant">
-        <div class="col-xs-12">
-          Kopiert von
-        </div>
-      </div>
-      <% if @plant.creator.picture.file? %>
-        <div class="row sidebar-plant">
-          <div class="col-xs-12">
-              <%= link_to image_tag(@plant.creator.picture.url(:thumb), class: "img-rounded"), @plant.creator %>
-          </div>
-        </div>
-      <% end %>
-      <div class="row sidebar-plant">
-        <div class="col-xs-12">
-          <%= @plant.creator.display_name %>
-        </div>
-      </div>
     <% end %>
 
     <% if @plant.creator != current_user %>
       <div class="row sidebar-plant">
         <div class="col-xs-12">
           <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+          <br>
           <% if current_user.voted_for?(@plant.original) %>
-            besonders hilfreich
+            als besonders hilfreich markiert
           <%# TODO: hier könnte ein tooltip hin: von mir als besonders hilfreich markiert %>
           <%# TODO: undo voting %>
           <% else %>
-            <%= link_to 'besonders hilfreich!', vote_plant_path(@plant.original), method: :post %>
+            <%= link_to 'Original als besonders hilfreich markieren', vote_plant_path(@plant.original), method: :post %>
           <% end %>
         </div>
       </div>

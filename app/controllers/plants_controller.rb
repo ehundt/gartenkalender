@@ -29,7 +29,7 @@ class PlantsController < ApplicationController
   def show
     @plant = Plant.find(params[:id]) # User should only see plants of himself and his friends'!!!
     @done_tasks = Array.new()
-    @plant.tasks.order(updated_at: :desc).each do |task|
+    @plant.tasks.order(created_at: :desc).each do |task|
       unless task.done_tasks.empty?
         @done_tasks.push(task.done_tasks)
       end
@@ -97,6 +97,26 @@ class PlantsController < ApplicationController
       @plant.liked_by current_user
     end
     redirect_to @plant
+  end
+
+  def activate
+    @plant = Plant.find(params[:id])
+    if @plant
+      @plant.update(active: true)
+    end # TODO: else
+    if request.xhr?
+      render :json => { success: true }
+    end
+  end
+
+  def inactivate
+    @plant = Plant.find(params[:id])
+    if @plant
+      @plant.update(active: false)
+    end # TODO
+    if request.xhr?
+      render :json => { success: true }
+    end
   end
 
 private
