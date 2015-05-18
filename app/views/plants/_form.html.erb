@@ -61,15 +61,6 @@
 
   <div class="row form-space">
     <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Aktivieren?</span>
-          <%= f.select :active, options_for_select([["Ja", true], ["Nein", false]], @plant.active), {}, { class: 'form-control' } %>
-      </div>
-    </div>
-  </div>
-
-  <div class="row form-space">
-    <div class="col-xs-12">
       <div class="pull-right">
         <a href="<%= plant_path(@plant) %>">Abbrechen</a>&nbsp;
         <%= f.submit "Pflanze speichern", :class => "btn btn-success" %>

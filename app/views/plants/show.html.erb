@@ -1,7 +1,7 @@
 <%= render partial: "sidebar" %>
 
 <div class="row">
-  <div class="col-xs-3">
+  <div class="col-xs-5">
     <h4>
       <span class="active-button" data-id="<%= @plant.id %>" data-path="">
         <% if @plant.active %>
@@ -12,8 +12,6 @@
       </span>
       <%= @plant.name %>
     </h4>
-  </div>
-  <div class="col-xs-2 active-status">
   </div>
   <div class="col-xs-7 edit-plant-link">
     <% if @plant.user != current_user %>
