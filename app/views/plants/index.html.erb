@@ -47,7 +47,7 @@
       <td><%= link_to plant.name, plant %></td>
       <td><%= plant.creator.first_name %></td>
       <% unless @friend %>
-        <td class="active-button" data-id="<%= plant.id %>">
+        <td class="active-button" data-id="<%= plant.id %>" data-path="plants/">
           <% if plant.active %>
           <%# TODO: class: "img-rounded img-responsive" %>
             <%= image_tag "plant_active.gif", height: '42px', width: '30px' %>

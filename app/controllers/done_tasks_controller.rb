@@ -17,6 +17,14 @@ class DoneTasksController < ApplicationController
     end
   end
 
+  def destroy
+    @done_task = DoneTask.find(params[:id])
+    plant = @done_task.task.plant
+    @done_task.destroy
+
+    redirect_to plant
+  end
+
 private
 
   def done_task_params
