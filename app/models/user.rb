@@ -15,7 +15,11 @@ class User < ActiveRecord::Base
   accepts_nested_attributes_for :requesting_contacts, allow_destroy: true
   accepts_nested_attributes_for :requested_contacts,  allow_destroy: true
 
-  has_attached_file :picture, :styles => { :medium => "300x300>", :small => "100x100", :thumb => "50x50>" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :picture,
+    :styles         => { :medium => "300x300>", :small => "100x100", :thumb => "50x50>" },
+    :default_url    => "/images/:style/missing.png",
+    :path           => '/:class/pictures/:id/:style/:filename'
+
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/
 
   acts_as_voter

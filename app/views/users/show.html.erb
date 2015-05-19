@@ -2,7 +2,7 @@
   <% if @user.picture.file? %>
     <div class="row sidebar-contacts">
       <div class="col-xs-12">
-        <%= link_to image_tag(@user.picture.url(:medium), class: "img-rounded img-responsive"), @user %>
+        <%= link_to image_tag(download_picture_user_path(@user, {size: :medium}), class: "img-rounded img-responsive"), @user %>
      </div>
     </div>
   <% end %>

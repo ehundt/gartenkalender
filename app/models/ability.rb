@@ -11,6 +11,7 @@ class Ability
     else
       can :manage, User, :id => user.id
       can :read,   User, :id => friend_ids
+      can :download, User
 
       can :manage, Plant, :user_id    => user.id
       can :read,   Plant, :creator_id => friend_ids

@@ -28,6 +28,12 @@ class UsersController < ApplicationController
     redirect_to users_path
   end
 
+  def download_picture
+    @user = User.find(params[:id])
+    size = params[:size] || :small
+    redirect_to @user.picture.expiring_url(10, size)
+  end
+
   private
 
   def user_params

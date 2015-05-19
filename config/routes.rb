@@ -41,6 +41,9 @@ Rails.application.routes.draw do
 
   resources :users, except: :new do
     resources :plants, only: :index
+    member do
+      get 'download_picture'
+    end
   end
 
   # Example resource route with options:
