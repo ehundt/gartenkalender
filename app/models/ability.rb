@@ -17,6 +17,9 @@ class Ability
       can :read,   Plant, :creator_id => friend_ids
       can :vote,   Plant, :creator_id => friend_ids
       can :clone,  Plant, :creator_id => friend_ids
+      can :download_main_image, Plant, :user_id => user.id
+      can :download_main_image, Plant, :creator_id => user.id
+      can :download_main_image, Plant, :creator_id => friend_ids
 
       can :new, Task
       can :create, Task

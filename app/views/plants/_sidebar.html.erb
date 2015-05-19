@@ -2,7 +2,7 @@
   <% if current_user && @plant %>
     <div class="row sidebar-plant">
       <div class="col-xs-12">
-        <%= link_to image_tag(@plant.main_image, style: :medium, class: "sidebar-image img-rounded img-responsive"), @plant  %>
+        <%= link_to image_tag(download_main_image_plant_path(@plant, {size: :medium}), class: "sidebar-image img-rounded img-responsive"), @plant  %>
       </div>
     </div>
     <% if @plant.user == current_user && @plant.creator != current_user %>

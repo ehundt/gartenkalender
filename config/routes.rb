@@ -22,18 +22,19 @@ Rails.application.routes.draw do
   # Example resource route (maps HTTP verbs to controller actions automatically):
   #   resources :products
   resources :plants do
+    member do
+      post  'clone'
+      post  'vote'
+      patch 'activate'
+      patch 'inactivate'
+      get   'download_main_image'
+    end
     resources :tasks do
       member do
         patch 'hide'
         patch 'unhide'
       end
       resources :done_tasks
-    end
-    member do
-      post 'clone'
-      post 'vote'
-      patch 'activate'
-      patch 'inactivate'
     end
   end
 

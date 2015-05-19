@@ -119,6 +119,12 @@ class PlantsController < ApplicationController
     end
   end
 
+  def download_main_image
+    @plant = Plant.find(params[:id])
+    size = params[:size] || :small
+    redirect_to @plant.main_image.expiring_url(10, size)
+  end
+
 private
 
   def plant_params

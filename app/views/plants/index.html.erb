@@ -43,7 +43,9 @@
   <table class="table">
   <% @plants.each do |plant| %>
     <tr>
-      <td><% if plant.main_image.file? %><%= link_to image_tag(plant.main_image.url(:thumb), class: "img-rounded img-responsive"), plant %><% end %></td>
+      <td>
+        <% if plant.main_image.file? %>
+          <%= link_to image_tag(download_main_image_plant_path(plant, {size: :thumb}), class: "img-rounded img-responsive"), plant %><% end %></td>
       <td><%= link_to plant.name, plant %></td>
       <td><%= plant.creator.first_name %></td>
       <% unless @friend %>

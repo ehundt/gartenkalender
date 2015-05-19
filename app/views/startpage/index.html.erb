@@ -12,7 +12,8 @@
     <% @upcoming_tasks.each do |task| %>
     <tr>
       <td>
-        <% if task.plant.main_image.file? %><%= link_to image_tag(task.plant.main_image.url(:thumb), class: "img-rounded img-responsive"), task.plant %><% end %>
+        <% if task.plant.main_image.file? %>
+          <%= link_to image_tag(download_main_image_plant_path(task.plant, {size: :thumb}), class: "img-rounded img-responsive"), task.plant %><% end %>
       </td>
       <td>
         <%= link_to task.plant.name, task.plant %>

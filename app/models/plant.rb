@@ -6,7 +6,11 @@ class Plant < ActiveRecord::Base
   belongs_to :user
   belongs_to :creator, class_name: 'User', foreign_key: :creator_id, validate: true
 
-  has_attached_file :main_image, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :main_image,
+    :styles      => { :medium => "300x300>", :thumb => "100x100>" },
+    :default_url => "/images/:style/missing.png",
+    :path        => '/:class/main_image/:id/:style/:filename'
+
   validates_attachment :main_image,
     :content_type => { :content_type => ["image/jpeg", "image/gif", "image/png"] },
     :size         => { :in => 0..2.megabytes },
