@@ -4,11 +4,15 @@ class PlantsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    # show public plants of somebody else
     if params[:user_id].present?
       @other_user = User.find(params[:user_id])
-      @plants = @other_user.plants.order(:name) # unless @other_user.nil?
+      unless @other_user.nil?
+        @plants = @other_user.plants.where(public: true).order(:name)
+      end
     else
 
+    # show search results
       if params[:search].present?
         @searched_plants = current_user.plants.where(name: params[:search]).order(:name)
         # when using solr
@@ -18,9 +22,10 @@ class PlantsController < ApplicationController
         # end
         # @searched_plants = search.results
         @search_text = params[:search]
-      end
 
-      if @searched_plants.blank?
+    # show current_user's plant list
+      else
+#        if @searched_plants.blank?
         @plants = current_user.plants.order(:name)
       end
     end

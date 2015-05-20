@@ -1,26 +1,35 @@
 <% content_for :sidebar do %>
-  <%= form_tag(plants_path, method: "get") do %>
-    <div class="row sidebar-contacts">
-      <div class="col-xs-12">
-        <h4>Suche</h4>
-        <p><strong>in meiner Pflanzenliste</strong><p>
+  <% unless @other_user.present? %>
+  <%# TODO: add search in other_user's plants %>
+    <%= form_tag(plants_path, method: "get") do %>
+      <div class="row">
+        <div class="col-xs-12">
+          <h4>Suche</h4>
+          <p><strong>in meiner Pflanzenliste</strong><p>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="input-group">
-          <%= text_field_tag(:search, "", class: "form-control", placeholder: "z.B. Möhre")  %>
-          <span class="input-group-btn">
-            <%= submit_tag("suchen", class: "btn btn-default") %>
-          </span>
-        </div><!-- /input-group -->
-      </div><!-- /.col-xs-12 -->
-    </div><!-- /.row -->
+      <div class="row search-form">
+        <div class="col-xs-12">
+          <div class="input-group">
+            <%= text_field_tag(:search, "", class: "form-control", placeholder: "z.B. Möhre")  %>
+          </div><!-- /input-group -->
+        </div><!-- /.col-xs-12 -->
+      </div><!-- /.row -->
+      <div class="row search-form">
+        <div class="col-xs-12">
+          <div class="input-group">
+            <span class="input-group-btn">
+              <%= submit_tag("suchen", class: "btn btn-default") %>
+            </span>
+          </div><!-- /input-group -->
+        </div><!-- /.col-xs-12 -->
+      </div><!-- /.row -->
+    <% end %>
   <% end %>
 <% end %>
 
 <% if @other_user %>
-  <h4><%= @other_user.display_name %>'s Pflanzen</h4>
+  <h4><%= @other_user.display_name %>'s veröffentlichte Pflanzen</h4>
 <% else %>
   <h4>Meine Pflanzen</h4>
 <% end %>
@@ -33,9 +42,13 @@
   <% end %>
 
 <% elsif @plants.empty? %>
+  <% if @other_user %>
+    <p>Keine veröffentlichten Pflanzen.</p>
+  <% else %>
     <p>Eigene Pflanzen werden hier aufgelistet, sobald Du entweder
        selbst welche erstellt hast oder Dir von Freunden welche kopiert hast.
     </p>
+  <% end %>
 <% end %>
 
 <% unless @plants.empty? %>
@@ -48,7 +61,7 @@
           <%= link_to image_tag(download_main_image_plant_path(plant, {size: :thumb}), class: "img-rounded img-responsive"), plant %><% end %></td>
       <td><%= link_to plant.name, plant %></td>
       <td>
-        <% if plant.creator != current_user %>
+        <% if plant.creator != current_user && @other_user.nil? %>
           von <%= plant.creator.display_name %>
         <% end %>
       </td>
@@ -63,7 +76,7 @@
         </td>
       <% end %>
       <td>
-        <% if current_user == plant.creator && plant.original.public %>
+        <% if (current_user == plant.creator || @other_user.present?) && plant.original.public %>
           <strong><%= plant.original.get_likes.size %></strong>
           <%= image_tag("green_flower_icon.png", height: '20px', width: '20px') %>
         <% end %>

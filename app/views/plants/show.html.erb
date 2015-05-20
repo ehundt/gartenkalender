@@ -16,7 +16,8 @@
     </h4>
   </div>
   <div class="col-xs-7 edit-plant-link">
-    <% if @plant.user != current_user %>
+    <%# if @plant.user != current_user && @plant.public %>
+    <% if can? :clone, @plant %>
       <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
       <%= link_to 'Kopieren', clone_plant_path(@plant), method: :post %>&nbsp;
     <% end %>
