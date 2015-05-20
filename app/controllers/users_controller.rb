@@ -4,7 +4,13 @@ class UsersController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @users = User.all
+    if params[:search].present?
+      search_terms = params[:search].gsub(/\s+/m, ' ').strip.split(" ")
+      # TODO: split on spaces
+      @users = User.where("first_name IN (?) OR last_name IN (?)", search_terms, search_terms).to_a
+    else
+      @users = User.all
+    end
   end
 
   def show

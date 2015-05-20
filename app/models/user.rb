@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
 
   def display_name
     if (first_name.blank? && last_name.blank?)
-      email
+      "user#{self.id}"
     else
       "#{first_name} #{last_name}"
     end
@@ -44,5 +44,13 @@ class User < ActiveRecord::Base
   def region
     # get region for user with user.latitude and user.longitude, default: 0 = Germany
     0
+  end
+
+  def created_plants(only_public=true)
+    if only_public
+      plants.where(creator_id: self.id).where(public: true)
+    else
+      plants.where(creator_id: self.id)
+    end
   end
 end

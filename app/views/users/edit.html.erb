@@ -32,34 +32,27 @@
 
   <div class="row form-space">
     <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon">
-          <%= f.label :first_name %>
-        </span>
-        <%= f.text_field :first_name, :class => "form-control" %>
-      </div>
+      <%= f.text_field :first_name, :class => "form-control", placeholder: "Vorname" %>
     </div>
   </div>
 
   <div class="row form-space">
     <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon">
-          <%= f.label :last_name %>
-        </span>
-        <%= f.text_field :last_name, :class => "form-control" %>
-      </div>
+      <%= f.text_field :last_name, :class => "form-control", placeholder: "Nachname" %>
     </div>
   </div>
 
   <div class="row form-space">
     <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon">
-          <%= f.label :email %>
-        </span>
-        <%= f.text_field :email, :class => "form-control" %>
-      </div>
+      <%= f.text_field :email, :class => "form-control", placeholder: "Email" %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <small>
+        &nbsp;Die Email Adresse wird nicht veröffentlicht.
+      </small>
     </div>
   </div>
 
@@ -68,7 +61,7 @@
     <%= f.hidden_field :longitude %>
   <% end %>
 
-  <% if @user.admin? %>
+  <% if current_user.admin? %>
     <div class="row form-space">
       <div class="col-xs-12">
         <div class="input-group">

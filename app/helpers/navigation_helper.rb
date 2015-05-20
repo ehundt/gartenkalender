@@ -10,9 +10,7 @@ module NavigationHelper
     output += display_tab(root_path, "Aufgabenliste")
     output += display_tab(plants_path, "Pflanzenliste")
     output += display_tab(new_plant_path, "Neue Pflanze")
-    if (current_user && current_user.admin?)
-      output += display_tab(users_path, "Benutzer")
-    end
+    output += display_tab(users_path, "Gartenfreunde")
     output += "</ul>"
     output.html_safe
   end
