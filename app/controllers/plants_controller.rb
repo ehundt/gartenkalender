@@ -5,8 +5,8 @@ class PlantsController < ApplicationController
 
   def index
     if params[:user_id].present?
-      @friend = User.find(params[:user_id])
-      @plants = @friend.plants.order(:name) # unless @friend.nil?
+      @other_user = User.find(params[:user_id])
+      @plants = @other_user.plants.order(:name) # unless @other_user.nil?
     else
 
       if params[:search].present?
@@ -37,11 +37,18 @@ class PlantsController < ApplicationController
   end
 
   def new
-    contacts = Contact.confirmed_contacts_for(current_user)
-    user_ids = contacts.collect { |c| c.sharing_user_for(current_user).id }
-    if params[:search].present?
+    #contacts = Contact.confirmed_contacts_for(current_user)
+    #user_ids = contacts.collect { |c| c.sharing_user_for(current_user).id }
+    if params[:search_name].present?
       # TODO: security issue?? params[:search]???
-      @plants = Plant.where(name: params[:search]).where('user_id in (?)', user_ids)
+      if params[:search_creator].present?
+        creator_ids = User.where(last_name: params[:search_creator]).pluck(:id) # TODO: display name, email, LIKE %...?
+        @plants = Plant.where(name: params[:search_name])
+                       .where(public: true)
+                       .where("creator_id IN (?)", creator_ids)
+      else
+        @plants = Plant.where(name: params[:search_name]).where(public: true)
+      end
       # search = Plant.search do
       #   fulltext params[:search]
       #     without(:user_id, current_user.id)
@@ -49,6 +56,11 @@ class PlantsController < ApplicationController
       # end
 # TODO: add search!
 #      @plants = search.results
+    elsif params[:search_creator].present?
+        creator_ids = User.where(last_name: params[:search_creator]).pluck(:id) # TODO: display name, email, LIKE %...?
+        @plants = Plant.where(public: true)
+                       .where("creator_id IN (?)", creator_ids)
+
     end
   end
 
@@ -128,6 +140,6 @@ class PlantsController < ApplicationController
 private
 
   def plant_params
-    params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active)
+    params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active, :public)
   end
 end

@@ -11,15 +11,15 @@ class Ability
     else
       can :manage, User, :id => user.id
       can :read,   User, :id => friend_ids
-      can :download, User
+      can :download_picture, User
 
-      can :manage, Plant, :user_id    => user.id
-      can :read,   Plant, :creator_id => friend_ids
-      can :vote,   Plant, :creator_id => friend_ids
-      can :clone,  Plant, :creator_id => friend_ids
+      can :manage, Plant, :user_id => user.id
+      can :read,   Plant, :public  => true
+      can :vote,   Plant, :public  => true
+      can :clone,  Plant, :public  => true
       can :download_main_image, Plant, :user_id => user.id
       can :download_main_image, Plant, :creator_id => user.id
-      can :download_main_image, Plant, :creator_id => friend_ids
+      can :download_main_image, Plant, :public => true
 
       can :new, Task
       can :create, Task
@@ -34,6 +34,7 @@ class Ability
 
       can :read, Startpage
       can :read, :static_pages
+      can :help, :page
     end
   end
 end

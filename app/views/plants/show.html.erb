@@ -3,53 +3,58 @@
 <div class="row">
   <div class="col-xs-5">
     <h4>
-      <span class="active-button" data-id="<%= @plant.id %>" data-path="">
-        <% if @plant.active %>
-          <%= image_tag "plant_active.gif", height: '42px', width: '30px' %>
-        <% else %>
-          <%= image_tag "plant_inactive.gif", height: '42px', width: '30px' %>
-        <% end %>
-      </span>
+      <% if @plant.user == current_user %>
+        <span class="active-button" data-id="<%= @plant.id %>" data-path="">
+          <% if @plant.active %>
+            <%= image_tag "plant_active.gif", height: '42px', width: '30px' %>
+          <% else %>
+            <%= image_tag "plant_inactive.gif", height: '42px', width: '30px' %>
+          <% end %>
+        </span>
+      <% end %>
       <%= @plant.name %>
     </h4>
   </div>
   <div class="col-xs-7 edit-plant-link">
     <% if @plant.user != current_user %>
       <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-      <%= link_to 'Kopieren', clone_plant_path(@plant), method: :post %>
+      <%= link_to 'Kopieren', clone_plant_path(@plant), method: :post %>&nbsp;
     <% end %>
 
     <% if can? :manage, @plant %>
       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-      <%= link_to 'Pflanze bearbeiten', edit_plant_path(@plant) %>
+      <%= link_to 'Pflanze bearbeiten', edit_plant_path(@plant) %>&nbsp;
     <% end %>
 
     <% if @plant.creator != @plant.user && !@plant.orig_id.nil? %>
-      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+      <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
       <%= link_to 'Original', plant_path(@plant.orig_id) %>
     <% end %>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <strong><%= @plant.subtitle %></strong>
-  </div>
-</div>
-<br>
-
 <% if @plant.creator != current_user %>
   <div class="row">
     <div class="col-xs-12">
-      AutorIn:&nbsp;
+      <strong>
+        <% if @plant.user == current_user %>
+          Kopiert von:&nbsp;
+        <% else %>
+          AutorIn:&nbsp;
+        <% end %>
       <% if @plant.creator.picture.file? %>
         <%#= link_to image_tag(@plant.creator.picture.url(:thumb), class: "img-rounded"), @plant.creator %>
       <% end %>
-      <%= link_to @plant.creator.display_name, @plant.creator %>
+      <%= link_to @plant.creator.display_name, @plant.creator %></strong>
     </div>
   </div>
-  <br>
 <% end %>
+
+<div class="row">
+  <div class="col-xs-12">
+    <h5><%= @plant.subtitle %></h5>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-xs-12">
@@ -88,7 +93,8 @@
       <tr>
         <th>Aufgabe</th>
         <th>Notiz</th>
-        <th>erledigt am</th>
+        <th>Datum</th>
+        <th></th>
         <th></th>
       </tr>
       <% @plant.tasks.order(updated_at: :desc).each do |task| %>

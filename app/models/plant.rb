@@ -31,6 +31,7 @@ class Plant < ActiveRecord::Base
     cloned_plant.user_id = user.id
     cloned_plant.main_image = main_image
     cloned_plant.orig_id = id
+    cloned_plant.public = false
     cloned_plant.save
 
     tasks.each do |task|

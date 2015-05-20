@@ -1,33 +1,35 @@
 <% content_for :sidebar do %>
   <% if current_user && @plant %>
-    <div class="row sidebar-plant">
+    <div class="row">
       <div class="col-xs-12">
-        <%= link_to image_tag(download_main_image_plant_path(@plant, {size: :medium}), class: "sidebar-image img-rounded img-responsive"), @plant  %>
+        <% if @plant.public %>
+          <%= image_tag("world-globe32x32.png") %> öffentlich
+        <% else %>
+          <%= image_tag("not-world-globe32x32.png") %> privat
+        <% end %>
       </div>
     </div>
-    <% if @plant.user == current_user && @plant.creator != current_user %>
-      <div class="row sidebar-plant">
-        <div class="col-xs-12">
-          <% if @plant.active %>
-            <%= image_tag "plant_active.gif", height: '42px', width: '30px' %> aktiv
-          <% else %>
-            <%= image_tag "plant_inactive.gif", height: '42px', width: '30px' %> nicht aktiv
-          <% end %>
-        </div>
+
+    <div class="row">
+      <div class="col-xs-12 sidebar-image">
+        <%= link_to image_tag(download_main_image_plant_path(@plant, {size: :medium}), class: "img-rounded img-responsive"), @plant  %>
       </div>
-    <% end %>
+    </div>
 
     <% if @plant.creator != current_user %>
-      <div class="row sidebar-plant">
+      <div class="row sidebar-votes">
         <div class="col-xs-12">
-          <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-          <br>
           <% if current_user.voted_for?(@plant.original) %>
-            als besonders hilfreich markiert
-          <%# TODO: hier könnte ein tooltip hin: von mir als besonders hilfreich markiert %>
+            <% if @plant.user == current_user %>Original<% end %> von mir  empfohlen
+          <%= image_tag("green_flower_icon.png", height: '20px', width: '20px') %><%# TODO: hier könnte ein tooltip hin: von mir als besonders hilfreich markiert %>
           <%# TODO: undo voting %>
           <% else %>
-            <%= link_to 'Original als besonders hilfreich markieren', vote_plant_path(@plant.original), method: :post %>
+            <% if @plant.user != current_user %>
+              <%= link_to 'empfehlen', vote_plant_path(@plant.original), method: :post %>
+            <% else %>
+              <%= link_to 'Original empfehlen', vote_plant_path(@plant.original), method: :post %>
+            <% end %>
+            <%= image_tag("green_flower_icon.png", height: '20px', width: '20px') %>
           <% end %>
         </div>
       </div>
