@@ -51,14 +51,18 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.update(hide: true)
 
-    redirect_to request.referer
+    if request.xhr?
+      render :json => { success: true }
+    end
   end
 
   def unhide
     @task = Task.find(params[:id])
     @task.update(hide: false)
 
-    redirect_to request.referer
+    if request.xhr?
+      render :json => { success: true }
+    end
   end
 
 private

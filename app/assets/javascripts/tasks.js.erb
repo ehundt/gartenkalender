@@ -1,0 +1,32 @@
+var onPageReady = function(){
+
+  $('.task-visibility').on('click', function(){
+    var $task_id = $(this).data("id");
+    var $plant_id = $(this).data("plant-id");
+    var path = $(this).data("path");
+    var $url = path + $plant_id + "/tasks/" + $task_id;
+
+    var icon = $(this).children("span");
+    var path = $(this).data("path");
+
+    if (icon.hasClass("glyphicon-eye-open"))
+      $url += "/hide";
+
+    if (icon.hasClass("glyphicon-eye-close"))
+      $url += "/unhide";
+
+    $.ajax({
+      url:      $url,
+      type:     "PATCH",
+      dataType: "json",
+      data:     { task: {id: $task_id} },
+      success:  function(data, status){
+        icon.toggleClass("glyphicon-eye-open");
+        icon.toggleClass("glyphicon-eye-close");
+      }
+    });
+  });
+};
+
+$(document).ready(onPageReady);
+$(document).on("page:load", onPageReady);

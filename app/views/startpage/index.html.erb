@@ -30,8 +30,9 @@
         <%= link_to "überspringen", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id, skipped: true}), method: :post %>
       </td>
       <td>
-        <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-        <%= link_to 'nicht anzeigen', hide_plant_task_path(task.plant,task), method: :patch, class: "delete-link" %>
+        <div class="task-visibility" data-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="plants/">
+          <span class="glyphicon glyphicon-eye-open" aria-hidden="true" data-toggle="tooltip" data-placement="bottom" title="Sichtbarkeit in der Aufgabenliste durch Anklicken des Auges ausschalten."></span>
+        </div>
       </td>
     </tr>
     <% end %>
