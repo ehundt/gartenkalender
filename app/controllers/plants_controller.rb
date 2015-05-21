@@ -33,7 +33,7 @@ class PlantsController < ApplicationController
   def new
     retrieve_searched_plants()
 
-    if (search && @plants.empty?)
+    if (searched? && @plants.empty?)
       flash[:danger] = "Es wurde keine Pflanze gefunden."
     end
   end
@@ -125,7 +125,7 @@ private
     params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active, :public)
   end
 
-  def search
+  def searched?
     params[:search_name].present? || params[:search_creator].present?
   end
 
