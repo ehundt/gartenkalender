@@ -8,7 +8,7 @@ var onPageReady = function(){
         url:      path + plant_id + "/inactivate",
         type:     "PATCH",
         dataType: "json",
-        data:     { plant: {id: 14} },
+        data:     { plant: {id: plant_id} },
         success:  function(data, status){
                     $(activeIcon).attr("src", "<%= image_url('plant_inactive.gif') %>");
                   }
@@ -19,11 +19,46 @@ var onPageReady = function(){
         url:      path + plant_id + "/activate",
         type:     "PATCH",
         dataType: "json",
-        data:     { plant: {id: 14} },
+        data:     { plant: {id: plant_id} },
         success:  function(data, status){
                     $(activeIcon).attr("src", "<%= image_url('plant_active.gif') %>");
                   }
       });
+  });
+
+  $('.plant-visibility').on('click', function(){
+    var world_globe = $(this).children("img");
+    var privacy_text = $(this).children("span");
+    var plant_id = $(this).data("plant-id");
+    var switch_allowed = $(this).data("switch-allowed");
+
+    if ($(world_globe).attr("src") == "<%= image_url('world-globe32x32.png') %>"){
+      if (switch_allowed == 1)
+        $.ajax({
+          url: plant_id,
+          type: "PATCH",
+          dataType: "json",
+          data: { plant: {id: plant_id, public: false} },
+          success: function(data, status){
+            $(world_globe).attr("src", "<%= image_url('not-world-globe32x32.png') %>");
+            privacy_text.text("privat");
+          }
+        });
+    };
+
+    if ($(world_globe).attr("src") == "<%= image_url('not-world-globe32x32.png') %>"){
+      if (switch_allowed == 1)
+        $.ajax({
+          url: plant_id,
+          type: "PATCH",
+          dataType: "json",
+          data: { plant: {id: plant_id, public: true} },
+          success: function(data, status){
+            $(world_globe).attr("src", "<%= image_url('world-globe32x32.png') %>");
+            privacy_text.text("öffentlich");
+          }
+        });
+    };
   });
 };
 

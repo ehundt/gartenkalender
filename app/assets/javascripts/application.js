@@ -21,4 +21,7 @@ $(document).ready(function() {
   $('.has-popover').popover({
     trigger: 'hover'
   });
+  $(function () {
+  $('[data-toggle="popover"]').popover()
+})
 });

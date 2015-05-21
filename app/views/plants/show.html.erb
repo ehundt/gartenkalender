@@ -8,7 +8,7 @@
           <% if @plant.active %>
             <%= image_tag "plant_active.gif", height: '42px', width: '30px',
                  "data-toggle" => "tooltip", "data-placement" => "bottom",
-                 title: "Pflanze ist aktiv, d.h. Pflegetips werden in der Aufgabenliste angezeigt." %>
+                 title: "Pflanze ist aktiv, d.h. Pflegetips werden in der Aufgabenliste angezeigt. Zum aktiv schalten, bitte auf das Bild klicken." %>
           <% else %>
             <%= image_tag "plant_inactive.gif", height: '42px', width: '30px', "data-toggle" => "tooltip", "data-placement" => "bottom",
                  title: "Pflanze ist inaktiv, d.h. Pflegetips werden in der Aufgabenliste nicht angezeigt. Zum aktiv schalten, bitte auf das Bild klicken."  %>

@@ -88,7 +88,11 @@ class PlantsController < ApplicationController
   def update
     @plant = Plant.find(params[:id])
     @plant.update(plant_params)
-    redirect_to @plant
+    if request.xhr?
+      render :json => { success: true }
+    else
+      redirect_to @plant
+    end
   end
 
   def destroy
@@ -120,7 +124,7 @@ class PlantsController < ApplicationController
     @plant = Plant.find(params[:id])
     if @plant
       @plant.update(active: true)
-    end # TODO: else
+    end
     if request.xhr?
       render :json => { success: true }
     end
