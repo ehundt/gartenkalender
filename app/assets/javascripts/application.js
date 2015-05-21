@@ -21,7 +21,12 @@ $(document).ready(function() {
   $('.has-popover').popover({
     trigger: 'hover'
   });
-  $(function () {
-  $('[data-toggle="popover"]').popover()
-})
 });
+
+var onPageReady = function () {
+    $('[data-toggle="popover"]').popover()
+  };
+
+$(document).ready(onPageReady);
+$(document).on("page:load", onPageReady);
+
