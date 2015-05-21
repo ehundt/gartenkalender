@@ -10,24 +10,13 @@ class PlantsController < ApplicationController
       unless @other_user.nil?
         @plants = @other_user.plants.where(public: true).order(:name)
       end
+
+    elsif (params[:search_name].present? || params[:search_creator].present?)
+      @searched_plants = retrieve_searched_plants()
+      @search_text = params[:search_name]
+
     else
-
-    # show search results
-      if params[:search].present?
-        @searched_plants = current_user.plants.where(name: params[:search]).order(:name)
-        # when using solr
-        # search = Plant.search do
-        #   fulltext params[:search]
-        #     with(:user_id, current_user.id)
-        # end
-        # @searched_plants = search.results
-        @search_text = params[:search]
-
-    # show current_user's plant list
-      else
-#        if @searched_plants.blank?
-        @plants = current_user.plants.order(:name)
-      end
+      @plants = current_user.plants.order(:name)
     end
   end
 
@@ -42,30 +31,10 @@ class PlantsController < ApplicationController
   end
 
   def new
-    #contacts = Contact.confirmed_contacts_for(current_user)
-    #user_ids = contacts.collect { |c| c.sharing_user_for(current_user).id }
-    if params[:search_name].present?
-      # TODO: security issue?? params[:search]???
-      if params[:search_creator].present?
-        creator_ids = User.where(last_name: params[:search_creator]).pluck(:id) # TODO: display name, email, LIKE %...?
-        @plants = Plant.where(name: params[:search_name])
-                       .where(public: true)
-                       .where("creator_id IN (?)", creator_ids)
-      else
-        @plants = Plant.where(name: params[:search_name]).where(public: true)
-      end
-      # search = Plant.search do
-      #   fulltext params[:search]
-      #     without(:user_id, current_user.id)
-      #     with(:user_id, user_ids)
-      # end
-# TODO: add search!
-#      @plants = search.results
-    elsif params[:search_creator].present?
-        creator_ids = User.where(last_name: params[:search_creator]).pluck(:id) # TODO: display name, email, LIKE %...?
-        @plants = Plant.where(public: true)
-                       .where("creator_id IN (?)", creator_ids)
+    retrieve_searched_plants()
 
+    if (search && @plants.empty?)
+      flash[:danger] = "Es wurde keine Pflanze gefunden."
     end
   end
 
@@ -95,11 +64,8 @@ class PlantsController < ApplicationController
     end
   end
 
-  def destroy
-    @plant = Plant.find(params[:id])
-    @plant.destroy
-
-    redirect_to plants_path
+  def search
+    render "search_form"
   end
 
   def clone
@@ -146,9 +112,74 @@ class PlantsController < ApplicationController
     redirect_to @plant.main_image.expiring_url(10, size)
   end
 
+  def destroy
+    @plant = Plant.find(params[:id])
+    @plant.destroy
+
+    redirect_to plants_path
+  end
+
 private
 
   def plant_params
     params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active, :public)
+  end
+
+  def search
+    params[:search_name].present? || params[:search_creator].present?
+  end
+
+  def search_creator_ids
+    my_plants = params[:search_my_plants].present? ? params[:search_my_plants] : 0
+    if my_plants == 1
+      creator_ids = [current_user.id]
+
+    elsif params[:search_creator].present?
+      terms = params[:search_creator]
+      search_terms = terms.split(' ').collect { |term| '%' + term + '%' }
+      creator_ids = User.where.not(id: current_user.id)
+                        .where("first_name ILIKE ANY (array[?]) OR last_name ILIKE ANY (array[?])",
+                               search_terms, search_terms).pluck(:id)
+    end
+    creator_ids
+  end
+
+  def retrieve_searched_plants()
+    only_public = params[:search_only_public].present? ? params[:search_only_public] : 1
+    creator_ids = search_creator_ids()
+
+    only_my_plants = params[:search_my_plants].present? ? params[:search_my_plants] : 0
+
+    if params[:search_name].present?
+      # TODO: security issue?? params[:search]???
+      search_terms = params[:search_name].split(' ').collect { |term| '%' + term + '%' }
+
+      if only_public == 1
+        if creator_ids.nil?
+          @plants = Plant.where("name ILIKE ANY (array[?])", search_terms).where(public: true)
+        else
+          @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+                         .where(public: true)
+                         .where("creator_id IN (?)", creator_ids)
+        end
+
+      else
+        if creator_ids.nil?
+          @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+        else
+          @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+                         .where("creator_id IN (?)", creator_ids)
+        end
+      end
+
+    else
+      if only_public && creator_ids.nil?
+        @plants = Plant.where("creator_id IN (?)", creator_ids)
+      else
+        @plants = Plant.where(public: true)
+                       .where("creator_id IN (?)", creator_ids)
+      end
+    end
+    @plants
   end
 end

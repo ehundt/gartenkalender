@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get 'static_pages/recommendations'
 
+  get 'plants/search'
+
   devise_for :users
 
   get 'startpage/index'

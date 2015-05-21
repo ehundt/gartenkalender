@@ -11,6 +11,7 @@ module NavigationHelper
     output += display_tab(plants_path, "Pflanzenliste")
     output += display_tab(new_plant_path, "Neue Pflanze")
     output += display_tab(users_path, "Gartenfreunde")
+    output += display_tab(plants_search_path, "Pflanzensuche")
     output += "</ul>"
     output.html_safe
   end
