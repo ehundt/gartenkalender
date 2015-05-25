@@ -15,19 +15,16 @@
   <% options.shift %>
   <div class="input-group search-form">
     <select name="search_category" id="search_category" class="form-control">
-    <ul class="dropdown-menu" role="menu">
-      <option value="keine">Kategorie</option>
-      <%= options_for_select(options) %>
-    </ul>
+      <ul class="dropdown-menu" role="menu">
+        <option value="keine">Kategorie</option>
+        <%= options_for_select(options) %>
+      </ul>
   </select>
   </div>
 
-  <div class="search-form">
   <div class="input-group search-form">
     <span class="input-group-btn">
       <%= submit_tag("suchen", class: "btn btn-default") %>
     </span>
-  </div><!-- /input-group -->
-</div>
-
+  </div>
 <% end %>

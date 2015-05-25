@@ -145,6 +145,7 @@ private
                                search_terms, search_terms).pluck(:id)
     end
     creator_ids
+    # TODO: search for plants without my own!!
   end
 
   def retrieve_searched_plants()

@@ -33,6 +33,8 @@
 
 <% if @other_user %>
   <h4><%= @other_user.display_name %>'s veröffentlichte Pflanzen</h4>
+<% elsif @searched %>
+  <h4>Suchergebnis</h4>
 <% else %>
   <h4>Meine Pflanzen</h4>
 <% end %>
@@ -42,6 +44,7 @@
   <% unless @searched_plants.empty? %>
     <% @plants = @searched_plants %>
   <% else %>
+    <br>
     <button type="button" class="btn btn-default">
       <%= link_to "neue Suche", plants_search_path %>
     </button>
