@@ -6,15 +6,6 @@ class User < ActiveRecord::Base
 
   has_many :plants
 
-  has_many :requesting_contacts, class_name: 'Contact',
-           foreign_key: :requested_user_id, :dependent => :destroy
-
-  has_many :requested_contacts,  class_name: 'Contact',
-           foreign_key: :requesting_user_id,  :dependent => :destroy
-
-  accepts_nested_attributes_for :requesting_contacts, allow_destroy: true
-  accepts_nested_attributes_for :requested_contacts,  allow_destroy: true
-
   has_attached_file :picture,
     :styles         => { :medium => "300x300>", :small => "100x100", :thumb => "50x50>" },
     :default_url    => "/images/:style/missing.png",
@@ -34,11 +25,6 @@ class User < ActiveRecord::Base
     else
       "#{first_name} #{last_name}"
     end
-  end
-
-  # a friend is a confirmed contact user
-  def friends
-    Contact.confirmed_contacts_for(self).collect { |c| c.sharing_user_for(self) }
   end
 
   def region

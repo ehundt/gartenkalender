@@ -40,8 +40,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :contacts
-
   resources :users, except: :new do
     resources :plants, only: :index
     member do

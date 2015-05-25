@@ -15,16 +15,16 @@ class PlantsController < ApplicationController
       @searched_plants = retrieve_searched_plants()
       @searched = true
       @search_inputs = Array.new
-      @search_inputs.push(params[:search_name]) if params[:search_name] != ""
-      @search_inputs.push(params[:search_category]) if params[:search_category] != "keine"
-      @search_inputs.push(params[:search_creator]) if params[:search_creator] != ""
+      @search_inputs.push(params[:search_name]) unless params[:search_name].blank?
+      @search_inputs.push(params[:search_category]) if (!params[:search_category].blank? && params[:search_category] != "keine")
+      @search_inputs.push(params[:search_creator]) unless params[:search_creator].blank?
     else
       @plants = current_user.plants.order(:name)
     end
   end
 
   def show
-    @plant = Plant.find(params[:id]) # User should only see plants of himself and his friends'!!!
+    @plant = Plant.find(params[:id]) # TODO: make sure user cannot see private plants of other users
     @done_tasks = Array.new()
     @plant.tasks.order(created_at: :desc).each do |task|
       unless task.done_tasks.empty?
