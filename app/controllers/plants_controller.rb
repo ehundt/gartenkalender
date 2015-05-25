@@ -11,10 +11,13 @@ class PlantsController < ApplicationController
         @plants = @other_user.plants.where(public: true).order(:name)
       end
 
-    elsif (params[:search_name].present? || params[:search_creator].present?)
+    elsif (params[:search_name].present? || params[:search_creator].present? || params[:search_category].present?)
       @searched_plants = retrieve_searched_plants()
-      @search_text = params[:search_name]
-
+      @searched = true
+      @search_inputs = Array.new
+      @search_inputs.push(params[:search_name]) if params[:search_name] != ""
+      @search_inputs.push(params[:search_category]) if params[:search_category] != "keine"
+      @search_inputs.push(params[:search_creator]) if params[:search_creator] != ""
     else
       @plants = current_user.plants.order(:name)
     end
@@ -122,7 +125,7 @@ class PlantsController < ApplicationController
 private
 
   def plant_params
-    params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active, :public)
+    params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active, :public, :category)
   end
 
   def searched?
@@ -156,30 +159,88 @@ private
 
       if only_public == 1
         if creator_ids.nil?
-          @plants = Plant.where("name ILIKE ANY (array[?])", search_terms).where(public: true)
+          if search_category
+            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+                           .where(public: true)
+                           .where(category: search_category)
+          else
+            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+                           .where(public: true)
+          end
         else
-          @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
-                         .where(public: true)
-                         .where("creator_id IN (?)", creator_ids)
+          if search_category
+            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+                           .where(public: true)
+                           .where("creator_id IN (?)", creator_ids)
+                           .where(category: search_category)
+          else
+            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+                           .where(public: true)
+                           .where("creator_id IN (?)", creator_ids)
+          end
         end
 
-      else
+      else # not only public
         if creator_ids.nil?
-          @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+          if search_category
+            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+                           .where(category: search_category)
+          else
+            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+          end
         else
-          @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
-                         .where("creator_id IN (?)", creator_ids)
+          if search_category
+            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+                           .where("creator_id IN (?)", creator_ids)
+                           .where(category: search_category)
+          else
+            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+                           .where("creator_id IN (?)", creator_ids)
+          end
         end
       end
 
-    else
-      if only_public && creator_ids.nil?
-        @plants = Plant.where("creator_id IN (?)", creator_ids)
-      else
-        @plants = Plant.where(public: true)
-                       .where("creator_id IN (?)", creator_ids)
+    else # no search name
+      if only_public
+        if creator_ids.nil? # no search name, no creator ids
+          if search_category
+            @plants = Plant.where(public: true)
+                           .where(category: search_category)
+          else
+            require 'logger'
+            Logger.new("log/debug.log").debug("yes, i am right")
+          end
+        else # only public with creator ids, no search name
+           if search_category
+            @plants = Plant.where(public: true)
+                           .where(category: search_category)
+                           .where("creator_id IN (?)", creator_ids)
+          else # only public, with creator_ids, no search name, no categories
+            @plants = Plant.where(public: true)
+                           .where("creator_id IN (?)", creator_ids)
+          end
+        end
+      else # not only public
+        if creator_ids.nil? # no search name, no creator ids
+          if search_category
+            @plants = Plant.where(category: search_category)
+          end
+        else # with creator ids, no search name
+          if search_category
+            @plants = Plant.where("creator_id IN (?)", creator_ids)
+                           .where(category: search_category)
+          else # with creator ids, no search name, no category
+            @plants = Plant.where("creator_id IN (?)", creator_ids)
+          end
+        end
       end
     end
     @plants
+  end
+
+  def search_category
+    if params[:search_category] != "keine"
+      Plant.categories[params[:search_category]]
+    end
   end
 end

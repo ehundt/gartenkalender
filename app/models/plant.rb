@@ -6,6 +6,8 @@ class Plant < ActiveRecord::Base
   belongs_to :user
   belongs_to :creator, class_name: 'User', foreign_key: :creator_id, validate: true
 
+  enum category: [:keine, :blume, :obst, :gemüse, :baum, :strauch, :kaktus, :staude, :sukkulent, :kletterpflanze, :zimmerpflanze, :wasserpflanze, :gras]
+
   has_attached_file :main_image,
     :styles      => { :medium => "300x300>", :thumb => "100x100>" },
     :default_url => "/images/:style/missing.png",

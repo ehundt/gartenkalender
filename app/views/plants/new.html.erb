@@ -65,7 +65,7 @@
 
   <div class="row form-space">
     <div class="col-xs-12">
-      <small>Bilder im png oder jpg Format bis zu 2 Megabyte groß</small>
+      <small>Bilder im png oder jpg Format bis zu 2 Megabyte</small>
      </div>
   </div>
 
@@ -95,6 +95,18 @@
         <span class="input-group-addon">Beschreibung</span>
           <%= f.text_area :desc, :class => "form-control",
              "aria-label" => "Beschreibung", rows: "12" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">Kategorie</span>
+        <%= f.select :category,
+            options_for_select(Plant.categories.collect { |c| [c[0].humanize.titleize, c[0]] }),
+            {},
+            { class: 'form-control'} %>
       </div>
     </div>
   </div>

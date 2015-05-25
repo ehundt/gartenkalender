@@ -55,8 +55,11 @@
 <% end %>
 
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-6">
     <h5><%= @plant.subtitle %></h5>
+  </div>
+  <div class="col-xs-6">
+    <strong>Kategorie: </strong><%= @plant.category.humanize %></h5>
   </div>
 </div>
 

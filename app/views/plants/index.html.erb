@@ -37,11 +37,14 @@
   <h4>Meine Pflanzen</h4>
 <% end %>
 
-<% if @search_text %>
-  <% if @searched_plants.empty? %>
-    <p><h5>Suchergebnis: </h5>Keine "<strong><%= @search_text %></strong>" gefunden.</p>
-  <% else %>
+<% if @searched %>
+  <h5><%= searched_for_text %>: <strong><%= @plants.length %></strong> Pflanzen gefunden.</h5>
+  <% unless @searched_plants.empty? %>
     <% @plants = @searched_plants %>
+  <% else %>
+    <button type="button" class="btn btn-default">
+      <%= link_to "neue Suche", plants_search_path %>
+    </button>
   <% end %>
 
 <% elsif @plants.empty? %>
