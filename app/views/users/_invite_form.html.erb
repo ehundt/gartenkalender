@@ -1,3 +1,4 @@
+<%= form_tag users_invite_path(), method: "post" do %>
   <div class="row">
     <div class="col-xs-12">
       <h4>Gartenfreunde</h4>
@@ -11,10 +12,17 @@
   <div class="row search-form">
     <div class="col-xs-12">
       <div class="input-group">
+        <%= text_field_tag(:email, "", class: "form-control", placeholder: "Email Adresse") %>
+      </div>
+    </div>
+  </div>
+  <div class="row search-form">
+    <div class="col-xs-12">
+      <div class="input-group">
         <span class="input-group-btn">
-          <%= render partial: "modal_invite" %>
-          <%= submit_tag("einladen", class: "btn btn-default", "data-toggle" => "modal", "data-target" => "#inviteModal") %>
+          <%= submit_tag("einladen", class: "btn btn-default") %>
         </span>
       </div><!-- /input-group -->
     </div><!-- /.col-xs-12 -->
   </div><!-- /.row -->
+<% end %>
