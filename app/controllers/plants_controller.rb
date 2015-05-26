@@ -26,6 +26,7 @@ class PlantsController < ApplicationController
   def show
     @plant = Plant.find(params[:id]) # TODO: make sure user cannot see private plants of other users
     @done_tasks = Array.new()
+
     @plant.tasks.order(created_at: :desc).each do |task|
       unless task.done_tasks.empty?
         @done_tasks.push(task.done_tasks)
