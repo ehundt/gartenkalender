@@ -1,0 +1,53 @@
+<% if @inputs.blank? %>
+  <h4>Pflanzen suchen</h4>
+  <p>Veröffentliche Pflanzen anderer Gartenfreunde können für den privaten Gebrauch kopiert werden.</p>
+  <%= render "form" %>
+<% else %>
+
+  <h4>Suchergebnis</h4>
+  <h5><%= searched_for_text %>: <strong><%= @plants.length %></strong> Pflanzen gefunden.</h5>
+
+  <% unless @plants.empty? %>
+    <br>
+    <table class="table">
+    <% @plants.each do |plant| %>
+      <tr>
+        <td>
+          <% if plant.main_image.file? %>
+            <%= link_to image_tag(download_main_image_plant_path(plant, {size: :thumb}), class: "img-rounded img-responsive"), plant %><% end %></td>
+        <td><%= link_to plant.name, plant %></td>
+        <td>
+          <% if plant.creator != current_user %>
+            von <%= plant.creator.display_name %>
+          <% end %>
+        </td>
+        <td class="active-button" data-id="<%= plant.id %>" data-path="plants/">
+          <% if plant.active %>
+          <%# TODO: class: "img-rounded img-responsive" %>
+            <%= image_tag "plant_active.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
+                 title: "Pflanze ist aktiv, d.h. Pflegetips werden in der Aufgabenliste angezeigt. Zum inaktiv schalten, bitte auf das Bild klicken."  %>
+          <% else %>
+            <%= image_tag "plant_inactive.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
+                 title: "Pflanze ist inaktiv, d.h. Pflegetips werden in der Aufgabenliste nicht angezeigt. Zum aktiv schalten, bitte auf das Bild klicken."  %>
+          <% end %>
+        </td>
+        <td>
+          <% if current_user == plant.creator && plant.original.public %>
+            <strong><%= plant.original.get_likes.size %></strong>
+            <%= image_tag("green_flower_icon.png", height: '20px', width: '20px') %>
+          <% end %>
+        </td>
+        <td>
+          <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+          <%= link_to 'Entfernen', plant, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "delete-link" %>
+        </td>
+      </tr>
+    <% end %>
+    </table>
+  <% end %>
+
+  <br>
+  <h4>Neue Pflanzensuche</h4>
+  <%= render "form" %>
+
+<% end %>

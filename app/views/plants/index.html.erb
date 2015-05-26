@@ -40,7 +40,7 @@
 <% end %>
 
 <% if @searched %>
-  <h5><%= searched_for_text %>: <strong><%= @plants.length %></strong> Pflanzen gefunden.</h5>
+  <h5>Suche nach "<%= @searched_text %>": <strong><%= @searched_plants.length %></strong> Pflanzen gefunden.</h5>
   <% unless @searched_plants.empty? %>
     <% @plants = @searched_plants %>
   <% else %>

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'static_pages/recommendations'
 
-  get 'plants/search'
+  get 'search/index'
 
   devise_for :users
 

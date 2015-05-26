@@ -1,0 +1,28 @@
+<%= form_tag(search_index_path, method: "get") do %>
+  <input type="hidden" name="search_only_public" value="1" />
+
+  <div class="input-group search-form">
+    <%= text_field_tag(:search_name, "", class: "form-control", placeholder: "Pflanzenname")  %>
+  </div>
+
+  <div class="input-group search-form">
+    <%= text_field_tag(:search_creator, "", class: "form-control", placeholder: "AutorIn")  %>
+  </div>
+
+  <% options = Plant.categories.collect { |c| [c[0].humanize.titleize, c[0]] } %>
+  <% options.shift %>
+  <div class="input-group search-form">
+    <select name="search_category" id="search_category" class="form-control">
+      <ul class="dropdown-menu" role="menu">
+        <option value="keine">Kategorie</option>
+        <%= options_for_select(options) %>
+      </ul>
+  </select>
+  </div>
+
+  <div class="input-group search-form">
+    <span class="input-group-btn">
+      <%= submit_tag("suchen", class: "btn btn-default") %>
+    </span>
+  </div>
+<% end %>
