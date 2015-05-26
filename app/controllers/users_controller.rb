@@ -40,9 +40,15 @@ class UsersController < ApplicationController
     redirect_to @user.picture.expiring_url(10, size)
   end
 
+  def invite
+    UserMailer.invite_email(params[:email], params[:text], current_user).deliver_now
+    # TODO: deliver_later
+    redirect_to users_path
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :picture, :latitude, :longitude, :admin)
+    params.require(:user).permit(:first_name, :last_name, :email, :picture, :latitude, :longitude, :admin, :text)
   end
 end

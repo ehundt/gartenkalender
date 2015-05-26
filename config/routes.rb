@@ -1,19 +1,17 @@
 Rails.application.routes.draw do
-  get 'static_pages/help'
-
-  get 'static_pages/recommendations'
-
-  get 'plants/search'
-
-  devise_for :users
-
-  get 'startpage/index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'startpage#index'
+
+  get 'static_pages/help'
+  get 'static_pages/recommendations'
+
+  devise_for :users
+
+  get 'startpage/index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -39,6 +37,7 @@ Rails.application.routes.draw do
       resources :done_tasks
     end
   end
+  get 'plants/search'
 
   resources :users, except: :new do
     resources :plants, only: :index
@@ -46,6 +45,7 @@ Rails.application.routes.draw do
       get 'download_picture'
     end
   end
+  post 'users/invite'
 
   # Example resource route with options:
   #   resources :products do

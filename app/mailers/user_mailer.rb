@@ -1,9 +1,10 @@
 class UserMailer < ApplicationMailer
 default from: 'elisabeth.hoelscher@gmail.com' # TODO
 
-  def invite_email(user)
+  def invite_email(email, text, user)
     @user = user
-    @url  = 'http://example.com/login'
-    mail(to: @user.email, subject: 'Welcome to My Awesome Site')
+    @text = text
+    @url = root_url
+    mail(to: email, subject: 'Intelligenter Gartenkalender')
   end
 end

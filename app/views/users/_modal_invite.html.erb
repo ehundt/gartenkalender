@@ -1,0 +1,44 @@
+<%= form_tag users_invite_path(), method: "post" do %>
+<div class="modal fade" id="inviteModal" tabindex="-1" role="dialog" aria-labelledby="inviteModal" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="inviteModal">Einladen</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="row search-form">
+          <div class="col-xs-12">
+            <div class="input-group">
+              <%= text_field_tag(:email, "", class: "form-control", placeholder: "Email Adresse") %>
+            </div>
+          </div>
+        </div>
+        <div class="row search-form">
+          <div class="col-xs-12">
+            <div class="input-group">
+              <%= text_area_tag(:text, "", class: "form-control", placeholder: "persönlicher Text")  %>
+            </div>
+          </div>
+        </div>
+        <div class="row note">
+          <div class="col-xs-12">
+            <h6>Der folgende Text wird automatisch an die Email gehängt:</h6>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            <h6>"Den intelligenten Gartenkalender findest Du hier:
+            <%= link_to root_url %>."</h6>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag("einladen", class: "btn btn-default") %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

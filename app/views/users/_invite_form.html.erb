@@ -1,0 +1,20 @@
+  <div class="row">
+    <div class="col-xs-12">
+      <h4>Gartenfreunde</h4>
+    </div>
+  </div>
+  <div class="row search-form">
+    <div class="col-xs-12">
+      ...noch jemand interessiert am intelligenten Gartenkalender? Dann kannst Du ihn/sie hier per Email einladen:
+    </div>
+  </div>
+  <div class="row search-form">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-btn">
+          <%= render partial: "modal_invite" %>
+          <%= submit_tag("einladen", class: "btn btn-default", "data-toggle" => "modal", "data-target" => "#inviteModal") %>
+        </span>
+      </div><!-- /input-group -->
+    </div><!-- /.col-xs-12 -->
+  </div><!-- /.row -->
