@@ -1,9 +1,18 @@
 <h4>Persönlicher Gartenkalender</h4>
-<div>
-  Dies ist ein persönlicher Kalender für Arbeiten in Deinem Garten.
-  Bitte registriere Dich mit einer Email Adresse.
-   <%= link_to 'Einloggen', new_user_session_path %>
-      oder
-  <%= link_to 'Registrieren', new_user_registration_path %>
-
+<div class="row search-form">
+  <div class="col-xs-12">
+    Dies ist ein persönlicher Kalender für Arbeiten in Deinem Garten.
+    Bitte registriere Dich mit einer Email Adresse.
+  </div>
 </div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <button  type="button" class="btn btn-default">
+      <%= link_to 'Einloggen', new_user_session_path %>
+    </button>
+    <button  type="button" class="btn btn-default">
+      <%= link_to 'Registrieren', new_user_registration_path %>
+    </button>
+  </div><!-- /.col-xs-12 -->
+</div><!-- /.row -->

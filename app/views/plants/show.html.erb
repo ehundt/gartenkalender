@@ -20,7 +20,7 @@
   </div>
   <div class="col-xs-7 edit-plant-link">
     <%# if @plant.user != current_user && @plant.public %>
-    <% if can? :clone, @plant %>
+    <% if can? :clone, @plant && @plant.user != current_user %>
       <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
       <%= link_to 'Kopieren', clone_plant_path(@plant), method: :post %>&nbsp;
     <% end %>
@@ -30,7 +30,7 @@
       <%= link_to 'Pflanze bearbeiten', edit_plant_path(@plant) %>&nbsp;
     <% end %>
 
-    <% if @plant.creator != @plant.user && !@plant.orig_id.nil? %>
+    <% if @plant.creator != @plant.user && !@plant.orig_id.nil? && @plant.public %>
       <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
       <%= link_to 'Original', plant_path(@plant.orig_id) %>
     <% end %>
@@ -58,7 +58,7 @@
   <div class="col-xs-6">
     <h5><%= @plant.subtitle %></h5>
   </div>
-  <div class="col-xs-6">
+  <div class="col-xs-6 show-category">
     <strong>Kategorie: </strong><%= @plant.category.humanize %></h5>
   </div>
 </div>

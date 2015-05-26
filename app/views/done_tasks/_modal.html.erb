@@ -1,0 +1,32 @@
+<%= form_for :done_task, method: :post, url: plant_task_done_tasks_path(task.plant, task) do |f| %>
+  <input type="hidden" name="done_task[skipped]" id="done_task_skipped" value="0" />
+  <div class="modal fade" id="taskDoneModal" tabindex="-1" role="dialog" aria-labelledby="taskDoneModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="taskDoneModalLabel">Aufgabe erledigt</h4>
+        </div>
+        <div class="modal-body">
+          <p>persönliche Notiz:</p>
+          <div class="input-group">
+            <%= f.text_area :notice, :class => "form-control", rows: "4" %>
+          </div>
+          <br>
+          <p>erledigt am:</p>
+          <div class="input-group">
+            <%= date_select :done_task, :date %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-success">erledigt</button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+
+

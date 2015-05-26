@@ -28,6 +28,6 @@ class DoneTasksController < ApplicationController
 private
 
   def done_task_params
-    params.permit(:task_id, :skipped)
+    params.require(:done_task).permit(:task_id, :skipped, :notice, :date)
   end
 end
