@@ -16,11 +16,7 @@ private
   end
 
   def search_creator_ids
-    my_plants = params[:search_my_plants].present? ? params[:search_my_plants] : 0
-    if my_plants == 1
-      creator_ids = [current_user.id]
-
-    elsif params[:search_creator].present?
+    if params[:search_creator].present?
       terms = params[:search_creator]
       search_terms = terms.split(' ').collect { |term| '%' + term + '%' }
       creator_ids = User.where.not(id: current_user.id)
@@ -32,10 +28,9 @@ private
   end
 
   def retrieve_searched_plants()
-    only_public = params[:search_only_public].present? ? params[:search_only_public] : 1
+    only_public = params[:search_only_public].present? ? params[:search_only_public].to_i : 1
     creator_ids = search_creator_ids()
 
-    only_my_plants = params[:search_my_plants].present? ? params[:search_my_plants] : 0
 
     if params[:search_name].present?
       # TODO: security issue?? params[:search]???
@@ -90,9 +85,6 @@ private
           if search_category
             @plants = Plant.where(public: true)
                            .where(category: search_category)
-          else
-            require 'logger'
-            Logger.new("log/debug.log").debug("yes, i am right")
           end
         else # only public with creator ids, no search name
            if search_category
