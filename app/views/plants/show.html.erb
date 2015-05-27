@@ -19,8 +19,7 @@
     </h4>
   </div>
   <div class="col-xs-7 edit-plant-link">
-    <%# if @plant.user != current_user && @plant.public %>
-    <% if can? :clone, @plant && @plant.user != current_user %>
+    <% if (can? :clone, @plant) && @plant.user != current_user %>
       <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
       <%= link_to 'Kopieren', clone_plant_path(@plant), method: :post %>&nbsp;
     <% end %>
@@ -29,8 +28,7 @@
       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
       <%= link_to 'Pflanze bearbeiten', edit_plant_path(@plant) %>&nbsp;
     <% end %>
-
-    <% if @plant.creator != @plant.user && !@plant.orig_id.nil? && @plant.public %>
+    <% if (@plant.creator != @plant.user) && !@plant.orig_id.nil? && @plant.original.public %>
       <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
       <%= link_to 'Original', plant_path(@plant.orig_id) %>
     <% end %>

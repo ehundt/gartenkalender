@@ -30,8 +30,9 @@
       <div class="row sidebar-votes">
         <div class="col-xs-12">
           <% if current_user.voted_for?(@plant.original) %>
-            <% if @plant.user == current_user %>Original<% end %> von mir  empfohlen
-          <%= image_tag("green_flower_icon.png", height: '20px', width: '20px') %><%# TODO: hier könnte ein tooltip hin: von mir als besonders hilfreich markiert %>
+            <% if @plant.user == current_user %>Original<% end %>
+              von mir empfohlen
+              <%= image_tag("green_flower_icon.png", height: '20px', width: '20px') %><%# TODO: hier könnte ein tooltip hin: von mir als besonders hilfreich markiert %>
           <%# TODO: undo voting %>
           <% else %>
             <% if @plant.user != current_user %>
