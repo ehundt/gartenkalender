@@ -77,7 +77,7 @@ class PlantsController < ApplicationController
     if @plant
       @plant.liked_by current_user
     end
-    redirect_to @plant
+    redirect_to request.referer
   end
 
   def activate
