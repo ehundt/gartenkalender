@@ -1,10 +1,10 @@
 <% if @inputs.blank? %>
-  <h4>Pflanzen suchen</h4>
+  <h2>Pflanzen suchen</h2>
   <p>Veröffentliche Pflanzen <strong>anderer Gartenfreunde</strong> können für den privaten Gebrauch kopiert werden.</p>
   <%= render "form" %>
 <% else %>
 
-  <h4>Suchergebnis</h4>
+  <h2>Suchergebnis</h2>
   <h5><%= searched_for_text %>: <strong><%= @plants.length %></strong> Pflanzen gefunden.</h5>
 
   <% unless @plants.empty? %>

@@ -30,11 +30,11 @@
 <% end %>
 
 <% if @other_user %>
-  <h4><%= @other_user.display_name %>'s veröffentlichte Pflanzen</h4>
+  <h2><%= @other_user.display_name %>'s veröffentlichte Pflanzen</h2>
 <% elsif @searched %>
-  <h4>Suchergebnis</h4>
+  <h2>Suchergebnis</h2>
 <% else %>
-  <h4>Meine Pflanzen</h4>
+  <h2>Meine Pflanzen</h2>
 <% end %>
 
 <% if @searched %>
@@ -105,8 +105,8 @@
       <% end %>
       <td>
         <% if (current_user == plant.creator || @other_user.present?) && plant.original.public %>
-          <strong><%= plant.original.get_likes.size %></strong>
-          <%= image_tag("green_flower_icon.png", height: '20px', width: '20px') %>
+          <div class="likes-count"><%= plant.original.get_likes.size %>
+          <%= image_tag("thumb_up30x38.png") %></div>
         <% end %>
       </td>
       <% unless @other_user %>

@@ -32,7 +32,7 @@
           <% if current_user.voted_for?(@plant.original) %>
             <% if @plant.user == current_user %>Original<% end %>
               von mir empfohlen
-              <%= image_tag("green_flower_icon.png", height: '20px', width: '20px') %><%# TODO: hier könnte ein tooltip hin: von mir als besonders hilfreich markiert %>
+              <%# TODO: hier könnte ein tooltip hin: von mir als besonders hilfreich markiert %>
           <%# TODO: undo voting %>
           <% else %>
             <% if @plant.user != current_user %>
@@ -40,7 +40,6 @@
             <% else %>
               <%= link_to 'Original empfehlen', vote_plant_path(@plant.original), method: :post %>
             <% end %>
-            <%= image_tag("green_flower_icon.png", height: '20px', width: '20px') %>
           <% end %>
         </div>
       </div>

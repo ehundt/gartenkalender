@@ -46,11 +46,19 @@ class Plant < ActiveRecord::Base
     cloned_plant
   end
 
+  def copy_of(user)
+    Plant.where(orig_id: self.id).where(user_id: user.id).first
+  end
+
   def original
     unless orig_id.nil?
       Plant.find(orig_id)
     else
       self
     end
+  end
+
+  def original?
+    orig_id.nil?
   end
 end
