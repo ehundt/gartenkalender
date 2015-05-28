@@ -73,6 +73,25 @@
         <% end %>
       </td>
       <% unless @other_user %>
+        <td>
+          <div class="plant-visibility"
+             data-plant-id="<%= plant.id %>"
+             data-switch-allowed="<% if plant.creator == current_user %>1<% else %>0<% end %>"
+               data-toggle="popover"
+               data-container="body"
+               data-trigger="hover"
+               title="Veröffentlichen und privatisieren"
+               data-content="Durch Klicken auf das Symbol kann die Pflanze veröffentlicht bzw. privat geschaltet werden. Jedoch: nur der/die ursprüngliche AutorIn darf die Pflanze veröffentlichen oder verstecken."
+             >
+
+            <% if plant.public %>
+              <%= image_tag "world-globe32x32.png" %>
+            <% else %>
+              <%= image_tag "not-world-globe32x32.png" %>
+            <% end %>
+          </div>
+        </td>
+
         <td class="active-button" data-id="<%= plant.id %>" data-path="plants/">
           <% if plant.active %>
           <%# TODO: class: "img-rounded img-responsive" %>

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   has_attached_file :picture,
     :styles         => { :medium => "300x300>", :small => "100x100", :thumb => "50x50>" },
-    :default_url    => "/images/:style/missing.png",
+    :default_url    => "/images/:style/missing_user.png",
     :path           => '/:class/pictures/:id/:style/:filename'
 
   validates_attachment_content_type :picture, :content_type => /\Aimage\/.*\Z/

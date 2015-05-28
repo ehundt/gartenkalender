@@ -35,7 +35,7 @@ var onPageReady = function(){
     if ($(world_globe).attr("src") == "<%= image_url('world-globe32x32.png') %>"){
       if (switch_allowed == 1)
         $.ajax({
-          url: plant_id,
+          url: "/plants/" + plant_id,
           type: "PATCH",
           dataType: "json",
           data: { plant: {id: plant_id, public: false} },
@@ -49,7 +49,7 @@ var onPageReady = function(){
     if ($(world_globe).attr("src") == "<%= image_url('not-world-globe32x32.png') %>"){
       if (switch_allowed == 1)
         $.ajax({
-          url: plant_id,
+          url: "/plants/" + plant_id,
           type: "PATCH",
           dataType: "json",
           data: { plant: {id: plant_id, public: true} },

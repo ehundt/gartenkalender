@@ -10,13 +10,13 @@ class Plant < ActiveRecord::Base
 
   has_attached_file :main_image,
     :styles      => { :medium => "300x300>", :thumb => "100x100>" },
-    :default_url => "/images/:style/missing.png",
+    :default_url => "/images/:style/missing_plant.png",
     :path        => '/:class/main_image/:id/:style/:filename'
 
   validates_attachment :main_image,
     :content_type => { :content_type => ["image/jpeg", "image/gif", "image/png"] },
     :size         => { :in => 0..2.megabytes },
-    :file_name    => { :matches => [/png\Z/, /jpe?g\Z/, /JPE?G\Z/] }
+    :file_name    => { :matches => [/png\Z/, /jpe?g\Z/, /JPE?G\Z/, /gif\Z/] }
     # TODO: Files on the local filesystem (and in the Rails app's public directory) will be available to the internet at large. If you require access control, it's possible to place your files in a different location.
     # see https://github.com/thoughtbot/paperclip for further information!!
 
