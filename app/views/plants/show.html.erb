@@ -1,8 +1,24 @@
 <%= render partial: "sidebar" %>
-
+<div class="row">
+  <div class="col-xs-6">
+    Meine Pflanze
+    <% if @plant.creator != current_user %>
+      <%= image_tag "green_flower_icon.png", height: '20px', width: '20px', class: "small-logo" %>
+        <% if @plant.user == current_user %>
+          Kopiert von:&nbsp;
+        <% else %>
+          AutorIn:&nbsp;
+        <% end %>
+      <% if @plant.creator.picture.file? %>
+        <%#= link_to image_tag(@plant.creator.picture.url(:thumb), class: "img-rounded"), @plant.creator %>
+      <% end %>
+      <%= link_to @plant.creator.display_name, @plant.creator %>
+    <% end %>
+  </div>
+</div>
 <div class="row">
   <div class="col-xs-5">
-    <h4>
+    <h3>
       <% if @plant.user == current_user %>
         <span class="active-button" data-id="<%= @plant.id %>" data-path="">
           <% if @plant.active %>
@@ -16,7 +32,7 @@
         </span>
       <% end %>
       <%= @plant.name %>
-    </h4>
+    </h3>
   </div>
   <div class="col-xs-7 edit-plant-link">
     <% if (can? :clone, @plant) && @plant.user != current_user %>
@@ -34,23 +50,6 @@
     <% end %>
   </div>
 </div>
-
-<% if @plant.creator != current_user %>
-  <div class="row">
-    <div class="col-xs-12">
-      <strong>
-        <% if @plant.user == current_user %>
-          Kopiert von:&nbsp;
-        <% else %>
-          AutorIn:&nbsp;
-        <% end %>
-      <% if @plant.creator.picture.file? %>
-        <%#= link_to image_tag(@plant.creator.picture.url(:thumb), class: "img-rounded"), @plant.creator %>
-      <% end %>
-      <%= link_to @plant.creator.display_name, @plant.creator %></strong>
-    </div>
-  </div>
-<% end %>
 
 <div class="row">
   <div class="col-xs-6">
