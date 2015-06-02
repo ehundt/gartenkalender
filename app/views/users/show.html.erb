@@ -43,20 +43,10 @@
 <% unless @user.created_plants.empty? %>
   <table class="table">
     <% @user.created_plants.each do |plant| %>
-      <tr>
-        <td>
-          <% if plant.main_image.file? %>
-            <%= link_to image_tag(download_main_image_plant_path(plant, {size: :thumb}), class: "img-rounded img-responsive"), plant %>
-          <% end %>
-        </td>
-
-        <td><%= link_to plant.name, plant %></td>
-
-        <td>
-          <strong><%= plant.original.get_likes.size %></strong>
-          <%= image_tag("green_flower_icon.png", height: '20px', width: '20px') %>
-        </td>
-      </tr>
+      <%= render partial: "/plants/list_entry",
+                 locals: { plant:          plant,
+                           user:           @user,
+                           only_my_plants: false } %>
   <% end %>
   </table>
 <% else %>
