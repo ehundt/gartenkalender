@@ -59,6 +59,6 @@ class Plant < ActiveRecord::Base
   end
 
   def original?
-    orig_id.nil?
+    (orig_id.nil? || orig_id == id)
   end
 end

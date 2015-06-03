@@ -4,4 +4,18 @@ module ApplicationHelper
     Logger.new("log/debug.log").debug("new Redcarpet markdown object created!")
     Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
   end
+
+  def help_content
+    content = '<table class="table"><tr><td>'
+    content += image_tag("world-globe32x32.png")
+    content += '</td><td>Zum Veröffentlichen dieser Pflanzentips für andere Gartenfreunde auf dieses Icon klicken.'
+    content += '</td></tr><tr><td>'
+    content += image_tag "plant_active.gif", height: "42px", width: "30px"
+    content += '</td><td>Pflanze aktiv/inaktiv schalten durch Klick auf die Pflanze. Nur die Pflegetips für aktive Pflanzen werden in der Aufgabenliste angezeigt.'
+    content += '</td></tr><tr><td>'
+    content += image_tag "thumb_up30x38.png"
+    content += '</td><td>War diese Pflanzenbeschreibung besonders hilfreich? Klicken auf dieses Icon setzt den Hilfreich-Counter auf +1.'
+    content += '</td></tr></table>'
+    content.html_safe
+  end
 end

@@ -42,6 +42,20 @@
        <%= yield %>
     </div>
     <div class="col-xs-1">
+      <div class="help"
+           data-toggle="popover"
+           data-container="body"
+           data-trigger="focus"
+           title="Hilfe"
+           data-placement="left"
+           data-html="true"
+           data-content='<%= help_content.html_safe %>'
+         >
+
+
+
+        <a href="#"><%= image_tag("help.jpeg", class: "img-responsive", width: "30px", height: "30px") %></a>
+      </div>
     </div>
   </div>
 </div>
