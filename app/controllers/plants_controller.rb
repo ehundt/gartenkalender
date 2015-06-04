@@ -71,13 +71,32 @@ class PlantsController < ApplicationController
     end
   end
 
-  # TODO: ajax call, routes, etc.
   def vote
     @plant = Plant.find(params[:id])
-    if @plant
+    success = false
+    if @plant && @plant.user_id != current_user
       @plant.liked_by current_user
+      success = true
     end
-    redirect_to request.referer
+    if request.xhr?
+      render :json => { success: success }
+    else
+      redirect_to request.referer
+    end
+  end
+
+  def unvote
+    @plant = Plant.find(params[:id])
+    success = false
+    if (@plant && current_user.voted_for?(@plant))
+      @plant.unliked_by current_user
+      success = true
+    end
+    if request.xhr?
+      render :json => { success: success }
+    else
+      redirect_to request.referer
+    end
   end
 
   def activate

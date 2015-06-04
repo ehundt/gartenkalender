@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     member do
       post  'clone'
       post  'vote'
+      post  'unvote'
       patch 'activate'
       patch 'inactivate'
       get   'download_main_image'

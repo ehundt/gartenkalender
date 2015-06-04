@@ -43,9 +43,13 @@
   <% end %>
   <td>
     <% if plant.public %>
-      <div class="likes-count">
-        <%= image_tag("thumb_up30x38.png") %>
-        <%= plant.get_likes.size %>
+      <div class="likes-count" data-id=<%= plant.id %> data-path="/plants/">
+        <% if current_user.voted_for?(plant) %>
+          <%= image_tag("thumb_up_voted.png") %>
+        <% else %>
+          <%= image_tag("thumb_up_not_voted.png") %>
+        <% end %>
+        <span><%= plant.get_likes.size %></span>
       </div>
     <% end %>
   </td>

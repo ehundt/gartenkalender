@@ -42,6 +42,7 @@
        <%= yield %>
     </div>
     <div class="col-xs-1">
+      <% if current_page?(plants_path) || current_page?(search_index_path) %>
       <div class="help"
            data-toggle="popover"
            data-container="body"
@@ -51,11 +52,9 @@
            data-html="true"
            data-content='<%= help_content.html_safe %>'
          >
-
-
-
         <a href="#"><%= image_tag("help.jpeg", class: "img-responsive", width: "30px", height: "30px") %></a>
       </div>
+      <% end %>
     </div>
   </div>
 </div>

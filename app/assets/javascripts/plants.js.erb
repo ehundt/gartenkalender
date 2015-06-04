@@ -1,4 +1,38 @@
 var onPageReady = function(){
+  $('.likes-count').on('click', function(){
+    var plant_id  = $(this).data("id");
+    var likesIcon = $(this).children("img");
+    var path      = $(this).data("path");
+    var likesText = $(this).children("span");
+    var likesInt  = parseInt(likesText.text());
+
+    console.log("likesText = " + likesText + ", likesInt = " + likesInt);
+
+    if ($(likesIcon).attr("src") == "<%= image_url('thumb_up_voted.png') %>")
+      $.ajax({
+        url:      path + plant_id + "/unvote",
+        type:     "POST",
+        dataType: "json",
+        data:     { plant: { id: plant_id } },
+        success:  function(data, status){
+          likesText.text(likesInt - 1);
+          $(likesIcon).attr("src", "<%= image_url('thumb_up_not_voted.png') %>");
+        }
+      });
+
+    if ($(likesIcon).attr("src") == "<%= image_url('thumb_up_not_voted.png') %>")
+      $.ajax({
+        url:      path + plant_id + "/vote",
+        type:     "POST",
+        dataType: "json",
+        data:     { plant: { id: plant_id } },
+        success:  function(data, status){
+          likesText.text(likesInt + 1);
+          $(likesIcon).attr("src", "<%= image_url('thumb_up_voted.png') %>");
+        }
+      });
+  });
+
   $('.active-button').on('click', function(){
     var plant_id = $(this).data("id");
     var path = $(this).data("path");

@@ -55,13 +55,13 @@
           <%= raw markdown.render(task.desc) %>
         </div>
       </div>
-      <% if can? :manage, task %>
-        <div class="row">
-          <div class="col-xs-6">
-            Wiederholung: <strong><%= task.repeat.humanize %></strong>
-          </div>
-          <div class="col-xs-6 task-action-links">
+      <div class="row">
+        <div class="col-xs-6">
+          Wiederholung: <strong><%= task.repeat.humanize %></strong>
+        </div>
+        <div class="col-xs-6 task-action-links">
 
+        <% if can? :manage, task %>
             <% if task.upcoming? %>
               <%= link_to "überspringen", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id, done_task: { skipped: true } }), method: :post, class: "btn btn-default", role: "button" %>&nbsp;
             <% end %>
@@ -69,9 +69,10 @@
               erledigt
             </button>
             <%= render partial: "done_tasks/modal", locals: { task: task } %>
-         </div>
+        <% end %>
+
         </div>
-      <% end %>
+      </div>
     </div>
   </div>
 </div>
