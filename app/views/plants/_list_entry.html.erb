@@ -43,7 +43,7 @@
   <% end %>
   <td>
     <% if plant.public %>
-      <div class="likes-count" data-id=<%= plant.id %> data-path="/plants/">
+      <div class="likes-count" data-id=<%= plant.id %> data-path="/plants/" data-likeallowed="<% if plant.user == current_user %>0<% else %>1<% end %>">
         <% if current_user.voted_for?(plant) %>
           <%= image_tag("thumb_up_voted.png") %>
         <% else %>

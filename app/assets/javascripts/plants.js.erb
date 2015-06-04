@@ -5,10 +5,9 @@ var onPageReady = function(){
     var path      = $(this).data("path");
     var likesText = $(this).children("span");
     var likesInt  = parseInt(likesText.text());
+    var likeAllowed = $(this).data("likeallowed");
 
-    console.log("likesText = " + likesText + ", likesInt = " + likesInt);
-
-    if ($(likesIcon).attr("src") == "<%= image_url('thumb_up_voted.png') %>")
+    if (likeAllowed && $(likesIcon).attr("src") == "<%= image_url('thumb_up_voted.png') %>")
       $.ajax({
         url:      path + plant_id + "/unvote",
         type:     "POST",
@@ -20,7 +19,7 @@ var onPageReady = function(){
         }
       });
 
-    if ($(likesIcon).attr("src") == "<%= image_url('thumb_up_not_voted.png') %>")
+    if (likeAllowed && $(likesIcon).attr("src") == "<%= image_url('thumb_up_not_voted.png') %>")
       $.ajax({
         url:      path + plant_id + "/vote",
         type:     "POST",

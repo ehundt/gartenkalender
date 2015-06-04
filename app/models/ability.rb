@@ -15,6 +15,7 @@ class Ability
       can :manage, Plant, :user_id => user.id
       can :read,   Plant, :public  => true
       can :vote,   Plant, :public  => true
+      can :unvote, Plant, :public  => true
       can :clone,  Plant, :public  => true
       can :download_main_image, Plant, :user_id => user.id
       can :download_main_image, Plant, :creator_id => user.id
