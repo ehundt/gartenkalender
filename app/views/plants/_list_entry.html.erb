@@ -44,12 +44,26 @@
   <td>
     <% if plant.public %>
       <div class="likes-count" data-id=<%= plant.id %> data-path="/plants/" data-likeallowed="<% if plant.user == current_user %>0<% else %>1<% end %>">
-        <% if current_user.voted_for?(plant) %>
-          <%= image_tag("thumb_up_voted.png") %>
-        <% else %>
-          <%= image_tag("thumb_up_not_voted.png") %>
-        <% end %>
         <span><%= plant.get_likes.size %></span>
+        <% if current_user.voted_for?(plant) %>
+          <% if plant.user == current_user %>
+            <%= image_tag "thumb_up_voted.png",
+                "data-toggle"  => "popover",
+                "title"        => "Du kannst nur Pflanzen anderer Gartenfreunde bewerten.",
+                "data-trigger" => "focus",
+                "role"         => "button",
+                "tabindex"     => "0" %>
+          <% else %>
+            <%= image_tag "thumb_up_voted.png" %>
+          <% end %>
+        <% else %>
+          <%= image_tag "thumb_up_not_voted.png",
+                "data-toggle"  => "popover",
+                "title"        => "Du kannst nur Pflanzen anderer Gartenfreunde bewerten.",
+                "data-trigger" => "focus",
+                "role"         => "button",
+                "tabindex"     => "0" %>
+        <% end %>
       </div>
     <% end %>
   </td>

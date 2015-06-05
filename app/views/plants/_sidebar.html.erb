@@ -11,7 +11,7 @@
                tabindex="0"
                data-placement="bottom"
                title="Veröffentlichen und privatisieren"
-               data-content="Nur das Original kann durch den/die ursprüngliche AutorIn veröffentlicht oder privatisiert werden.">
+               data-content="Diese Pflanze kann nur durch den/die ursprüngliche AutorIn veröffentlicht oder privatisiert werden.">
         <% end %>
 
         <div class="plant-visibility"
@@ -36,24 +36,5 @@
         <%= link_to image_tag(download_main_image_plant_path(@plant, {size: :medium}), class: "img-rounded img-responsive"), @plant  %>
       </div>
     </div>
-
-    <% if @plant.creator != current_user %>
-      <div class="row sidebar-votes">
-        <div class="col-xs-12">
-          <% if current_user.voted_for?(@plant.original) %>
-            <% if @plant.user == current_user %>Original<% end %>
-              von mir empfohlen
-              <%# TODO: hier könnte ein tooltip hin: von mir als besonders hilfreich markiert %>
-          <%# TODO: undo voting %>
-          <% else %>
-            <% if @plant.user != current_user %>
-              <%= link_to 'empfehlen', vote_plant_path(@plant.original), method: :post %>
-            <% else %>
-              <%= link_to 'Original empfehlen', vote_plant_path(@plant.original), method: :post %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
   <% end %>
 <% end %>

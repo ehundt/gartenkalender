@@ -14,29 +14,9 @@
     <% end %>
   </div>
 
-  <div class="col-xs-6 original-details">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <% if @plant.original? %>
-          AutorIn:&nbsp;
-        <% else %>
-          Kopiert von:&nbsp;
-        <% end %>
-        <%= link_to @plant.creator.display_name, @plant.creator %>
-        &nbsp;
-
-        <% unless @plant.original? %>
-          <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-          <%= link_to 'Original', @plant.original %>
-        <% end %>
-
-        <span class="likes-count-small">
-          <%= @plant.original.get_likes.size %>
-          <%= image_tag("thumb_up_active.png") %>
-        </span>
-      </div>
-    </div>
-  </div>
+  <% if @plant.creator != current_user %>
+    <%= render partial: "orig_plant_bar", locals: { plant: @plant } %>
+  <% end %>
 </div>
 <div class="row">
   <div class="col-xs-5">
