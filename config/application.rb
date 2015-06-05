@@ -24,5 +24,9 @@ module Socialgardener
     config.active_record.raise_in_transactional_callbacks = true
 
     config.i18n.default_locale = :de
+
+    # for devise to use the correct views;
+    # only needed when using my own Registration controller
+    config.paths['app/views'] << "app/views/devise"
   end
 end
