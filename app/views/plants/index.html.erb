@@ -55,6 +55,14 @@
     <p>Eigene Pflanzen werden hier aufgelistet, sobald Du entweder
        selbst welche erstellt hast oder Dir von Freunden welche kopiert hast.
     </p>
+    <div class="row welcome">
+      <div class="col-md-12">
+        <%= link_to "Pflanze anlegen", new_plant_path, class: "btn btn-default", role: "button" %>
+        <%= image_tag("green_flower_icon.png") %>
+        <%= link_to "Pflanze suchen", search_index_path, class: "btn btn-default", role: "button" %>
+      </div>
+    </div>
+
   <% end %>
 <% end %>
 

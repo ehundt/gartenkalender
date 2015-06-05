@@ -1,16 +1,47 @@
-<div class="row search-form">
-  <div class="col-xs-12">
-    <h3>Ich möchte meinen eigenen persönlichen Gartenkalender.</h3>
+<div class="row">
+  <div class="col-xs-3">
+    <div class="thumbnail">
+      <%= image_tag("logged_out_main.jpg") %>
+      <div class="caption">
+        <h3>Eigene Pflanzen</h3>
+        <p>Hier kannst Du Deine eigenen Pflanzen beschreiben, Pflegetipps anlegen und Dich zur gegebenen Zeit daran erinnern lassen.</p>
+        <p><%= link_to "weiter", plants_path, class: "btn btn-default", role: "button" %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-3">
+    <div class="thumbnail">
+      <%= image_tag("DSC_8450.JPG") %>
+      <%#= image_tag("SeestadtGarten_1-660x394.jpg") %>
+      <%# zwei Gärtner, die sich die Hand geben %>
+      <div class="caption">
+        <h3>Pflegetips anderer GärtnerInnen nutzen</h3>
+        <p>Du kannst die Pflegetipps anderer GärtnerInnen nutzen und sie bewerten.</p>
+        <p><%= link_to "weiter", search_index_path, class: "btn btn-default", role: "button" %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-3">
+    <div class="thumbnail">
+      <%= image_tag("DSC_8437.JPG") %>
+      <%#= image_tag("chili_2blatt.jpg") %>
+      <%# Bild mit kleinen Pflänzchen und Schildchen dazu %>
+      <div class="caption">
+        <h3>Wann habe ich was gesät?</h3>
+        <p>Du kannst für jede Pflanze speichern, wann Du welche Arbeit wie erledigt hast und jederzeit darauf zugreifen.</p>
+        <p><%= link_to "weiter", plants_path, class: "btn btn-default", role: "button" %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-3">
+    <div class="thumbnail">
+      <%#= image_tag("Jahreszeiten_Jahresringe.jpg") %>
+      <%= image_tag("IMG_3989.JPG") %>
+      <div class="caption">
+        <h3>Phaenologischer Kalender</h3>
+        <p>Nutze den phaenologischen Kalender, der Dir die Pflanzentipps abhängig von Deiner regionalen Jahreszeit anzeigt.</p>
+        <p><%= link_to "weiter", static_pages_help_path, class: "btn btn-default", role: "button" %></p>
+      </div>
+    </div>
   </div>
 </div>
-
-<div class="row">
-  <div class="col-xs-12">
-    <button  type="button" class="btn btn-default">
-      <%= link_to 'Einloggen', new_user_session_path %>
-    </button>
-    <button  type="button" class="btn btn-default">
-      <%= link_to 'Registrieren', new_user_registration_path %>
-    </button>
-  </div><!-- /.col-xs-12 -->
-</div><!-- /.row -->
