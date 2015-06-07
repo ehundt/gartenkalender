@@ -4,22 +4,33 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hallo,</h1>
+    <h3>Hallo,</h3>
     <p>
       <%= @user.display_name %> möchte Dich gerne einladen, an einem
-      Netzwerk für Hobby-GärtnerInnen teilzunehmen. Es handelt sich
-      um einen persönlichen Gartenkalender, der Dir je nach Jahreszeit die zu erledigenden Arbeiten in Deinem persönlichen Garten
-      anzeigt.
+      Netzwerk für Hobby-GärtnerInnen teilzunehmen.
     </p>
     <p>
-      Die anstehenden Arbeiten kannst Du entweder selbst formulieren oder
-      von anderen GärtnerInnen kopieren.
+      Hier kannst Du Deinen persönlichen Gartenkalender anlegen, Deine eigenen Pflanzenbeschreibungen formulieren, Aufgaben hinzufügen und Dich zu gegebener Zeit daran erinnern lassen.
     </p>
     <p>
-      Hier kommst Du zum Gartenkalender: <%= link_to "#{root_url}", root_url %>.
+      Deine Pflanzentipps kannst Du anderen GärtnerInnen verfügbar machen und die Pflanzentipps anderer nutzen.
     </p>
     <p>
-<%# Dein @user.display_name? oder lieber: Dein Gartenkalender oder so %>
+      Du kannst speichern, wann Du welche Arbeiten im Garten wie erledigt hast und jederzeit wieder darauf zurückgreifen.
     </p>
+    <p>
+      Hier geht's zum Gartenkalender: <%= link_to "#{root_url}", root_url %>.
+    </p>
+    <p>
+      Viele Grüße,
+      Dein persönlicher Gartenkalender
+    </p>
+
+    <small>
+      <p>Kontakt: elisabeth.hoelscher@gmail.com<br>
+         Moorreye 43<br>
+         22415 Hamburg
+      </p>
+    </small>
   </body>
 </html>
