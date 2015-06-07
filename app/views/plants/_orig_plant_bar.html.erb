@@ -24,9 +24,9 @@
             <% end %>
           <% end %>
 
-          <span class="likes-count-small" data-id=<%= plant.orig_id %> data-path="/plants/" data-likeallowed="1">
+          <span class="likes-counter" data-id=<%= plant.original.id %> data-path="/plants/" data-likeallowed="1">
 
-            <span><%= plant.original.get_likes.size %></span>
+            <span class="likes-count-small"><%= plant.original.get_likes.size %></span>
 
             <% if current_user.voted_for?(plant.original) %>
               <%= image_tag("thumb_up_voted.png") %>
