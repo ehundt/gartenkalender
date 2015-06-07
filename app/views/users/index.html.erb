@@ -27,7 +27,11 @@
     <% if current_user.admin? %><td><%= user.email %></td><% end %>
     <% if current_user.admin? %><td><%= user.admin %></td><% end %>
     <td>
-      <%= user.plants.count %> <%= link_to "Pflanzen", user_plants_path(user) %>
+      <strong>
+        <%= link_to user.plants.where(public: true).count, user_plants_path(user) %>
+      </strong>
+      / <%= user.plants.count %>
+      <%= link_to "Pflanzen", user_plants_path(user) %>
     </td>
     <td>
       <% if current_user.admin? %>
