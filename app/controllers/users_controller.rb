@@ -43,7 +43,7 @@ class UsersController < ApplicationController
   def invite
     UserMailer.invite_email(params[:email], current_user).deliver_now
     # TODO: deliver_later
-    flash[:success] = "Die Email wurde erfolgreich an #{params[:email]} gesendet."
+    flash[:success] = "Vielen Dank! Es wurde eine Einladungs-Email an #{params[:email]} gesendet."
     redirect_to users_path
   end
 
