@@ -12,33 +12,28 @@
     </div>
   <% end %>
 
-  <% if current_user == @plant.creator %>
-    <div class="row">
-      <div class="col-xs-1">
-        <% if @plant.public %>
-          <%= image_tag("world-globe32x32.png", class: "img-responsive") %>
-        <% else %>
-          <%= image_tag("not-world-globe32x32.png", class: "img-responsive") %>
-        <% end %>
-        <%# TODO: world durchgestrichen? als private icon? %>
-      </div>
-      <div class="col-xs-2">
-        <div class="input-group">
-          <span class="input-group-addon">
-            <input type="checkbox" aria-label="public" value="true" name="plant[public]" <% if @plant.public %>checked="checked"<% end %>>
-          </span>
-          <span class="input-group-addon">
-            öffentlich
-          </span>
-        </div><!-- /input-group -->
-      </div>
-      <div class="col-xs-9">
-      </div>
+  <div class="row">
+    <div class="col-xs-1">
+      <% if @plant.public %>
+        <%= image_tag("world-globe32x32.png", class: "img-responsive") %>
+      <% else %>
+        <%= image_tag("not-world-globe32x32.png", class: "img-responsive") %>
+      <% end %>
+      <%# TODO: world durchgestrichen? als private icon? %>
     </div>
-  <% else %>
-    <%= image_tag("not-world-globe32x32.png", class: "img-responsive") %>
-    Von anderen kopierte Pflanzenpflegetipps können nicht öffentlich geschaltet werden.
-  <% end %>
+    <div class="col-xs-2">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <input type="checkbox" aria-label="public" value="true" name="plant[public]" <% if @plant.public %>checked="checked"<% end %>>
+        </span>
+        <span class="input-group-addon">
+          öffentlich
+        </span>
+      </div><!-- /input-group -->
+    </div>
+    <div class="col-xs-9">
+    </div>
+  </div>
 
   <div class="row form-space">
     <div class="col-xs-12">

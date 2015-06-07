@@ -9,7 +9,7 @@ module TasksHelper
         options.push([season.humanize.titleize + " (ab #{start_date})",
                      season])
       end
-      selected = task.start if defined? task
+      selected = task.start unless task.nil?
     elsif attribute == :stops
       seasons = Season::seasons_with_mean_dates
       Task.starts.each do |season, index|
@@ -17,10 +17,10 @@ module TasksHelper
         options.push([season.humanize.titleize + " (bis #{end_date})",
                      ("ende_" + season.to_s).to_sym])
       end
-      selected = task.stop if defined? task
+      selected = task.stop unless task.nil?
     elsif attribute == :repeats
       options = Task.repeats.collect { |s| [s[0].humanize.titleize, s[0]] }
-      selected = task.repeat if defined? task
+      selected = task.repeat unless task.nil?
     end
 
     options_for_select(options, selected)

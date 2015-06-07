@@ -42,7 +42,7 @@
        <%= yield %>
     </div>
     <div class="col-xs-1">
-      <% if current_page?(plants_path) || current_page?(search_index_path) %>
+      <% if lookup_context.exists?('help_content', request.path, true) %>
       <div class="help"
            data-toggle="popover"
            data-container="body"
@@ -50,7 +50,7 @@
            title="Hilfe"
            data-placement="left"
            data-html="true"
-           data-content='<%= help_content.html_safe %>'
+           data-content='<%= render partial: request.path + "/help_content" %>'
          >
         <a href="#"><%= image_tag("help.jpeg", class: "img-responsive", width: "30px", height: "30px") %></a>
       </div>

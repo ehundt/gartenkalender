@@ -78,12 +78,17 @@
 <% end %>
 
 <% if can? :update, @plant %>
-  <div class="row">
-    <div class="col-xs-12">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        <%= link_to "Neue Aufgabe", new_plant_task_path(@plant) %>
+  <% if @plant.tasks.empty? %>
+    <h4>Neue Aufgabe</h4>
+    <%= render partial: "/tasks/form" %>
+  <% else %>
+    <div class="row">
+      <div class="col-xs-12">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          <%= link_to "Neue Aufgabe", new_plant_task_path(@plant) %>
+      </div>
     </div>
-  </div>
+  <% end %>
 <% end %>
 <br>
 <br>

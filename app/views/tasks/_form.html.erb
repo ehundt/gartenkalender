@@ -53,7 +53,7 @@
     <div class="col-xs-12">
       <div class="input-group">
         <span class="input-group-addon">
-          <input type="radio" value="false" name="task[hide]" id="task_hide_false"<% unless @task.hide %> checked="checked"<% end %>>
+          <input type="radio" value="false" name="task[hide]" id="task_hide_false"<% if (@task.nil? || !@task.hide) %> checked="checked"<% end %>>
         </span>
         <span class="form-control">
           Aufgabe in der Aufgabenliste anzeigen
@@ -65,7 +65,7 @@
     <div class="col-xs-12">
       <div class="input-group">
         <span class="input-group-addon">
-          <input type="radio" value="false" name="task[hide]" id="task_hide_true"<% if @task.hide %> checked="checked"<% end %>>
+          <input type="radio" value="false" name="task[hide]" id="task_hide_true"<% if (!@task.nil? && @task.hide) %> checked="checked"<% end %>>
         </span>
         <span class="form-control">
           Aufgabe in der Aufgabenliste <b>nicht</b> anzeigen
