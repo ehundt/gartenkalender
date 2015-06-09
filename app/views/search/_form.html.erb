@@ -5,13 +5,9 @@
     <%= text_field_tag(:search_name, "", class: "form-control", placeholder: "Pflanzenname")  %>
   </div>
 
-  <div class="input-group search-form">
-    <%= text_field_tag(:search_creator, "", class: "form-control", placeholder: "AutorIn")  %>
-  </div>
-
   <% options = Plant.categories.collect { |c| [c[0].humanize.titleize, c[0]] } %>
   <% options.shift %>
-  <div class="input-group search-form">
+  <div class="input-group search-form">oder
     <select name="search_category" id="search_category" class="form-control">
       <ul class="dropdown-menu" role="menu">
         <option value="keine">Kategorie</option>
@@ -19,6 +15,11 @@
       </ul>
   </select>
   </div>
+
+  <div class="input-group search-form">und
+    <%= text_field_tag(:search_creator, "", class: "form-control", placeholder: "AutorIn")  %>
+  </div>
+
 
   <div class="input-group search-form">
     <span class="input-group-btn">

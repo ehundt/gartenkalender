@@ -19,12 +19,10 @@ private
     if params[:search_creator].present?
       terms = params[:search_creator]
       search_terms = terms.split(' ').collect { |term| '%' + term + '%' }
-      creator_ids = User.where.not(id: current_user.id)
-                        .where("first_name ILIKE ANY (array[?]) OR last_name ILIKE ANY (array[?])",
+      creator_ids = User.where("first_name ILIKE ANY (array[?]) OR last_name ILIKE ANY (array[?])",
                                search_terms, search_terms).pluck(:id)
     end
     creator_ids
-    # TODO: search for plants without my own!!
   end
 
   def retrieve_searched_plants()
@@ -39,19 +37,17 @@ private
       if only_public == 1
         if creator_ids.nil?
           if search_category
-            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+            @plants = Plant.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
                            .where(public: true)
-                           .where(category: search_category)
           else
             @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
                            .where(public: true)
           end
         else
           if search_category
-            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+            @plants = Plant.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
                            .where(public: true)
                            .where("creator_id IN (?)", creator_ids)
-                           .where(category: search_category)
           else
             @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
                            .where(public: true)
@@ -62,16 +58,14 @@ private
       else # not only public
         if creator_ids.nil?
           if search_category
-            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
-                           .where(category: search_category)
+            @plants = Plant.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
           else
             @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
           end
         else
           if search_category
-            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+            @plants = Plant.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
                            .where("creator_id IN (?)", creator_ids)
-                           .where(category: search_category)
           else
             @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
                            .where("creator_id IN (?)", creator_ids)
