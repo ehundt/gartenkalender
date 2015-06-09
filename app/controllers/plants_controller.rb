@@ -13,6 +13,7 @@ class PlantsController < ApplicationController
     else
       @plants = current_user.plants.order(:name)
     end
+    @help_content_path = "/plants"
   end
 
   def show
@@ -24,6 +25,7 @@ class PlantsController < ApplicationController
         @done_tasks.push(task.done_tasks)
       end
     end
+    @help_content_path = "/plants"
   end
 
   def new

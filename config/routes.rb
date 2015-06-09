@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   get 'static_pages/help'
   get 'static_pages/recommendations'
+  get 'static_pages/impressum'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

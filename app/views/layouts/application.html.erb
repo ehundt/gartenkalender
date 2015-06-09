@@ -12,10 +12,10 @@
 
 <div id="main-container" class="container-fluid">
   <div class="row">
-    <div class="col-xs-3">
+    <div class="col-xs-6">
       <%= render 'shared/help_menu' %>
     </div>
-    <div class="col-xs-9 logged-in-status">
+    <div class="col-xs-6 logged-in-status">
       <%= render 'shared/logged_in_status' %>
     </div>
   </div>
@@ -42,18 +42,18 @@
        <%= yield %>
     </div>
     <div class="col-xs-1">
-      <% if lookup_context.exists?('help_content', request.path, true) %>
-      <div class="help"
+      <% unless @help_content_path.blank? %>
+        <div class="help"
            data-toggle="popover"
            data-container="body"
            data-trigger="focus"
            title="Hilfe"
            data-placement="left"
            data-html="true"
-           data-content='<%= render partial: request.path + "/help_content" %>'
-         >
-        <a href="#"><%= image_tag("help.jpg", class: "img-responsive", width: "30px", height: "30px") %></a>
-      </div>
+           data-content='<%= render partial: @help_content_path + "/help_content" %>'
+        >
+          <a href="#"><%= image_tag("help.jpg", class: "img-responsive", width: "30px", height: "30px") %></a>
+        </div>
       <% end %>
     </div>
   </div>

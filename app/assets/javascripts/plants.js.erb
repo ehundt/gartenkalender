@@ -7,7 +7,7 @@ var onPageReady = function(){
     var likesInt  = parseInt(likesText.text());
     var likeAllowed = $(this).data("likeallowed");
 
-    if (likeAllowed && $(likesIcon).attr("src") == "<%= image_url('thumb_up_voted.png') %>")
+    if (likeAllowed && $(likesIcon).attr("src") == "<%= image_url('voted_thumb_up.png') %>")
       $.ajax({
         url:      path + plant_id + "/unvote",
         type:     "POST",
@@ -15,11 +15,11 @@ var onPageReady = function(){
         data:     { plant: { id: plant_id } },
         success:  function(data, status){
           likesText.text(likesInt - 1);
-          $(likesIcon).attr("src", "<%= image_url('thumb_up_not_voted.png') %>");
+          $(likesIcon).attr("src", "<%= image_url('unvoted_thumb_up.png') %>");
         }
       });
 
-    if (likeAllowed && $(likesIcon).attr("src") == "<%= image_url('thumb_up_not_voted.png') %>")
+    if (likeAllowed && $(likesIcon).attr("src") == "<%= image_url('unvoted_thumb_up.png') %>")
       $.ajax({
         url:      path + plant_id + "/vote",
         type:     "POST",
@@ -27,7 +27,7 @@ var onPageReady = function(){
         data:     { plant: { id: plant_id } },
         success:  function(data, status){
           likesText.text(likesInt + 1);
-          $(likesIcon).attr("src", "<%= image_url('thumb_up_voted.png') %>");
+          $(likesIcon).attr("src", "<%= image_url('voted_thumb_up.png') %>");
         }
       });
   });

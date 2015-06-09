@@ -7,6 +7,7 @@ class SearchController < ApplicationController
     @inputs.push(params[:search_name]) unless params[:search_name].blank?
     @inputs.push(params[:search_category]) if (!params[:search_category].blank? && params[:search_category] != "keine")
     @inputs.push(params[:search_creator]) unless params[:search_creator].blank?
+    @help_content_path = "users" unless @plants.blank?
   end
 
 private

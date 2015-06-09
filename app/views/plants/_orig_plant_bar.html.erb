@@ -1,6 +1,6 @@
     <div class="col-xs-6 original-details">
       <div class="panel panel-default">
-        <div class="panel-body">
+        <div class="panel-body" id="orig-plant-bar">
           <% if plant.original? %>
             AutorIn:&nbsp;
           <% else %>
@@ -29,9 +29,9 @@
             <span class="likes-count-small"><%= plant.original.get_likes.size %></span>
 
             <% if current_user.voted_for?(plant.original) %>
-              <%= image_tag("thumb_up_voted.png") %>
+              <%= image_tag("voted_thumb_up.png") %>
             <% else %>
-              <%= image_tag("thumb_up_not_voted.png") %>
+              <%= image_tag("unvoted_thumb_up.png") %>
             <% end %>
           </span>
         </div>

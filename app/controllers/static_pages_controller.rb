@@ -6,4 +6,7 @@ class StaticPagesController < ApplicationController
 
   def recommendations
   end
+
+  def impressum
+  end
 end
