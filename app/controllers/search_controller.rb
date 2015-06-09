@@ -31,7 +31,6 @@ private
 
 
     if params[:search_name].present?
-      # TODO: security issue?? params[:search]???
       search_terms = params[:search_name].split(' ').collect { |term| '%' + term + '%' }
 
       if only_public == 1
@@ -39,19 +38,23 @@ private
           if search_category
             @plants = Plant.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
                            .where(public: true)
+                           .order(cached_votes_total: :desc)
           else
             @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
                            .where(public: true)
+                           .order(cached_votes_total: :desc)
           end
         else
           if search_category
             @plants = Plant.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
                            .where(public: true)
                            .where("creator_id IN (?)", creator_ids)
+                           .order(cached_votes_total: :desc)
           else
             @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
                            .where(public: true)
                            .where("creator_id IN (?)", creator_ids)
+                           .order(cached_votes_total: :desc)
           end
         end
 
@@ -59,16 +62,20 @@ private
         if creator_ids.nil?
           if search_category
             @plants = Plant.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
+                           .order(cached_votes_total: :desc)
           else
             @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+                           .order(cached_votes_total: :desc)
           end
         else
           if search_category
             @plants = Plant.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
                            .where("creator_id IN (?)", creator_ids)
+                           .order(cached_votes_total: :desc)
           else
             @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
                            .where("creator_id IN (?)", creator_ids)
+                           .order(cached_votes_total: :desc)
           end
         end
       end
@@ -79,28 +86,34 @@ private
           if search_category
             @plants = Plant.where(public: true)
                            .where(category: search_category)
+                           .order(cached_votes_total: :desc)
           end
         else # only public with creator ids, no search name
            if search_category
             @plants = Plant.where(public: true)
                            .where(category: search_category)
                            .where("creator_id IN (?)", creator_ids)
+                           .order(cached_votes_total: :desc)
           else # only public, with creator_ids, no search name, no categories
             @plants = Plant.where(public: true)
                            .where("creator_id IN (?)", creator_ids)
+                           .order(cached_votes_total: :desc)
           end
         end
       else # not only public
         if creator_ids.nil? # no search name, no creator ids
           if search_category
             @plants = Plant.where(category: search_category)
+                           .order(cached_votes_total: :desc)
           end
         else # with creator ids, no search name
           if search_category
             @plants = Plant.where("creator_id IN (?)", creator_ids)
                            .where(category: search_category)
+                           .order(cached_votes_total: :desc)
           else # with creator ids, no search name, no category
             @plants = Plant.where("creator_id IN (?)", creator_ids)
+                           .order(cached_votes_total: :desc)
           end
         end
       end
