@@ -1,23 +1,54 @@
+ <%# other_user = nil + only_my_plants false -> search result of other users;
+     other_user = set -> show plants created by another user;
+     other_user = nil + only_my_plants = true -> show my plants only; %>
 <tr>
   <td>
     <% if plant.main_image.file? %>
       <%= link_to image_tag(download_main_image_plant_path(plant, {size: :thumb}), class: "img-rounded img-responsive"), plant %><% end %></td>
   <td><%= link_to plant.name, plant, class: "plant-name" %></td>
+
   <td>
-    <% if user.blank? %>
+    <%# if other_user.blank? %>
+    <%# TODO: create a helper for this? %>
+    <% if only_my_plants %>
+      <% if plant.creator != plant.original.user %>
+        <small>kopiert von</small><br>
+        <%= link_to plant.original.user.display_name, plant.original.user %>
+      <% end %>
+
       <% if plant.creator != current_user %>
-        von <%= link_to plant.creator.display_name, plant.creator %>
-      <% else %>
-        eigene
+        <small>erstellt von</small><br>
+        <%= link_to plant.creator.display_name, plant.creator %><br>
+      <% end %>
+
+    <% elsif other_user.blank? %><%# means: search result %>
+      <small>von</small><br>
+      <%= link_to plant.user.display_name, plant.user %><br>
+      <% if plant.creator != plant.user %>
+        <small>erstellt von</small><br>
+        <%= link_to plant.creator.display_name, plant.creator %><br>
+      <% end %>
+
+    <% else %> <%# other user's plants %>
+      <% if plant.original.user != other_user %>
+        <small>kopiert von</small>
+        <%= link_to plant.original.user.display_name, plant.original.user %>
+      <% end %>
+
+      <% if plant.creator != other_user %>
+        <small>erstellt von</small>
+        <%= link_to plant.creator.display_name, plant.creator %><br>
       <% end %>
     <% end %>
   </td>
+
   <% if only_my_plants %>
     <td>
       <div class="plant-visibility"
          data-plant-id="<%= plant.id %>"
          data-switch-allowed="<% if plant.user == current_user %>1<% else %>0<% end %>"
          >
+         <%# TODO: data-switch-allowed can be removed? %>
 
         <% if plant.public %>
           <%= image_tag "world-globe32x32.png" %>
@@ -25,9 +56,9 @@
           <%= image_tag "not-world-globe32x32.png" %>
         <% end %>
       </div>
-      <% if plant.creator == current_user %>
+      <%# if plant.creator == current_user
         </div>
-      <% end %>
+      end %>
     </td>
 
     <td class="active-button" data-id="<%= plant.id %>" data-path="plants/">
@@ -41,6 +72,7 @@
       <% end %>
     </td>
   <% end %>
+
   <td>
     <% if plant.public %>
       <div class="likes-counter" data-id=<%= plant.id %> data-path="/plants/" data-likeallowed="<% if plant.user == current_user %>0<% else %>1<% end %>">
@@ -65,6 +97,7 @@
       </div>
     <% end %>
   </td>
+
   <% if only_my_plants %>
     <td>
       <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>

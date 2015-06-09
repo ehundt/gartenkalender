@@ -45,7 +45,7 @@
     <% @user.created_plants.each do |plant| %>
       <%= render partial: "/plants/list_entry",
                  locals: { plant:          plant,
-                           user:           @user,
+                           other_user:     @user,
                            only_my_plants: false } %>
   <% end %>
   </table>

@@ -13,7 +13,7 @@
     <% @plants.each do |plant| %>
       <%= render partial: "/plants/list_entry",
              locals: { plant:          plant,
-                       user:           nil,
+                       other_user:     nil,
                        only_my_plants: false } %>
     <% end %>
     </table>
