@@ -6,13 +6,17 @@
      </div>
     </div>
   <% end %>
+  <div class="sidebar-statistics">
+    <h4>Pflanzenstatistik</h4>
+  <%= render partial: "/plants/statistics", locals: { user: @user, other_user: true } %>
+</div>
 <% end %>
 
 <div class="row">
   <div class="col-xs-5">
-    <h4>
+    <h2>
       <%= @user.display_name %>
-    </h4>
+    </h2>
   </div>
   <div class="col-xs-7 edit-plant-link">
     <% if current_user.admin? || @user == current_user %>
@@ -39,7 +43,7 @@
 </table>
 <br>
 
-<h5>Veröffentlichte Pflanzen</h5>
+<h4>Veröffentlichte Pflanzen</h4>
 <% unless @user.created_plants.empty? %>
   <table class="table">
     <% @user.created_plants.each do |plant| %>

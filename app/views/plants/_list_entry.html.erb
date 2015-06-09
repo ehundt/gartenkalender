@@ -1,6 +1,3 @@
- <%# other_user = nil + only_my_plants false -> search result of other users;
-     other_user = set -> show plants created by another user;
-     other_user = nil + only_my_plants = true -> show my plants only; %>
 <tr>
   <td>
     <% if plant.main_image.file? %>
@@ -8,37 +5,20 @@
   <td><%= link_to plant.name, plant, class: "plant-name" %></td>
 
   <td>
-    <%# if other_user.blank? %>
-    <%# TODO: create a helper for this? %>
     <% if only_my_plants %>
-      <% if plant.creator != plant.original.user %>
+      <% if plant.creator != plant.user %>
         <small>kopiert von</small><br>
-        <%= link_to plant.original.user.display_name, plant.original.user %>
-      <% end %>
-
-      <% if plant.creator != current_user %>
-        <small>erstellt von</small><br>
-        <%= link_to plant.creator.display_name, plant.creator %><br>
+        <%= link_to plant.creator.display_name, plant.creator %>
       <% end %>
 
     <% elsif other_user.blank? %><%# means: search result %>
       <small>von</small><br>
       <%= link_to plant.user.display_name, plant.user %><br>
       <% if plant.creator != plant.user %>
-        <small>erstellt von</small><br>
+        <small>kopiert von</small><br>
         <%= link_to plant.creator.display_name, plant.creator %><br>
       <% end %>
-
-    <% else %> <%# other user's plants %>
-      <% if plant.original.user != other_user %>
-        <small>kopiert von</small>
-        <%= link_to plant.original.user.display_name, plant.original.user %>
-      <% end %>
-
-      <% if plant.creator != other_user %>
-        <small>erstellt von</small>
-        <%= link_to plant.creator.display_name, plant.creator %><br>
-      <% end %>
+    <%# if other user, copied plants should not be visible %>
     <% end %>
   </td>
 
@@ -58,7 +38,6 @@
          data-plant-id="<%= plant.id %>"
          data-switch-allowed="<% if plant.creator == current_user %>1<% else %>0<% end %>"
          >
-<%# TODO: grey image unless plant.creator == current_user %>
         <% if plant.public %>
           <%= image_tag "world-globe32x32.png" %>
         <% else %>

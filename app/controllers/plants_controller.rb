@@ -4,14 +4,7 @@ class PlantsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    # show public plants of somebody else
-    if params[:user_id].present?
-      @other_user = User.find(params[:user_id])
-      unless @other_user.nil?
-        @plants = @other_user.plants.where(public: true).order(:name)
-      end
-
-    elsif (params[:search_name].present?)
+    if (params[:search_name].present?)
       @searched = true
       @searched_text = params[:search_name]
       search_terms = params[:search_name].split(' ').collect { |term| '%' + term + '%' }

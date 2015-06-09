@@ -1,37 +1,35 @@
 <% content_for :sidebar do %>
-  <% unless @other_user.present? %>
-  <%# TODO: add search in other_user's plants %>
-    <%= form_tag(plants_path, method: "get") do %>
-      <div class="row">
-        <div class="col-xs-12">
-          <h4>Suche</h4>
-          <p><strong>in meiner Pflanzenliste</strong><p>
-        </div>
+  <%= form_tag(plants_path, method: "get") do %>
+    <div class="row">
+      <div class="col-xs-12">
+        <h4>Suche</h4>
+        <p><strong>in meiner Pflanzenliste</strong><p>
       </div>
+    </div>
 
-      <div class="row search-form">
-        <div class="col-xs-12">
-          <div class="input-group">
-            <%= text_field_tag(:search_name, "", class: "form-control", placeholder: "z.B. Möhre")  %>
-          </div><!-- /input-group -->
-        </div><!-- /.col-xs-12 -->
-      </div><!-- /.row -->
-      <div class="row search-form">
-        <div class="col-xs-12">
-          <div class="input-group">
-            <span class="input-group-btn">
-              <%= submit_tag("suchen", class: "btn btn-default") %>
-            </span>
-          </div><!-- /input-group -->
-        </div><!-- /.col-xs-12 -->
-      </div><!-- /.row -->
-    <% end %>
+    <div class="row search-form">
+      <div class="col-xs-12">
+        <div class="input-group">
+          <%= text_field_tag(:search_name, "", class: "form-control", placeholder: "z.B. Möhre")  %>
+        </div><!-- /input-group -->
+      </div><!-- /.col-xs-12 -->
+    </div><!-- /.row -->
+    <div class="row search-form">
+      <div class="col-xs-12">
+        <div class="input-group">
+          <span class="input-group-btn">
+            <%= submit_tag("suchen", class: "btn btn-default") %>
+          </span>
+        </div><!-- /input-group -->
+      </div><!-- /.col-xs-12 -->
+    </div><!-- /.row -->
   <% end %>
+  <br>
+  <h4>Pflanzenstatistik</h4>
+  <%= render partial: "statistics", locals: { user: current_user, other_user: false } %>
 <% end %>
 
-<% if @other_user %>
-  <h2><%= @other_user.display_name %>'s veröffentlichte Pflanzen</h2>
-<% elsif @searched %>
+<% if @searched %>
   <h2>Suchergebnis</h2>
 <% else %>
   <h2>Meine Pflanzen</h2>
@@ -49,21 +47,16 @@
   <% end %>
 
 <% elsif @plants.empty? %>
-  <% if @other_user %>
-    <p>Keine veröffentlichten Pflanzen.</p>
-  <% else %>
-    <p>Eigene Pflanzen werden hier aufgelistet, sobald Du entweder
-       selbst welche erstellt hast oder Dir von Freunden welche kopiert hast.
-    </p>
-    <div class="row welcome">
-      <div class="col-md-12">
-        <%= link_to "Pflanze anlegen", new_plant_path, class: "btn btn-default", role: "button" %>
-        <%= image_tag("green_flower_icon.png") %>
-        <%= link_to "Pflanze suchen", search_index_path, class: "btn btn-default", role: "button" %>
-      </div>
+  <p>Eigene Pflanzen werden hier aufgelistet, sobald Du entweder
+     selbst welche erstellt hast oder Dir von Freunden welche kopiert hast.
+  </p>
+  <div class="row welcome">
+    <div class="col-md-12">
+      <%= link_to "Pflanze anlegen", new_plant_path, class: "btn btn-default", role: "button" %>
+      <%= image_tag("green_flower_icon.png") %>
+      <%= link_to "Pflanze suchen", search_index_path, class: "btn btn-default", role: "button" %>
     </div>
-
-  <% end %>
+  </div>
 <% end %>
 
 <% unless @plants.empty? %>
@@ -72,8 +65,8 @@
   <% @plants.each do |plant| %>
     <%= render partial: "/plants/list_entry",
                locals: { plant:          plant,
-                         other_user:     @other_user,
-                         only_my_plants: @other_user.blank? } %>
+                         other_user:     nil,
+                         only_my_plants: true } %>
   <% end %>
   </table>
 <% end %>

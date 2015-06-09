@@ -45,7 +45,6 @@ Rails.application.routes.draw do
   end
 
   resources :users, except: :new do
-    resources :plants, only: :index
     member do
       get 'download_picture'
     end

@@ -1,21 +1,13 @@
 <% content_for :sidebar do %>
   <%= render "search_form" %>
-  <%= render "invite_form" %>
+  <div class="sidebar-invite">
+    <%= render "invite_form" %>
+  </div>
 <% end %>
 
 <h2>Gartenfreunde</h2>
 
 <table class="table">
-  <tr>
-    <th>Bild</th>
-    <th>Name</th>
-    <% if current_user.admin? %><th>Email</th><% end %>
-    <% if current_user.admin? %><th>Admin</th><% end %>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
 <% @users.each do |user| %>
   <tr>
     <td>
@@ -28,10 +20,10 @@
     <% if current_user.admin? %><td><%= user.admin %></td><% end %>
     <td>
       <strong>
-        <%= link_to user.plants.where(public: true).count, user_plants_path(user) %>
+        <%= link_to user.plants.where(public: true).count, user %>
       </strong>
       / <%= user.plants.count %>
-      <%= link_to "Pflanzen", user_plants_path(user) %>
+      <%= link_to "Pflanzen", user %>
     </td>
     <td>
       <% if current_user.admin? %>

@@ -1,0 +1,26 @@
+<div class="row search-form">
+  <div class="col-xs-12">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <table class="table">
+          <tr>
+            <td>insgesamt:</td>
+            <td><strong><%= user.plants.length %></strong></td>
+          </tr>
+          <tr>
+            <td>öffentlich:</td>
+            <td><strong><%= user.plants.where(public: true).length %></strong></td>
+          </tr>
+          <tr>
+            <td>selbst angelegt:</td>
+            <td><strong><%= user.plants.where(creator: user).length %></strong></td>
+          </tr>
+          <tr>
+            <td>von anderen genutzt:</td>
+            <td><strong><%= Plant.where(creator: user).where('user_id != ?', user.id).length %></strong></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
