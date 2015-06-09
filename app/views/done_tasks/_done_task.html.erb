@@ -5,7 +5,7 @@
   <td><% if done_task.skipped? %>übersprungen<% else %>erledigt<% end %></td>
   <td>
     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-    <% if done_task.task.skipped? %>
+    <% if done_task.skipped? %>
       <%= link_to "doch nicht überspringen", plant_task_done_task_path(done_task.task.plant, done_task.task, done_task), method: :delete, class: "delete-link" %></td>
     <% else %>
       <%= link_to "doch nicht erledigt", plant_task_done_task_path(done_task.task.plant, done_task.task, done_task), method: :delete, class: "delete-link" %></td>

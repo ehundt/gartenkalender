@@ -1,5 +1,5 @@
 class UserMailer < ApplicationMailer
-default from: 'elisabeth.hoelscher@gmail.com' # TODO
+default from: 'persoenlicher.gartenkalender@gmail.com'
 
   def invite_email(email, user)
     @user = user
