@@ -22,10 +22,10 @@
         <%= link_to task.title, plant_task_path(task.plant, task) %>
       </td>
       <td>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal">
+        <%= render partial: "done_tasks/modal", locals: { task: task } %>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
           erledigt
         </button>
-        <%= render partial: "done_tasks/modal", locals: { task: task } %>
       </td>
       <td>
         <%= link_to "überspringen", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id, done_task: { skipped: true } }), method: :post, class: "btn btn-default", role: "button"  %>

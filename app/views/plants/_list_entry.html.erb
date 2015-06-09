@@ -1,7 +1,23 @@
 <tr>
   <td>
     <% if plant.main_image.file? %>
-      <%= link_to image_tag(download_main_image_plant_path(plant, {size: :thumb}), class: "img-rounded img-responsive"), plant %><% end %></td>
+      <%= link_to image_tag(download_main_image_plant_path(plant, {size: :thumb}), class: "img-rounded img-responsive"), plant %>
+    <% end %>
+  </td>
+
+  <% if only_my_plants %>
+      <td class="active-button" data-id="<%= plant.id %>" data-path="plants/">
+      <% if plant.active %>
+      <%# TODO: class: "img-rounded img-responsive" %>
+        <%= image_tag "plant_active.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
+             title: "Pflanze ist aktiv, d.h. Pflegetipps werden in der Aufgabenliste angezeigt. Zum inaktiv schalten, bitte auf das Bild klicken."  %>
+      <% else %>
+        <%= image_tag "plant_inactive.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
+             title: "Pflanze ist inaktiv, d.h. Pflegetipps werden in der Aufgabenliste nicht angezeigt. Zum aktiv schalten, bitte auf das Bild klicken."  %>
+      <% end %>
+    </td>
+  <% end %>
+
   <td><%= link_to plant.name, plant, class: "plant-name" %></td>
 
   <td>
@@ -46,17 +62,6 @@
       </div>
       <% if plant.creator == current_user %>
         </div>
-      <% end %>
-    </td>
-
-    <td class="active-button" data-id="<%= plant.id %>" data-path="plants/">
-      <% if plant.active %>
-      <%# TODO: class: "img-rounded img-responsive" %>
-        <%= image_tag "plant_active.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
-             title: "Pflanze ist aktiv, d.h. Pflegetipps werden in der Aufgabenliste angezeigt. Zum inaktiv schalten, bitte auf das Bild klicken."  %>
-      <% else %>
-        <%= image_tag "plant_inactive.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
-             title: "Pflanze ist inaktiv, d.h. Pflegetipps werden in der Aufgabenliste nicht angezeigt. Zum aktiv schalten, bitte auf das Bild klicken."  %>
       <% end %>
     </td>
   <% end %>
