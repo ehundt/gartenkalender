@@ -9,14 +9,10 @@
         </div>
         <div class="modal-body">
           <p>persönliche Notiz:</p>
-          <div class="input-group">
             <%= f.text_area :notice, :class => "form-control", rows: "4" %>
-          </div>
           <br>
           <p>erledigt am:</p>
-          <div class="input-group">
             <%= date_select :done_task, :date %>
-          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
