@@ -34,9 +34,9 @@ class User < ActiveRecord::Base
 
   def created_plants(only_public=true)
     if only_public
-      plants.where(creator_id: self.id).where(public: true)
+      plants.where(creator_id: self.id).where(public: true).order(cached_votes_total: :desc)
     else
-      plants.where(creator_id: self.id)
+      plants.where(creator_id: self.id).order(cached_votes_total: :desc)
     end
   end
 end

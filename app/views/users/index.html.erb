@@ -12,7 +12,7 @@
   <tr>
     <td>
       <% if user.picture.file? %>
-        <%= link_to image_tag(download_picture_user_path(user, {size: :thumb}), class: "img-rounded img-responsive"), user %>
+        <%= link_to image_tag(download_picture_user_path(user, {size: :small}), class: "img-rounded img-responsive"), user %>
       <% end %>
     </td>
     <td><%= link_to "#{user.display_name}", user %></td>
