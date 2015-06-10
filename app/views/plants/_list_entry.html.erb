@@ -55,9 +55,18 @@
          data-switch-allowed="<% if plant.creator == current_user %>1<% else %>0<% end %>"
          >
         <% if plant.public %>
-          <%= image_tag "world-globe32x32.png" %>
+          <% if plant.creator != current_user %>
+            <%= image_tag "world-globe32x32_grey.png" %>
+          <% else %>
+            <%= image_tag "world-globe32x32.png" %>
+          <% end %>
+
         <% else %>
-          <%= image_tag "not-world-globe32x32.png" %>
+          <% if plant.creator != current_user %>
+            <%= image_tag "not-world-globe32x32_grey.png" %>
+          <% else %>
+            <%= image_tag "not-world-globe32x32.png" %>
+          <% end %>
         <% end %>
       </div>
       <% if plant.creator == current_user %>
