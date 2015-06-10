@@ -35,8 +35,23 @@
       </div>
     </div>
   <% else %>
-    <%= image_tag("not-world-globe32x32.png", class: "img-responsive") %>
-    Von anderen kopierte Pflanzenpflegetipps können nicht öffentlich geschaltet werden.
+
+    <div class="row">
+      <div class="col-xs-2">
+        <div data-toggle="popover"
+          data-container="body"
+          data-trigger="focus"
+          role="button"
+          tabindex="0"
+          data-placement="bottom"
+          data-content="Nur der/die ursprüngliche AutorIn kann die Pflanzenbeschreibung veröffentlichen.">
+
+          <%= image_tag("not-world-globe32x32_grey.png", class: "img-responsive") %>
+        </div>
+      </div>
+      <div class="col-xs-10">
+      </div>
+    </div>
   <% end %>
 
   <div class="row form-space">

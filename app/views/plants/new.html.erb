@@ -83,6 +83,16 @@
 
   <div class="row form-space">
     <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon">Private Notizen</span>
+        <%= f.text_area :private_notes, :class => "form-control",
+            "aria-label" => "Private Notizen", rows: "8" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
       <div class="pull-right">
           <a href="<%= plants_path %>">Abbrechen</a>&nbsp;
           <%= f.submit "Pflanze speichern", :class => "btn btn-success" %>
