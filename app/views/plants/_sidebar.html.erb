@@ -36,4 +36,13 @@
       </div>
     </div>
   <% end %>
+
+  <% if @plant && @plant.user == current_user %>
+    <div class="row sidebar-private-notes">
+      <div class="col-xs-12">
+        <p><strong>Private Notizen:</strong></p>
+        <%= raw markdown.render(@plant.private_notes) %>
+      </div>
+    </div>
+  <% end %>
 <% end %>

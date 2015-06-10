@@ -130,6 +130,6 @@ class PlantsController < ApplicationController
 private
 
   def plant_params
-    params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active, :public, :category)
+    params.require(:plant).permit(:name, :subtitle, :desc, :main_image, :tasks, :active, :public, :category, :private_notes)
   end
 end
