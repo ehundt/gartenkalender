@@ -92,7 +92,9 @@
   <% if only_my_plants %>
     <td>
       <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-      <%= link_to 'Entfernen', plant, method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "delete-link" %>
+      <a data-toggle="modal" data-target="#removePlantModal<%= plant.id %>">Löschen</a>
+      <%= render partial: "modal_remove_plant", locals: { plant: plant } %>
+
     </td>
   <% end %>
 </tr>

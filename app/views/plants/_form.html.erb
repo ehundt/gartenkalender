@@ -105,7 +105,7 @@
       <div class="input-group">
         <span class="input-group-addon">Kategorie</span>
         <%= f.select :category,
-            options_for_select(Plant.categories.collect { |c| [c[0].humanize.titleize, c[0]] }),
+            options_for_select(Plant.categories.collect { |c| [c[0].humanize.titleize, c[0]] }, @plant.category),
             {},
             { class: 'form-control'} %>
       </div>

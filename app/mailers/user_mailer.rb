@@ -11,6 +11,6 @@ default from: 'persoenlicher.gartenkalender@gmail.com'
     @text = text
     mail(to: "persoenlicher.gartenkalender@gmail.com",
          from: user.email,
-         subject: subject.to_str)
+         subject: "Contact us: " + subject.to_str)
   end
 end
