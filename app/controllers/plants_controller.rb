@@ -4,6 +4,7 @@ class PlantsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @only_public = "0"
     if (params[:search_name].present?)
       @searched = true
       @searched_text = params[:search_name]
@@ -11,7 +12,17 @@ class PlantsController < ApplicationController
       @searched_plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
                               .where(user_id: current_user.id)
     else
-      @plants = current_user.plants.order(:name)
+      @plants = current_user.plants
+
+      if (params[:only_public].present? && params[:only_public] == "1")
+        @only_public = "1"
+        @plants = @plants.where(public: true)
+      end
+
+      sort_by = params[:sort_by].present? ? params[:sort_by] : "name"
+      order = params[:order].present? ? params[:order] :"asc"
+
+      @plants = @plants.order(sort_by.to_sym => order.to_sym)
     end
     @help_content_path = "/plants"
   end

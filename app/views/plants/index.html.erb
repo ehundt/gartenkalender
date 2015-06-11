@@ -62,6 +62,35 @@
 <% unless @plants.empty? %>
   <br />
   <table class="table">
+    <tr>
+      <th></th><%# image %>
+      <th></th><%# active/inactive %>
+      <th>
+        <a href="<%= plants_path(sort_by: "name", order: "asc", only_public: @only_public) %>">
+          <%= image_tag "gnome_view_sort_descending.png", width: "35", height: "35" %>Name
+        </a>
+      </th><%# plant name %>
+      <th></th><%# creator %>
+      <th>
+        <% if @only_public == "1" %>
+          <a href="<%= plants_path %>">
+            <%= image_tag "filter.png", width: "35px", height: "35px" %>
+            alle
+          </a>
+        <% else %>
+          <a href="<%= plants_path(only_public: "1") %>">
+            <%= image_tag "filter.png", width: "35px", height: "35px" %>
+            öffentliche
+          </a>
+        <% end %>
+      </th>
+      <th>
+        <a href="<%= plants_path(sort_by: "cached_votes_total", order: "desc", only_public: @only_public) %>">
+          <%= image_tag "gnome_view_sort_descending.png", width: "35", height: "35" %>Bewertung
+        </a>
+      </th><%# votes %>
+      <th></th><%# delete plant %>
+    </tr>
   <% @plants.each do |plant| %>
     <%= render partial: "/plants/list_entry",
                locals: { plant:          plant,
