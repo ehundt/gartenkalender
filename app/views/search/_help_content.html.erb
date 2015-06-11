@@ -1,0 +1,24 @@
+<table class="table">
+  <% unless @plants.blank? %>
+  <tr>
+    <td colspan="2">
+      Hier werden nur öffentliche Pflanzen angezeigt.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= image_tag "unvoted_thumb_up.png" %>
+    </td>
+    <td>
+      War diese Pflanzenbeschreibung besonders hilfreich? Dann klicke auf dieses Icon. Änderst Du Deine Meinung wieder, klicke ein zweites Mal.
+    </td>
+  </tr>
+  <% else %>
+    <tr>
+      <td colspan="2">
+        Hier wird nur nach öffentlichen Pflanzen gesucht.
+      </td>
+    </tr>
+  <% end %>
+</table>
+

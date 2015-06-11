@@ -1,0 +1,26 @@
+<h2>Kontakt</h2>
+<p>Hast Du Fragen, Kritik oder Anregungen? Schreibe eine Email an uns:</p>
+
+<div class="row">
+  <div class="col-xs-12 contact-form">
+    <%= form_tag static_pages_contact_path do %>
+      <div class="input-group contact-form">
+        <%= text_field_tag(:subject, "", class: "form-control", placeholder: "Subject")  %>
+      </div>
+      <div class="input-group contact-form">
+        <%= text_area_tag :text,
+                          "",
+                          class: "form-control",
+                          placeholder: "Text",
+                          rows: "6"  %>
+      </div>
+
+      <div class="input-group contact-form submit-button">
+        <span class="input-group-btn">
+          <%= submit_tag("versenden", class: "btn btn-default") %>
+        </span>
+      </div>
+
+    <% end %>
+  </div>
+</div>
