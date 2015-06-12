@@ -5,6 +5,7 @@ class PlantsController < ApplicationController
 
   def index
     @only_public = "0"
+    @plants = []
     if (params[:search_name].present?)
       @searched = true
       @searched_text = params[:search_name]
@@ -20,7 +21,7 @@ class PlantsController < ApplicationController
       end
 
       sort_by = params[:sort_by].present? ? params[:sort_by] : "name"
-      order = params[:order].present? ? params[:order] :"asc"
+      order = params[:order].present? ? params[:order] : "asc"
 
       @plants = @plants.order(sort_by.to_sym => order.to_sym)
     end

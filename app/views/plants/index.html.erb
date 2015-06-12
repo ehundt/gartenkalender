@@ -39,8 +39,7 @@
   <h5>Suche nach "<%= @searched_text %>": <strong><%= @searched_plants.length %></strong> Pflanzen gefunden.</h5>
   <% unless @searched_plants.empty? %>
     <% @plants = @searched_plants %>
-<% end %>
-
+  <% end %>
 <% elsif @plants.empty? %>
   <p>Eigene Pflanzen werden hier aufgelistet, sobald Du entweder
      selbst welche erstellt hast oder Dir von Freunden welche kopiert hast.
@@ -62,7 +61,7 @@
       <th></th><%# active/inactive %>
       <th>
         <a href="<%= plants_path(sort_by: "name", order: "asc", only_public: @only_public) %>">
-          <%= image_tag "gnome_view_sort_descending.png", width: "35", height: "35" %>Name
+          <%= image_tag "gnome_view_sort_descending.png", width: "35", height: "35" %>
         </a>
       </th><%# plant name %>
       <th></th><%# creator %>
@@ -81,7 +80,7 @@
       </th>
       <th>
         <a href="<%= plants_path(sort_by: "cached_votes_total", order: "desc", only_public: @only_public) %>">
-          <%= image_tag "gnome_view_sort_descending.png", width: "35", height: "35" %>Bewertung
+          <%= image_tag "gnome_view_sort_descending.png", width: "35", height: "35" %>
         </a>
       </th><%# votes %>
       <th></th><%# delete plant %>
