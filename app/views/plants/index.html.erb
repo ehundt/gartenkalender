@@ -39,12 +39,7 @@
   <h5>Suche nach "<%= @searched_text %>": <strong><%= @searched_plants.length %></strong> Pflanzen gefunden.</h5>
   <% unless @searched_plants.empty? %>
     <% @plants = @searched_plants %>
-  <% else %>
-    <br>
-    <button type="button" class="btn btn-default">
-      <%= link_to "neue Suche", plants_search_path %>
-    </button>
-  <% end %>
+<% end %>
 
 <% elsif @plants.empty? %>
   <p>Eigene Pflanzen werden hier aufgelistet, sobald Du entweder
