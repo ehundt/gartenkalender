@@ -1,28 +1,36 @@
-<h3>Hallo,</h3>
-<p>
-  <%= @user.display_name %> möchte Dich gerne einladen, an einem
-  Netzwerk für Hobby-GärtnerInnen teilzunehmen.
-</p>
-<p>
-  Hier kannst Du Deinen persönlichen Gartenkalender anlegen, Deine eigenen Pflanzenbeschreibungen formulieren, Aufgaben hinzufügen und Dich zu gegebener Zeit daran erinnern lassen.
-</p>
-<p>
-  Deine Pflanzentipps kannst Du anderen GärtnerInnen verfügbar machen und die Pflanzentipps anderer nutzen.
-</p>
-<p>
-  Du kannst speichern, wann Du welche Arbeiten im Garten wie erledigt hast und jederzeit wieder darauf zurückgreifen.
-</p>
-<p>
-  Hier geht's zum Gartenkalender: <%= link_to "#{root_url}", root_url %>.
-</p>
-<p>
-  Viele Grüße,
-  Dein persönlicher Gartenkalender
-</p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h3>Hallo,</h3>
+    <p>
+      <%= @user.display_name %> möchte Dich gerne einladen, an einem
+      Netzwerk für Hobby-GärtnerInnen teilzunehmen.
+    </p>
+    <p>
+      Hier kannst Du Deinen persönlichen Gartenkalender anlegen, Deine eigenen Pflanzenbeschreibungen formulieren, Aufgaben hinzufügen und Dich zu gegebener Zeit daran erinnern lassen.
+    </p>
+    <p>
+      Deine Pflanzentipps kannst Du anderen GärtnerInnen verfügbar machen und die Pflanzentipps anderer nutzen.
+    </p>
+    <p>
+      Du kannst speichern, wann Du welche Arbeiten im Garten wie erledigt hast und jederzeit wieder darauf zurückgreifen.
+    </p>
+    <p>
+      Hier geht's zum Gartenkalender: <%= link_to "#{root_url}", root_url %>.
+    </p>
+    <p>
+      Viele Grüße,
+      Dein persönlicher Gartenkalender
+    </p>
 
-<small>
-  <p>Kontakt: persoenlicher.gartenkalender@gmail.com<br>
-     Moorreye 43<br>
-     22415 Hamburg
-  </p>
-</small>
+    <small>
+      <p>Kontakt: persoenlicher.gartenkalender@gmail.com<br>
+         Moorreye 43<br>
+         22415 Hamburg
+      </p>
+    </small>
+  </body>
+</html>
