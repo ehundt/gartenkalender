@@ -22,6 +22,11 @@
         <%= link_to task.title, plant_task_path(task.plant, task) %>
       </td>
       <td>
+        <div class="visibility" data-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
+          <%= image_tag "eye_visible.jpg" %>
+        </div>
+      </td>
+      <td>
         <%= render partial: "done_tasks/modal", locals: { task: task } %>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
           erledigt
