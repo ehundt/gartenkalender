@@ -6,13 +6,13 @@ var onPageReady = function(){
     var path = $(this).data("path");
     var $url = path + $plant_id + "/tasks/" + $task_id;
 
-    var icon = $(this).children("span");
+    var icon = $(this).children().first();
     var path = $(this).data("path");
 
-    if (icon.hasClass("glyphicon-eye-open"))
+    if ($(icon).attr("src") == "<%= image_url('eye_visible.jpg') %>")
       $url += "/hide";
 
-    if (icon.hasClass("glyphicon-eye-close"))
+    if ($(icon).attr("src") == "<%= image_url('eye_not_visible.jpg') %>")
       $url += "/unhide";
 
     $.ajax({
@@ -21,8 +21,12 @@ var onPageReady = function(){
       dataType: "json",
       data:     { task: {id: $task_id} },
       success:  function(data, status){
-        icon.toggleClass("glyphicon-eye-open");
-        icon.toggleClass("glyphicon-eye-close");
+        if ($(icon).attr("src") == "<%= image_url('eye_not_visible.jpg') %>"){
+          $(icon).attr("src", "<%= image_url('eye_visible.jpg') %>");
+        } else {
+          $(icon).attr("src", "<%= image_url('eye_not_visible.jpg') %>");
+        }
+
       }
     });
   });

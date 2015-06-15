@@ -22,7 +22,7 @@ class DoneTasksController < ApplicationController
     plant = @done_task.task.plant
     @done_task.destroy
 
-    redirect_to plant
+    redirect_to request.referer
   end
 
 private

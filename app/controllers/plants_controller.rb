@@ -32,6 +32,7 @@ class PlantsController < ApplicationController
     @plant = Plant.find(params[:id]) # TODO: make sure user cannot see private plants of other users
     @done_tasks = Array.new()
 
+    # TODO: tasks sortieren nach Datum unabhängig vom Jahr: Januar, Februar, etc.
     @plant.tasks.order(created_at: :desc).each do |task|
       unless task.done_tasks.empty?
         @done_tasks.push(task.done_tasks)

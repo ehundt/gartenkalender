@@ -37,7 +37,7 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     @task.update(task_params)
     @plant = Plant.find(params[:plant_id])
-    redirect_to @plant
+    redirect_to plant_task_path(@task.plant, @task)
   end
 
   def destroy
