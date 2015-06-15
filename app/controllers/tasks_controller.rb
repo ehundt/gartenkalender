@@ -7,6 +7,7 @@ class TasksController < ApplicationController
   def show
     @task = Task.find(params[:id])
     @plant = @task.plant
+    @help_content_path = "/tasks"
   end
 
   def new

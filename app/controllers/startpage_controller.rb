@@ -7,5 +7,6 @@ class StartpageController < ApplicationController
     else
       @upcoming_tasks = Task.upcoming_tasks_for_user(current_user)
     end
+    @help_content_path = "/startpage"
   end
 end
