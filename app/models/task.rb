@@ -5,9 +5,6 @@ class Task < ActiveRecord::Base
   has_many :done_tasks
   has_many :skipped_tasks, -> {where(skipped: true)}, class_name: "DoneTask"
 
-  enum start: Season::PHAENOLOG_SEASONS
-  enum stop:  Season::PHAENOLOG_SEASONS.map{ |s| ("ende_" + s.to_s).to_sym }
-
   enum repeat: [:einmalig, :täglich, :wöchentlich, :monatlich, :halbjährlich, :jährlich]
 
   validates :title, presence: true
@@ -25,8 +22,6 @@ class Task < ActiveRecord::Base
   end
 
   def self.upcoming_tasks_for_user(user)
-    season = Season::current.season_index
-
     current_tasks = self.all_for_user(user).in_time_frame
                     .includes(:done_tasks, :plant)
                     .references(:done_tasks)

@@ -6,7 +6,7 @@ class Plant < ActiveRecord::Base
   belongs_to :user
   belongs_to :creator, class_name: 'User', foreign_key: :creator_id, validate: true
 
-  enum category: [:keine, :blume, :obst, :gemüse, :baum, :strauch, :kaktus, :staude, :sukkulent, :kletterpflanze, :zimmerpflanze, :wasserpflanze, :gras]
+  enum category: [:keine, :blume, :obst, :gemüse, :baum, :strauch, :kaktus, :staude, :sukkulent, :kletterpflanze, :zimmerpflanze, :wasserpflanze, :gras, :wildkraut]
 
   has_attached_file :main_image,
     :styles      => { :medium => "300x300>", :thumb => "100x100>" },
