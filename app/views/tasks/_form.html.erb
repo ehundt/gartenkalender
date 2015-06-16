@@ -1,10 +1,17 @@
-<% begin_day   = @task.begin_date.blank? ? nil : @task.begin_date.day
-   begin_month = @task.begin_date.blank? ? nil : @task.begin_date.month
-   end_day     = @task.end_date.blank?   ? nil : @task.end_date.day
-   end_month   = @task.end_date.blank?   ? nil : @task.end_date.month
+<% if (defined? @task)
+     task = @task
+   else
+     task = @plant.tasks.build
+   end
+%>
+
+<% begin_day   = task.begin_date.blank? ? nil : @task.begin_date.day
+   begin_month = task.begin_date.blank? ? nil : @task.begin_date.month
+   end_day     = task.end_date.blank? ? nil : @task.end_date.day
+   end_month   = task.end_date.blank? ? nil : @task.end_date.month
 %>
 <br>
-<%= form_for([@plant, @task]) do |f| %>
+<%= form_for([@plant, task]) do |f| %>
   <input type="hidden" value="false" name="task[hide]">
   <div class="input-group wide-form-input">
     <div class="task-form-title">Aufgabentitel:</div>
@@ -38,7 +45,7 @@
   <div class="input-group task-form-space">
     <span class="task-form-space task-form-title">Wiederholung:</span>
     <%= f.select :repeat,
-        select_options_for(@task, :repeats), {}, { class: 'form-input' } %>
+        select_options_for(task, :repeats), {}, { class: 'form-input' } %>
   </div>
   <div class="pull-right form-space">
       <a href="<%= plant_path(@plant) %>">Abbrechen</a>&nbsp;
