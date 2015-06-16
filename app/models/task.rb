@@ -7,7 +7,10 @@ class Task < ActiveRecord::Base
 
   enum start: Season::PHAENOLOG_SEASONS
   enum stop:  Season::PHAENOLOG_SEASONS.map{ |s| ("ende_" + s.to_s).to_sym }
+
   enum repeat: [:einmalig, :täglich, :wöchentlich, :monatlich, :halbjährlich, :jährlich]
+
+  validates :title, presence: true
 
   scope :in_time_frame, -> {
     search_for_date = Date.today.change(year: 1)
