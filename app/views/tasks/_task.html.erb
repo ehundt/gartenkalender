@@ -61,18 +61,16 @@
           Wiederholung: <strong><%= task.repeat.humanize %></strong>
         </div>
         <div class="col-xs-6 task-action-links">
-
-        <% if can? :manage, task %>
-            <% if task.upcoming? %>
-              <%= link_to "überspringen", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id, done_task: { skipped: true } }), method: :post, class: "btn btn-default", role: "button" %>&nbsp;
-            <% end %>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
-              erledigt
-            </button>
-            <%= render partial: "done_tasks/modal", locals: { task: task } %>
-        <% end %>
-
+          <% if can? :manage, task %>
+              <% if task.upcoming? %>
+                <%= link_to "überspringen", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id, done_task: { skipped: true } }), method: :post, class: "btn btn-default", role: "button" %>&nbsp;
+              <% end %>
+              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
+                erledigt
+              </button>
+          <% end %>
         </div>
+        <%= render partial: "done_tasks/modal", locals: { task: task } %>
       </div>
     </div>
   </div>
