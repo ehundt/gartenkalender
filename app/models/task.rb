@@ -9,6 +9,14 @@ class Task < ActiveRecord::Base
   enum stop:  Season::PHAENOLOG_SEASONS.map{ |s| ("ende_" + s.to_s).to_sym }
   enum repeat: [:einmalig, :täglich, :wöchentlich, :monatlich, :halbjährlich, :jährlich]
 
+  scope :in_time_frame, -> {
+    search_for_date = Date.today.change(year: 1)
+    search_for_date2 = Date.today.change(year: 2)
+
+    where('(begin_date <= ? AND end_date >= ?) OR (begin_date <= ? AND end_date >= ?)',
+          search_for_date, search_for_date, search_for_date2, search_for_date2)
+  }
+
   def self.all_for_user(user, hide=false)
     self.where(hide: hide).where('plant_id IN (?)', user.plants.where(active: true).select(:id))
   end
@@ -16,8 +24,7 @@ class Task < ActiveRecord::Base
   def self.upcoming_tasks_for_user(user)
     season = Season::current.season_index
 
-    current_tasks = self.all_for_user(user)
-                    .where('start <= ? AND stop >= ?', season, season)
+    current_tasks = self.all_for_user(user).in_time_frame
                     .includes(:done_tasks, :plant)
                     .references(:done_tasks)
     upcoming_tasks = []
@@ -92,7 +99,7 @@ class Task < ActiveRecord::Base
   end
 
   def upcoming?
-    p Season::current.season_index
+    #p Season::current.season_index
     current_done_task.nil? && Task.starts[start] <= Season::current.season_index && Task.stops[stop] >= Season::current.season_index
   end
 end

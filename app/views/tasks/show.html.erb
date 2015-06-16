@@ -24,8 +24,11 @@
   </div>
 </div>
 
-<strong>Zeitraum:</strong>
-<%= @task.start.humanize %> bis <%= @task.stop.humanize.titleize %>,
+<% if task_time_frame(@task).present? %>
+  <strong>Zeitraum:</strong>
+  <%= task_time_frame(@task) %>,
+<% end %>
+
 <strong>Wiederholung:</strong>
 <%= @task.repeat.humanize %>
 <br><br>

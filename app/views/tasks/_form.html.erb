@@ -1,11 +1,11 @@
-<% if (defined? @task)
-     form_param = @task
-   else
-     form_param = @plant.tasks.build
-   end
+<% begin_day   = @task.begin_date.blank? ? nil : @task.begin_date.day
+   begin_month = @task.begin_date.blank? ? nil : @task.begin_date.month
+   end_day     = @task.end_date.blank?   ? nil : @task.end_date.day
+   end_month   = @task.end_date.blank?   ? nil : @task.end_date.month
 %>
 
-<%= form_for([@plant, form_param]) do |f| %>
+<%= form_for([@plant, @task]) do |f| %>
+  <input type="hidden" value="false" name="task[hide]">
   <div class="row form-space">
     <div class="col-xs-12">
       <div class="input-group">
@@ -14,21 +14,36 @@
       </div>
     </div>
   </div>
+
   <div class="row form-space">
     <div class="col-xs-12">
       <div class="input-group">
         <span class="input-group-addon">frühestens</span>
-        <%= f.select :start,
-            select_options_for(@task, :starts), {}, { class: 'form-control' } %>
+          &nbsp;
+          <%= select_tag( :begin_day,
+                          options_for_select(day_options, begin_day),
+                          class: 'form-control')  %>
+          &nbsp;
+          <%= select_tag( :begin_month,
+                          options_for_select(month_options, begin_month),
+                          class: 'form-control')  %>
+        </span>
       </div>
     </div>
   </div>
   <div class="row form-space">
     <div class="col-xs-12">
       <div class="input-group">
-        <span class="input-group-addon">bis spätestens</span>
-        <%= f.select :stop,
-            select_options_for(@task, :stops), {}, { class: 'form-control' } %>
+        <span class="input-group-addon">spätestens</span>
+          &nbsp;
+          <%= select_tag( :end_day,
+                          options_for_select(day_options, end_day),
+                          class: 'form-control') %>
+          &nbsp;
+          <%= select_tag( :end_month,
+                          options_for_select(month_options, end_month),
+                          class: 'form-control')  %>
+        </span>
       </div>
     </div>
   </div>
@@ -48,30 +63,6 @@
         <%= f.text_area :desc, :class => "form-control", rows: "12" %>
       </div>
     </div>
-  </div>
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon">
-          <input type="radio" value="false" name="task[hide]" id="task_hide_false"<% if (@task.nil? || !@task.hide) %> checked="checked"<% end %>>
-        </span>
-        <span class="form-control">
-          Aufgabe in der Aufgabenliste anzeigen
-        </span>
-      </div><!-- /input-group -->
-    </div><!-- /.col-lg-6 -->
-  </div>
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon">
-          <input type="radio" value="false" name="task[hide]" id="task_hide_true"<% if (!@task.nil? && @task.hide) %> checked="checked"<% end %>>
-        </span>
-        <span class="form-control">
-          Aufgabe in der Aufgabenliste <b>nicht</b> anzeigen
-        </span>
-      </div><!-- /input-group -->
-    </div><!-- /.col-lg-6 -->
   </div>
   <div class="row form-space">
     <div class="col-xs-12">
