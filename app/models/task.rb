@@ -102,7 +102,13 @@ class Task < ActiveRecord::Base
   end
 
   def upcoming?
-    #p Season::current.season_index
-    current_done_task.nil? && Task.starts[start] <= Season::current.season_index && Task.stops[stop] >= Season::current.season_index
+    return true if begin_date.nil?
+    return true if end_date.nil?
+
+    this_day  = Date.today.change(year: 1)
+    this_day2 = Date.today.change(year: 2)
+
+    current_done_task.nil? &&
+    (( begin_date <= this_day && end_date >= this_day) || (begin_date <= this_day2 && end_date >= this_day2))
   end
 end
