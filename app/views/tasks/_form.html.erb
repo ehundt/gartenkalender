@@ -3,74 +3,45 @@
    end_day     = @task.end_date.blank?   ? nil : @task.end_date.day
    end_month   = @task.end_date.blank?   ? nil : @task.end_date.month
 %>
-
+<br>
 <%= form_for([@plant, @task]) do |f| %>
   <input type="hidden" value="false" name="task[hide]">
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon">Titel</span>
-        <%= f.text_field :title, :class => "form-control" %>
-      </div>
-    </div>
+  <div class="input-group wide-form-input">
+    <div class="task-form-title">Aufgabentitel:</div>
+    <%= f.text_field :title, class: "form-input wide-form-input", placeholder: "Titel" %>
   </div>
-
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon">frühestens</span>
-          &nbsp;
-          <%= select_tag( :begin_day,
-                          options_for_select(day_options, begin_day),
-                          class: 'form-control')  %>
-          &nbsp;
-          <%= select_tag( :begin_month,
-                          options_for_select(month_options, begin_month),
-                          class: 'form-control')  %>
-        </span>
-      </div>
-    </div>
+  <div class="input-group task-form-space wide-form-input">
+    <div class="task-form-title">Beschreibung:</div>
+    <%= f.text_area :desc, :class => "form-control wide-form-input", rows: "8" %>
   </div>
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon">spätestens</span>
-          &nbsp;
-          <%= select_tag( :end_day,
-                          options_for_select(day_options, end_day),
-                          class: 'form-control') %>
-          &nbsp;
-          <%= select_tag( :end_month,
-                          options_for_select(month_options, end_month),
-                          class: 'form-control')  %>
-        </span>
-      </div>
-    </div>
+  <div class="input-group">
+    <span class="task-form-space task-form-title">frühestens</span>
+      <%= select_tag( :begin_day,
+                      options_for_select(day_options, begin_day),
+                      class: "form-input task-form-space" )  %>
+      &nbsp;
+      <%= select_tag( :begin_month,
+                      options_for_select(month_options, begin_month),
+                      class: "form-input task-form-space" )  %>
+      &nbsp;
+    </span>
+    <span class="task-form-space task-form-title">&nbsp; bis spätestens</span>
+      <%= select_tag( :end_day,
+                      options_for_select(day_options, end_day),
+                      class: "form-input" ) %>
+      &nbsp;
+      <%= select_tag( :end_month,
+                      options_for_select(month_options, end_month),
+                      class: "form-input" ) %>
+    </span>
   </div>
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon">Wiederholung</span>
-        <%= f.select :repeat,
-            select_options_for(@task, :repeats), {}, { class: 'form-control' } %>
-      </div>
-    </div>
+  <div class="input-group task-form-space">
+    <span class="task-form-space task-form-title">Wiederholung:</span>
+    <%= f.select :repeat,
+        select_options_for(@task, :repeats), {}, { class: 'form-input' } %>
   </div>
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon">Beschreibung</span>
-        <%= f.text_area :desc, :class => "form-control", rows: "12" %>
-      </div>
-    </div>
+  <div class="pull-right form-space">
+      <a href="<%= plant_path(@plant) %>">Abbrechen</a>&nbsp;
+      <%= f.submit "Aufgabe speichern", :class => "btn btn-success" %>
   </div>
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="pull-right">
-          <a href="<%= plant_path(@plant) %>">Abbrechen</a>&nbsp;
-          <%= f.submit "Aufgabe speichern", :class => "btn btn-success" %>
-      </div>
-    </div>
-  </div>
-  <br>
 <% end %>

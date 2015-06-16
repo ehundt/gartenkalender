@@ -1,5 +1,5 @@
 <%= render partial: "/plants/sidebar" %>
 
-<h4><%= @plant.name %></h4>
-<h5>Neue Aufgabe anlegen</h5>
+<h2><%= link_to @plant.name, @plant %> <small>Neue Aufgabe anlegen</small></h2>
+
 <%= render partial: "form" %>
