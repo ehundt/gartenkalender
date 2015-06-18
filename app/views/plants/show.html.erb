@@ -79,6 +79,24 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-xs-12">
+    <strong>Standort:</strong> <%= @plant.location %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <strong>Boden:</strong> <%= @plant.soil %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <strong>Optimaler Ph-Wert:</strong> <%= @plant.ph %>
+  </div>
+</div>
+<br>
 <% unless @plant.tasks.empty? %>
   <div class="row">
     <div class="col-xs-12">
