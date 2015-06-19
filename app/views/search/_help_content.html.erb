@@ -10,7 +10,11 @@
       <%= image_tag "unvoted_thumb_up.png" %>
     </td>
     <td>
-      War diese Pflanzenbeschreibung besonders hilfreich? Dann klicke auf dieses Icon. Änderst Du Deine Meinung wieder, klicke ein zweites Mal.
+      <% if user_signed_in? %>
+        War diese Pflanzenbeschreibung besonders hilfreich? Dann klicke auf dieses Icon. Änderst Du Deine Meinung wieder, klicke ein zweites Mal.
+      <% else %>
+        Als registrierter und eingeloggter Benutzer kannst Du hier abstimmen.
+      <% end %>
     </td>
   </tr>
   <% else %>
