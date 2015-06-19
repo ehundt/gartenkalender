@@ -1,9 +1,9 @@
 <% content_for :sidebar do %>
-  <% if current_user && @plant %>
+  <% if @plant %>
     <div class="row">
       <div class="col-xs-12">
 
-        <% if @plant.creator != current_user %>
+        <% if current_user && @plant.creator != current_user %>
           <div data-toggle="popover"
                data-container="body"
                data-trigger="focus"
@@ -18,20 +18,20 @@
              data-switch-allowed="<% if @plant.creator == current_user %>1<% else %>0<% end %>"
              >
           <% if @plant.public %>
-            <% if @plant.creator == current_user %>
+            <% if current_user && @plant.creator == current_user %>
               <%= image_tag("world-globe32x32.png") %> <span>&nbsp;öffentlich</span>
             <% else %>
               <%= image_tag("world-globe32x32_grey.png") %> <span>&nbsp;öffentlich</span>
             <% end %>
           <% else %>
-            <% if @plant.creator == current_user %>
+            <% if current_user && @plant.creator == current_user %>
               <%= image_tag("not-world-globe32x32.png") %> <span>&nbsp;privat</span>
             <% else %>
               <%= image_tag("not-world-globe32x32_grey.png") %> <span>&nbsp;privat</span>
             <% end %>
           <% end %>
 
-          <% if @plant.creator != current_user %>
+          <% if current_user && @plant.creator != current_user %>
             </div>
           <% end %>
         </div>
@@ -43,14 +43,14 @@
         <%= link_to image_tag(download_main_image_plant_path(@plant, {size: :medium}), class: "img-rounded img-responsive"), @plant  %>
       </div>
     </div>
-  <% end %>
 
-  <% if @plant && @plant.user == current_user && !@plant.private_notes.empty? && current_page?(@plant) %>
-    <div class="row sidebar-private-notes">
-      <div class="col-xs-12">
-        <p><strong>Private Notizen:</strong></p>
-        <%= raw markdown.render(@plant.private_notes) %>
+    <% if current_user && @plant.user == current_user && !@plant.private_notes.empty? && current_page?(@plant) %>
+      <div class="row sidebar-private-notes">
+        <div class="col-xs-12">
+          <p><strong>Private Notizen:</strong></p>
+          <%= raw markdown.render(@plant.private_notes) %>
+        </div>
       </div>
-    </div>
+    <% end %>
   <% end %>
 <% end %>

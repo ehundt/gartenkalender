@@ -8,15 +8,17 @@
             <small><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></small>
           </div>
           <div class="col-xs-6 task-action-links">
-            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-            <% if task.done? %>
-              ist erledigt
-            <% elsif task.skipped? %>
-              übersprungen
-            <% elsif task.upcoming? %>
-              <span class="task-warning">wartet auf Ausführung</span>
-            <% else %>
-              steht zur Zeit nicht an
+            <% if user_signed_in? %>
+              <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+              <% if task.done? %>
+                ist erledigt
+              <% elsif task.skipped? %>
+                übersprungen
+              <% elsif task.upcoming? %>
+                <span class="task-warning">wartet auf Ausführung</span>
+              <% else %>
+                steht zur Zeit nicht an
+              <% end %>
             <% end %>
           </div>
         </div>

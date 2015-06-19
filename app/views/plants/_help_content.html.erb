@@ -1,59 +1,70 @@
 <table class="table">
-  <tr>
-    <td>
-      <%= image_tag "world-globe32x32.png" %>
-    </td>
-    <td>
-      Zum Veröffentlichen dieser Pflanzenbeschreibung inklusive der Aufgaben auf dieses Icon klicken. Private Notizen werden nicht veröffentlicht.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= image_tag "plant_active.gif", height: "42px", width: "30px" %>
-    </td>
-    <td>
-      Pflanze aktiv bzw. inaktiv schalten durch Klick auf die Pflanze. Nur die Pflegetipps für aktive Pflanzen werden in der Aufgabenliste angezeigt.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <%= image_tag "unvoted_thumb_up.png" %>
-    </td>
-    <td>
-      War diese Pflanzenbeschreibung inklusive der Pflegetipps besonders hilfreich? Dann klicke auf dieses Icon. Änderst Du Deine Meinung wieder, klicke ein zweites Mal.
-    </td>
-  </tr>
 
-  <% if @plant.blank? %>
+  <% if user_signed_in? %>
     <tr>
       <td>
-        <%= image_tag "filter.png", width: "35px", height: "35px" %>
+        <%= image_tag "world-globe32x32.png" %>
       </td>
       <td>
-        Nur öffentliche Pflanzenbeschreibungen anzeigen oder alle?
+        Zum Veröffentlichen dieser Pflanzenbeschreibung inklusive der Aufgaben auf dieses Icon klicken. Private Notizen werden nicht veröffentlicht.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= image_tag "plant_active.gif", height: "42px", width: "30px" %>
+      </td>
+      <td>
+        Pflanze aktiv bzw. inaktiv schalten durch Klick auf die Pflanze. Nur die Pflegetipps für aktive Pflanzen werden in der Aufgabenliste angezeigt.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= image_tag "unvoted_thumb_up.png" %>
+      </td>
+      <td>
+        War diese Pflanzenbeschreibung inklusive der Pflegetipps besonders hilfreich? Dann klicke auf dieses Icon. Änderst Du Deine Meinung wieder, klicke ein zweites Mal.
       </td>
     </tr>
 
+    <% if @plant.blank? %>
+      <tr>
+        <td>
+          <%= image_tag "filter.png", width: "35px", height: "35px" %>
+        </td>
+        <td>
+          Nur öffentliche Pflanzenbeschreibungen anzeigen oder alle?
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <%= image_tag "gnome_view_sort_descending.png", width: "35", height: "35" %>
+        </td>
+        <td>
+          Pflanzenliste sortieren.
+        </td>
+      </tr>
+    <% end %>
+
+    <% unless @plant.blank? %>
+      <tr>
+        <td>
+          <%= image_tag "eye_visible.jpg" %>
+        </td>
+        <td>
+          Soll diese Aufgabe in der Aufgabenliste angezeigt werden? Durch Anklicken des Auges wird die Sichtbarkeit an- oder ausgeschaltet.
+        </td>
+      </tr>
+    <% end %>
+  <% else %>
     <tr>
       <td>
-        <%= image_tag "gnome_view_sort_descending.png", width: "35", height: "35" %>
+        <%= image_tag "unvoted_thumb_up.png" %>
       </td>
       <td>
-        Pflanzenliste sortieren.
+        Als registrierter Benutzer kannst Du hier Deine Meinung abgeben.
       </td>
     </tr>
   <% end %>
-
-  <% unless @plant.blank? %>
-    <tr>
-      <td>
-        <%= image_tag "eye_visible.jpg" %>
-      </td>
-      <td>
-        Soll diese Aufgabe in der Aufgabenliste angezeigt werden? Durch Anklicken des Auges wird die Sichtbarkeit an- oder ausgeschaltet.
-      </td>
-    </tr>
-  <% end %>
-
 </table>
 

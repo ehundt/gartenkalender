@@ -2,15 +2,17 @@
 
 <div class="row">
   <div class="col-xs-6 my-plant-hint">
-    <% if @plant.user != current_user %>
-      <strong>Original&nbsp;</strong>
-      <% if @plant.copy_of(current_user) %>
-        <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-        gehe zu:
-        <%= link_to "meiner Pflanze", @plant.copy_of(current_user) %>
+    <% if current_user %>
+      <% if @plant.user != current_user %>
+        <strong>Original&nbsp;</strong>
+        <% if @plant.copy_of(current_user) %>
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          gehe zu:
+          <%= link_to "meiner Pflanze", @plant.copy_of(current_user) %>
+        <% end %>
+      <% elsif @plant.user == current_user %>
+        <strong>Meine Pflanze</strong>
       <% end %>
-    <% elsif @plant.user == current_user %>
-      <strong>Meine Pflanze</strong>
     <% end %>
   </div>
 
@@ -36,7 +38,8 @@
 <div class="row">
   <div class="col-xs-5">
     <h2>
-      <% if @plant.user == current_user %>
+      <% if can? :manage, @plant %>
+      <%# if @plant.user == current_user %>
         <span class="active-button" data-id="<%= @plant.id %>" data-path="">
           <% if @plant.active %>
             <%= image_tag "plant_active.gif", height: '42px', width: '30px',
@@ -52,7 +55,7 @@
     </h2>
   </div>
   <div class="col-xs-7 edit-plant-link">
-    <% if (can? :clone, @plant) && @plant.user != current_user %>
+    <% if (can? :clone, @plant) && current_user && @plant.user != current_user %>
       <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
       <%= link_to 'Kopieren', clone_plant_path(@plant), method: :post %>&nbsp;
     <% end %>

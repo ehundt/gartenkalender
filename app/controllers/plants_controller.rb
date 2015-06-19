@@ -1,5 +1,5 @@
 class PlantsController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:show, :download_main_image]
 
   load_and_authorize_resource
 
@@ -29,14 +29,18 @@ class PlantsController < ApplicationController
   end
 
   def show
-    @plant = Plant.find(params[:id]) # TODO: make sure user cannot see private plants of other users
+    @plant = Plant.find(params[:id])
     @done_tasks = Array.new()
 
     # TODO: tasks sortieren nach Datum unabhängig vom Jahr: Januar, Februar, etc.
-    @plant.tasks.order(end_date: :desc).each do |task|
-      unless task.done_tasks.empty?
-        @done_tasks.push(task.done_tasks)
+
+    if current_user
+      @plant.tasks.each do |task|
+        unless task.done_tasks.empty?
+          @done_tasks.push(task.done_tasks.to_a)
+        end
       end
+      @done_tasks.flatten.sort! { |done1, done2| done1.date <=> done2.date }
     end
     @help_content_path = "/plants"
   end
