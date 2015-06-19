@@ -84,6 +84,34 @@
   <div class="row form-space">
     <div class="col-xs-12">
       <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Standort</span>
+          <%= f.text_field :location, :class => "form-control",
+             "aria-label" => "Standort" %>
+      </div>
+    </div>
+  </div>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Bodenbeschaffenheit</span>
+          <%= f.text_field :soil, :class => "form-control",
+             "aria-label" => "Bodenbeschaffenheit" %>
+      </div>
+    </div>
+  </div>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Optimaler Ph-Wert</span>
+          <%= f.number_field :ph, step: :any, :class => "form-control",
+             "aria-label" => "Ph-Wert" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
         <span class="input-group-addon">Private Notizen</span>
         <%= f.text_area :private_notes, :class => "form-control",
             "aria-label" => "Private Notizen", rows: "8" %>
