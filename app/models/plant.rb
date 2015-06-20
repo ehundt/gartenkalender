@@ -20,8 +20,6 @@ class Plant < ActiveRecord::Base
     # TODO: Files on the local filesystem (and in the Rails app's public directory) will be available to the internet at large. If you require access control, it's possible to place your files in a different location.
     # see https://github.com/thoughtbot/paperclip for further information!!
 
-  validates_numericality_of :ph, :greater_than => 0
-
   accepts_nested_attributes_for :tasks, allow_destroy: true
 
   # searchable do

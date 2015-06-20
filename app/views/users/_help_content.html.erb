@@ -1,11 +1,15 @@
 <table class="table">
   <tr>
-    <td>
-      <%= image_tag "unvoted_thumb_up.png" %>
-    </td>
-    <td>
-      War diese Pflanzenbeschreibung besonders hilfreich? Dann klicke auf dieses Icon. Änderst Du Deine Meinung wieder, klicke ein zweites Mal.
-    </td>
-  </tr>
+    <% unless @user.created_plants.empty? %>
+      <td>
+        <%= image_tag "unvoted_thumb_up.png" %>
+      </td>
+      <td>
+        <%= I18n.t "help_thumb_up" %>
+      </td>
+    </tr>
+  <% else %>
+    <td>Wenn dieser Gartenfreund Pflanzen veröffentlicht hat, kann man hier einen grünen Daumen vergeben.
+  <% end %>
 </table>
 
