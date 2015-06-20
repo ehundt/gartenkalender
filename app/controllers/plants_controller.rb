@@ -66,10 +66,17 @@ class PlantsController < ApplicationController
 
   def update
     @plant = Plant.find(params[:id])
-    @plant.update(plant_params)
+
+    if @plant.update(plant_params)
+      success = true
+    end
+
     if request.xhr?
-      render :json => { success: true }
+      render :json => { success: success }
     else
+      unless success
+        flash[:danger] = "Konnte die Pflanze leider nicht speichern: $!"
+      end
       redirect_to @plant
     end
   end
