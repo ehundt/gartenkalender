@@ -65,18 +65,7 @@
         </a>
       </th><%# plant name %>
       <th></th><%# creator %>
-      <th>
-        <% if @only_public == "1" %>
-          <a href="<%= plants_path %>">
-            <%= image_tag "filter.png", width: "35px", height: "35px" %>
-            alle
-          </a>
-        <% else %>
-          <a href="<%= plants_path(only_public: "1") %>">
-            <%= image_tag "filter.png", width: "35px", height: "35px" %>
-          </a>
-        <% end %>
-      </th>
+      <th></th>
       <th>
         <a href="<%= plants_path(sort_by: "cached_votes_total", order: "desc", only_public: @only_public) %>">
           <%= image_tag "gnome_view_sort_descending.png", width: "35", height: "35" %>
