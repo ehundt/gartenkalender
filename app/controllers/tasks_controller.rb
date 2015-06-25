@@ -63,7 +63,7 @@ class TasksController < ApplicationController
     @task.update(task_params.merge(begin_date: begin_date, end_date: end_date))
 
     @plant = Plant.find(params[:plant_id])
-    redirect_to plant_task_path(@task.plant, @task)
+    redirect_to plant_tasks_path(@task.plant)
   end
 
   def destroy

@@ -48,7 +48,7 @@
         select_options_for(task, :repeats), {}, { class: 'form-input' } %>
   </div>
   <div class="pull-right form-space">
-      <a href="<%= plant_path(@plant) %>">Abbrechen</a>&nbsp;
+      <a href="<%= plant_tasks_path(@plant) %>">Abbrechen</a>&nbsp;
       <%= f.submit "Aufgabe speichern", :class => "btn btn-success" %>
   </div>
 <% end %>

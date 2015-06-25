@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-xs-6">
     <h4>
-      <span class="task-visibility" data-id="<%= @task.id %>" data-plant-id="<%= @task.plant.id %>" data-path="/plants/">
+      <span class="task-visibility" data-task-id="<%= @task.id %>" data-plant-id="<%= @task.plant.id %>" data-path="/plants/">
         <% if @task.hide %>
             <%= image_tag "eye_not_visible.jpg" %>
         <% else %>
