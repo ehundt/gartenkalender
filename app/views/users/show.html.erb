@@ -43,18 +43,16 @@
 </table>
 <br>
 
-<% if @user != current_user %>
-  <h4>Veröffentlichte Pflanzen</h4>
-  <% unless @user.created_plants.empty? %>
-    <table class="table">
-      <% @user.created_plants.each do |plant| %>
-        <%= render partial: "/plants/list_entry",
-                   locals: { plant:          plant,
-                             other_user:     @user,
-                             only_my_plants: false } %>
-    <% end %>
-    </table>
-  <% else %>
-  Keine veröffentlichten Pflanzen.
+<h4>Veröffentlichte Pflanzen</h4>
+<% unless @user.created_plants.empty? %>
+  <table class="table">
+    <% @user.created_plants.each do |plant| %>
+      <%= render partial: "/plants/list_entry",
+                 locals: { plant:          plant,
+                           other_user:     @user,
+                           only_my_plants: false } %>
   <% end %>
+  </table>
+<% else %>
+Keine veröffentlichten Pflanzen.
 <% end %>

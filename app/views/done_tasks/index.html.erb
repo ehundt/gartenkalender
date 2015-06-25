@@ -1,0 +1,20 @@
+<%= render partial: "plants/sidebar" %>
+<%= render partial: "plants/header" %>
+
+<h2>Erledigte Aufgaben</h2>
+<% unless @done_tasks.empty? %>
+  <table class="table">
+    <tr>
+      <th>Aufgabe</th>
+      <th>Notiz</th>
+      <th>Datum</th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @plant.tasks.order(updated_at: :desc).each do |task| %>
+      <%= render task.done_tasks %>
+    <% end %>
+  </table>
+<% else %>
+  ...noch keine erledigten Aufgaben.
+<% end %>

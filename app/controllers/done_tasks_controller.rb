@@ -3,6 +3,11 @@ class DoneTasksController < ApplicationController
 
   load_and_authorize_resource
 
+  def index
+    @plant = Plant.find(params[:plant_id])
+    @done_tasks = DoneTask.where("task_id in (?)", @plant.tasks.pluck(:id))
+  end
+
   def create
     dt_params = done_task_params.merge(task_id: params[:task_id])
     @done_task = DoneTask.new(dt_params)

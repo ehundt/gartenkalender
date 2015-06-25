@@ -42,19 +42,7 @@
        <%= yield %>
     </div>
     <div class="col-xs-1">
-      <% unless @help_content_path.blank? %>
-        <div class="help"
-           data-toggle="popover"
-           data-container="body"
-           data-trigger="focus"
-           title="Hilfe"
-           data-placement="left"
-           data-html="true"
-           data-content='<%= render partial: @help_content_path + "/help_content" %>'
-        >
-          <a href="#"><%= image_tag("help.jpg", class: "img-responsive", width: "30px", height: "30px") %></a>
-        </div>
-      <% end %>
+      <%= render partial: 'shared/iconbar' %>
     </div>
   </div>
 </div>

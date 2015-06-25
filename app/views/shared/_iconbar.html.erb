@@ -1,0 +1,29 @@
+<% unless @help_content_path.blank? %>
+  <div class="help"
+     data-toggle="popover"
+     data-container="body"
+     data-trigger="focus"
+     title="Hilfe"
+     data-placement="left"
+     data-html="true"
+     data-content='<%= render partial: @help_content_path + "/help_content" %>'
+  >
+    <a href="#"><%= image_tag("help.jpg", class: "img-responsive", width: "30px", height: "30px") %></a>
+  </div>
+<% end %>
+
+<% if @plant %>
+  <div class="icon-bar">
+    <span class="likes-counter" data-id=<%= @plant.id %> data-path="/plants/" data-likeallowed="1">
+
+      <% if current_user.voted_for?(@plant) %>
+        <%= image_tag("voted_thumb_up.png") %>
+      <% else %>
+        <%= image_tag("unvoted_thumb_up.png") %>
+      <% end %>
+
+      <span class="likes-count-small"><%= @plant.get_likes.size %></span>
+
+    </span>
+  </div>
+<% end %>

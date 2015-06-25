@@ -40,8 +40,9 @@ Rails.application.routes.draw do
         patch 'hide'
         patch 'unhide'
       end
-      resources :done_tasks
+      resources :done_tasks, except: :index
     end
+    get 'done_tasks/index'
   end
 
   resources :users, except: :new do

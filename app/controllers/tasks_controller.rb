@@ -4,6 +4,11 @@ class TasksController < ApplicationController
 
   load_and_authorize_resource
 
+  def index
+    @plant = Plant.find(params[:plant_id])
+    @help_content_path = "/tasks"
+  end
+
   def show
     @plant = @task.plant
     @help_content_path = "/tasks"
@@ -64,7 +69,7 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
 
-    redirect_to Plant.find(params[:plant_id])
+    redirect_to request.referer
   end
 
   def hide

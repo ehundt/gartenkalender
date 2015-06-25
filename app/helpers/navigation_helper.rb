@@ -1,9 +1,4 @@
 module NavigationHelper
-  def active_class(link_path)
-    if current_page?(link_path)
-      "class=active"
-    end
-  end
 
   def display_tabs
     output = "<ul class=\"nav nav-tabs\" role=\"tablist\">"
@@ -16,12 +11,49 @@ module NavigationHelper
     output.html_safe
   end
 
-  def display_tab(link_path, title)
+  def display_tab(link_path, title, classes=nil, disabled=false)
     output = "<li "
-    output += active_class(link_path) || ""
+    output += current_page?(link_path) ? "class=active" : ""
+    output += disabled ? "class=disabled" : ""
     output += ">"
-    output += link_to title, link_path if link_path
+    if classes.nil?
+      output += link_to title, link_path
+    else
+      output += link_to title, link_path, class: classes
+    end
     output += "</li>"
     output
+  end
+
+  def display_plant_tabs
+    output = "<ul class=\"nav nav-tabs\">"
+    # @plant is my plant
+    if user_signed_in? && @plant.user == current_user
+      output += display_tab(@plant, "Meine Pflanze", "small-nav")
+      output += display_tab(plant_tasks_path(@plant), "Aufgaben", "small-nav")
+      output += display_tab(plant_done_tasks_index_path(@plant), "Erledigt", "small-nav")
+
+      unless @plant.original?
+        if @plant.original.public
+          output += display_tab(@plant.original, "Original", "small-nav")
+        else
+          output += display_tab(@plant.original, "Original", "small-nav", true)
+        end
+      end
+
+    # @plant is not my plant
+    # i have copied @plant
+    elsif user_signed_in? && @plant.copied_by?(current_user)
+      output += display_tab(@plant.copy_of(current_user), "Meine Pflanze", "small-nav")
+      output += display_tab(plant_tasks_path(@plant.copy_of(current_user)), "Aufgaben", "small-nav")
+      output += display_tab(plant_done_tasks_index_path(@plant.copy_of(current_user)), "Erledigt", "small-nav")
+      output += display_tab(@plant, "Original", "small-nav")
+
+    else
+      output += display_tab(@plant, "Original", "small-nav")
+      output += display_tab(plant_tasks_path(@plant), "Aufgaben", "small-nav")
+    end
+    output += "</ul>"
+    output.html_safe
   end
 end

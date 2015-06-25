@@ -1,6 +1,5 @@
 <%= render partial: "/plants/sidebar" %>
-
-<h2><%= link_to @task.plant.name, @task.plant %></h2>
+<%= render partial: "plants/header" %>
 
 <h4>Aufgabe bearbeiten:
 <span class="task-title"><%= link_to @task.title, plant_task_path(@task.plant, @task) %></span></h4>

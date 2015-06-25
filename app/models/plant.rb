@@ -46,8 +46,15 @@ class Plant < ActiveRecord::Base
     cloned_plant
   end
 
+  # gives me the user's copy of @plant
+  # orig_id must be NULL if user created @plant himself!
   def copy_of(user)
     Plant.where(orig_id: self.id).where(user_id: user.id).first
+  end
+
+  # true if @plant has been copied by user
+  def copied_by?(user)
+    Plant.exists?(orig_id: id, user_id: user.id)
   end
 
   def original

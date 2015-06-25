@@ -1,7 +1,16 @@
 var onPageReady = function(){
 
+  $('.show-details').on('click', function(){
+    var task_id = $(this).data("task-id");
+    $(this).parent().next().toggle();
+    $(this).parent().next().children().css("border-top", "0px solid #fff");
+
+    var chevron = $(this).children("a").children().children().first();
+    $(chevron).toggleClass("glyphicon-chevron-down glyphicon-chevron-up");
+  });
+
   $('.task-visibility').on('click', function(){
-    var $task_id = $(this).data("id");
+    var $task_id = $(this).data("task-id");
     var $plant_id = $(this).data("plant-id");
     var path = $(this).data("path");
     var $url = path + $plant_id + "/tasks/" + $task_id;
