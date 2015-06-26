@@ -6,7 +6,7 @@ class Plant < ActiveRecord::Base
   belongs_to :user
   belongs_to :creator, class_name: 'User', foreign_key: :creator_id, validate: true
 
-  enum category: [:keine, :blume, :obst, :gemüse, :baum, :strauch, :kaktus, :staude, :sukkulent, :kletterpflanze, :zimmerpflanze, :wasserpflanze, :gras, :wildkraut]
+  enum category: [:keine, :blume, :obst, :gemüse, :kräuter, :baum, :strauch, :kaktus, :staude, :sukkulent, :kletterpflanze, :zimmerpflanze, :wasserpflanze, :gras, :wildkraut]
 
   has_attached_file :main_image,
     :styles      => { :medium => "300x300>", :thumb => "100x100>" },
@@ -15,7 +15,7 @@ class Plant < ActiveRecord::Base
 
   validates_attachment :main_image,
     :content_type => { :content_type => ["image/jpeg", "image/gif", "image/png"] },
-    :size         => { :in => 0..2.megabytes },
+    :size         => { :in => 0..3.megabytes },
     :file_name    => { :matches => [/png\Z/, /jpe?g\Z/, /JPE?G\Z/, /gif\Z/] }
     # TODO: Files on the local filesystem (and in the Rails app's public directory) will be available to the internet at large. If you require access control, it's possible to place your files in a different location.
     # see https://github.com/thoughtbot/paperclip for further information!!
