@@ -1,4 +1,6 @@
 <%= render partial: "sidebar" %>
 <%= render partial: "plants/header" %>
-<%= render 'form' %>
 
+<%= form_for :plant, method: :patch, url: plant_path(@plant), :html => { :multipart => true } do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+<% end %>

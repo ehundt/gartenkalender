@@ -1,4 +1,3 @@
-<%= form_for :plant, method: :patch, url: plant_path(@plant), :html => { :multipart => true } do |f| %>
 
   <% if @plant && @plant.errors.any? %>
     <div id="error_explanation">
@@ -12,10 +11,10 @@
     </div>
   <% end %>
 
-  <% if current_user == @plant.creator %>
+  <% if current_user == @plant.creator || @plant.id.nil? %>
     <div class="row">
       <div class="col-xs-1">
-        <% if @plant.public %>
+        <% if @plant.public || @plant.id.nil? %>
           <%= image_tag("world-globe32x32.png", class: "img-responsive") %>
         <% else %>
           <%= image_tag("not-world-globe32x32.png", class: "img-responsive") %>
@@ -24,7 +23,7 @@
       <div class="col-xs-2">
         <div class="input-group">
           <span class="input-group-addon">
-            <input type="checkbox" aria-label="public" value="true" name="plant[public]" <% if @plant.public %>checked="checked"<% end %>>
+            <input type="checkbox" aria-label="public" value="true" name="plant[public]" <% if @plant.public || @plant.id.nil? %>checked="checked"<% end %>>
           </span>
           <span class="input-group-addon">
             öffentlich
@@ -66,7 +65,9 @@
 
   <div class="row form-space">
     <div class="col-xs-12">
+      <% if @plant.main_image.file? %>
       <%= image_tag download_main_image_plant_path(@plant, {size: :thumb}), class: "img-rounded img-responsive" %>
+      <% end %>
     </div>
   </div>
 
@@ -153,10 +154,11 @@
   <div class="row form-space">
     <div class="col-xs-12">
       <div class="pull-right">
-        <a href="<%= plant_path(@plant) %>">Abbrechen</a>&nbsp;
+        <% if @plant.id %>
+          <a href="<%= plant_path(@plant) %>">Abbrechen</a>&nbsp;
+        <% end %>
         <%= f.submit "Pflanze speichern", :class => "btn btn-success" %>
       </div>
     </div>
   </div>
   <br>
-<% end %>
