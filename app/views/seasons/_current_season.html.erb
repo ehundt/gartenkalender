@@ -1,6 +1,6 @@
 <div class="panel panel-default">
   <div class="panel-body">
-    Aktuelle Jahreszeit: <strong><%= @current_season
+    Aktuelle Jahreszeit: <strong><%= Season::current.season.humanize.titleize
  %></strong>
   </div>
 </div>

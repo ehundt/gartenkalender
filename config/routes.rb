@@ -42,6 +42,7 @@ Rails.application.routes.draw do
       end
       resources :done_tasks, except: :index
     end
+    resources :comments, only: [:index, :destroy, :create]
     get 'done_tasks/index'
   end
 

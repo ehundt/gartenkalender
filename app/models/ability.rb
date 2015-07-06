@@ -32,6 +32,10 @@ class Ability
       can :read, Startpage
       can :read, :static_pages
       can :help, :page
+
+      can :read, Comment
+      can :create, Comment
+      can :manage, Comment, :user_id => user.id
     end
   end
 end

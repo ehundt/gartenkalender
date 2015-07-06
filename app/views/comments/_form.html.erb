@@ -1,0 +1,18 @@
+<%= form_for :comment do |f| %>
+    <%#= form_for :done_task, method: :post, url: plant_task_done_tasks_path(task.plant, task) do |f| %>
+  <tr>
+    <td>
+      <% if current_user.picture.file? %>
+        <%= link_to image_tag(download_picture_user_path(current_user, {size: :small}), class: "img-rounded img-responsive"), current_user %>
+      <% end %>
+    </td>
+    <td>
+      <%= current_user.display_name %>
+    </td>
+    <td>
+      <%= f.text_area :comment, :class => "form-control",
+          "placeholder" => "Kommentieren ...", rows: "2" %><br>
+      <%= f.submit "Kommentar senden" %>
+    </td>
+  </tr>
+<% end %>

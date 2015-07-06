@@ -1,0 +1,28 @@
+<%= render partial: "/plants/sidebar" %>
+<%= render partial: "/plants/header" %>
+
+<h3>Kommentare<% if @plant.copied_by?(current_user) %> zum Original<% end %></h3>
+<table class="table">
+
+  <% @comments.each do |comment| %>
+    <tr>
+      <td>
+        <% if comment.user.picture.file? %>
+          <%= link_to image_tag(download_picture_user_path(comment.user, {size: :small}), class: "img-rounded img-responsive"), comment.user %>
+        <% end %>
+      </td>
+      <td>
+        <%= comment.user.display_name %>
+      </td>
+      <td>
+        <%= comment.comment %>
+      </td>
+      <td>
+        <% if comment.user == current_user %>
+          <%= link_to 'Löschen', plant_comment_path(@plant, comment), method: :delete %>
+        <% end %>
+    </tr>
+  <% end %>
+
+  <%= render partial: "form" %>
+</table>

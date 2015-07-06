@@ -3,6 +3,8 @@ class Plant < ActiveRecord::Base
   acts_as_votable
 
   has_many :tasks, :dependent => :destroy
+  has_many :comments, :dependent => :destroy
+
   belongs_to :user
   belongs_to :creator, class_name: 'User', foreign_key: :creator_id, validate: true
 
@@ -54,7 +56,7 @@ class Plant < ActiveRecord::Base
 
   # true if @plant has been copied by user
   def copied_by?(user)
-    Plant.exists?(orig_id: id, user_id: user.id)
+    Plant.exists?(orig_id: self.id, user_id: user.id)
   end
 
   def original
