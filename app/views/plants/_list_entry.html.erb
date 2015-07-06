@@ -18,7 +18,10 @@
     </td>
   <% end %>
 
-  <td><%= link_to plant.name, plant, class: "plant-name" %></td>
+  <td>
+    <%= link_to plant.name, plant, class: "plant-name" %><br>
+    <small><%= plant.tasks.count %> <%= I18n.t("tasks", count: plant.tasks.count) %></small>
+  </td>
 
   <td>
     <% if only_my_plants %>
@@ -93,13 +96,4 @@
       <%= image_tag "unvoted_thumb_up.png" %>
     <% end %>
   </td>
-
-  <% if only_my_plants %>
-    <td>
-      <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-      <a data-toggle="modal" data-target="#removePlantModal<%= plant.id %>">Löschen</a>
-      <%= render partial: "modal_remove_plant", locals: { plant: plant } %>
-
-    </td>
-  <% end %>
 </tr>

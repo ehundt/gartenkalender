@@ -4,7 +4,7 @@ de:
   help_plant_active:      "Pflanze aktiv bzw. inaktiv schalten durch Klick auf dieses Icon. Nur die Pflegetipps für aktive Pflanzen werden in der Aufgabenliste angezeigt."
   tooltip_plant_active:   "Pflanze ist aktiv, d.h. Pflegetipps werden in der Aufgabenliste angezeigt. Zum inaktiv schalten, bitte auf das Bild klicken."
   tooltip_plant_inactive: "Pflanze ist inaktiv, d.h. Pflegetipps werden in der Aufgabenliste nicht angezeigt. Zum aktiv schalten, bitte auf das Bild klicken."
-  help_publish:           "Zum Veröffentlichen dieser Pflanzenbeschreibung inklusive der Aufgaben auf dieses Icon klicken. Private Notizen werden nicht veröffentlicht."
+  help_publish:           "Zum Veröffentlichen dieser Pflanzenbeschreibung inklusive der Aufgaben auf dieses Icon klicken."
   date:
     abbr_day_names:
     - So
@@ -207,3 +207,7 @@ de:
       long: "%A, %d. %B %Y, %H:%M Uhr"
       short: "%d. %B, %H:%M Uhr"
     pm: nachmittags
+  tasks:
+    zero: Aufgaben
+    one: Aufgabe
+    other: Aufgaben
