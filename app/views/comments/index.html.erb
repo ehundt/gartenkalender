@@ -12,7 +12,9 @@
         <% end %>
       </td>
       <td>
-        <%= comment.user.display_name %>
+        <%= comment.user.display_name %><br>
+        <span class="small-info"><%= display_date_time(comment.created_at) %></span>
+
       </td>
       <td>
         <%= comment.comment %>

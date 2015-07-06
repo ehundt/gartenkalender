@@ -31,7 +31,7 @@ module NavigationHelper
     # plant is my plant
     if (user_signed_in? and plant.user == current_user)
       output += display_tab(plant, "Meine Pflanze", "small-nav")
-      output += display_tab(plant_tasks_path(plant), "Aufgaben", "small-nav")
+      output += display_tab(plant_tasks_path(plant), "Meine Aufgaben", "small-nav")
       output += display_tab(plant_done_tasks_index_path(plant), "Erledigt", "small-nav")
 
       unless plant.original?
@@ -46,13 +46,13 @@ module NavigationHelper
     # i have copied plant
     elsif user_signed_in? && plant.copied_by?(current_user)
       output += display_tab(plant.copy_of(current_user), "Meine Pflanze", "small-nav")
-      output += display_tab(plant_tasks_path(plant.copy_of(current_user)), "Aufgaben", "small-nav")
+      output += display_tab(plant_tasks_path(plant.copy_of(current_user)), "Meine Aufgaben", "small-nav")
       output += display_tab(plant_done_tasks_index_path(plant.copy_of(current_user)), "Erledigt", "small-nav")
       output += display_tab(plant, "Original", "small-nav")
 
     else
       output += display_tab(plant, "Original", "small-nav")
-      output += display_tab(plant_tasks_path(plant), "Aufgaben", "small-nav")
+      output += display_tab(plant_tasks_path(plant), "Meine Aufgaben", "small-nav")
     end
 
     if plant.comments.present?
