@@ -2,7 +2,7 @@
   <%= render "welcome" %>
 
 <% else %>
-  <h2>Jetzt anstehende Aufgaben</h2>
+  <h2><%= title "Jetzt anstehende Aufgaben" %></h2>
 
   <% if @upcoming_tasks.empty? %>
     <p>Geniesse Deinen Garten, es gibt nichts zu tun!</p>

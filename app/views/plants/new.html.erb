@@ -1,3 +1,4 @@
+<h2><%= title "Neue Pflanze anlegen" %></h2>
 <%= form_for :plant, url: {action: "create"} do |f| %>
   <%= render partial: 'form', locals: { f: f } %>
 <% end %>

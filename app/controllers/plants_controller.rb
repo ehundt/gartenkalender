@@ -26,6 +26,9 @@ class PlantsController < ApplicationController
       @plants = @plants.order(sort_by.to_sym => order.to_sym)
     end
     @help_content_path = "/plants"
+
+    # meta tags
+    @page_description = 'Pflanzenliste.'
   end
 
   def show
@@ -43,6 +46,10 @@ class PlantsController < ApplicationController
       @done_tasks.flatten.sort! { |done1, done2| done1.date <=> done2.date }
     end
     @help_content_path = "/plants"
+
+    # meta tags
+    @page_description = "#{@plant.name}: Pflegetipps und Infos rund um die Pflanze."
+    @page_keywords = "#{@plant.name}, #{@plant.subtitle}, #{@plant.category}" + I18n.t("page_keywords")
   end
 
   def new

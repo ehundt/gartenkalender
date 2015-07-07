@@ -56,6 +56,8 @@ gem 'capistrano', '~> 3.3.0'
 
 gem 'puma'
 
+gem 'meta-tags'
+
 gem 'default_value_for', '~> 3.0.0'
 
 group :development, :test do

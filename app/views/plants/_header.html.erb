@@ -14,7 +14,7 @@
           <% end %>
         </span>
       <% end %>
-      <%= @plant.name %>
+      <%= title @plant.name %>
       <% if @plant.user != current_user %>
         <small>von <%= @plant.creator.display_name %></small>
       <% end %>
