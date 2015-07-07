@@ -13,7 +13,7 @@
           </tr>
           <tr>
             <td>von anderen genutzt:</td>
-            <td><strong><%= Plant.where(creator: user).where('user_id != ?', user.id).length %> x</strong></td>
+            <td><strong><%= Plant.where(creator: user).where('user_id != ?', user.id).length %></strong></td>
           </tr>
         </table>
       </div>

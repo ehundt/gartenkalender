@@ -32,6 +32,7 @@ module NavigationHelper
     if (user_signed_in? and plant.user == current_user)
       output += display_tab(plant, "Meine Pflanze", "small-nav")
       output += display_tab(plant_tasks_path(plant), "Meine Aufgaben", "small-nav")
+      output += display_tab(new_plant_task_path(plant), "Neue Aufgabe", "small-nav")
       output += display_tab(plant_done_tasks_index_path(plant), "Erledigt", "small-nav")
 
       unless plant.original?
