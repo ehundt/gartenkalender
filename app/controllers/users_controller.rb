@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       # TODO: split on spaces
       @users = User.where("first_name IN (?) OR last_name IN (?)", search_terms, search_terms).to_a
     else
-      @users = User.all
+      @users = User.all.to_a
     end
   end
 
