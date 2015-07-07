@@ -1,6 +1,7 @@
 <tr>
   <td>
     <% if plant.main_image.file? %>
+      <%#= link_to image_tag(download_main_image_plant_path(plant, {size: :thumb}), class: "img-rounded img-responsive"), plant %>
       <%= link_to image_tag(plant.main_image.expiring_url(10, :thumb), class: "img-rounded img-responsive"), plant %>
     <% end %>
   </td>
@@ -20,7 +21,7 @@
 
   <td>
     <%= link_to plant.name, plant, class: "plant-name" %><br>
-    <small><%= plant.tasks.count %> <%= I18n.t("tasks", count: plant.tasks.count) %></small>
+    <small><%= plant.tasks.length %> <%= I18n.t("tasks", count: plant.tasks.length) %></small>
   </td>
 
   <td>
@@ -82,7 +83,7 @@
     <% if user_signed_in? %>
       <% if plant.public || only_my_plants %>
         <div class="likes-counter" data-id=<%= plant.id %> data-path="/plants/" data-likeallowed="1">
-          <span class="likes-count"><%= plant.get_likes.size %></span>
+          <span class="likes-count"><%= plant.cached_votes_total %></span>
 
           <% if current_user && current_user.voted_for?(plant) %>
             <%= image_tag "voted_thumb_up.png" %>
@@ -92,7 +93,7 @@
         </div>
       <% end %>
     <% else %>
-      <span class="likes-count"><%= plant.get_likes.size %></span>
+      <span class="likes-count"><%= plant.cached_votes_total %></span>
       <%= image_tag "unvoted_thumb_up.png" %>
     <% end %>
   </td>

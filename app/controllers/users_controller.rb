@@ -16,6 +16,9 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @help_content_path = "/users"
+    @all_plants_count = @user.plants.count
+    @public_plants_count = @user.plants.where(public: true).count
+    @plants_used_by_others_count = Plant.where(creator: @user).where('user_id != ?', @user.id).count
   end
 
   def edit

@@ -11,21 +11,24 @@ class PlantsController < ApplicationController
       @searched_text = params[:search_name]
       search_terms = params[:search_name].split(' ').collect { |term| '%' + term + '%' }
       @searched_plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
-                              .where(user_id: current_user.id)
+                              .where(user_id: current_user.id).to_a
     else
-      @plants = current_user.plants
-
-      if (params[:only_public].present? && params[:only_public] == "1")
-        @only_public = "1"
-        @plants = @plants.where(public: true)
-      end
-
       sort_by = params[:sort_by].present? ? params[:sort_by] : "name"
       order = params[:order].present? ? params[:order] : "asc"
 
-      @plants = @plants.order(sort_by.to_sym => order.to_sym)
+      if (params[:only_public].present? && params[:only_public] == "1")
+        @only_public = "1"
+        @plants = current_user.plants.where(public: true).includes(:tasks).includes(:creator).order(sort_by.to_sym => order.to_sym).to_a
+      else
+        @plants = current_user.plants.includes(:tasks).includes(:creator).order(sort_by.to_sym => order.to_sym).to_a
+      end
     end
     @help_content_path = "/plants"
+
+    # statistics partial:
+    @all_plants_count = current_user.plants.count
+    @public_plants_count = current_user.plants.where(public: true).count
+    @plants_used_by_others_count = Plant.where(creator: current_user).where('user_id != ?', current_user.id).count
 
     # meta tags
     @page_description = 'Pflanzenliste.'

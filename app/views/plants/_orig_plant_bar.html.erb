@@ -26,7 +26,7 @@
 
           <span class="likes-counter" data-id=<%= plant.original.id %> data-path="/plants/" data-likeallowed="1">
 
-            <span class="likes-count-small"><%= plant.original.get_likes.size %></span>
+            <span class="likes-count-small"><%= plant.original.cached_votes_total %></span>
 
             <% if current_user && current_user.voted_for?(plant.original) %>
               <%= image_tag("voted_thumb_up.png") %>

@@ -5,15 +5,15 @@
         <table class="table">
           <tr>
             <td>insgesamt:</td>
-            <td><strong><%= user.plants.length %></strong></td>
+            <td><strong><%= @all_plants_count %></strong></td>
           </tr>
           <tr>
             <td>öffentlich:</td>
-            <td><strong><%= user.plants.where(public: true).length %></strong></td>
+            <td><strong><%= @public_plants_count %></strong></td>
           </tr>
           <tr>
             <td>von anderen genutzt:</td>
-            <td><strong><%= Plant.where(creator: user).where('user_id != ?', user.id).length %></strong></td>
+            <td><strong><%= @plants_used_by_others_count %></strong></td>
           </tr>
         </table>
       </div>
