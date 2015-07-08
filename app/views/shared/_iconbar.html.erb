@@ -16,7 +16,7 @@
   <div class="icon-bar">
     <span class="likes-counter" data-id=<%= @plant.id %> data-path="/plants/" data-likeallowed="1">
 
-      <% if current_user.voted_for?(@plant) %>
+      <% if signed_in? && current_user.voted_for?(@plant) %>
         <%= image_tag("voted_thumb_up.png") %>
       <% else %>
         <%= image_tag("unvoted_thumb_up.png") %>
