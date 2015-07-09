@@ -2,28 +2,38 @@
   <input type="hidden" name="search_only_public" value="1" />
 
   <%# TODO: hier fehlt border-radius: 4px am text_field %>
-  <div class="input-group search-form">
-    <%= text_field_tag(:search_name, "", class: "form-control", placeholder: "Pflanzenname")  %>
-  </div>
+  <div class="row">
+    <div class="col-xs-3">
+      <div class="input-group search-form"><small>Suche nach</small>
+        <%= text_field_tag(:search_name, "", class: "form-control", placeholder: "Pflanzenname")  %>
+      </div>
+    </div>
 
-  <% options = Plant.categories.collect { |c| [c[0].humanize.titleize, c[0]] } %>
-  <% options.shift %>
-  <div class="input-group search-form">oder
-    <select name="search_category" id="search_category" class="form-control">
-      <ul class="dropdown-menu" role="menu">
-        <option value="keine">Kategorie</option>
-        <%= options_for_select(options) %>
-      </ul>
-  </select>
-  </div>
+    <div class="col-xs-3">
+      <% options = Plant.categories.collect { |c| [c[0].humanize.titleize, c[0]] } %>
+      <% options.shift %>
+      <div class="input-group search-form"><small>oder</small>
+        <select name="search_category" id="search_category" class="form-control">
+          <ul class="dropdown-menu" role="menu">
+            <option value="keine">Kategorie</option>
+            <%= options_for_select(options) %>
+          </ul>
+      </select>
+      </div>
+    </div>
 
-  <div class="input-group search-form">und
-    <%= text_field_tag(:search_creator, "", class: "form-control", placeholder: "AutorIn")  %>
-  </div>
+    <div class="col-xs-3">
+      <div class="input-group search-form"><small>und</small>
+        <%= text_field_tag(:search_creator, "", class: "form-control", placeholder: "AutorIn")  %>
+      </div>
+    </div>
 
-  <div class="input-group search-form">
-    <span class="input-group-btn">
-      <%= submit_tag("suchen", class: "btn btn-default") %>
-    </span>
+    <div class="col-xs-3"><small>&nbsp;</small><br>
+      <div class="input-group search-form">
+        <span class="input-group-btn">
+          <%= submit_tag("suchen", class: "btn btn-default") %>
+        </span>
+      </div>
+    </div>
   </div>
 <% end %>

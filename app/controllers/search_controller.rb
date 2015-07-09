@@ -2,6 +2,9 @@ class SearchController < ApplicationController
 
   def index
     @plants = retrieve_searched_plants()
+    if @plants.nil?
+      @plants = Plant.all.limit(30).order(:cached_votes_total => :desc).to_a
+    end
     @inputs = Array.new
     @inputs.push(params[:search_name]) unless params[:search_name].blank?
     @inputs.push(params[:search_category]) if (!params[:search_category].blank? && params[:search_category] != "keine")

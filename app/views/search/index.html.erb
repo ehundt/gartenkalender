@@ -1,25 +1,18 @@
-<% if @inputs.blank? %>
-  <h2><%= title "Pflanze suchen" %></h2>
-  <p>Veröffentliche Pflanzen anderer Gartenfreunde können für den privaten Gebrauch kopiert werden.</p>
-  <%= render "form" %>
-<% else %>
+<%= render "form" %>
 
-  <h2>Suchergebnis</h2>
+<% unless @inputs.blank? %>
+  <h3>Suchergebnis</h3>
   <h5><%= searched_for_text %>: <strong><%= @plants.length %></strong> Pflanzen gefunden.</h5>
+<% end %>
 
-  <% unless @plants.empty? %>
-    <br>
-    <table class="table">
-    <% @plants.each do |plant| %>
-      <%= render partial: "/plants/list_entry",
-             locals: { plant:          plant,
-                       other_user:     nil,
-                       only_my_plants: false } %>
-    <% end %>
-    </table>
-  <% end %>
-
+<% unless @plants.empty? %>
   <br>
-  <h4>Neue Pflanzensuche</h4>
-  <%= render "form" %>
+  <table class="table">
+  <% @plants.each do |plant| %>
+    <%= render partial: "/plants/list_entry",
+           locals: { plant:          plant,
+                     other_user:     nil,
+                     only_my_plants: false } %>
+  <% end %>
+  </table>
 <% end %>
