@@ -2,7 +2,7 @@ module NavigationHelper
 
   def display_tabs
     output = "<ul class=\"nav nav-tabs\" role=\"tablist\">"
-    output += display_tab(root_path, "Aufgaben")
+    output += display_tab(startpage_index_path, "Aufgaben")
     output += display_tab(plants_path, "Meine Pflanzen")
     output += display_tab(new_plant_path, "Neue Pflanze")
     output += display_tab(search_index_path, "Pflanzensuche")

@@ -30,6 +30,7 @@ class Ability
       can :manage, DoneTask, :task => { :plant => { :user_id => user.id } }
 
       can :read, Startpage
+      can :entry, Startpage
       can :read, :static_pages
       can :help, :page
 
