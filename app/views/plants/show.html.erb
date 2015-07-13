@@ -3,41 +3,53 @@
 
 <h3>Pflanzenbeschreibung</h3>
 
+<% if @plant.subtitle.present? %>
 <div class="row">
   <div class="col-xs-12">
     <h5><%= @plant.subtitle %></h5>
   </div>
 </div>
+<% end %>
 
+<% if @plant.desc.present? %>
 <div class="row">
   <div class="col-xs-12">
     <%= raw markdown.render(@plant.desc) %>
   </div>
 </div>
+<% end %>
 
+<% unless @plant.category == "keine" %>
 <div class="row">
   <div class="col-xs-12">
     <strong>Kategorie: </strong><%= @plant.category.humanize %></h5>
   </div>
 </div>
+<% end %>
 
+<% if @plant.location.present? %>
 <div class="row">
   <div class="col-xs-12">
     <strong>Standort:</strong> <%= @plant.location %>
   </div>
 </div>
+<% end %>
 
+<% if @plant.soil.present? %>
 <div class="row">
   <div class="col-xs-12">
     <strong>Boden:</strong> <%= @plant.soil %>
   </div>
 </div>
+<% end %>
 
+<% if @plant.ph.present? %>
 <div class="row">
   <div class="col-xs-12">
     <strong>Optimaler Ph-Wert:</strong> <%= @plant.ph %>
   </div>
 </div>
+<% end %>
 <br>
 <% unless @plant.tasks.empty? %>
   <div class="row">
