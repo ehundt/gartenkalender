@@ -1,6 +1,11 @@
 <%= render partial: "/plants/sidebar" %>
 <%= render partial: "plants/header" %>
 
+<div class="row">
+  <div class="col-xs-12 edit-plant-link">
+  </div>
+</div>
+
 <h4>Aufgabe bearbeiten:
 <span class="task-title"><%= link_to @task.title, plant_task_path(@task.plant, @task) %></span></h4>
 

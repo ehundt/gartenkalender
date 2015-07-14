@@ -1,6 +1,11 @@
 <%= render partial: "plants/sidebar" %>
 <%= render partial: "plants/header" %>
 
+<div class="row">
+  <div class="col-xs-12 edit-plant-link">
+  </div>
+</div>
+
 <% if @plant.tasks.empty? %>
   Es sind noch keine Aufgaben angelegt worden.
   <h3>Neue Aufgabe</h3>

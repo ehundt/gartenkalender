@@ -1,6 +1,11 @@
 <%= render partial: "plants/sidebar" %>
 <%= render partial: "plants/header" %>
 
+<div class="row">
+  <div class="col-xs-12 edit-plant-link">
+  </div>
+</div>
+
 <h3>Erledigte Aufgaben</h3>
 <% unless @done_tasks.empty? %>
   <table class="table">
