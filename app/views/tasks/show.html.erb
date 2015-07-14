@@ -24,19 +24,26 @@
   </div>
 </div>
 
-<% if task_time_frame(@task).present? %>
-  <strong>Zeitraum:</strong>
-  <%= task_time_frame(@task) %>
-  &nbsp;<%= image_tag "green_flower_icon.png", width: "15px" %>&nbsp;
-<% end %>
-
-<strong>Wiederholung:</strong>
-<%= @task.repeat.humanize %>
-<br><br>
-
 <div class="row">
   <div class="col-xs-12">
     <%= raw markdown.render(@task.desc) %>
+  </div>
+</div>
+
+<div class="row">
+
+  <% if task_time_frame(@task).present? %>
+    <div class="col-xs-12">
+      <strong>Zeitraum:</strong>
+      <%= task_time_frame(@task) %>
+      &nbsp;<%= image_tag "green_flower_icon.png", width: "15px" %>&nbsp;
+  <% else %>
+    <div class="col-xs-6">
+  <% end %>
+
+    <strong>Wiederholung:</strong>
+    <%= @task.repeat.humanize %>
+    <br><br>
   </div>
 </div>
 
@@ -56,7 +63,14 @@
   <div class="col-xs-6 task-action-links">
     <% if can? :manage, @task %>
         <% if @task.upcoming? %>
-          <%= link_to "überspringen", plant_task_done_tasks_path({task_id: @task.id, plant_id: @task.plant.id, done_task: { skipped: true } }), method: :post, class: "btn btn-default", role: "button" %>&nbsp;
+          <%= link_to "überspringen",
+                      plant_task_done_tasks_path({ task_id: @task.id,
+                                                   plant_id: @task.plant.id,
+                                                   done_task: { skipped: true } }),
+                      method: :post,
+                      class:  "btn btn-default",
+                      role:   "button" %>
+          &nbsp;
         <% end %>
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= @task.id %>">
           erledigt

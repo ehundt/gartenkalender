@@ -1,6 +1,6 @@
 <%= form_for :done_task, method: :post, url: plant_task_done_tasks_path(task.plant, task) do |f| %>
   <input type="hidden" name="done_task[skipped]" id="done_task_skipped" value="0" />
-  <div class="modal fade" id="taskDoneModal<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="taskDoneModalLabel<%= task.id %>" aria-hidden="true">
+  <div class="modal fade modal-container" id="taskDoneModal<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="taskDoneModalLabel<%= task.id %>" aria-hidden="true">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
