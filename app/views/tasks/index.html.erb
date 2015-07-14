@@ -14,7 +14,7 @@
       <tr>
         <td>
           <% if task.hide %>
-            <div class="task-visibility" data-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
+            <div class="task-visibility" data-task-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
               <%= image_tag "eye_not_visible.jpg" %>
             </div>
           <% else %>
@@ -23,7 +23,7 @@
             </div>
           <% end %>
         </td>
-        <td class="show-details" data-id="<%= task.id %>">
+        <td class="show-details">
           <a><%= task.title %> <small><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></small></a>
         </td>
         <td>

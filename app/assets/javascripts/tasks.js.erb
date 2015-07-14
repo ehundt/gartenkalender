@@ -1,7 +1,6 @@
 var onPageReady = function(){
 
   $('.show-details').on('click', function(){
-    var task_id = $(this).data("task-id");
     $(this).parent().next().toggle();
     $(this).parent().next().children().css("border-top", "0px solid #fff");
 
