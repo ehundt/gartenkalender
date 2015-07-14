@@ -10,7 +10,8 @@
 
 <% if @comments.empty? %>
   Noch keine Kommentare vorhanden.
-<% else %>
+  <br><br>
+<% end %>
 
   <table class="table">
     <% @comments.each do |comment| %>
@@ -39,4 +40,3 @@
       <%= render partial: "form" %>
     <% end %>
   </table>
-<% end %>
