@@ -12,4 +12,14 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     render :file => "#{Rails.root}/public/403.html", :status => 403, :layout => false
   end
+
+  # redirect to the startpage/tasks page after login
+  def after_sign_in_path_for(resource)
+    startpage_index_path
+  end
+
+  # def after_sign_out_path_for(resource_or_scope)
+  #   request.referrer
+  # end
+
 end

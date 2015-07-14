@@ -25,6 +25,7 @@ class Task < ActiveRecord::Base
     current_tasks = self.all_for_user(user).in_time_frame
                     .includes(:done_tasks, :plant)
                     .references(:done_tasks)
+                    .order(:order)
     upcoming_tasks = []
     current_tasks.each do |task|
       upcoming_tasks.push(task) unless (task.done? || task.skipped?)
