@@ -10,7 +10,7 @@
    end_day     = task.end_date.blank? ? nil : @task.end_date.day
    end_month   = task.end_date.blank? ? nil : @task.end_date.month
 %>
-<br>
+
 <%= form_for([@plant, task]) do |f| %>
   <input type="hidden" value="false" name="task[hide]">
   <div class="input-group wide-form-input">

@@ -6,13 +6,15 @@
   </div>
 </div>
 
+<h3>Meine Aufgaben</h3>
+
 <% if @plant.tasks.empty? %>
-  Es sind noch keine Aufgaben angelegt worden.
-  <h3>Neue Aufgabe</h3>
+  ...noch keine Aufgaben.<br><br>
+
+  <h4>Neue Aufgabe anlegen</h4>
   <%= render partial: "form" %>
 
 <% else %>
-  <h3>Aufgaben</h3>
   <table class="table">
 
     <% @plant.tasks.each do |task| %>

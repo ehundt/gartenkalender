@@ -70,15 +70,16 @@
 <% end %>
 <br>
 
-<% if can? :update, @plant %>
-  <% if @plant.tasks.empty? %>
-    <h4>Neue Aufgabe</h4>
-    <%= render partial: "/tasks/form" %>
-  <% else %>
+<% if @plant.user != current_user %>
+  <% unless @plant.tasks.empty? %>
     <div class="row">
       <div class="col-xs-12">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-          <%= link_to "Neue Aufgabe", new_plant_task_path(@plant) %>
+        <h4>Aufgaben</h4>
+
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          <%= render @plant.tasks %>
+        </div>
+
       </div>
     </div>
   <% end %>
