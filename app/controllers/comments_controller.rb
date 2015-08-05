@@ -11,7 +11,10 @@ class CommentsController < ApplicationController
 
   def create
     @plant = Plant.find(params[:plant_id])
-    @comment = @plant.comments.create(comment_params.merge(user_id: current_user.id))
+    unless comment_params[:comment].blank?
+      @comment = @plant.comments.create(comment_params.merge(user_id: current_user.id))
+      UserMailer.comment_created_email(@plant, current_user).deliver_now
+    end
     redirect_to plant_comments_path
   end
 
