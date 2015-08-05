@@ -47,7 +47,7 @@ module NavigationHelper
     elsif user_signed_in? && plant.copied_by?(current_user)
       output += display_tab(plant.copy_of(current_user), "Meine Pflanze", "small-nav")
       output += display_tab(plant_tasks_path(plant.copy_of(current_user)), "Meine Aufgaben", "small-nav")
-      output += display_tab(new_plant_task_path(plant), "Neue Aufgabe", "small-nav")
+      #output += display_tab(new_plant_task_path(plant), "Neue Aufgabe", "small-nav")
       output += display_tab(plant_done_tasks_index_path(plant.copy_of(current_user)), "Erledigt", "small-nav")
       output += display_tab(plant, "Original", "small-nav")
 

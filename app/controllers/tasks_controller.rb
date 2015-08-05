@@ -28,6 +28,23 @@ class TasksController < ApplicationController
     begin_date = Date.new(1, params[:begin_month].to_i, params[:begin_day].to_i)
     end_date   = Date.new(1, params[:end_month].to_i, params[:end_day].to_i)
 
+    # # including e.g. "End of August"
+    # end_month = params[:end_month].to_i
+    # case params[:end_day].to_i
+    # when 1
+    #   end_day = 10
+    # when 10
+    #   end_day = 20
+    # when 20
+    #   end_day = 1
+    #   end_month += 1
+    # end
+
+    # if end_month == 13
+    #   end_month = 1
+    # end
+    # end_date = Date.new(1, end_month, end_day)
+
     if begin_date > end_date
       end_date = end_date.change(year: 2)
     end
@@ -54,7 +71,24 @@ class TasksController < ApplicationController
 
   def update
     begin_date = Date.new(1, params[:begin_month].to_i, params[:begin_day].to_i)
-    end_date   = Date.new(1, params[:end_month].to_i, params[:end_day].to_i)
+    #end_date   = Date.new(1, params[:end_month].to_i, params[:end_day].to_i)
+
+    # including e.g. "End of August"
+    end_month = params[:end_month].to_i
+    case params[:end_day].to_i
+    when 1
+      end_day = 10
+    when 10
+      end_day = 20
+    when 20
+      end_day = 1
+      end_month += 1
+    end
+
+    if end_month == 13
+      end_month = 1
+    end
+    end_date = Date.new(1, end_month, end_day)
 
     if begin_date > end_date
       end_date = end_date.change(year: 2)

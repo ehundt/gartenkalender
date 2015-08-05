@@ -68,6 +68,7 @@ class Plant < ActiveRecord::Base
   end
 
   def original?
-    (orig_id.nil? || orig_id == id)
+    return true if (orig_id.nil? or orig_id == id)
+    return false
   end
 end

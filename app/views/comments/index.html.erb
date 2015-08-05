@@ -30,13 +30,13 @@
           <%= comment.comment %>
         </td>
         <td>
-          <% if comment.user == current_user %>
+          <% if comment.user == current_user || current_user == @plant.creator %>
             <%= link_to 'Löschen', plant_comment_path(@plant, comment), method: :delete %>
           <% end %>
       </tr>
     <% end %>
 
     <% if user_signed_in? %>
-      <%= render partial: "form" %>
+      <%= render partial: "form", locals: { plant: @plant } %>
     <% end %>
   </table>

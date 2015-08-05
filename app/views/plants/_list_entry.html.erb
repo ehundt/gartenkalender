@@ -21,14 +21,14 @@
 
   <td>
     <%= link_to plant.name, plant, class: "plant-name" %><br>
-    <small><%= plant.tasks.length %> <%= I18n.t("tasks", count: plant.tasks.length) %></small>
+    <small><b><%= plant.tasks.length %></b> <%= link_to I18n.t("tasks", count: plant.tasks.length), plant_tasks_path(plant) %></small><br>
   </td>
 
   <td>
     <% if only_my_plants %>
       <% if plant.creator != plant.user %>
         <small>kopiert von</small><br>
-        <%= link_to plant.creator.display_name, plant.creator %>
+        <%= link_to plant.creator.display_name, plant.creator %><br>
       <% end %>
 
     <% elsif other_user.blank? %><%# means: search result %>
@@ -39,6 +39,11 @@
         <%= link_to plant.creator.display_name, plant.creator %><br>
       <% end %>
     <%# if other user, copied plants should not be visible %>
+    <% end %>
+
+    <%# TODO: performance %>
+    <% if (plant.public || !plant.original?) %>
+    <small><b><%= plant.original.comments.count %></b> <%= link_to "Kommentare", plant_comments_path(plant.original) %></small>
     <% end %>
   </td>
 
