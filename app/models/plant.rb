@@ -71,4 +71,8 @@ class Plant < ActiveRecord::Base
     return true if (orig_id.nil? or orig_id == id)
     return false
   end
+
+  def commenters
+    comments.map { |comment| comment.user }.uniq
+  end
 end

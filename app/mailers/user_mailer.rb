@@ -14,8 +14,8 @@ default from: 'persoenlicher.gartenkalender@gmail.com'
          subject: "Contact us: " + subject.to_str)
   end
 
-  def comment_created_email(plant, commenter)
-    @user = plant.creator
+  def comment_created_email(plant, receiver, commenter)
+    @user = receiver
     @plant = plant
     @commenter = commenter
     mail(to: @user.email, subject: "Neuer Kommentar")
