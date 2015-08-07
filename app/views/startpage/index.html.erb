@@ -27,7 +27,8 @@
         </div>
       </td>
       <td>
-        <%= render partial: "done_tasks/modal", locals: { task: task } %>
+        <%= done_task_modal(task, nil) %>
+
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
           erledigt
         </button>

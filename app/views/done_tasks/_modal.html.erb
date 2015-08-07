@@ -1,19 +1,26 @@
-<%= form_for :done_task, method: :post, url: plant_task_done_tasks_path(task.plant, task) do |f| %>
-  <input type="hidden" name="done_task[skipped]" id="done_task_skipped" value="0" />
+  <input type="hidden" name="done_task[skipped]" id="done_task_skipped" value="<%= skipped %>" />
   <div class="modal fade modal-container" id="taskDoneModal<%= task.id %>" tabindex="-1" role="dialog" aria-labelledby="taskDoneModalLabel<%= task.id %>" aria-hidden="true">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title" id="taskDoneModalLabel<%= task.id %>">Aufgabe erledigt?</h4>
+          <h4 class="modal-title" id="taskDoneModalLabel<%= task.id %>"><%= task.plant.name %></h4>
         </div>
         <div class="modal-body">
-          <h4><%= task.plant.name %>: <%= task.title %></h4>
+          <h4><%= task.title %></h4>
           <p>Persönliche Notiz (optional):</p>
             <%= f.text_area :notice, :class => "form-control", rows: "4" %>
           <br>
-          <p>erledigt am:</p>
-            <%= date_select :done_task, :date %>
+          <% if done_task.present? and done_task.skipped? %>
+            <p>übersprungen am:</p>
+          <% else %>
+            <p>erledigt am:</p>
+          <% end %>
+            <% if done_task.present? %>
+              <%= date_select :done_task, :date, selected: done_task.date %>
+            <% else %>
+              <%= date_select :done_task, :date %>
+            <% end %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Abbrechen</button>
@@ -23,7 +30,6 @@
       </div>
     </div>
   </div>
-  <% end %>
 
 
 

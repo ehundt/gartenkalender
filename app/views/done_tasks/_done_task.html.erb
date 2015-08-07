@@ -5,10 +5,19 @@
   <td><% if done_task.skipped? %>übersprungen<% else %>erledigt<% end %></td>
   <td>
     <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-    <% if done_task.skipped? %>
-      <%= link_to "doch nicht überspringen", plant_task_done_task_path(done_task.task.plant, done_task.task, done_task), method: :delete, class: "delete-link" %></td>
-    <% else %>
-      <%= link_to "doch nicht erledigt", plant_task_done_task_path(done_task.task.plant, done_task.task, done_task), method: :delete, class: "delete-link" %></td>
-    <% end %>
+    <%= link_to link_label(done_task.skipped?),
+                plant_task_done_task_path(done_task.task.plant, done_task.task, done_task),
+                method: :delete,
+                class: "delete-link" %>
+  </td>
+
+  <td>
+    <%= done_task_modal(done_task.task, done_task) %>
+    <button type="button" class="btn btn-default"
+            data-toggle="modal"
+            data-target="#taskDoneModal<%= done_task.task.id %>">
+      ändern
+    </button>
+      </td>
 </tr>
 
