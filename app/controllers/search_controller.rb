@@ -9,6 +9,11 @@ class SearchController < ApplicationController
     @inputs.push(params[:search_name]) unless params[:search_name].blank?
     @inputs.push(params[:search_category]) if (!params[:search_category].blank? && params[:search_category] != "keine")
     @inputs.push(params[:search_creator]) unless params[:search_creator].blank?
+
+    @searched_for = { :name     => params[:search_name],
+                      :category => params[:search_category],
+                      :creator  => params[:search_creator] }
+
     @help_content_path = "/search"
   end
 
@@ -31,7 +36,6 @@ private
   def retrieve_searched_plants()
     only_public = params[:search_only_public].present? ? params[:search_only_public].to_i : 1
     creator_ids = search_creator_ids()
-
 
     if params[:search_name].present?
       search_terms = params[:search_name].split(' ').collect { |term| '%' + term + '%' }
