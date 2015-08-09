@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150704100923) do
+ActiveRecord::Schema.define(version: 20150808093121) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,7 +62,8 @@ ActiveRecord::Schema.define(version: 20150704100923) do
     t.text     "private_notes",           default: ""
     t.string   "location"
     t.string   "soil"
-    t.float    "ph"
+    t.float    "ph_from"
+    t.float    "ph_to"
   end
 
   add_index "plants", ["cached_votes_total"], name: "index_plants_on_cached_votes_total", using: :btree
@@ -92,6 +93,7 @@ ActiveRecord::Schema.define(version: 20150704100923) do
     t.datetime "deleted_at"
     t.date     "begin_date"
     t.date     "end_date"
+    t.integer  "order"
   end
 
   add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree
@@ -102,14 +104,14 @@ ActiveRecord::Schema.define(version: 20150704100923) do
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "admin",                  default: 0
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "email",                  default: "",   null: false
+    t.string   "encrypted_password",     default: "",   null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,    null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -120,6 +122,7 @@ ActiveRecord::Schema.define(version: 20150704100923) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
+    t.boolean  "show_welcome_page",      default: true
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

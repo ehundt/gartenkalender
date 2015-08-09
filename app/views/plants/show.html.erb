@@ -61,10 +61,10 @@
 </div>
 <% end %>
 
-<% if @plant.ph.present? %>
+<% if @plant.ph_from.present? %>
 <div class="row">
   <div class="col-xs-12">
-    <strong>Optimaler Ph-Wert:</strong> <%= @plant.ph %>
+    <strong>Optimaler Ph-Bereich:</strong> <%= @plant.ph_from %> - <%= @plant.ph_to %>
   </div>
 </div>
 <% end %>

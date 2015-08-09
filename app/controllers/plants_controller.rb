@@ -167,6 +167,6 @@ private
     params.require(:plant).permit(:name, :subtitle, :desc,
                                   :main_image, :tasks, :active,
                                   :public, :category, :private_notes,
-                                  :location, :ph, :soil)
+                                  :location, :ph_from, :ph_to, :soil)
   end
 end
