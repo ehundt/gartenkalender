@@ -1,4 +1,13 @@
 var onPageReady = function(){
+  $('#plant-public').on('click', function(){
+    var icon = $(this).parent().parent().parent().parent().children("div").children("img");
+    if ($(icon).attr("src") == "<%= image_url('world-globe32x32.png') %>"){
+      $(icon).attr("src", "<%= image_url('not-world-globe32x32.png') %>");
+    } else {
+      $(icon).attr("src", "<%= image_url('world-globe32x32.png') %>");
+    };
+  });
+
   $('.likes-counter').on('click', function(){
     var plant_id  = $(this).data("id");
     var likesIcon = $(this).children("img");
