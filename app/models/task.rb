@@ -14,7 +14,7 @@ class Task < ActiveRecord::Base
     search_for_date2 = Date.today.change(year: 2)
 
     where('(begin_date <= ? AND end_date >= ?) OR (begin_date <= ? AND end_date >= ?)',
-          search_for_date, search_for_date, search_for_date2, search_for_date2)
+          search_for_date, search_for_date - 10.days, search_for_date2, search_for_date2 - 10.days)
   }
 
   def self.all_for_user(user, hide=false)
