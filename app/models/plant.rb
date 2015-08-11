@@ -30,6 +30,8 @@ class Plant < ActiveRecord::Base
   #   integer (:user_id), :multiple => true
   # end
 
+  paginates_per 15
+
   def clone_for(user)
     cloned_plant = self.dup
     cloned_plant.user_id = user.id

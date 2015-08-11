@@ -86,6 +86,9 @@ end
 
 gem 'redcarpet'
 
+# pagination
+gem 'kaminari'
+
 # group :test do
 #  gem 'capybara',           '~> 2.1.1',    require: false
 #   gem 'capybara-firebug',   '~> 1.3.0'
