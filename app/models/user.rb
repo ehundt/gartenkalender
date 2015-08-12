@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
 
   acts_as_voter
 
+  paginates_per 15
+
   def admin?
     admin == 1 || false
   end

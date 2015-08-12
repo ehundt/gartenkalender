@@ -7,9 +7,9 @@ class UsersController < ApplicationController
     if params[:search].present?
       search_terms = params[:search].gsub(/\s+/m, ' ').strip.split(" ")
       # TODO: split on spaces
-      @users = User.where("first_name IN (?) OR last_name IN (?)", search_terms, search_terms).to_a
+      @users = User.where("first_name IN (?) OR last_name IN (?)", search_terms, search_terms).page params[:page]
     else
-      @users = User.all.to_a
+      @users = User.all.page params[:page]
     end
   end
 
