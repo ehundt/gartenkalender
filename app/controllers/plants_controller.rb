@@ -65,11 +65,14 @@ class PlantsController < ApplicationController
   def create
     params = plant_params.merge(creator_id: current_user.id)
     @plant = current_user.plants.create(params)
-    if @plant.save
+
+    if @plant.valid?
       flash[:success] = "Pflanze wurde erfolgreich gespeichert."
       redirect_to @plant
-    else
-      flash[:danger] = 'Beim Speichern der Pflanze ist ein Fehler aufgetreten.'
+     else
+      error_message = "Beim Speichern der Pflanze ist ein Fehler aufgetreten: "
+      error_message += @plant.errors.full_messages.join(", ")
+      flash[:danger] = error_message + "."
       render "new"
     end
   end
@@ -77,16 +80,15 @@ class PlantsController < ApplicationController
   def update
     @plant = Plant.find(params[:id])
 
-    if @plant.update(plant_params)
-      success = true
+    unless @plant.update(plant_params)
+      error_message = "Beim Speichern der Pflanze ist ein Fehler aufgetreten: "
+      error_message += @plant.errors.full_messages.join(", ")
+      flash[:danger] = error_message + "."
     end
 
     if request.xhr?
       render :json => { success: success }
     else
-      unless success
-        flash[:danger] = "Konnte die Pflanze leider nicht speichern: $!"
-      end
       redirect_to @plant
     end
   end

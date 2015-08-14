@@ -1,167 +1,154 @@
-
-  <% if @plant && @plant.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@plant.errors.count, "error") %> prohibited this plant from being saved:</h2>
-
-      <ul>
-      <% @plant.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <% if current_user == @plant.creator || @plant.id.nil? %>
-    <div class="row">
-      <div class="col-xs-1">
-        <% if @plant.public || @plant.id.nil? %>
-          <%= image_tag("world-globe32x32.png", class: "img-responsive") %>
-        <% else %>
-          <%= image_tag("not-world-globe32x32.png", class: "img-responsive") %>
-        <% end %>
-      </div>
-      <div class="col-xs-2">
-        <div class="input-group">
-          <span class="input-group-addon">
-            <input type="checkbox" aria-label="public" value="true" name="plant[public]" <% if @plant.public || @plant.id.nil? %>checked="checked"<% end %> id="plant-public">
-          </span>
-          <span class="input-group-addon">
-            öffentlich
-          </span>
-        </div><!-- /input-group -->
-      </div>
-      <div class="col-xs-9">
-      </div>
-    </div>
-  <% else %>
-
-    <div class="row">
-      <div class="col-xs-2">
-        <div data-toggle="popover"
-          data-container="body"
-          data-trigger="focus"
-          role="button"
-          tabindex="0"
-          data-placement="bottom"
-          data-content="Nur der/die ursprüngliche AutorIn kann die Pflanzenbeschreibung veröffentlichen.">
-
-          <%= image_tag("not-world-globe32x32_grey.png", class: "img-responsive") %>
-        </div>
-      </div>
-      <div class="col-xs-10">
-      </div>
-    </div>
-  <% end %>
-
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-         <span class="input-group-addon" id="basic-addon1">Pflanzenname</span>
-          <%= f.text_field :name, :class => "form-control",
-             "aria-label" => "Pflanzenname" %>
-      </div>
-    </div>
-  </div>
-
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <% if @plant.main_image.file? %>
-      <%= image_tag download_main_image_plant_path(@plant, {size: :thumb}), class: "img-rounded img-responsive" %>
+<% if current_user == @plant.creator || @plant.id.nil? %>
+  <div class="row">
+    <div class="col-xs-1">
+      <% if @plant.public || @plant.id.nil? %>
+        <%= image_tag("world-globe32x32.png", class: "img-responsive") %>
+      <% else %>
+        <%= image_tag("not-world-globe32x32.png", class: "img-responsive") %>
       <% end %>
     </div>
+    <div class="col-xs-2">
+      <div class="input-group">
+        <span class="input-group-addon">
+          <input type="checkbox" aria-label="public" value="true" name="plant[public]" <% if @plant.public || @plant.id.nil? %>checked="checked"<% end %> id="plant-public">
+        </span>
+        <span class="input-group-addon">
+          öffentlich
+        </span>
+      </div><!-- /input-group -->
+    </div>
+    <div class="col-xs-9">
+    </div>
   </div>
+<% else %>
 
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Bild</span>
-        <%= f.file_field :main_image, :class => "form-control",
-           "aria-label" => "Bild" %>
-      </div>
-    </div>
-  </div>
+  <div class="row">
+    <div class="col-xs-2">
+      <div data-toggle="popover"
+        data-container="body"
+        data-trigger="focus"
+        role="button"
+        tabindex="0"
+        data-placement="bottom"
+        data-content="Nur der/die ursprüngliche AutorIn kann die Pflanzenbeschreibung veröffentlichen.">
 
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Lateinische Bezeichnung</span>
-          <%= f.text_field :subtitle, :class => "form-control",
-             "aria-label" => "Lateinische-Bezeichnung" %>
+        <%= image_tag("not-world-globe32x32_grey.png", class: "img-responsive") %>
       </div>
     </div>
+    <div class="col-xs-10">
+    </div>
   </div>
+<% end %>
 
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Beschreibung</span>
-          <%= f.text_area :desc, :class => "form-control",
-             "aria-label" => "Beschreibung", rows: "12" %>
-      </div>
+<div class="row form-space">
+  <div class="col-xs-12">
+    <div class="input-group">
+       <span class="input-group-addon" id="basic-addon1">Pflanzenname</span>
+        <%= f.text_field :name, :class => "form-control",
+           "aria-label" => "Pflanzenname" %>
     </div>
   </div>
+</div>
 
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon">Kategorie</span>
-        <%= f.select :category,
-            options_for_select(Plant.categories.collect { |c| [c[0].humanize.titleize, c[0]] }, @plant.category),
-            {},
-            { class: 'form-control'} %>
-      </div>
+<div class="row form-space">
+  <div class="col-xs-12">
+    <% if @plant.image_url %>
+    <%= image_tag download_main_image_plant_path(@plant, {size: :thumb}), class: "img-rounded img-responsive" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row form-space">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">Bild</span>
+      <%= f.file_field :main_image, :class => "form-control",
+         "aria-label" => "Bild" %>
     </div>
   </div>
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Optimaler Standort</span>
-          <%= f.text_field :location, :class => "form-control",
-             "aria-label" => "Optimaler Standort" %>
-      </div>
+</div>
+
+<div class="row form-space">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">Lateinische Bezeichnung</span>
+        <%= f.text_field :subtitle, :class => "form-control",
+           "aria-label" => "Lateinische-Bezeichnung" %>
     </div>
   </div>
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Optimale Bodenbeschaffenheit</span>
-          <%= f.text_field :soil, :class => "form-control",
-             "aria-label" => "Optimale Bodenbeschaffenheit" %>
-      </div>
+</div>
+
+<div class="row form-space">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">Beschreibung</span>
+        <%= f.text_area :desc, :class => "form-control",
+           "aria-label" => "Beschreibung", rows: "12" %>
     </div>
   </div>
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Optimaler Ph Bereich</span>
-          &nbsp; von &nbsp;
-          <%= f.number_field :ph_from, step: :any,
-             "aria-label" => "Ph-Wert von" %> &nbsp;bis&nbsp;
-          <%= f.number_field :ph_to, step: :any,
-             "aria-label" => "Ph-Wert bis" %>
-      </div>
+</div>
+
+<div class="row form-space">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <span class="input-group-addon">Kategorie</span>
+      <%= f.select :category,
+          options_for_select(Plant.categories.collect { |c| [c[0].humanize.titleize, c[0]] }, @plant.category),
+          {},
+          { class: 'form-control'} %>
     </div>
   </div>
+</div>
+<div class="row form-space">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">Optimaler Standort</span>
+        <%= f.text_field :location, :class => "form-control",
+           "aria-label" => "Optimaler Standort" %>
+    </div>
+  </div>
+</div>
+<div class="row form-space">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">Optimale Bodenbeschaffenheit</span>
+        <%= f.text_field :soil, :class => "form-control",
+           "aria-label" => "Optimale Bodenbeschaffenheit" %>
+    </div>
+  </div>
+</div>
+<div class="row form-space">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">Optimaler Ph Bereich</span>
+        &nbsp; von &nbsp;
+        <%= f.number_field :ph_from, step: :any,
+           "aria-label" => "Ph-Wert von" %> &nbsp;bis&nbsp;
+        <%= f.number_field :ph_to, step: :any,
+           "aria-label" => "Ph-Wert bis" %>
+    </div>
+  </div>
+</div>
 
 <%#
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon">Private Notizen</span> %>
-        <%#= f.text_area :private_notes, :class => "form-control",
-            "aria-label" => "Private Notizen", rows: "8" %>
+<div class="row form-space">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <span class="input-group-addon">Private Notizen</span> %>
+      <%#= f.text_area :private_notes, :class => "form-control",
+          "aria-label" => "Private Notizen", rows: "8" %>
 <%#      </div>
-    </div>
-  </div>%>
+  </div>
+</div>%>
 
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="pull-right">
-        <% if @plant.id %>
-          <a href="<%= plant_path(@plant) %>">Abbrechen</a>&nbsp;
-        <% end %>
-        <%= f.submit "Pflanze speichern", :class => "btn btn-success" %>
-      </div>
+<div class="row form-space">
+  <div class="col-xs-12">
+    <div class="pull-right">
+      <% if @plant.id %>
+        <a href="<%= plant_path(@plant) %>">Abbrechen</a>&nbsp;
+      <% end %>
+      <%= f.submit "Pflanze speichern", :class => "btn btn-success" %>
     </div>
   </div>
-  <br>
+</div>
+<br>
