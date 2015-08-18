@@ -15,6 +15,8 @@ class Plant < ActiveRecord::Base
     :default_url => "/images/:style/missing_plant.png",
     :path        => '/:class/main_image/:id/:style/:filename'
 
+  validates :name, presence: true
+
   validates_attachment :main_image,
     :content_type => { :content_type => ["image/jpeg", "image/gif", "image/png"] },
     :size         => { :in => 0..3.megabytes },

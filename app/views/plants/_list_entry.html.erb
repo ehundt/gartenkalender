@@ -6,19 +6,6 @@
     <% end %>
   </td>
 
-  <% if only_my_plants %>
-      <td class="active-button" data-id="<%= plant.id %>" data-path="plants/">
-      <% if plant.active %>
-      <%# TODO: class: "img-rounded img-responsive" %>
-        <%= image_tag "plant_active.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
-             title: I18n.t("tooltip_plant_active")  %>
-      <% else %>
-        <%= image_tag "plant_inactive.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
-             title: I18n.t("tooltip_plant_inactive") %>
-      <% end %>
-    </td>
-  <% end %>
-
   <td>
     <%= link_to plant.name, plant, class: "plant-name" %><br>
     <small><b><%= plant.tasks.length %></b> <%= link_to I18n.t("tasks", count: plant.tasks.length), plant_tasks_path(plant) %></small><br>
@@ -46,6 +33,19 @@
     <small><b><%= plant.original.comments.count %></b> <%= link_to "Kommentare", plant_comments_path(plant.original) %></small>
     <% end %>
   </td>
+
+  <% if only_my_plants %>
+      <td class="active-button" data-id="<%= plant.id %>" data-path="plants/">
+      <% if plant.active %>
+      <%# TODO: class: "img-rounded img-responsive" %>
+        <%= image_tag "plant_active.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
+             title: I18n.t("tooltip_plant_active")  %>
+      <% else %>
+        <%= image_tag "plant_inactive.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
+             title: I18n.t("tooltip_plant_inactive") %>
+      <% end %>
+    </td>
+  <% end %>
 
   <% if only_my_plants %>
     <td>
