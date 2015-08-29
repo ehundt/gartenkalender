@@ -22,7 +22,7 @@
     <%= f.text_area :desc, :class => "form-control wide-form-input", rows: "8" %>
   </div>
   <div class="input-group">
-    <span class="task-form-space task-form-title">frühestens</span>
+    <span class="task-form-space task-form-title">Erinnern zwischen</span>
       <%= select_tag( :begin_day,
                       options_for_select(day_options, begin_day),
                       class: "form-input task-form-space" )  %>
@@ -32,7 +32,7 @@
                       class: "form-input task-form-space" )  %>
       &nbsp;
     </span>
-    <span class="task-form-space task-form-title">&nbsp; bis spätestens</span>
+    <span class="task-form-space task-form-title">&nbsp; und</span>
       <%= select_tag( :end_day,
                       options_for_select(day_options, end_day),
                       class: "form-input" ) %>

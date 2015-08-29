@@ -45,7 +45,7 @@ class TasksController < ApplicationController
 
     if @task.save
       flash[:success] = "Die Aufgabe wurde erfolgreich gespeichert."
-      redirect_to @plant
+      redirect_to plant_tasks_path(@plant)
     else
       flash[:danger] = "Fehler: Die Aufgabe konnte nicht gespeichert werden."
       redirect_to edit_plant_path(@plant)
