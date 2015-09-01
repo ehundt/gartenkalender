@@ -21,6 +21,8 @@
     <div class="task-form-title">Beschreibung:</div>
     <%= f.text_area :desc, :class => "form-control wide-form-input", rows: "8" %>
   </div>
+        <small>Zur Formatierung kannst Du Markdown verwenden (siehe <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Cheatsheet</a>).</small>
+
   <div class="input-group">
     <span class="task-form-space task-form-title">Erinnern zwischen</span>
       <%= select_tag( :begin_day,
