@@ -50,10 +50,6 @@ gem 'cancancan', '~> 1.10'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-gem 'capistrano', '~> 3.3.0'
-
 gem 'puma'
 
 gem 'meta-tags'
