@@ -6,23 +6,18 @@
   </div>
   <div class="row search-form">
     <div class="col-xs-12">
-      ...noch jemand interessiert am persönlichen Gartenkalender? Dann kannst Du ihn/sie hier per Email einladen:
+      ...noch jemand interessiert am persönlichen Gartenkalender?<br>
+      Dann kannst Du ihn/sie hier per Email einladen:
     </div>
   </div>
   <div class="row search-form">
     <div class="col-xs-12">
       <div class="input-group">
         <%= text_field_tag(:email, "", class: "form-control", placeholder: "Email Adresse") %>
-      </div>
-    </div>
-  </div>
-  <div class="row search-form">
-    <div class="col-xs-12">
-      <div class="input-group">
         <span class="input-group-btn">
           <%= submit_tag("einladen", class: "btn btn-default") %>
         </span>
-      </div><!-- /input-group -->
-    </div><!-- /.col-xs-12 -->
-  </div><!-- /.row -->
+      </div>
+    </div>
+  </div>
 <% end %>
