@@ -29,7 +29,8 @@
   </div>
   <div class="row">
     <div id="sidebar" class="col-xs-3">
-      <%= render 'seasons/current_season' %>
+      <%= render "shared/search_form" %>
+      <%#= render 'seasons/current_season' %>
       <%=  yield :sidebar %>
     </div>
     <div id="content" class="col-xs-8 content-container">
