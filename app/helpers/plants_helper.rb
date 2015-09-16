@@ -1,28 +1,23 @@
 module PlantsHelper
 
-  def display_options_menu(selected_option)
-    options = { all:          "alle",
-                only_active:  "aktive",
-                only_public:  "öffentliche",
-                only_created: "von mir erstellte" }
+  def link_with_params(type, sorting_param, selection_param)
+    sort_options = { name:               { title: "Name",      order: "asc" },
+                     cached_votes_total: { title: "Bewertung", order: "desc" } }
 
-    output = '<button type="button" class="btn btn-default">'
+    sel_options = { all:          "alle",
+                    only_active:  "aktive",
+                    only_public:  "öffentliche",
+                    only_created: "von mir erstellte" }
 
-    output += link_to options[selected_option], plants_path(selected_option => 1)
-    options.delete(selected_option)
-
-    output += '</button>
-               <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="caret"></span>
-               </button>
-               <ul class="dropdown-menu">'
-
-    options.each do |option, title|
-      output += '<li>'
-      output += link_to title, plants_path(option => 1)
-      output += '</li>'
+    if type == :sorting
+      title = sort_options[sorting_param][:title]
+    elsif type == :selection
+      title = sel_options[selection_param]
     end
-    output += '</ul>'
-    output.html_safe
+
+    link_to title, plants_path( :sort_by        => sorting_param,
+                                :filter         => selection_param,
+                                #selection_param => 1,
+                                :order          => sort_options[sorting_param][:order])
   end
 end

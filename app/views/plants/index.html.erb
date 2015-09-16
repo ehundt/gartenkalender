@@ -5,18 +5,55 @@
 <% end %>
 
 <div class="row">
-  <div class="col-xs-8">
-<% if @searched %>
-  <h2>Suchergebnis</h2>
-<% else %>
-  <h2><%= title "Meine Pflanzen" %></h2>
-<% end %>
-  </div>
-  <div class="col-xs-4 list-options">
-    <div class="btn-group">
-      <%= display_options_menu(@selected_option) %>
+  <% if @searched %>
+    <div class="col-xs-12">
+      <h2>Suchergebnis</h2>
     </div>
-  </div>
+  <% else %>
+    <div class="col-xs-6">
+      <h2><%= title "Meine Pflanzen" %></h2>
+    </div>
+
+    <div class="col-xs-6 list-options">
+      Sortieren nach
+      <div class="btn-group">
+        <button type="button" class="btn btn-default">
+          <%= link_with_params(:sorting, @selected_sorting, @selected_filter) %>
+          <% @sorting_options.delete(@selected_sorting) %>
+        </button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="caret"></span>
+        </button>
+
+        <ul class="dropdown-menu">
+          <% @sorting_options.each do |sorting_param| %>
+            <li>
+              <%= link_with_params(:sorting, sorting_param, @selected_filter) %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
+      &nbsp;Auswahl:
+      <div class="btn-group">
+        <button type="button" class="btn btn-default">
+          <%= link_with_params(:selection, @selected_sorting, @selected_filter) %>
+          <% @filter_options.delete(@selected_filter) %>
+        </button>
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span class="caret"></span>
+        </button>
+
+        <ul class="dropdown-menu">
+          <% @filter_options.each do |filter| %>
+            <li>
+              <%= link_with_params(:selection, @selected_sorting, filter) %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
 </div>
 
 <% if @searched %>
@@ -40,23 +77,7 @@
 <% unless @plants.empty? %>
   <br />
   <table class="table">
-    <tr>
-      <th></th><%# image %>
-      <th></th><%# active/inactive %>
-      <th>
-        <a href="<%= plants_path(sort_by: "name", order: "asc", only_public: @only_public) %>">
-          <%= image_tag "gnome_view_sort_descending.png", width: "35", height: "35" %>
-        </a>
-      </th><%# plant name %>
-      <th></th><%# creator %>
-      <th></th>
-      <th>
-        <a href="<%= plants_path(sort_by: "cached_votes_total", order: "desc", only_public: @only_public) %>">
-          <%= image_tag "gnome_view_sort_descending.png", width: "35", height: "35" %>
-        </a>
-      </th><%# votes %>
-      <th></th><%# delete plant %>
-    </tr>
+
   <% @plants.each do |plant| %>
     <%= render partial: "/plants/list_entry",
                locals: { plant:          plant,

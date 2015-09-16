@@ -6,7 +6,15 @@ class PlantsController < ApplicationController
   def index
     @only_public = "0"
     @plants = []
-    @selected_option = :all
+
+    @filter_options  = [:all, :only_active, :only_public, :only_created]
+    @sorting_options = [:name, :cached_votes_total]
+
+    @selected_filter  = params[:filter].present? ? params[:filter] : "all"
+    @selected_filter  = @selected_filter.to_sym
+
+    @selected_sorting = params[:sort_by].present? ? params[:sort_by] : "name"
+    @selected_sorting = @selected_sorting.to_sym
 
     # TODO: search should go to a search action
     if (params[:search_name].present?)
@@ -21,33 +29,29 @@ class PlantsController < ApplicationController
       @searched_plants = @searched_plants.page params[:page]
 
     else
-      sort_by = params[:sort_by].present? ? params[:sort_by] : "name"
       order = params[:order].present? ? params[:order] : "asc"
 
       @plants = current_user.plants
                     .includes(:tasks)
                     .includes(:creator)
 
-      if params[:only_public] == "1"
+      if @selected_filter == :only_public
         @only_public = "1"
         @plants = @plants.where(public: true)
-        @selected_option = :only_public
       end
 
-      if params[:only_active] == "1"
+      if @selected_filter == :only_active
         @plants = @plants.where(active: true)
-        @selected_option = :only_active
       end
 
-      if params[:only_created] == "1"
+      if @selected_filter == :only_created
         @plants = @plants.where(creator: current_user)
-        @selected_option = :only_created
       end
 
-      @plants = @plants.order(sort_by.to_sym => order.to_sym)
+      @plants = @plants.order(@selected_sorting.to_sym => order.to_sym)
                        .page params[:page]
-
     end
+
     @help_content_path = "/plants"
 
     # statistics partial:
