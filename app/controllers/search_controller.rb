@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
 
   def index
-    @plants = retrieve_searched_plants()
+    @plants = retrieve_plants()
     if @plants.nil?
       @plants = Plant.where(public: true).order(:cached_votes_total => :desc).page params[:page]
     end
@@ -33,113 +33,37 @@ private
     creator_ids
   end
 
-  def retrieve_searched_plants()
+  def retrieve_plants()
     only_public = params[:search_only_public].present? ? params[:search_only_public].to_i : 1
     creator_ids = search_creator_ids()
+
+    query = Plant.order(cached_votes_total: :desc)
 
     if params[:search_name].present?
       search_terms = params[:search_name].split(' ').collect { |term| '%' + term + '%' }
 
-      if only_public == 1
-        if creator_ids.nil?
-          if search_category
-            @plants = Plant.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
-                           .where(public: true)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          else
-            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
-                           .where(public: true)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          end
-        else
-          if search_category
-            @plants = Plant.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
-                           .where(public: true)
-                           .where("creator_id IN (?)", creator_ids)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          else
-            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
-                           .where(public: true)
-                           .where("creator_id IN (?)", creator_ids)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          end
-        end
-
-      else # not only public
-        if creator_ids.nil?
-          if search_category
-            @plants = Plant.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          else
-            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          end
-        else
-          if search_category
-            @plants = Plant.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
-                           .where("creator_id IN (?)", creator_ids)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          else
-            @plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
-                           .where("creator_id IN (?)", creator_ids)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          end
-        end
+      if search_category
+        query = query.where("name ILIKE ANY (array[?]) OR category = ?", search_terms, search_category)
+      else
+        query = query.where("name ILIKE ANY (array[?])", search_terms)
       end
 
     else # no search name
-      if only_public
-        if creator_ids.nil? # no search name, no creator ids
-          if search_category
-            @plants = Plant.where(public: true)
-                           .where(category: search_category)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          end
-        else # only public with creator ids, no search name
-           if search_category
-            @plants = Plant.where(public: true)
-                           .where(category: search_category)
-                           .where("creator_id IN (?)", creator_ids)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          else # only public, with creator_ids, no search name, no categories
-            @plants = Plant.where(public: true)
-                           .where("creator_id IN (?)", creator_ids)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          end
-        end
-      else # not only public
-        if creator_ids.nil? # no search name, no creator ids
-          if search_category
-            @plants = Plant.where(category: search_category)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          end
-        else # with creator ids, no search name
-          if search_category
-            @plants = Plant.where("creator_id IN (?)", creator_ids)
-                           .where(category: search_category)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          else # with creator ids, no search name, no category
-            @plants = Plant.where("creator_id IN (?)", creator_ids)
-                           .order(cached_votes_total: :desc)
-                           .page params[:page]
-          end
-        end
+      if search_category
+        query = query.where(category: search_category)
       end
     end
-    @plants
+
+    if only_public == 1
+      query = query.where(public: true)
+    end
+
+    if creator_ids.present?
+      query = query.where("creator_id IN (?)", creator_ids)
+    end
+
+    query = query.page params[:page]
+    query
   end
 
   def search_category
