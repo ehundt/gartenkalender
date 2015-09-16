@@ -1,10 +1,10 @@
 module PlantsHelper
 
   def display_options_menu(selected_option)
-    options = { all:          "Alle Pflanzen",
-                only_active:  "Nur aktive",
-                only_public:  "Nur öffentliche",
-                only_created: "Nur von mir erstellte" }
+    options = { all:          "alle",
+                only_active:  "aktive",
+                only_public:  "öffentliche",
+                only_created: "von mir erstellte" }
 
     output = '<button type="button" class="btn btn-default">'
 
