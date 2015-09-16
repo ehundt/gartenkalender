@@ -6,22 +6,47 @@ class PlantsController < ApplicationController
   def index
     @only_public = "0"
     @plants = []
+    @selected_option = :all
+
+    # TODO: search should go to a search action
     if (params[:search_name].present?)
       @searched = true
       @searched_text = params[:search_name]
       search_terms = params[:search_name].split(' ').collect { |term| '%' + term + '%' }
       @searched_plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
-                              .where(user_id: current_user.id).page params[:page]
+                              .where(user_id: current_user.id)
+      if params[:only_active] == 1
+        @searched_plants = @searched_plants.where(active: true)
+      end
+      @searched_plants = @searched_plants.page params[:page]
+
     else
       sort_by = params[:sort_by].present? ? params[:sort_by] : "name"
       order = params[:order].present? ? params[:order] : "asc"
 
-      if (params[:only_public].present? && params[:only_public] == "1")
+      @plants = current_user.plants
+                    .includes(:tasks)
+                    .includes(:creator)
+
+      if params[:only_public] == "1"
         @only_public = "1"
-        @plants = current_user.plants.where(public: true).includes(:tasks).includes(:creator).order(sort_by.to_sym => order.to_sym).page params[:page]
-      else
-        @plants = current_user.plants.includes(:tasks).includes(:creator).order(sort_by.to_sym => order.to_sym).page params[:page]
+        @plants = @plants.where(public: true)
+        @selected_option = :only_public
       end
+
+      if params[:only_active] == "1"
+        @plants = @plants.where(active: true)
+        @selected_option = :only_active
+      end
+
+      if params[:only_created] == "1"
+        @plants = @plants.where(creator: current_user)
+        @selected_option = :only_created
+      end
+
+      @plants = @plants.order(sort_by.to_sym => order.to_sym)
+                       .page params[:page]
+
     end
     @help_content_path = "/plants"
 

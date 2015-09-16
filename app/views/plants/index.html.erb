@@ -4,11 +4,20 @@
   <%= render partial: "statistics" %>
 <% end %>
 
+<div class="row">
+  <div class="col-xs-8">
 <% if @searched %>
   <h2>Suchergebnis</h2>
 <% else %>
   <h2><%= title "Meine Pflanzen" %></h2>
 <% end %>
+  </div>
+  <div class="col-xs-4 list-options">
+    <div class="btn-group">
+      <%= display_options_menu(@selected_option) %>
+    </div>
+  </div>
+</div>
 
 <% if @searched %>
   <h5>Suche nach "<%= @searched_text %>": <strong><%= @searched_plants.length %></strong> Pflanzen gefunden.</h5>
