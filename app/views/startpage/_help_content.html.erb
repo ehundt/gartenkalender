@@ -1,4 +1,5 @@
 <table class="table">
+<% if current_user.plants.present? %>
   <tr>
     <td>
       <%= image_tag "eye_visible.jpg" %>
@@ -7,4 +8,16 @@
       Auf das Auge klicken, wenn diese Aufgabe hier nicht mehr aufgelistet werden soll. Die Sichtbarkeit kann unter der jeweiligen Pflanzenbeschreibung wieder angeschaltet werden.
     </td>
   </tr>
+<% else %>
+  <tr>
+    <td>
+      Eigene <%= link_to "Pflanze anlegen", new_plant_path %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Von anderen GartenfreundInnen angelegte <%= link_to "Pflanze suchen", search_index_path %> und kopieren.<br> Kopierte Pflanzentipps können anschließend für den persönlichen Gebrauch bearbeitet werden. Änderungen an kopierten Pflanzen sind privat und für andere Nutzer nicht sichtbar.
+    </td>
+  </tr>
+<% end %>
 </table>

@@ -50,6 +50,7 @@ class PlantsController < ApplicationController
 
       @plants = @plants.order(@selected_sorting.to_sym => order.to_sym)
                        .page params[:page]
+      @plants.to_a
     end
 
     @help_content_path = "/plants"

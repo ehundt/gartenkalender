@@ -26,17 +26,6 @@
       </td>
     </tr>
 
-    <% if @plant.blank? %>
-      <tr>
-        <td>
-          <%= image_tag "gnome_view_sort_descending.png", width: "35", height: "35" %>
-        </td>
-        <td>
-          Pflanzenliste sortieren.
-        </td>
-      </tr>
-    <% end %>
-
     <% unless @plant.blank? %>
       <tr>
         <td>
