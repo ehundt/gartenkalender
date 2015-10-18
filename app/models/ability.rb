@@ -31,6 +31,7 @@ class Ability
 
       can :read, Startpage
       can :entry, Startpage
+      can :first_steps, Startpage
       can :read, :static_pages
       can :help, :page
 

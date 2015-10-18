@@ -85,6 +85,9 @@ gem 'redcarpet'
 # pagination
 gem 'kaminari'
 
+# animate.css
+gem "animate-rails"
+
 # group :test do
 #  gem 'capybara',           '~> 2.1.1',    require: false
 #   gem 'capybara-firebug',   '~> 1.3.0'

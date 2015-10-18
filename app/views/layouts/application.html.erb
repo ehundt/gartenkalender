@@ -14,7 +14,7 @@
 <div id="main-container" class="container-fluid">
   <div class="row">
     <div class="col-xs-6">
-      <%= render 'shared/help_menu' %>
+      <%= render 'shared/first_steps_menu' %>
     </div>
     <div class="col-xs-6 logged-in-status">
       <%= render 'shared/logged_in_status' %>
@@ -28,23 +28,43 @@
     </div>
   </div>
   <div class="row">
-    <div id="sidebar" class="col-xs-3">
-      <%= render "shared/search_form" %>
-      <%#= render 'seasons/current_season' %>
-      <%=  yield :sidebar %>
+    <% if current_user.present? && current_user.plants.empty? && current_page?(controller: 'startpage', action: 'index') %>
+      <div id="sidebar" class="col-xs-3">
+        <%= render "shared/search_form" %>
+      </div>
+      <div id="content" class="col-xs-8 content-container">
+         <%= display_tabs %>
+      </div>
     </div>
-    <div id="content" class="col-xs-8 content-container">
-       <%= display_tabs %>
-       <br />
+    <div class="row">
+      <div class="col-xs-12">
+         <%= yield %>
+      </div>
 
-       <% flash.each do |name, msg| -%>
-         <%= content_tag :div, msg, class: "alert alert-#{name}" %>
-       <% end -%>
+    <% else %>
+      <div id="sidebar" class="col-xs-3">
+        <%= render "shared/search_form" %>
+        <%#= render 'seasons/current_season' %>
+        <%=  yield :sidebar %>
+      </div>
+      <div id="content" class="col-xs-8 content-container">
+         <%= display_tabs %>
+         <br />
 
-       <%= yield %>
-    </div>
-    <div class="col-xs-1">
-      <%= render partial: 'shared/iconbar' %>
+         <% flash.each do |name, msg| -%>
+           <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+         <% end -%>
+
+         <%= yield %>
+      </div>
+      <div class="col-xs-1">
+        <%= render partial: 'shared/iconbar' %>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 footer">
+      <%= render 'shared/footer' %>
     </div>
   </div>
 </div>

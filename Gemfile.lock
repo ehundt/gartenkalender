@@ -37,6 +37,8 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     acts_as_votable (0.10.0)
+    animate-rails (1.0.8)
+      rails
     arel (6.0.0)
     autoprefixer-rails (5.1.11)
       execjs
@@ -228,6 +230,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_votable (~> 0.10.0)
+  animate-rails
   autoprefixer-rails
   aws-sdk (< 2.0)
   better_errors (~> 2.1.1)

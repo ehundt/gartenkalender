@@ -1,0 +1,247 @@
+<div id="carousel-help-1" class="carousel slide">
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-help-1" data-slide-to="0"<% if @active == "0" %> class="active"<% end %>>
+    </li>
+    <li data-target="#carousel-help-1" data-slide-to="1"<% if @active == "1" %> class="active"<% end %>></li>
+    <li data-target="#carousel-help-1" data-slide-to="2"<% if @active == "2" %> class="active"<% end %>></li>
+    <li data-target="#carousel-help-1" data-slide-to="3"<% if @active == "3" %> class="active"<% end %>></li>
+    <li data-target="#carousel-help-1" data-slide-to="4"<% if @active == "4" %> class="active"<% end %>></li>
+    <li data-target="#carousel-help-1" data-slide-to="5"<% if @active == "5" %> class="active"<% end %>></li>
+    <li data-target="#carousel-help-1" data-slide-to="6"<% if @active == "6" %> class="active"<% end %>></li>
+    <li data-target="#carousel-help-1" data-slide-to="7"<% if @active == "7" %> class="active"<% end %>></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+
+    <div class="item<% if @active == "0" %> active<% end %>">
+      <div class="carousel-caption">
+        <h2 data-animation="animated bounceInLeft">
+          Erste Schritte
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          1. Pflanze suchen und kopieren
+        </h4>
+
+        <%= video_tag "search_plant.mov",
+                      :size     => "952x450", # 1024x678
+                      :controls => false,
+                      :autoplay => true,
+                      "data-animation" => "animated bounceInRight" %>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item<% if @active == "1" %> active<% end %>">
+      <div class="carousel-caption">
+        <h2 data-animation="animated bounceInLeft">
+          Pflanze kopieren
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Die kopierte Pflanze ist privat.
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Ich kann die Kopie für meinen privaten Gebrauch ändern.
+        </h4>
+        <div class="slide-1">
+        </div>
+        <h4 class="slide-1-image" data-animation="animated bounceInRight">
+          <%= image_tag "first_steps_edit_plant_with_circle.png", width: "800px", height: "434px" %>
+        </h4>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item<% if @active == "2" %> active<% end %>">
+      <div class="carousel-caption">
+        <h2 data-animation="animated bounceInLeft">
+          Aufgaben
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          Mit der Pflanze werden die zugehörigen Aufgaben kopiert
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Ich kann die Aufgaben ändern
+        </h4>
+
+        <div id="screencast-container" data-animation="animated bounceInRight">
+        <%= video_tag "edit_task.mov",
+                      :size     => "952x450",
+                      :controls => false,
+                      :autoplay => true
+                      %>
+        </div>
+<%# TODO: screencast: meine Aufgaben -> eine Aufgabe auswählen -> auf bearbeiten klicken; dann text "... und neue hinzufügen" ergänzen, video ausblenden (bounceOut oder so) und ein image einblenden mit "Neue Aufgabe" umrandet .... zu kompliziert! erst einmal in nächstes slide %>
+        <%#= video_tag "search_plant.mov",
+                      :size     => "996x668",
+                      :controls => false,
+                      :autoplay => true,
+                      "data-animation" => "animated bounceInRight" %>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item<% if @active == "3" %> active<% end %>">
+      <div class="carousel-caption">
+        <h2>
+          Aufgaben
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Ich kann neue Aufgaben hinzufügen
+          <div class="slide-3">
+          </div>
+        </h4>
+        <h4 class="slide-3-image" data-animation="animated bounceInRight">
+          <%= image_tag "first_steps_edit_plant_with_circle.png", width: "800px", height: "434px" %>
+        </h4>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item<% if @active == "4" %> active<% end %>">
+      <div class="carousel-caption">
+        <h2>
+          Aufgabenliste
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Ich kann die Aufgaben aller meiner Pflanzen ansehen
+          <div class="slide-4">
+          </div>
+        </h4>
+        <h4 class="slide-4-image" data-animation="animated bounceInRight">
+          <%= image_tag "first_steps_edit_plant_with_circle.png", width: "800px", height: "434px" %>
+        </h4>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item<% if @active == "5" %> active<% end %>">
+      <div class="carousel-caption">
+        <h2 data-animation="animated bounceInLeft">
+          Aufgabenliste: was wird aufgelistet?
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          <div class="slide-5">
+          </div>
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Nur meine Aufgaben
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <div class="slide-5">
+          </div>
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Nur aktuelle Aufgaben
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <div class="slide-5">
+          </div>
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Nur noch nicht erledigte Aufgaben
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <div class="slide-5">
+          </div>
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Nur Aufgaben von aktiven Pflanzen<br>
+          aktiv &nbsp;<%= image_tag "plant_active.gif", height: '42px', width: '30px' %> &nbsp; oder &nbsp;
+          <%= image_tag "plant_inactive.gif" %>&nbsp; inaktiv
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <div class="slide-5">
+          </div>
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Nur sichtbar geschaltete Aufgaben<br>
+          sichtbar &nbsp;<%= image_tag "eye_visible.jpg" %> &nbsp; oder &nbsp;
+          <%= image_tag "eye_not_visible.jpg" %>&nbsp; unsichtbar
+        </h4>
+        <div class="slide-5-bottom">
+        </div>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item<% if @active == "6" %> active<% end %>">
+      <div class="carousel-caption">
+        <h2>
+          Kommentieren und bewerten
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Ich kann Pflanzen kommentieren
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Der Autor der Pflanze ist Moderator
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Ich kann Pflanzen bewerten -
+          von mir vergebener grüner Daumen:&nbsp; <%= image_tag "voted_thumb_up.png" %><br>
+        </h4>
+        <div class="slide-6">
+        </div>
+        <h4 data-animation="animated bounceInRight">
+          <%= image_tag "first_steps_edit_plant_with_circle.png", width: "650px", height: "300px" %>
+        </h4>
+        <div class="slide-6">
+        </div>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item<% if @active == "7" %> active<% end %>">
+      <div class="carousel-caption">
+        <h2>
+          Neue Pflanze anlegen
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Ich kann neue Pflanzen erstellen
+          <div class="slide-7">
+          </div>
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <%= image_tag "first_steps_edit_plant_with_circle.png", width: "400px", height: "250px" %>
+          <div class="slide-7">
+          </div>
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Ich kann Mark Down verwenden
+          <div class="slide-7">
+          </div>
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Die Pflanze mit Aufgaben kann privat oder öffentlich sein:
+          <%= image_tag "world-globe32x32.png" %> oder
+          <%= image_tag "not-world-globe32x32.png" %>
+          <div class="slide-7">
+          </div>
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Nur von mir erstellte Pflanzen können veröffentlicht werden
+          <div class="slide-7">
+          </div>
+        </h4>
+        <div class="slide-7">
+        </div>
+      </div>
+    </div><!-- /.item -->
+
+  </div><!-- /.carousel-inner -->
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-help-1"
+     role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-help-1"
+     role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+
+</div><!-- /.carousel -->
