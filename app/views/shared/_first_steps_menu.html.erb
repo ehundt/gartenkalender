@@ -9,11 +9,10 @@
         </button>
         <ul class="dropdown-menu">
           <li>
-            <%= link_to "1. Pflanze kopieren", startpage_first_steps_path(active: 0) %>
+            <%= link_to "1. Pflanze kopieren", startpage_first_steps_path(topic: "copy_plant") %>
           </li>
-          <li><%= link_to "2. Aufgaben verwalten", startpage_first_steps_path(active: 2) %></li>
-          <li><%= link_to "3. Aufgabenliste", startpage_first_steps_path(active: 4) %></li>
-          <li><%= link_to "4. Kommentieren und bewerten", startpage_first_steps_path(active: 6) %></li>
+          <li><%= link_to "2. Aufgabenliste", startpage_first_steps_path(topic: "tasks") %></li>
+          <li><%= link_to "3. Kommentieren und bewerten", startpage_first_steps_path(topic: "comment") %></li>
         </ul>
       </div>
   </div>

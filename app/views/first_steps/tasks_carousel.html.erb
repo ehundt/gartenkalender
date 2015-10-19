@@ -1,0 +1,129 @@
+<div id="carousel-tasks" class="carousel slide">
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-tasks" data-slide-to="0" class="active">
+    </li>
+    <li data-target="#carousel-tasks" data-slide-to="1"></li>
+    <li data-target="#carousel-tasks" data-slide-to="2"></li>
+    <li data-target="#carousel-tasks" data-slide-to="3"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+
+    <div class="item active">
+      <div class="carousel-caption">
+        <h2 data-animation="animated bounceInLeft">
+          Aufgaben
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          Mit der Pflanze werden die zugehörigen Aufgaben kopiert
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Ich kann die Aufgaben ändern
+        </h4>
+
+        <div id="screencast-container" data-animation="animated bounceInRight">
+        <%= video_tag "edit_task.mov",
+                      :size     => "952x450",
+                      :controls => false,
+                      :autoplay => true
+                      %>
+        </div>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2>
+          Aufgaben
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Ich kann neue Aufgaben hinzufügen
+          <div class="slide-3">
+          </div>
+        </h4>
+        <h4 class="slide-3-image" data-animation="animated bounceInRight">
+          <%= image_tag "first_steps/edit_plant_with_circle.png", width: "800px", height: "434px" %>
+        </h4>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2>
+          Aufgabenliste
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Ich kann die Aufgaben aller meiner Pflanzen ansehen
+          <div class="slide-4">
+          </div>
+        </h4>
+        <h4 class="slide-4-image" data-animation="animated bounceInRight">
+          <%= image_tag "first_steps/edit_plant_with_circle.png", width: "800px", height: "434px" %>
+        </h4>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2 data-animation="animated bounceInLeft">
+          Aufgabenliste: was wird aufgelistet?
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          <div class="slide-5">
+          </div>
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Nur meine Aufgaben
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <div class="slide-5">
+          </div>
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Nur aktuelle Aufgaben
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <div class="slide-5">
+          </div>
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Nur noch nicht erledigte Aufgaben
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <div class="slide-5">
+          </div>
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Nur Aufgaben von aktiven Pflanzen<br>
+          aktiv &nbsp;<%= image_tag "plant_active.gif", height: '42px', width: '30px' %> &nbsp; oder &nbsp;
+          <%= image_tag "plant_inactive.gif" %>&nbsp; inaktiv
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <div class="slide-5">
+          </div>
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Nur sichtbar geschaltete Aufgaben<br>
+          sichtbar &nbsp;<%= image_tag "eye_visible.jpg" %> &nbsp; oder &nbsp;
+          <%= image_tag "eye_not_visible.jpg" %>&nbsp; unsichtbar
+        </h4>
+        <div class="slide-5-bottom">
+        </div>
+      </div>
+    </div><!-- /.item -->
+  </div><!-- /.carousel-inner -->
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-tasks"
+     role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-tasks"
+     role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+
+</div><!-- /.carousel -->

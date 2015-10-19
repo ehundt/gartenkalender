@@ -6,8 +6,7 @@ class StartpageController < ApplicationController
       render template: "/startpage/logged_out/welcome" and return
     else
       if current_user.plants.empty?
-        @active = "0"
-        render template: "/startpage/first_steps_carousel" and return
+        render template: "/first_steps/copy_plant_carousel" and return
       else
         @upcoming_tasks = Task.upcoming_tasks_for_user(current_user)
       end
@@ -16,10 +15,12 @@ class StartpageController < ApplicationController
   end
 
   def first_steps
-    @active = params[:active] || "0"
-    require 'logger'
-    Logger.new("log/debug.log").debug(@active)
-    render template: "/startpage/first_steps_carousel"
+    @topic = params[:topic]
+    unless @topic =~ /copy_plant|tasks|comment/
+      @topic = "copy_plant"
+    end
+
+    render template: "/first_steps/#{@topic}_carousel"
   end
 
   def entry

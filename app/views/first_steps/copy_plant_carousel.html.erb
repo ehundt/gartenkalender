@@ -1,0 +1,74 @@
+<div id="carousel-copy-plant" class="carousel slide">
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-copy-plant" data-slide-to="0" class="active">
+    </li>
+    <li data-target="#carousel-copy-plant" data-slide-to="1"></li>
+    <li data-target="#carousel-copy-plant" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+
+    <div class="item active">
+      <div class="carousel-caption">
+        <h2 data-animation="animated bounceInLeft">
+          Erster Schritt
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          Pflanze suchen<br>
+
+          <%= image_tag "first_steps/plant_search.png", "data-animation" => "animated bounceInRight", class: "carousel-image" %>
+        </h4>
+        <br>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2 data-animation="animated bounceInLeft">
+          Zweiter Schritt
+        </h2>
+        <br>
+        <h4 data-animation="animated bounceInRight">
+          Pflanze kopieren<br>
+
+          <%= image_tag "first_steps/copy_plant.png", id: "copy-plant-image", "data-animation" => "animated bounceInRight", class: "carousel-image"  %>
+        </h4>
+        <br><br><br><br><br>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2 data-animation="animated bounceInLeft">
+          Die kopierte Pflanze
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          ... ist privat.<br>
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          <br>
+          Ich kann die Kopie für meinen privaten Gebrauch ändern.<br>
+          <%= image_tag "first_steps/edit_plant.png", class: "carousel-image" %>
+        <br><br><br>
+        </h4>
+      </div>
+    </div><!-- /.item -->
+
+  </div><!-- /.carousel-inner -->
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-copy-plant"
+     role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-copy-plant"
+     role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+
+</div><!-- /.carousel -->
