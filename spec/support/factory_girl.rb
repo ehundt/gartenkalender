@@ -1,25 +1,25 @@
 # RSpec
 # spec/support/factory_girl.rb
-# RSpec.configure do |config|
-#   config.include FactoryGirl::Syntax::Methods
+RSpec.configure do |config|
+  config.include FactoryGirl::Syntax::Methods
 
-#   config.before(:suite) do
-#     begin
-#       DatabaseCleaner.start
-#       FactoryGirl.lint
-#     ensure
-#       DatabaseCleaner.clean
-#     end
-#   end
-# end
+  config.before(:suite) do
+    begin
+      DatabaseCleaner.start
+      FactoryGirl.lint
+    ensure
+      DatabaseCleaner.clean
+    end
+  end
+end
 
 # # Test::Unit
 # class Test::Unit::TestCase
 #   include FactoryGirl::Syntax::Methods
 # end
 
-# # Cucumber
-# World(FactoryGirl::Syntax::Methods)
+# Cucumber
+World(FactoryGirl::Syntax::Methods)
 
 # # Spinach
 # class Spinach::FeatureSteps

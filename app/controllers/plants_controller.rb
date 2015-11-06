@@ -196,6 +196,7 @@ class PlantsController < ApplicationController
 private
 
   def plant_params
+    # TODO: should public param also be allowed to be mass-assigned?
     params.require(:plant).permit(:name, :subtitle, :desc,
                                   :main_image, :tasks, :active,
                                   :public, :category, :private_notes,

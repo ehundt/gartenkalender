@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Task, type: :model do
+RSpec.describe Task do
   describe '#all_for_user' do
     context "tasks for active and inactive plants" do
       let!(:user){ create(:user) }
@@ -18,26 +18,32 @@ RSpec.describe Task, type: :model do
   end
 
   describe '#upcoming_tasks_for_user' do
-    let!(:user1){ create(:user) }
-    let!(:user2){ create(:user) }
     # first user
-    let!(:active_plant1){ create(:plant, user_id: user1.id, active: true) }
-
-    let!(:inactive_plant){ create(:plant, user_id: user1.id, active: false) }
-    let!(:inactive_task){ create(:task, plant_id: inactive_plant.id, user_id: user1.id) }
+    let!(:user1){ create(:user) }
+    let!(:active_plant1){ create(:plant,   user_id: user1.id, active: true) }
+    let!(:inactive_plant1){ create(:plant, user_id: user1.id, active: false) }
 
     # second user
-    let!(:active_plant2){ create(:plant, user_id: user2.id, active: true) }
-    let!(:active_task2){ create(:task, plant_id: active_plant2.id, user_id: user2.id) }
+    let!(:user2){ create(:user) }
+    let!(:active_plant2){ create(:plant,   user_id: user2.id, active: true) }
+    let!(:inactive_plant2){ create(:plant, user_id: user2.id, active: false) }
 
-    let!(:season){ create(:season, season: :vollfrühling)}
-
-    before do
-      allow(Season).to receive(:current).and_return(season)
-    end
     context "tasks exist for different users and active and inactive plants" do
-      it "returns only upcoming tasks for this user" do
-        active_task1 = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 1, stop: 3, repeat: Task.repeats["einmalig"])
+      it "returns upcoming task only for this user" do
+        active_task1 = create(:task,
+                              plant_id: active_plant1.id,
+                              user_id: user1.id,
+                              begin_date: Date.today.change(year: 1) - 5.days,
+                              end_date: Date.today.change(year: 1) + 5.days,
+                              repeat: Task.repeats["einmalig"])
+
+        active_task2 = create(:task,
+                              plant_id: active_plant2.id,
+                              user_id: user2.id,
+                              begin_date: Date.today.change(year: 1) - 5.days,
+                              end_date: Date.today.change(year: 1) + 5.days,
+                              repeat: Task.repeats["einmalig"])
+
         expect(Task.upcoming_tasks_for_user(user1)).to contain_exactly(active_task1)
       end
     end
@@ -51,8 +57,17 @@ RSpec.describe Task, type: :model do
 
     context "tasks out of season" do
       it "returns only upcoming tasks" do
-        current_task = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 1, stop: 3)
-        future_task  = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 6, stop: 8)
+        current_task = create(:task,
+                              plant_id: active_plant1.id,
+                              user_id:  user1.id,
+                              begin_date: Date.today.change(year: 1) - 5.days,
+                              end_date: Date.today.change(year: 1) + 5.days )
+        future_task  = create(:task,
+                              plant_id: active_plant1.id,
+                              user_id: user1.id,
+                              begin_date: Date.today.change(year: 1) + 5.days,
+                              end_date: Date.today.change(year: 1) + 15.days )
+
 
         expect(Task.upcoming_tasks_for_user(user1)).to contain_exactly(current_task)
       end
@@ -60,14 +75,29 @@ RSpec.describe Task, type: :model do
 
     context "repeating daily tasks" do
       it "returns daily repeating tasks" do
-        current_task = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 1, stop: 3, repeat: Task.repeats[:täglich])
-        future_task  = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 6, stop: 8, repeat: Task.repeats[:täglich])
+        current_task = create(:task,
+                              plant_id:   active_plant1.id,
+                              user_id:    user1.id,
+                              begin_date: Date.today.change(year: 1) - 5.days,
+                              end_date:   Date.today.change(year: 1) + 15.days,
+                              repeat:     Task.repeats[:täglich])
+        future_task  = create(:task,
+                              plant_id:   active_plant1.id,
+                              user_id:    user1.id,
+                              begin_date: Date.today.change(year: 1) + 5.days,
+                              end_date:   Date.today.change(year: 1) + 15.days,
+                              repeat:     Task.repeats[:täglich])
         expect(Task.upcoming_tasks_for_user(user1)).to contain_exactly(current_task)
       end
 
-      context "task done within this season but on different day" do
+      context "task done but on different day" do
         it "returns daily repeating tasks" do
-          current_task = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 1, stop: 3, repeat: Task.repeats["täglich"])
+          current_task = create(:task,
+                                plant_id:   active_plant1.id,
+                                user_id:    user1.id,
+                                begin_date: Date.today.change(year: 1) - 5.days,
+                                end_date:   Date.today.change(year: 1) + 15.days,
+                                repeat:     Task.repeats[:täglich])
           done_task = create(:done_task, task_id: current_task.id, date: (Date.today - 2.days))
 
           expect(Task.upcoming_tasks_for_user(user1)).to contain_exactly(current_task)

@@ -1,11 +1,24 @@
 FactoryGirl.define do
-  factory :user do
-    first_name            "Heinz"
-    last_name             "Mustermann"
+  factory :user, class: :user do
+    first_name            { Faker::Name.first_name }
+    last_name             { Faker::Name.last_name }
     admin                 false
     password              "password"
     password_confirmation "password"
     email                 { Faker::Internet.email }
+  end
+
+  factory :admin do
+    first_name            { Faker::Name.first_name }
+    last_name             { Faker::Name.last_name }
+    admin                 true
+    password              "password"
+    password_confirmation "password"
+    email                 { Faker::Internet.email }
+  end
+
+  factory :creator, :parent => :user do |author|
+    author.after(:create) { |a| Factory(:plant, :creator => a )}
   end
 
   # factory :admin, class: :user do

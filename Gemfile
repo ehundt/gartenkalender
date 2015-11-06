@@ -6,8 +6,7 @@ gem 'rails', '4.2.0'
 
 gem 'rails-i18n'
 
-# Use sqlite3 as the database for Active Record
-#gem 'sqlite3'
+# Use PostGreSQL as the database for Active Record
 gem 'pg'
 gem 'rails_12factor', group: :production
 
@@ -24,10 +23,12 @@ gem 'autoprefixer-rails'
 # gem 'therubyracer', platforms: :ruby
 
 gem "paperclip", "~> 4.2"
+
 # Amazon webservices S3
 # newer version is buggy, see:
 # http://ruby.awsblog.com/post/TxFKSK2QJE6RPZ/Upcoming-Stable-Release-of-AWS-SDK-for-Ruby-Version-2
 gem 'aws-sdk', '< 2.0'
+
 gem "paranoia", "~> 2.0"
 gem 'acts_as_votable', '~> 0.10.0'
 
@@ -50,7 +51,7 @@ gem 'cancancan', '~> 1.10'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
-gem 'puma'
+gem 'puma' # used by Heroku instead of WebRick as Rails server
 
 gem 'meta-tags'
 
@@ -60,13 +61,16 @@ group :development, :test do
 #  gem 'sunspot_rails'
 #  gem 'sunspot_solr' # is the pre-packaged development version of Solr
 
-  gem 'rspec-rails', '~> 3.0'
-  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'rspec-rails',        '~> 3.0',   :require => false
+  gem 'factory_girl_rails', '~> 4.5.0', :require => false
   gem 'database_cleaner'
   gem 'faker'
+  gem 'cucumber-rails',                 :require => false
+  gem 'webrat'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'pry-rails'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
@@ -75,7 +79,7 @@ group :development, :test do
   gem 'spring'
 
 #    gem 'debugger'
-    gem 'better_errors',      '~> 2.1.1'
+  gem 'better_errors', '~> 2.1.1'
 #    gem 'binding_of_caller'
 #    gem 'meta_request'
 end
@@ -85,11 +89,11 @@ gem 'redcarpet'
 # pagination
 gem 'kaminari'
 
-# group :test do
-#  gem 'capybara',           '~> 2.1.1',    require: false
-#   gem 'capybara-firebug',   '~> 1.3.0'
-#   gem 'selenium-webdriver', '~> 2.32.1'
+ group :test do
+  gem 'capybara'
+#  gem 'capybara-firebug',   '~> 1.3.0'
+#  gem 'selenium-webdriver', '~> 2.32.1'
 #   gem 'poltergeist',        '~> 1.3.0'
 #
 #    gem "spork-rails", "~> 3.2.1"
-#end
+end
