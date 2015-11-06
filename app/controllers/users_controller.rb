@@ -28,6 +28,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
+    if current_user.admin?
+      @user.admin = (params[:user][:admin] == "1") ? 1 : 0
+      @user.save
+    end
     redirect_to @user
   end
 
@@ -54,6 +58,12 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :picture, :latitude, :longitude, :admin, :text)
+    params.require(:user).permit(:first_name,
+                                 :last_name,
+                                 :email,
+                                 :picture,
+                                 :latitude,
+                                 :longitude,
+                                 :text) # admin should not be mass assigned!
   end
 end

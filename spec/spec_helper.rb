@@ -17,12 +17,13 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require 'factory_girl'
-require 'devise'
+#require 'devise'
 require 'faker'
+require 'capybara/rspec'
 
 RSpec.configure do |config|
-  config.include FactoryGirl::Syntax::Methods
-  config.include Devise::TestHelpers, type: :controller
+  config.include FactoryGirl::Syntax::Methods # already included in support/factory_girl.rb
+#  config.include Devise::TestHelpers, type: :controller
 
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
@@ -38,6 +39,12 @@ RSpec.configure do |config|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
 
+  # this makes sure that only the "expect" syntax may be used
+  # and never the "should..." syntax
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+
   # rspec-mocks config goes here. You can use an alternate test double
   # library (such as bogus or mocha) by changing the `mock_with` option here.
   config.mock_with :rspec do |mocks|
@@ -49,7 +56,7 @@ RSpec.configure do |config|
 
 # The settings below are suggested to provide a good initial experience
 # with RSpec, but feel free to customize to your heart's content.
-=begin
+#=begin
   # These two settings work together to allow you to limit a spec run
   # to individual examples or groups you care about by tagging them with
   # `:focus` metadata. When nothing is tagged with `:focus`, all examples
@@ -90,15 +97,10 @@ RSpec.configure do |config|
   # test failures related to randomization by passing the same `--seed` value
   # as the one that triggered the failure.
   Kernel.srand config.seed
-=end
 
-  # TODO: fix user factory and uncomment this
-  # config.before(:suite) do
-  #   begin
-  #     DatabaseCleaner.start
-  #     FactoryGirl.lint
-  #   ensure
-  #     DatabaseCleaner.clean
-  #   end
-  # end
+  config.before(:all) do
+    FactoryGirl.reload
+  end
+
+#=end
 end
