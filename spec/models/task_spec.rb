@@ -89,59 +89,19 @@ RSpec.describe Task do
                               repeat:     Task.repeats[:täglich])
         expect(Task.upcoming_tasks_for_user(user1)).to contain_exactly(current_task)
       end
-
-      context "task done but on different day" do
-        it "returns daily repeating tasks" do
-          current_task = create(:task,
-                                plant_id:   active_plant1.id,
-                                user_id:    user1.id,
-                                begin_date: Date.today.change(year: 1) - 5.days,
-                                end_date:   Date.today.change(year: 1) + 15.days,
-                                repeat:     Task.repeats[:täglich])
-          done_task = create(:done_task, task_id: current_task.id, date: (Date.today - 2.days))
-
-          expect(Task.upcoming_tasks_for_user(user1)).to contain_exactly(current_task)
-        end
-      end
-
-      context "task done outside of this season this year" do
-        it "returns task" do
-          current_task = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 2, stop: 3, repeat: Task.repeats["täglich"])
-          done_task = create(:done_task, task_id: current_task.id, date: (Date.today - 3.months), season: 1)
-
-          expect(Task.upcoming_tasks_for_user(user1)).to contain_exactly(current_task)
-        end
-      end
-
-      context "task has been done today" do
-        it "does not return task" do
-          current_task = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 1, stop: 3, repeat: Task.repeats["täglich"])
-          done_task = create(:done_task, task_id: current_task.id, date: (Date.today), season: 1)
-
-          expect(Task.upcoming_tasks_for_user(user1)).to be_empty
-        end
-      end
     end
 
-    context "repeating yearly tasks" do
-      context "task has been done within this year" do
-        it "does not return task" do
-          current_task = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 1, stop: 3, repeat: Task.repeats["jährlich"])
-          done_task = create(:done_task, task_id: current_task.id, date: (Date.today - 1.day), season: 2  )
+    context "task done but on different day" do
+      it "returns daily repeating tasks" do
+        current_task = create(:task,
+                              plant_id:   active_plant1.id,
+                              user_id:    user1.id,
+                              begin_date: Date.today.change(year: 1) - 5.days,
+                              end_date:   Date.today.change(year: 1) + 15.days,
+                              repeat:     Task.repeats[:täglich])
+        done_task = create(:done_task, task_id: current_task.id, date: (Date.today - 2.days))
 
-          expect(Task.upcoming_tasks_for_user(user1)).to be_empty
-        end
-      end
-    end
-
-    context "done tasks" do
-      context "repeating yearly" do
-        it "does not return the done task" do
-          current_task = create(:task, plant_id: active_plant1.id, user_id: user1.id, start: 1, stop: 3, repeat: Task.repeats["jährlich"])
-          done_task = create(:done_task, task_id: current_task.id, date: (Date.today - 10.days), season: 1)
-
-          expect(Task.upcoming_tasks_for_user(user1)).to be_empty
-        end
+        expect(Task.upcoming_tasks_for_user(user1)).to contain_exactly(current_task)
       end
     end
   end

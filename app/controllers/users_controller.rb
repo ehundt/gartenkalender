@@ -28,6 +28,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     @user.update(user_params)
+    if current_user.admin?
+      @user.admin = (params[:user][:admin] == "1") ? 1 : 0
+      @user.save
+    end
     redirect_to @user
   end
 

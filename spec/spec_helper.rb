@@ -22,7 +22,7 @@ require 'faker'
 require 'capybara/rspec'
 
 RSpec.configure do |config|
-#  config.include FactoryGirl::Syntax::Methods # already included in support/factory_girl.rb
+  config.include FactoryGirl::Syntax::Methods # already included in support/factory_girl.rb
 #  config.include Devise::TestHelpers, type: :controller
 
   # rspec-expectations config goes here. You can use an alternate
