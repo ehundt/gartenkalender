@@ -7,6 +7,7 @@
     <li data-target="#carousel-new-plant" data-slide-to="1"></li>
     <li data-target="#carousel-new-plant" data-slide-to="2"></li>
     <li data-target="#carousel-new-plant" data-slide-to="3"></li>
+    <li data-target="#carousel-new-plant" data-slide-to="4"></li>
   </ol>
 
   <!-- Wrapper for slides -->
@@ -29,10 +30,6 @@
         <h2>
           Neue Pflanze
         </h2>
-        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
-          Für die Beschreibung kann ich Mark Down verwenden<br>
-          <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Hilfe zu Mark Down</a>
-        </h4>
         <h4 class="carousel-no-image" data-animation="animated bounceInRight">
           Die Pflanze inklusive Aufgaben kann privat oder öffentlich gemacht werden<br>
           <%= image_tag "world-globe32x32.png" %> oder
@@ -57,11 +54,26 @@
           Die Pflanzenbeschreibung sollte nur die Pflanze an sich beschreiben und keine Pflegetipps enthalten.
         </h4>
         <h4 class="carousel-no-image" data-animation="animated bounceInRight">
-          Es kommt hauptsächlich auf die Aufgaben an!
-          So lege ich eine neue Aufgabe an:
-          <%= image_tag "first_steps/new_task.png", class: "carousel-image" %>
+          Für die Beschreibung kann ich Mark Down verwenden<br>
+          <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Hilfe zu Mark Down</a>
         </h4>
         <div class="new-plant-valign-2"></div>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2>
+          Neue Pflanze
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          Es kommt hauptsächlich auf die Pflegetipps an!
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          Nach dem Speichern der Pflanzenbeschreibung kann ich eine neue Aufgabe anlegen:<br>
+          <%= image_tag "first_steps/new_task.png", class: "carousel-image" %>
+        </h4>
+        <div class="new-plant-valign-3"></div>
       </div>
     </div><!-- /.item -->
 
@@ -71,7 +83,7 @@
           Jetzt starten?<br>
           <%= link_to "Neue Pflanze anlegen", new_plant_path() %><br>
         </h4>
-        <div class="new-plant-valign-3"></div>
+        <div class="new-plant-valign-4"></div>
       </div>
     </div><!-- /.item -->
 
