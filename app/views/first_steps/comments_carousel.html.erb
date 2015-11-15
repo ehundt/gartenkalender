@@ -1,0 +1,73 @@
+<div id="carousel-comments" class="carousel slide">
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-comments" data-slide-to="0" class="active">
+    </li>
+    <li data-target="#carousel-comments" data-slide-to="1"></li>
+    <li data-target="#carousel-comments" data-slide-to="2"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <div class="carousel-caption">
+        <h2>
+          Kommentieren
+        </h2>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Ich kann Pflanzen kommentieren<br>
+          <%= image_tag "first_steps/comment.png", class: "carousel-image" %>
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Der Autor der Pflanze ist Moderator
+        </h4>
+        <div class="comments-valign-0"></div>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2>
+          Bewerten
+        </h2>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Durch Klicken auf den Daumen&nbsp;
+          <%= image_tag "unvoted_thumb_up.png" %>
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          ...kann ich Pflanzen einen grünen Daumen vergeben&nbsp; <%= image_tag "voted_thumb_up.png" %>
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          ...entweder auf der "Meine Pflanzen" Übersichtsseite
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          oder auf der Pflanzen-Detailansicht
+        </h4>
+        <div class="comments-valign-1"></div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Zum nächsten <%= link_to "Tutorial", startpage_first_steps_path(topic: "new_plant") %>?
+        </h4>
+        <div class="comments-valign-2"></div>
+      </div>
+    </div>
+  </div><!-- /.carousel-inner -->
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-comments"
+     role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-comments"
+     role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+
+</div><!-- /.carousel -->

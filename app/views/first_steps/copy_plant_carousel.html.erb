@@ -6,6 +6,7 @@
     </li>
     <li data-target="#carousel-copy-plant" data-slide-to="1"></li>
     <li data-target="#carousel-copy-plant" data-slide-to="2"></li>
+    <li data-target="#carousel-copy-plant" data-slide-to="3"></li>
   </ol>
 
   <!-- Wrapper for slides -->
@@ -21,39 +22,63 @@
 
           <%= image_tag "first_steps/plant_search.png", "data-animation" => "animated bounceInRight", class: "carousel-image" %>
         </h4>
-        <br>
+        <div class="copy-plant-valign-0"></div>
       </div>
     </div><!-- /.item -->
 
     <div class="item">
       <div class="carousel-caption">
-        <h2 data-animation="animated bounceInLeft">
+        <h2>
           Zweiter Schritt
         </h2>
-        <br>
         <h4 data-animation="animated bounceInRight">
-          Pflanze kopieren<br>
-
+          Gefundene Pflanze kopieren<br>
           <%= image_tag "first_steps/copy_plant.png", id: "copy-plant-image", "data-animation" => "animated bounceInRight", class: "carousel-image"  %>
         </h4>
-        <br><br><br><br><br>
+        <div class="copy-plant-valign-1"></div>
       </div>
     </div><!-- /.item -->
 
     <div class="item">
       <div class="carousel-caption">
-        <h2 data-animation="animated bounceInLeft">
+        <h2>
           Die kopierte Pflanze
         </h2>
         <h4 data-animation="animated bounceInRight">
-          ... ist privat.<br>
+          ... ist privat und<br>
         </h4>
         <h4 data-animation="animated bounceInRight">
           <br>
-          Ich kann die Kopie für meinen privaten Gebrauch ändern.<br>
+          ich kann die Kopie für meinen privaten Gebrauch ändern.<br>
           <%= image_tag "first_steps/edit_plant.png", class: "carousel-image" %>
-        <br><br><br>
+        <div class="copy-plant-valign-2"></div>
         </h4>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <div class="row">
+          <div class="col-xs-6">
+            <h4 data-animation="animated bounceInLeft">
+              Jetzt starten?<br>
+              <%= link_to "Pflanze suchen", search_index_path() %><br>
+              <%= link_to(image_tag("lupe.png", width: "80px", height: "80px"), search_index_path()) %>
+            </h4>
+          </div>
+          <div class="col-xs-6">
+            <h4 data-animation="animated bounceInLeft">
+              ...oder
+              <br>
+              <%= link_to "zum nächsten Tutorial", startpage_first_steps_path(topic: "tasks") %>
+            </h4>
+          </div>
+        </div>
+        <h4 data-animation="animated bounceInLeft">
+          Alle Tutorials finde ich in der linken oberen Ecke<br>
+          <%= image_tag "first_steps/first_steps_menu.png", class: "carousel-image"  %>
+        </h4>
+        <div class="copy-plant-valign-3"></div>
       </div>
     </div><!-- /.item -->
 

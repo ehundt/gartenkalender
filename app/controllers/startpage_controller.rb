@@ -5,6 +5,7 @@ class StartpageController < ApplicationController
     unless user_signed_in?
       render template: "/startpage/logged_out/welcome" and return
     else
+      # TODO: falls der user das tutorial noch nicht gesehen hat!!
       if current_user.plants.empty?
         render template: "/first_steps/copy_plant_carousel" and return
       else
@@ -16,7 +17,7 @@ class StartpageController < ApplicationController
 
   def first_steps
     @topic = params[:topic]
-    unless @topic =~ /copy_plant|tasks|comment/
+    unless @topic =~ /^(copy_plant|tasks|comments|new_plant)$/
       @topic = "copy_plant"
     end
 
