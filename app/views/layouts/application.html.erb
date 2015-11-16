@@ -29,8 +29,8 @@
   </div>
   <div class="row">
     <% if current_user.present? &&
-          current_user.plants.empty? &&
-          ( current_page?(controller: 'startpage', action: 'index') ||
+          (( !current_user.first_steps_seen &&
+            current_page?(controller: 'startpage', action: 'index')) ||
             current_page?(controller: 'startpage', action: 'first_steps')) %>
       <div id="sidebar" class="col-xs-3">
         <%= render "shared/search_form" %>

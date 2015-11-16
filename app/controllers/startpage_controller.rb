@@ -5,11 +5,15 @@ class StartpageController < ApplicationController
     unless user_signed_in?
       render template: "/startpage/logged_out/welcome" and return
     else
-      # TODO: falls der user das tutorial noch nicht gesehen hat!!
-      if current_user.plants.empty?
-        render template: "/first_steps/copy_plant_carousel" and return
+      unless current_user.first_steps_seen
+        render template: "/first_steps/copy_plant_carousel"
+        current_user.update_attribute(:first_steps_seen, true) and return
       else
-        @upcoming_tasks = Task.upcoming_tasks_for_user(current_user)
+        if current_user.plants.empty?
+          render template: "/startpage/welcome"
+        else
+          @upcoming_tasks = Task.upcoming_tasks_for_user(current_user)
+        end
       end
     end
     @help_content_path = "/startpage"
@@ -31,6 +35,6 @@ class StartpageController < ApplicationController
   private
 
   def startpage_params
-    params.require(:startpage).permit(:step)
+    params.require(:startpage)
   end
 end

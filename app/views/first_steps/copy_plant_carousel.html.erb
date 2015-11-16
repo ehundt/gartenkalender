@@ -2,17 +2,42 @@
 
   <!-- Indicators -->
   <ol class="carousel-indicators">
-    <li data-target="#carousel-copy-plant" data-slide-to="0" class="active">
-    </li>
+    <% unless current_user.first_steps_seen %>
+      <li data-target="#carousel-copy-plant" data-slide-to="0" class="active">
+      </li>
+    <% end %>
     <li data-target="#carousel-copy-plant" data-slide-to="1"></li>
     <li data-target="#carousel-copy-plant" data-slide-to="2"></li>
     <li data-target="#carousel-copy-plant" data-slide-to="3"></li>
+    <li data-target="#carousel-copy-plant" data-slide-to="4"></li>
   </ol>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
 
-    <div class="item active">
+    <% unless current_user.first_steps_seen %>
+      <div class="item active">
+        <div class="carousel-caption">
+          <h2 data-animation="animated bounceInLeft">
+            Herzlich Willkommen
+          </h2>
+          <h4 data-animation="animated bounceInRight">
+            Hier wirst Du durch die ersten Schritte zum Informationsmanagement
+            rund um den Garten geführt.
+          </h4>
+          <h4 data-animation="animated bounceInLeft">
+            Alle Tutorials findest Du in der linken oberen Ecke:<br>
+            <%= image_tag "first_steps/first_steps_menu.png", class: "carousel-image"  %>
+          </h4>
+          <h4 data-animation="animated bounceInRight">
+            Viel Spaß!
+          </h4>
+          <div class="copy-plant-valign-0"></div>
+        </div>
+      </div><!-- /.item -->
+    <% end %>
+
+    <div class="item<% if current_user.first_steps_seen %> active<% end %>">
       <div class="carousel-caption">
         <h2 data-animation="animated bounceInLeft">
           Erster Schritt
@@ -22,7 +47,7 @@
 
           <%= image_tag "first_steps/plant_search.png", "data-animation" => "animated bounceInRight", class: "carousel-image" %>
         </h4>
-        <div class="copy-plant-valign-0"></div>
+        <div class="copy-plant-valign-1"></div>
       </div>
     </div><!-- /.item -->
 
@@ -35,7 +60,7 @@
           Gefundene Pflanze kopieren<br>
           <%= image_tag "first_steps/copy_plant.png", id: "copy-plant-image", "data-animation" => "animated bounceInRight", class: "carousel-image"  %>
         </h4>
-        <div class="copy-plant-valign-1"></div>
+        <div class="copy-plant-valign-2"></div>
       </div>
     </div><!-- /.item -->
 
@@ -49,36 +74,26 @@
         </h4>
         <h4 data-animation="animated bounceInRight">
           <br>
-          ich kann die Kopie für meinen privaten Gebrauch ändern.<br>
+          Du kannst die Kopie für Deinen privaten Gebrauch ändern.<br>
           <%= image_tag "first_steps/edit_plant.png", class: "carousel-image" %>
-        <div class="copy-plant-valign-2"></div>
+        <div class="copy-plant-valign-3"></div>
         </h4>
       </div>
     </div><!-- /.item -->
 
     <div class="item">
       <div class="carousel-caption">
-        <div class="row">
-          <div class="col-xs-6">
-            <h4 data-animation="animated bounceInLeft">
-              Jetzt starten?<br>
-              <%= link_to "Pflanze suchen", search_index_path() %><br>
-              <%= link_to(image_tag("lupe.png", width: "80px", height: "80px"), search_index_path()) %>
-            </h4>
-          </div>
-          <div class="col-xs-6">
-            <h4 data-animation="animated bounceInLeft">
-              ...oder
-              <br>
-              <%= link_to "zum nächsten Tutorial", startpage_first_steps_path(topic: "tasks") %>
-            </h4>
-          </div>
-        </div>
         <h4 data-animation="animated bounceInLeft">
-          Alle Tutorials finde ich in der linken oberen Ecke<br>
-          <%= image_tag "first_steps/first_steps_menu.png", class: "carousel-image"  %>
+          Jetzt starten?<br>
+          <%= link_to "Pflanze suchen", search_index_path() %><br>
+          <%= link_to(image_tag("lupe.png", width: "80px", height: "80px"), search_index_path()) %>
         </h4>
-        <div class="copy-plant-valign-3"></div>
+        <h4 data-animation="animated bounceInLeft">
+          ...oder
+          <br>
+          <%= link_to "zum nächsten Tutorial", startpage_first_steps_path(topic: "tasks") %>
+        </h4>
+        <div class="copy-plant-valign-4"></div>
       </div>
     </div><!-- /.item -->
 
