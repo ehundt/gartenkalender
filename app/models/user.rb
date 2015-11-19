@@ -41,4 +41,8 @@ class User < ActiveRecord::Base
       plants.where(creator_id: self.id).order(cached_votes_total: :desc)
     end
   end
+
+  def first_steps_seen?
+    plants.present? || first_steps_seen
+  end
 end

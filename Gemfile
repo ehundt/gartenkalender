@@ -89,7 +89,10 @@ gem 'redcarpet'
 # pagination
 gem 'kaminari'
 
- group :test do
+# animate.css
+gem "animate-rails"
+
+group :test do
   gem 'capybara'
 #  gem 'capybara-firebug',   '~> 1.3.0'
 #  gem 'selenium-webdriver', '~> 2.32.1'
@@ -97,3 +100,11 @@ gem 'kaminari'
 #
 #    gem "spork-rails", "~> 3.2.1"
 end
+
+# changes in Rails 5:
+# this is to monitor the file system for changes in dev mode to know
+# when the Rails application has to be reloaded during development
+# see http://weblog.rubyonrails.org/2015/11/11/snappier-development-mode-in-rails-5/?utm_source=rubyweekly&utm_medium=email
+# group :development do
+#   gem 'listen', '~> 3.0.4'
+# end

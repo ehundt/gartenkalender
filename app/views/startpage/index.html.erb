@@ -1,7 +1,3 @@
-<% if current_user.plants.empty? %>
-  <%= render "welcome" %>
-
-<% else %>
   <h2><%= title "Jetzt anstehende Aufgaben" %></h2>
 
   <% if @upcoming_tasks.empty? %>
@@ -41,4 +37,3 @@
 
     </table>
   <% end %>
-<% end %>

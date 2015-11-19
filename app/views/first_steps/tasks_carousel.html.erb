@@ -1,0 +1,137 @@
+<div id="carousel-tasks" class="carousel slide">
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-tasks" data-slide-to="0" class="active">
+    </li>
+    <li data-target="#carousel-tasks" data-slide-to="1"></li>
+    <li data-target="#carousel-tasks" data-slide-to="2"></li>
+    <li data-target="#carousel-tasks" data-slide-to="3"></li>
+    <li data-target="#carousel-tasks" data-slide-to="4"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+
+    <div class="item active">
+      <div class="carousel-caption">
+        <h2>
+          Aufgaben = Pflegeanweisungen
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          Beim Kopieren einer Pflanze werden auch die zugehörigen Aufgaben kopiert.
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          Du kannst die Aufgaben an Deine Bedürfnisse anpassen:
+          <br>
+          <%# TODO: image einer kopierten Pflanze verwenden und tab einkreisen %>
+          <%= image_tag "first_steps/edit_task.png", id: "copy-plant-image", "data-animation" => "animated bounceInRight", class: "carousel-image"  %>
+        </h4>
+        <div class="tasks-valign-0"></div>
+
+        <%# <div id="screencast-container" data-animation="animated bounceInRight"> %>
+        <%#= video_tag "edit_task.mov",
+                      :size     => "952x450",
+                      :controls => false,
+                      :autoplay => true
+                      %>
+        <%#</div> %>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2>
+          Aufgaben
+        </h2>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Pflanze privat
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Aufgaben privat
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Pflanze öffentlich
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Aufgaben öffentlich
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Pflanze kopiert
+          <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+          Pflanze privat
+        </h4>
+
+        <div class="tasks-valign-1"></div>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2>
+          Aufgaben
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          Eine Übersicht über anstehende Aufgaben aller Deiner Pflanzen findest Du hier:<br>
+          <%= image_tag "first_steps/tasks_overview.png", class: "carousel-image" %>
+        </h4>
+        <div class="tasks-valign-2"></div>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2>
+          Was wird aufgelistet?
+        </h2>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Nur Deine eigenen Aufgaben,
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          nur aktuelle Aufgaben,
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          nur noch nicht erledigte Aufgaben,
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          nur Aufgaben von aktiven Pflanzen:&nbsp;
+          aktiv &nbsp;<%= image_tag "plant_active.gif", height: '42px', width: '30px' %> &nbsp; oder &nbsp;
+          <%= image_tag "plant_inactive.gif" %>&nbsp; inaktiv,
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          nur sichtbar geschaltete Aufgaben:&nbsp;
+          sichtbar &nbsp;<%= image_tag "eye_visible.jpg" %> &nbsp; oder &nbsp;
+          <%= image_tag "eye_not_visible.jpg" %>&nbsp; unsichtbar.
+        </h4>
+        <div class="tasks-valign-3"></div>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h4 data-animation="animated bounceInLeft">
+          Jetzt zur
+          <%= link_to "Aufgabenliste", startpage_index_path() %><br>
+          <%= link_to(image_tag("first_steps/todo.png", height: "60px", width: "60px", class: "carousel-image"), startpage_index_path()) %>
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInLeft">
+          ...oder
+          <br>
+          <%= link_to "zum nächsten Tutorial", startpage_first_steps_path(topic: "comments") %>
+        </h4>
+        <div class="tasks-valign-4"></div>
+      </div>
+    </div><!-- /.item -->
+  </div><!-- /.carousel-inner -->
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-tasks"
+     role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-tasks"
+     role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+
+</div><!-- /.carousel -->

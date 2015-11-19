@@ -22,10 +22,34 @@ class Task < ActiveRecord::Base
   end
 
   def self.upcoming_tasks_for_user(user)
+
     current_tasks = self.all_for_user(user).in_time_frame
                     .includes(:done_tasks, :plant)
                     .references(:done_tasks)
                     .order(:order)
+
+# this is the sql that's created by the above ... performant??
+# I only need the tasks from active plants...
+
+#  SELECT ... FROM "tasks"
+#  LEFT OUTER JOIN "done_tasks"
+#              ON "done_tasks"."task_id" = "tasks"."id"
+#              AND "done_tasks"."deleted_at" IS NULL
+#  LEFT OUTER JOIN "plants" ON "plants"."id" = "tasks"."plant_id"
+#             AND "plants"."deleted_at" IS NULL
+#
+#  WHERE "tasks"."deleted_at" IS NULL
+#  AND "tasks"."hide" = 'f'
+#  AND (plant_id IN
+#         (SELECT "plants"."id" FROM "plants"
+#             WHERE "plants"."deleted_at" IS NULL
+#             AND "plants"."user_id" = 4
+#             AND "plants"."active" = 't'))
+#  AND ( ( begin_date <= '0001-10-13'
+#         AND end_date >= '0001-10-03')
+#      OR ( begin_date <= '0002-10-13'
+#           AND end_date >= '0002-10-03'))
+
     upcoming_tasks = []
     current_tasks.each do |task|
       upcoming_tasks.push(task) unless (task.done? || task.skipped?)

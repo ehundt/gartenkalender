@@ -31,9 +31,7 @@ class PlantsController < ApplicationController
     else
       order = params[:order].present? ? params[:order] : "asc"
 
-      @plants = current_user.plants
-                    .includes(:tasks)
-                    .includes(:creator)
+      @plants = current_user.plants.includes(:tasks, :creator)
 
       if @selected_filter == :only_public
         @only_public = "1"

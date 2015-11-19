@@ -1,0 +1,105 @@
+<div id="carousel-new-plant" class="carousel slide">
+
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#carousel-new-plant" data-slide-to="0" class="active">
+    </li>
+    <li data-target="#carousel-new-plant" data-slide-to="1"></li>
+    <li data-target="#carousel-new-plant" data-slide-to="2"></li>
+    <li data-target="#carousel-new-plant" data-slide-to="3"></li>
+    <li data-target="#carousel-new-plant" data-slide-to="4"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <div class="carousel-caption">
+        <h2>
+          Neue Pflanze anlegen
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          Hier kannst Du neue Pflanzen erstellen:<br>
+          <%= image_tag "first_steps/new_plant.png", "data-animation" => "animated bounceInRight", class: "carousel-image" %>
+        </h4>
+        <div class="new-plant-valign-0"></div>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2>
+          Neue Pflanze
+        </h2>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Die Pflanze inklusive Aufgaben kann privat oder öffentlich gemacht werden.<br>
+          <%= image_tag "not-world-globe32x32.png" %>
+          oder
+          <%= image_tag "world-globe32x32.png" %>
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Veröffentlichte Pflanzen können von jedem Gartenfreund kopiert werden.
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Nur von Dir selbst erstellte Pflanzen können veröffentlicht werden.
+        </h4>
+        <div class="new-plant-valign-1"></div>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2>
+          Neue Pflanze
+        </h2>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Die Pflanzenbeschreibung sollte nur die Pflanze an sich beschreiben und keine Pflegeanweisungen enthalten.
+        </h4>
+        <h4 class="carousel-no-image" data-animation="animated bounceInRight">
+          Für die Beschreibung kannst Du Mark Down verwenden:<br>
+          <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Hilfe zu Mark Down</a>
+        </h4>
+        <div class="new-plant-valign-2"></div>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h2>
+          Neue Pflanze
+        </h2>
+        <h4 data-animation="animated bounceInRight">
+          Es kommt hauptsächlich auf die Pflegeanweisungen an!
+        </h4>
+        <h4 data-animation="animated bounceInRight">
+          Nach dem Speichern der Pflanze kannst Du neue Aufgaben anlegen:<br>
+          <%= image_tag "first_steps/new_task.png", class: "carousel-image" %>
+        </h4>
+        <div class="new-plant-valign-3"></div>
+      </div>
+    </div><!-- /.item -->
+
+    <div class="item">
+      <div class="carousel-caption">
+        <h4 data-animation="animated bounceInLeft">
+          Jetzt starten?<br>
+          <%= link_to "Neue Pflanze anlegen", new_plant_path() %><br>
+        </h4>
+        <div class="new-plant-valign-4"></div>
+      </div>
+    </div><!-- /.item -->
+
+  </div><!-- /.carousel-inner -->
+
+  <!-- Controls -->
+  <a class="left carousel-control" href="#carousel-new-plant"
+     role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#carousel-new-plant"
+     role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+
+</div><!-- /.carousel -->
