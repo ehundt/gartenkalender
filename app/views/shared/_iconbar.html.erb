@@ -12,7 +12,7 @@
   </div>
 <% end %>
 
-<% if @plant %>
+<% if @plant && @plant.public %>
   <div class="icon-bar">
     <span class="likes-counter" data-id=<%= @plant.id %> data-path="/plants/" data-likeallowed="1">
 

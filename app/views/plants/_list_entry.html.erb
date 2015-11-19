@@ -86,7 +86,7 @@
 
   <td>
     <% if user_signed_in? %>
-      <% if plant.public || only_my_plants %>
+      <% if plant.public %>
         <div class="likes-counter" data-id=<%= plant.id %> data-path="/plants/" data-likeallowed="1">
           <span class="likes-count"><%= plant.cached_votes_total %></span>
 

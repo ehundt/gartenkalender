@@ -11,65 +11,68 @@
 </head>
 <body>
 
-<div id="main-container" class="container-fluid">
-  <div class="row">
-    <div class="col-xs-6">
-      <%= render 'shared/header' %>
+  <div id="main-container" class="container-fluid">
+    <div class="row">
+      <div class="col-xs-6">
+        <%= render 'shared/header' %>
+      </div>
+      <div class="col-xs-6 logged-in-status">
+        <%= render 'shared/logged_in_status' %>
+      </div>
     </div>
-    <div class="col-xs-6 logged-in-status">
-      <%= render 'shared/logged_in_status' %>
+    <div class="row">
+      <div class="col-xs-3 head-bg">
+      </div>
+      <div class="col-xs-9 head-bg">
+        <%= image_tag("title.png", class: "img-responsive head") %>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-3 head-bg">
-    </div>
-    <div class="col-xs-9 head-bg">
-      <%= image_tag("title.png", class: "img-responsive head") %>
-    </div>
-  </div>
+
+    <%# show first steps presentation %>
     <% if (( current_user.present? && !current_user.first_steps_seen? &&
             current_page?(controller: 'startpage', action: 'index')) ||
             current_page?(startpage_first_steps_path)) %>
-    <div class="row">
-      <div id="sidebar" class="col-xs-3">
-        <%= render "shared/search_form" %>
+      <div class="row">
+        <div id="sidebar" class="col-xs-3">
+          <%= render "shared/search_form" %>
+        </div>
+        <div id="content" class="col-xs-8 content-container">
+           <%= display_tabs %>
+        </div>
       </div>
-      <div id="content" class="col-xs-8 content-container">
-         <%= display_tabs %>
+      <div class="row">
+        <div class="col-xs-12">
+           <%= yield %>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-         <%= yield %>
-      </div>
-  </div>
 
     <% else %>
-    <div class="row">
-      <div id="sidebar" class="col-xs-3">
-        <%= render "shared/search_form" %>
-        <%#= render 'seasons/current_season' %>
-        <%=  yield :sidebar %>
-      </div>
-      <div id="content" class="col-xs-8 content-container">
-         <%= display_tabs %>
-         <br />
+      <div class="row">
+        <div id="sidebar" class="col-xs-3">
+          <%= render "shared/search_form" %>
+          <%#= render 'seasons/current_season' %>
+          <%=  yield :sidebar %>
+        </div>
+        <div id="content" class="col-xs-8 content-container">
+           <%= display_tabs %>
+           <br />
 
-         <% flash.each do |name, msg| -%>
-           <%= content_tag :div, msg, class: "alert alert-#{name}" %>
-         <% end -%>
+           <% flash.each do |name, msg| -%>
+             <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+           <% end -%>
 
-         <%= yield %>
+           <%= yield %>
+        </div>
+        <div class="col-xs-1">
+          <%= render partial: 'shared/iconbar' %>
+        </div>
       </div>
-      <div class="col-xs-1">
-        <%= render partial: 'shared/iconbar' %>
-      </div>
-    </div>
-  <% end %>
-</div>
-<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-  <%= render 'shared/footer' %>
-</nav>
+    <% end %>
+  </div>
+
+  <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <%= render 'shared/footer' %>
+  </nav>
 
 </body>
 </html>

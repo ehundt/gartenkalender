@@ -108,7 +108,9 @@ class PlantsController < ApplicationController
   def update
     @plant = Plant.find(params[:id])
 
+    success = true
     unless @plant.update(plant_params)
+      success = false
       error_message = "Beim Speichern der Pflanze ist ein Fehler aufgetreten: "
       error_message += @plant.errors.full_messages.join(", ")
       flash[:danger] = error_message + "."
