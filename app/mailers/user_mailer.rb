@@ -7,10 +7,17 @@ default from: 'persoenlicher.gartenkalender@gmail.com'
   end
 
   def contact_us_email(subject, text, user)
-    @user = user
     @text = text
-    mail(to: "persoenlicher.gartenkalender@gmail.com",
-         from: user.email,
+    if user
+      @user_name = "#{user.display_name} ( #{user.id} )"
+      from_email = user.email
+    else
+      @user_name = "Anonym"
+      from_email = "persoenlicher.gartenkalender@gmail.com"
+    end
+
+    mail(to:      "persoenlicher.gartenkalender@gmail.com",
+         from:    from_email,
          subject: "Contact us: " + subject.to_str)
   end
 

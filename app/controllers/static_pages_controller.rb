@@ -14,7 +14,11 @@ class StaticPagesController < ApplicationController
     unless params[:subject].blank? && params[:text].blank?
       UserMailer.contact_us_email(params[:subject], params[:text], current_user).deliver_now
 
-      flash[:success] = "Vielen Dank! Deine Email wurde versendet. Wir werden uns in Kürze bei Dir melden."
+      if current_user
+        flash[:success] = "Vielen Dank! Deine Email wurde versendet. Wir werden uns in Kürze bei Dir melden."
+      else
+        flash[:success] = "Vielen Dank! Deine Email wurde versendet."
+      end
     end
   end
 end
