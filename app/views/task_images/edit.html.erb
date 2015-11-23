@@ -1,0 +1,14 @@
+<% @task.task_images.each do |task_image| %>
+  <div class="row">
+    <div class="col-xs-12 sidebar-image">
+      <%= link_to image_tag(download_task_image_plant_task_task_image_path(@plant, @task, task_image, {size: :medium}), class: "img-rounded img-responsive"), edit_plant_task_path(@plant, @task) %>
+    </div>
+  </div>
+    <div class="row">
+    <div class="col-xs-12 sidebar-image">
+      <%= task_image.title %>
+    </div>
+  </div>
+<% end %>
+
+<%= render partial: "/task_images/form" %>

@@ -4,10 +4,14 @@ class Task < ActiveRecord::Base
   belongs_to :plant
   has_many :done_tasks
   has_many :skipped_tasks, -> {where(skipped: true)}, class_name: "DoneTask"
+  has_many :task_images, :dependent => :destroy
 
   enum repeat: [:einmalig, :täglich, :wöchentlich, :monatlich, :halbjährlich, :jährlich]
 
   validates :title, presence: true
+
+  accepts_nested_attributes_for :task_images,
+                                :reject_if => lambda { |t| t['task_image'].nil? }
 
   scope :in_time_frame, -> {
     search_for_date = Date.today.change(year: 1)

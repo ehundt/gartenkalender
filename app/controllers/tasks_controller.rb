@@ -17,11 +17,13 @@ class TasksController < ApplicationController
   def new
    @plant = Plant.find(params[:plant_id])
    @repeat_options = Task.repeats
+   @show_form_for_images = true
   end
 
   def edit
     @plant = Plant.find(params[:plant_id])
     @repeat_options = Task.repeats
+    @show_form_for_images = true
   end
 
   def create
@@ -33,10 +35,6 @@ class TasksController < ApplicationController
     end
 
     @task = Task.new(task_params.merge( plant_id:   params[:plant_id],
-                                        user_id:    current_user.id,
-                                        begin_date: begin_date,
-                                        end_date:   end_date))
-    @task.update(task_params.merge( plant_id:   params[:plant_id],
                                         user_id:    current_user.id,
                                         begin_date: begin_date,
                                         end_date:   end_date))
@@ -61,6 +59,11 @@ class TasksController < ApplicationController
     end
 
     @task.update(task_params.merge(begin_date: begin_date, end_date: end_date))
+
+#    @task_image = @task.task_images.build(task_params[:task_image])
+#    @task_image.save
+    require 'logger'
+    Logger.new("log/debug.log").debug(params)
 
     @plant = Plant.find(params[:plant_id])
     redirect_to plant_tasks_path(@task.plant)
@@ -91,6 +94,8 @@ class TasksController < ApplicationController
 private
 
   def task_params
-    params.require(:task).permit(:title, :desc, :start, :stop, :repeat, :plant_id, :user_id, :hide, :begin_date, :end_date)
+    params.require(:task).permit(:title, :desc, :start, :stop,
+                             :repeat, :plant_id, :user_id,
+                             :hide, :begin_date, :end_date)
   end
 end

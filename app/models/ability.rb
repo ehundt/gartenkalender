@@ -26,6 +26,10 @@ class Ability
       can :manage, Task, :plant => { :user_id => user.id }
       can :read,   Task, :plant => { :public => true }
 
+      can :create,              TaskImage
+      can :download_task_image, TaskImage, :task  => { :user_id => user.id }
+      can :download_task_image, TaskImage, :task  => { :plant => { :public => true } }
+
       can :create, DoneTask
       can :manage, DoneTask, :task => { :plant => { :user_id => user.id } }
 

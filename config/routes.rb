@@ -43,6 +43,11 @@ Rails.application.routes.draw do
         patch 'unhide'
       end
       resources :done_tasks, except: :index
+      resources :task_images, only: [:download_task_image, :create] do
+        member do
+          get 'download_task_image'
+        end
+      end
     end
     resources :comments, only: [:index, :destroy, :create]
     get 'done_tasks/index'

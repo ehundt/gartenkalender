@@ -1,0 +1,24 @@
+<% @task.task_images.each do |task_image| %>
+  <div class="row">
+    <div class="col-xs-12 sidebar-image">
+      <%= image_tag(download_task_image_plant_task_task_image_path(@plant, @task, task_image, {size: :medium}), class: "img-rounded img-responsive") %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 sidebar-image">
+      <h5>
+      <%= task_image.title %>
+    </h5>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <span class="small-info"><%= display_date_time(task_image.updated_at) %></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 sidebar-image">
+      <%= task_image.desc %>
+    </div>
+  </div>
+<% end %>
