@@ -8,7 +8,7 @@
 
 <h3>Meine Aufgaben</h3>
 
-<% if @plant.tasks.empty? %>
+<% if @tasks.empty? %>
   ...noch keine Aufgaben.<br><br>
 
   <h4>Neue Aufgabe anlegen</h4>
@@ -17,7 +17,7 @@
 <% else %>
   <table class="table">
 
-    <% @plant.tasks.each do |task| %>
+    <% @tasks.each do |task| %>
       <tr>
         <td>
           <% if task.hide %>
@@ -30,8 +30,16 @@
             </div>
           <% end %>
         </td>
-        <td class="show-details">
-          <a><%= task.title %> <small><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></small></a>
+
+        <td>
+          <% if !task.task_images.empty? && task.task_images[0].image.file? %>
+            <%= image_tag(download_task_image_plant_task_task_image_path(@plant, task, task.task_images[0], {size: :thumb}), class: "img-rounded img-responsive") %>
+
+          <% end %>
+        </td>
+
+        <td>
+          <%= link_to task.title, plant_task_path(task.plant, task) %>
         </td>
         <td>
           <% if user_signed_in? %>
@@ -54,51 +62,6 @@
             <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
             <%= link_to 'Entfernen', [task.plant, task], method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "delete-link" %>
           <% end %>
-        </td>
-      </tr>
-
-      <tr class="task-details">
-        <td colspan="4">
-
-          <div class="panel panel-default">
-            <div class="panel-body">
-              <div class="row">
-                <div class="col-xs-12">
-                  <% if task_time_frame(task).present? %>
-                    <strong>Zeitraum:</strong>&nbsp;<%= task_time_frame(task) %>
-                    &nbsp;<%= image_tag "green_flower_icon.png", width: "15px" %>&nbsp;
-                  <% end %>
-
-                  <strong>Wiederholung:</strong>
-                  <%= task.repeat.humanize %>
-                </div>
-              </div>
-              <br>
-
-              <div class="row">
-                <div class="col-xs-12">
-                  <%= raw markdown.render(task.desc) %>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-xs-12 task-action-links">
-                  <% if can? :manage, task %>
-                      <% if task.upcoming? %>
-                        <%= link_to "überspringen", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id, done_task: { skipped: true } }), method: :post, class: "btn btn-default", role: "button" %>&nbsp;
-                      <% end %>
-                      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
-                        erledigt
-                      </button>
-                  <% end %>
-                </div>
-                <%= done_task_modal(task, nil) %>
-              </div>
-
-            </div>
-          </div>
-
-
         </td>
       </tr>
     <% end %>

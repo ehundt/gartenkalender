@@ -1,13 +1,5 @@
 var onPageReady = function(){
 
-  $('.show-details').on('click', function(){
-    $(this).parent().next().toggle();
-    $(this).parent().next().children().css("border-top", "0px solid #fff");
-
-    var chevron = $(this).children("a").children().children().first();
-    $(chevron).toggleClass("glyphicon-chevron-down glyphicon-chevron-up");
-  });
-
   $('.task-visibility').on('click', function(){
     var $task_id = $(this).data("task-id");
     var $plant_id = $(this).data("plant-id");

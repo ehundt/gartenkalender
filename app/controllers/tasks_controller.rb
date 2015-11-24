@@ -7,6 +7,7 @@ class TasksController < ApplicationController
   def index
     @plant = Plant.find(params[:plant_id])
     @help_content_path = "/tasks"
+    @tasks = @plant.tasks.includes(:task_images).references(:task_images)
   end
 
   def show
