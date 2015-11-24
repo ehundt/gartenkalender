@@ -1,15 +1,15 @@
-<% if @task_image && @task_image.id
-     task_image = @task_image
-   else
-     task_image = @task.task_images.build
-   end
-%>
+<div class="row sidebar-form-space">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">Bildüberschrift</span>
+      <%= f.text_field :title, :class => "form-control",
+         "aria-label" => "Bildüberschrift" %>
+    </div>
+  </div>
+</div>
 
-<%= form_for([@plant, @task, task_image], html: { multipart: true }) do |f| %>
-
-  <%#= f.fields_for :task_image do |ff| %>
-  <%#= form_for :task_image, html: { multipart: true }) do |f| %>
-  <div class="row form-space">
+<% if show_file_input_field %>
+  <div class="row sidebar-form-space">
     <div class="col-xs-12">
       <div class="input-group">
         <span class="input-group-addon" id="basic-addon1">Bild</span>
@@ -18,30 +18,31 @@
       </div>
     </div>
   </div>
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Bildunterschrift</span>
-        <%= f.text_field :title, :class => "form-control",
-           "aria-label" => "Bildunterschrift" %>
-      </div>
-    </div>
-  </div>
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Bildbeschreibung</span>
-        <%= f.text_area :desc, :class => "form-control",
-           "aria-label" => "Bildbeschreibung" %>
-      </div>
-    </div>
-  </div>
-      <% if f.object && f.object.persisted? %>
-        <%= f.check_box :_destroy %>
-        <%= f.label :_destroy, "Entfernen" %>
-      <% end %>
 
-  <div class="pull-right form-space">
-    <%= f.submit "Bild hochladen", :class => "btn btn-success" %>
+<% else %>
+  <div class="row">
+    <div class="col-xs-12 sidebar-form-space">
+      <%= link_to image_tag(download_task_image_plant_task_task_image_path(@plant, @task, task_image, {size: :medium}), class: "img-rounded img-responsive"), edit_plant_task_path(@plant, @task) %>
+    </div>
   </div>
 <% end %>
+
+<div class="row sidebar-form-space">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">Bildbeschreibung</span>
+      <%= f.text_area :desc, :class => "form-control",
+         "aria-label" => "Bildbeschreibung" %>
+    </div>
+  </div>
+</div>
+
+<%# TODO %>
+<% if f.object && f.object.persisted? %>
+  <%= f.check_box :_destroy %>
+  <%= f.label :_destroy, "Entfernen" %>
+<% end %>
+
+<div class="pull-right sidebar-form-space">
+  <%= f.submit "Bild speichern", :class => "btn btn-success" %>
+</div>

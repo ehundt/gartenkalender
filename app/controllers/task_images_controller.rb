@@ -13,6 +13,8 @@ class TaskImagesController < ApplicationController
   end
 
   def update
+    @task_image.update(task_image_params)
+    redirect_to request.referrer
   end
 
   def destroy
@@ -26,6 +28,6 @@ class TaskImagesController < ApplicationController
 private
 
   def task_image_params
-    params.require(:task_image).permit(:image, :title, :description)
+    params.require(:task_image).permit(:image, :title, :desc)
   end
 end
