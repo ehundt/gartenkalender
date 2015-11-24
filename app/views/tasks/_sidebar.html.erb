@@ -1,11 +1,11 @@
 <% if @show_form_for_images && @task && @task.id %>
   <% content_for :sidebar do %>
-    <%= render template: "/task_images/edit" %>
+    <%= render partial: "/task_images/edit" %>
   <% end %>
 
 <% elsif @task && !@task.task_images.empty? %>
   <% content_for :sidebar do %>
-    <%= render template: "/task_images/show" %>
+    <%= render partial: "/task_images/show" %>
   <% end %>
 
 <% else %>

@@ -1,0 +1,26 @@
+<h4><%= link_to @task.title, plant_task_path(@plant, @task) %></h4>
+
+<% @task.task_images.each do |task_image| %>
+  <div class="task-image-form-container">
+    <%= form_for(task_image,
+                 url: plant_task_task_image_path(@plant, @task, task_image),
+                 html: { multipart: true }) do |f| %>
+      <%= render partial: "/task_images/form",
+                 locals: { f: f,
+                           show_file_input_field: false,
+                           task_image: task_image } %>
+    <% end %>
+  </div>
+<% end %>
+
+<% if @task.task_images.empty? %>
+  <%= render partial: "/plants/sidebar" %>
+  <br>
+<% end %>
+
+<h5>Neues Bild:</h5>
+<%= form_for([@plant, @task, @task.task_images.build],
+             html: { multipart: true }) do |f| %>
+  <%= render partial: "/task_images/form",
+             locals: { f: f, show_file_input_field: true } %>
+<% end %>

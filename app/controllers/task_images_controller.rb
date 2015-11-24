@@ -18,6 +18,8 @@ class TaskImagesController < ApplicationController
   end
 
   def destroy
+    @task_image.destroy
+    redirect_to request.referer
   end
 
   def download_task_image

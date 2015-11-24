@@ -37,10 +37,9 @@
   </div>
 </div>
 
-<%# TODO %>
 <% if f.object && f.object.persisted? %>
-  <%= f.check_box :_destroy %>
-  <%= f.label :_destroy, "Entfernen" %>
+  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+  <%= link_to 'Entfernen', plant_task_task_image_path(@plant, @task, f.object), method: :delete, data: { confirm: 'Wollen Sie dieses Bild mit Titel und Beschreibung wirklich löschen?' }, class: "delete-link" %>
 <% end %>
 
 <div class="pull-right sidebar-form-space">

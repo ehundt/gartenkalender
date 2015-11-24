@@ -71,7 +71,6 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-
     redirect_to request.referer
   end
 

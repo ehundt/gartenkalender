@@ -28,6 +28,7 @@ class Ability
 
       can :create,              TaskImage
       can :update,              TaskImage, :task => { :user_id => user.id }
+      can :destroy,             TaskImage, :task => { :user_id => user.id }
       can :download_task_image, TaskImage, :task => { :user_id => user.id }
       can :download_task_image, TaskImage, :task => { :plant => { :public => true } }
 
