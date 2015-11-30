@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 ruby '2.2.0'
+# on heroku: Old: ruby 2.0.0p645 (2015-04-13 revision 50299) [x86_64-linux]
+#            New: ruby 2.2.0p0 (2014-12-25 revision 49005) [x86_64-linux]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

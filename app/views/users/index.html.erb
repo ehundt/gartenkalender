@@ -17,7 +17,7 @@
     </td>
     <td><%= link_to "#{user.display_name}", user %></td>
     <% if current_user.admin? %><td><%= user.email %></td><% end %>
-    <% if current_user.admin? %><td><%= user.admin %></td><% end %>
+    <% if current_user.admin? %><td><%= display_date_time(user.last_sign_in_at) %></td><% end %>
     <td>
       <strong>
         <%= link_to user.plants.where(public: true).count, user %>
