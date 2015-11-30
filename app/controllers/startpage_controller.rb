@@ -1,19 +1,17 @@
 class StartpageController < ApplicationController
+  before_filter :authenticate_user!, only: [:index]
+
   load_and_authorize_resource
 
   def index
-    unless user_signed_in?
-      render template: "/startpage/logged_out/welcome" and return
+    unless current_user.first_steps_seen?
+      render template: "/first_steps/copy_plant_carousel"
+      current_user.update_attribute(:first_steps_seen, true) and return
     else
-      unless current_user.first_steps_seen?
-        render template: "/first_steps/copy_plant_carousel"
-        current_user.update_attribute(:first_steps_seen, true) and return
+      if current_user.plants.empty?
+        render template: "/startpage/welcome" and return
       else
-        if current_user.plants.empty?
-          render template: "/startpage/welcome"
-        else
-          @upcoming_tasks = Task.upcoming_tasks_for_user(current_user)
-        end
+        @upcoming_tasks = Task.upcoming_tasks_for_user(current_user)
       end
     end
     @help_content_path = "/startpage"
