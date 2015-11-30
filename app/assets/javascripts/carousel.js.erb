@@ -33,7 +33,9 @@ var $firstAnimatingElems = $myCarousel.find('.item:first')
 doAnimations($firstAnimatingElems);
 
 // Pause the carousel
-$myCarousel.carousel('pause');
+if ($myCarousel.data("pause")){
+  $myCarousel.carousel('pause');
+}
 
 // Attach our doAnimations() function to the
 // carousel's slide.bs.carousel event
