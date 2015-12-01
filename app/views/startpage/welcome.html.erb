@@ -1,34 +1,13 @@
-<div class="row welcome">
+<div class="row">
   <div class="col-md-12">
-    <h2>Herzlich willkommen!</h2>
+    <h2>Meine Aufgaben</h2>
+    <h4>Du hast noch keine Pflanzen angelegt?</h4>
   </div>
 </div>
-<div class="row welcome">
+<div class="row">
   <div class="col-md-12">
-    Bevor Du hier Deine Aufgabenliste sehen kannst, müsstest Du Dir Pflanzen
-    anlegen.
+    <%= link_to (image_tag "welcome_copy_plant.jpg", class: "img-rounded welcome-img"), search_index_path() %>
+    &nbsp;
+    <%= link_to (image_tag "welcome_new_plant.jpg", class: "img-rounded welcome-img"), new_plant_path() %>
   </div>
-</div>
-<div class="row welcome">
-  <div class="col-md-12">
-    Entweder Du kopierst Dir Pflanzen von anderen Gartenfreunden&nbsp;
-    <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-    <%= link_to "Pflanze suchen", search_index_path, class: "btn btn-default", role: "button" %>
-  </div>
-</div>
-<div class="row welcome">
-  <div class="col-md-12">
-    oder legst Deine eigenen Pflanzen an&nbsp;
-    <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-    <%= link_to "Neue Pflanze", new_plant_path, class: "btn btn-default", role: "button" %>
-  </div>
-</div>
-<div class="row welcome">
-  <div class="col-md-12">
-    Hier geht es zum&nbsp;
-    <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-    <%= link_to "Tutorial", startpage_first_steps_path(), class: "btn btn-default", role: "button" %>
-  </div>
-</div>
-<div class="row welcome">
 </div>
