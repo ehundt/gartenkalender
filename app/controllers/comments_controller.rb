@@ -14,9 +14,8 @@ class CommentsController < ApplicationController
     unless comment_params[:comment].blank?
       @comment = @plant.comments.create(comment_params.merge(user_id: current_user.id))
 
-      # email to all other commenters # there shouldn't be more than 1000 commenters per plant
-      # therefore we don't need to use find_each or find_in_batches
-      @plant.commenters.each do |email_to_user|
+      # email to all other commenters
+      @plant.commenters.find_each do |email_to_user|
         unless email_to_user == current_user
           UserMailer.comment_created_email(@plant, email_to_user, current_user).deliver_now
         end

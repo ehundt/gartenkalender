@@ -1,7 +1,12 @@
   <h2><%= title "Jetzt anstehende Aufgaben" %></h2>
 
   <% if @upcoming_tasks.empty? %>
-    <p>Geniesse Deinen Garten, es gibt nichts zu tun!</p>
+  <%# TODO: SQL?? only count plants %>
+    <% if current_user.plants.empty? %>
+      <%= render partial: "/startpage/welcome" %>
+    <% else %>
+      <p>Geniesse Deinen Garten, es gibt nichts zu tun!</p>
+    <% end %>
 
   <% else %>
     <table class="table table-responsive">
