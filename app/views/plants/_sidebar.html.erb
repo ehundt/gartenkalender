@@ -1,42 +1,44 @@
 <% content_for :sidebar do %>
   <% if @plant %>
-    <div class="row">
-      <div class="col-xs-12">
-
-        <% if current_user && @plant.creator != current_user %>
-          <div data-toggle="popover"
-               data-container="body"
-               data-trigger="focus"
-               role="button"
-               tabindex="0"
-               data-placement="bottom"
-               data-content="Nur der/die ursprüngliche AutorIn kann die Pflanzenbeschreibung veröffentlichen.">
-        <% end %>
-
-        <div class="plant-visibility"
-             data-plant-id="<%= @plant.id %>"
-             data-switch-allowed="<% if @plant.creator == current_user %>1<% else %>0<% end %>"
-             >
-          <% if @plant.public %>
-            <% if current_user && @plant.creator == current_user %>
-              <%= image_tag("world-globe32x32.png") %> <span>&nbsp;öffentlich</span>
-            <% else %>
-              <%= image_tag("world-globe32x32_grey.png") %> <span>&nbsp;öffentlich</span>
-            <% end %>
-          <% else %>
-            <% if current_user && @plant.creator == current_user %>
-              <%= image_tag("not-world-globe32x32.png") %> <span>&nbsp;privat</span>
-            <% else %>
-              <%= image_tag("not-world-globe32x32_grey.png") %> <span>&nbsp;privat</span>
-            <% end %>
-          <% end %>
+    <% if user_signed_in? %>
+      <div class="row">
+        <div class="col-xs-12">
 
           <% if current_user && @plant.creator != current_user %>
-            </div>
+            <div data-toggle="popover"
+                 data-container="body"
+                 data-trigger="focus"
+                 role="button"
+                 tabindex="0"
+                 data-placement="bottom"
+                 data-content="Nur der/die ursprüngliche AutorIn kann die Pflanzenbeschreibung veröffentlichen.">
           <% end %>
+
+          <div class="plant-visibility"
+               data-plant-id="<%= @plant.id %>"
+               data-switch-allowed="<% if @plant.creator == current_user %>1<% else %>0<% end %>"
+               >
+            <% if @plant.public %>
+              <% if current_user && @plant.creator == current_user %>
+                <%= image_tag("world-globe32x32.png") %> <span>&nbsp;öffentlich</span>
+              <% else %>
+                <%= image_tag("world-globe32x32_grey.png") %> <span>&nbsp;öffentlich</span>
+              <% end %>
+            <% else %>
+              <% if current_user && @plant.creator == current_user %>
+                <%= image_tag("not-world-globe32x32.png") %> <span>&nbsp;privat</span>
+              <% else %>
+                <%= image_tag("not-world-globe32x32_grey.png") %> <span>&nbsp;privat</span>
+              <% end %>
+            <% end %>
+
+            <% if current_user && @plant.creator != current_user %>
+              </div>
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
+    <% end -%>
 
     <div class="row">
       <div class="col-xs-12 sidebar-image">
