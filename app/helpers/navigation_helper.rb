@@ -33,7 +33,7 @@ module NavigationHelper
       output += display_tab(plant, "Meine Pflanze", "small-nav")
       output += display_tab(plant_tasks_path(plant), "Meine Aufgaben", "small-nav")
       output += display_tab(new_plant_task_path(plant), "Neue Aufgabe", "small-nav")
-      output += display_tab(plant_done_tasks_index_path(plant), "Erledigt", "small-nav")
+      output += display_tab(plant_done_tasks_path(plant), "Erledigt", "small-nav")
 
       unless plant.original?
         if plant.original.public
@@ -49,7 +49,7 @@ module NavigationHelper
       output += display_tab(plant.copy_of(current_user), "Meine Pflanze", "small-nav")
       output += display_tab(plant_tasks_path(plant.copy_of(current_user)), "Meine Aufgaben", "small-nav")
       output += display_tab(new_plant_task_path(plant), "Neue Aufgabe", "small-nav")
-      output += display_tab(plant_done_tasks_index_path(plant.copy_of(current_user)), "Erledigt", "small-nav")
+      output += display_tab(plant_done_tasks_path(plant.copy_of(current_user)), "Erledigt", "small-nav")
       output += display_tab(plant, "Original", "small-nav")
 
     else

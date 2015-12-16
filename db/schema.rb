@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151120140129) do
+ActiveRecord::Schema.define(version: 20151215114407) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,13 +31,15 @@ ActiveRecord::Schema.define(version: 20151120140129) do
     t.integer  "task_id"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
-    t.boolean  "skipped",    default: false,                 null: false
+    t.boolean  "skipped",    default: false
     t.datetime "date",       default: '2015-05-04 09:32:25', null: false
     t.datetime "deleted_at"
     t.string   "notice"
+    t.integer  "plant_id"
   end
 
   add_index "done_tasks", ["deleted_at"], name: "index_done_tasks_on_deleted_at", using: :btree
+  add_index "done_tasks", ["plant_id"], name: "index_done_tasks_on_plant_id", using: :btree
   add_index "done_tasks", ["task_id"], name: "index_done_tasks_on_task_id", using: :btree
 
   create_table "plants", force: :cascade do |t|

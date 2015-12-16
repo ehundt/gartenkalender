@@ -69,9 +69,8 @@
     <% if can? :manage, @task %>
         <% if @task.upcoming? %>
           <%= link_to "überspringen",
-                      plant_task_done_tasks_path({ task_id: @task.id,
-                                                   plant_id: @task.plant.id,
-                                                   done_task: { skipped: true } }),
+                      plant_done_tasks_path({ plant_id: @task.plant.id,
+                                              done_task: { skipped: true } }),
                       method: :post,
                       class:  "btn btn-default",
                       role:   "button" %>
@@ -81,7 +80,6 @@
           erledigt
         </button>
 
-        <%= done_task_modal(@task, nil) %>
     <% end %>
   </div>
 </div>

@@ -33,7 +33,7 @@ class Ability
       can :download_task_image, TaskImage, :task => { :plant => { :public => true } }
 
       can :create, DoneTask
-      can :manage, DoneTask, :task => { :plant => { :user_id => user.id } }
+      can :manage, DoneTask, :plant => { :user_id => user.id }
 
       can :read, Startpage
       can :entry, Startpage

@@ -28,14 +28,28 @@
         </div>
       </td>
       <td>
-        <%= done_task_modal(task, nil) %>
+        <%= form_for :done_task, method: :post,
+              url: plant_done_tasks_path(task.plant) do |f| %>
+          <%= render partial: "done_tasks/modal",
+                     locals: { plant:     task.plant,
+                               task:      task,
+                               modal_id:  task.id,
+                               done_task: nil,
+                               f:         f,
+                               skipped:   nil } %>
+        <% end %>
+
 
         <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
           erledigt
         </button>
       </td>
       <td>
-        <%= link_to "überspringen", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id, done_task: { skipped: true } }), method: :post, class: "btn btn-default", role: "button"  %>
+        <%= link_to "überspringen",
+              plant_done_tasks_path({
+                plant_id:   task.plant.id,
+                done_task:  { skipped: true, task_id: task.id } }),
+              method: :post, class: "btn btn-default", role: "button"  %>
       </td>
      </tr>
     <% end %>

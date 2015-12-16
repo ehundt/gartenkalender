@@ -7,19 +7,22 @@
 </div>
 
 <h3>Erledigte Aufgaben</h3>
-<% unless @done_tasks.empty? %>
-  <table class="table">
-    <tr>
-      <th>Aufgabe</th>
-      <th>Notiz</th>
-      <th>Datum</th>
-      <th></th>
-      <th></th>
-    </tr>
-    <% @plant.tasks.order(updated_at: :desc).each do |task| %>
-      <%= render task.done_tasks %>
-    <% end %>
-  </table>
-<% else %>
+<% if @done_tasks.empty? %>
   ...noch keine erledigten Aufgaben.
 <% end %>
+
+<table class="table">
+  <tr>
+    <th>Aufgabe</th>
+    <th>Notiz</th>
+    <th>Datum</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <%= render partial: "form" %>
+
+  <% @done_tasks.each do |done_task| %>
+    <%= render done_task %>
+  <% end %>
+</table>

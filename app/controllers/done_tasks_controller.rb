@@ -5,7 +5,7 @@ class DoneTasksController < ApplicationController
 
   def index
     @plant = Plant.find(params[:plant_id])
-    @done_tasks = DoneTask.where("task_id in (?)", @plant.tasks.pluck(:id))
+    @done_tasks = DoneTask.includes(:plant).where("plant_id in (?)", @plant.id).order(date: :desc)
   end
 
   def edit
@@ -14,7 +14,8 @@ class DoneTasksController < ApplicationController
   end
 
   def create
-    dt_params = done_task_params.merge(task_id: params[:task_id])
+    dt_params = done_task_params.merge( plant_id: params[:plant_id] )
+
     @done_task = DoneTask.new(dt_params)
 
     if @done_task.save
@@ -39,7 +40,6 @@ class DoneTasksController < ApplicationController
 
   def destroy
     @done_task = DoneTask.find(params[:id])
-    plant = @done_task.task.plant
     @done_task.destroy
 
     redirect_to request.referer

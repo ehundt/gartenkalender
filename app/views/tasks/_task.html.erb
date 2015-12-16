@@ -72,7 +72,19 @@
               </button>
           <% end %>
         </div>
-        <%= done_task_modal(task, nil) %>
+
+        <% if can? :manage, task %>
+          <%= form_for :done_task, method: :post,
+             url: plant_done_tasks_path(plant) do |f| %>
+            <%= render partial: "done_tasks/modal",
+                    locals: { plant:     plant,
+                              task:      task,
+                              modal_id:  task.id,
+                              done_task: nil,
+                              f:         f,
+                              skipped:   nil } %>
+          <% end %>
+        <% end %>
       </div>
     </div>
   </div>

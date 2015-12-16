@@ -22,7 +22,7 @@ class Task < ActiveRecord::Base
   }
 
   def self.all_for_user(user, hide=false)
-    self.where(hide: hide).where('plant_id IN (?)', user.plants.where(active: true).select(:id))
+    self.where(hide: hide).where('tasks.plant_id IN (?)', user.plants.where(active: true).select(:id))
   end
 
   def self.upcoming_tasks_for_user(user)
@@ -118,7 +118,7 @@ class Task < ActiveRecord::Base
   end
 
   def done?
-    !current_done_task.nil? && !current_done_task.skipped
+    !current_done_task.nil? && ( current_done_task.skipped == false )
   end
 
   def skipped?
