@@ -14,45 +14,47 @@
       <h2><%= title "Meine Pflanzen" %></h2>
     </div>
 
-    <div class="col-xs-6 list-options">
-      Sortieren nach
-      <div class="btn-group">
-        <button type="button" class="btn btn-default">
-          <%= link_with_params(:sorting, @selected_sorting, @selected_filter) %>
-          <% @sorting_options.delete(@selected_sorting) %>
-        </button>
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="caret"></span>
-        </button>
+    <% unless @plants.empty? %>
+      <div class="col-xs-6 list-options">
+        Sortieren nach
+        <div class="btn-group">
+          <button type="button" class="btn btn-default">
+            <%= link_with_params(:sorting, @selected_sorting, @selected_filter) %>
+            <% @sorting_options.delete(@selected_sorting) %>
+          </button>
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+          </button>
 
-        <ul class="dropdown-menu">
-          <% @sorting_options.each do |sorting_param| %>
-            <li>
-              <%= link_with_params(:sorting, sorting_param, @selected_filter) %>
-            </li>
-          <% end %>
-        </ul>
+          <ul class="dropdown-menu">
+            <% @sorting_options.each do |sorting_param| %>
+              <li>
+                <%= link_with_params(:sorting, sorting_param, @selected_filter) %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+
+        &nbsp;Auswahl:
+        <div class="btn-group">
+          <button type="button" class="btn btn-default">
+            <%= link_with_params(:selection, @selected_sorting, @selected_filter) %>
+            <% @filter_options.delete(@selected_filter) %>
+          </button>
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+          </button>
+
+          <ul class="dropdown-menu">
+            <% @filter_options.each do |filter| %>
+              <li>
+                <%= link_with_params(:selection, @selected_sorting, filter) %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
       </div>
-
-      &nbsp;Auswahl:
-      <div class="btn-group">
-        <button type="button" class="btn btn-default">
-          <%= link_with_params(:selection, @selected_sorting, @selected_filter) %>
-          <% @filter_options.delete(@selected_filter) %>
-        </button>
-        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="caret"></span>
-        </button>
-
-        <ul class="dropdown-menu">
-          <% @filter_options.each do |filter| %>
-            <li>
-              <%= link_with_params(:selection, @selected_sorting, filter) %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
+    <% end %>
   <% end %>
 </div>
 
