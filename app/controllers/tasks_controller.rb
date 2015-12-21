@@ -1,6 +1,11 @@
 class TasksController < ApplicationController
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, except: [:index, :show]
+
+  # TODO: should it be a different type of filter?
+  # used after_filter instead of before_filter because I need to
+  # load the plant first in order to know whether it s public or not
+  after_filter :authenticate_user_for_private_plants, only: [:index, :show]
 
   load_and_authorize_resource
 
@@ -97,5 +102,11 @@ private
     params.require(:task).permit(:title, :desc, :start, :stop,
                              :repeat, :plant_id, :user_id,
                              :hide, :begin_date, :end_date)
+  end
+
+  def authenticate_user_for_private_plants
+    unless @plant.public
+      authenticate_user!
+    end
   end
 end

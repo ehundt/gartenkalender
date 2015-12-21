@@ -104,6 +104,8 @@ group :test do
 #    gem "spork-rails", "~> 3.2.1"
 end
 
+gem 'sitemap_generator'
+
 # changes in Rails 5:
 # this is to monitor the file system for changes in dev mode to know
 # when the Rails application has to be reloaded during development

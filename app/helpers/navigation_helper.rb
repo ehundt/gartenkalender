@@ -52,16 +52,13 @@ module NavigationHelper
       output += display_tab(plant_done_tasks_path(plant.copy_of(current_user)), "Erledigt", "small-nav")
       output += display_tab(plant, "Original", "small-nav")
 
+    # anonymous user or plant is not copied and not my plant
     else
       output += display_tab(plant, "Original", "small-nav")
+      output += display_tab(plant_tasks_path(plant), "Aufgaben", "small-nav")
     end
 
-    if plant.comments.present?
-      output += display_tab(plant_comments_path(plant.original), "Kommentare", "small-nav")
-      # TODO: why is plant.public == nil when it s actually false in DB???
-    elsif plant.public
-      output += display_tab(plant_comments_path(plant.original), "Kommentare", "small-nav")
-    elsif plant.original.public
+    if plant.original.public
       output += display_tab(plant_comments_path(plant.original), "Kommentare", "small-nav")
     end
 
