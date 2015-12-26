@@ -3,7 +3,7 @@ default from: 'persoenlicher.gartenkalender@gmail.com'
 
   def invite_email(email, user)
     @user = user
-    mail(to: email, subject: 'Persönlicher Gartenkalender')
+    mail(to: email, subject: 'Mein Garten')
   end
 
   def contact_us_email(subject, text, user)
