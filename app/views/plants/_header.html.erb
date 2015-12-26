@@ -16,7 +16,7 @@
       <% end %>
       <%= title @plant.name %>
       <% if @plant.user != current_user %>
-        <small>von <%= link_to @plant.creator.display_name, users_path(@plant.creator) %></small>
+        <small>von <%= link_to @plant.creator.display_name, user_path(@plant.creator) %></small>
       <% end %>
     </h2>
   </div>
