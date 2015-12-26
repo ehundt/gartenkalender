@@ -8,7 +8,10 @@
   </div>
   <div class="row">
     <div class="col-xs-12">
-      <%= image_tag(download_task_image_plant_task_task_image_path(@plant, @task, task_image, {size: :medium}), class: "img-rounded img-responsive") %>
+      <%= image_tag(download_task_image_plant_task_task_image_path(@plant, @task, task_image, {size: :medium}),
+            class: "img-rounded img-responsive",
+            alt:   "#{@plant.name}-#{@task.title}",
+            title: "#{@plant.name}-#{@task.title}") %>
     </div>
   </div>
   <div class="row">

@@ -42,7 +42,7 @@
 
     <div class="row">
       <div class="col-xs-12 sidebar-image">
-        <%= link_to image_tag(download_main_image_plant_path(@plant, {size: :medium}), class: "img-rounded img-responsive"), @plant  %>
+        <%= link_to image_tag(download_main_image_plant_path(@plant, {size: :medium}), class: "img-rounded img-responsive", alt: @plant.name, title: @plant.name), @plant  %>
       </div>
     </div>
 
