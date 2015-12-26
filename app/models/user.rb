@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  extend FriendlyId
+  friendly_id :display_name, use: [:slugged, :finders]
+
   has_many :plants
 
   has_attached_file :picture,

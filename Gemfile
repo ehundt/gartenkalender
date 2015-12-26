@@ -79,7 +79,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  # gem 'spring'
 
 #    gem 'debugger'
   gem 'better_errors', '~> 2.1.1'
@@ -105,6 +105,8 @@ group :test do
 end
 
 gem 'sitemap_generator'
+
+gem 'friendly_id', '~> 5.1.0'
 
 # changes in Rails 5:
 # this is to monitor the file system for changes in dev mode to know

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151215114407) do
+ActiveRecord::Schema.define(version: 20151226153652) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,19 @@ ActiveRecord::Schema.define(version: 20151215114407) do
   add_index "done_tasks", ["deleted_at"], name: "index_done_tasks_on_deleted_at", using: :btree
   add_index "done_tasks", ["plant_id"], name: "index_done_tasks_on_plant_id", using: :btree
   add_index "done_tasks", ["task_id"], name: "index_done_tasks_on_task_id", using: :btree
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string   "slug",                      null: false
+    t.integer  "sluggable_id",              null: false
+    t.string   "sluggable_type", limit: 50
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "plants", force: :cascade do |t|
     t.string   "name"
@@ -140,10 +153,12 @@ ActiveRecord::Schema.define(version: 20151215114407) do
     t.datetime "picture_updated_at"
     t.boolean  "show_welcome_page",      default: true
     t.boolean  "first_steps_seen",       default: false
+    t.string   "slug"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
 
   create_table "votes", force: :cascade do |t|
     t.integer  "votable_id"

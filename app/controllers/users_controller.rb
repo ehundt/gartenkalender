@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     @help_content_path = "/users"
     @all_plants_count = @user.plants.count
     @public_plants_count = @user.plants.where(public: true).count
@@ -22,11 +22,11 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     @user.update(user_params)
     if current_user.admin?
       @user.admin = (params[:user][:admin] == "1") ? 1 : 0
@@ -36,14 +36,14 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     @user.destroy
 
     redirect_to users_path
   end
 
   def download_picture
-    @user = User.find(params[:id])
+    @user = User.friendly.find(params[:id])
     size = params[:size] || :small
     redirect_to @user.picture.expiring_url(10, size)
   end
