@@ -1,7 +1,9 @@
 <tr>
   <td>
     <% if plant.main_image.file? %>
-      <%= link_to image_tag(download_main_image_plant_path(plant, {size: :thumb}), class: "img-rounded img-responsive"), plant %>
+      <%= link_to image_tag(download_main_image_plant_path(plant, {size: :thumb}), class: "img-rounded img-responsive",
+         alt: plant.name,
+         title: plant.name), plant %>
       <%#= link_to image_tag(plant.main_image.expiring_url(10, :thumb), class: "img-rounded img-responsive"), plant %>
     <% end %>
   </td>
