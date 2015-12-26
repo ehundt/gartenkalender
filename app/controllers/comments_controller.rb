@@ -15,7 +15,7 @@ class CommentsController < ApplicationController
       @comment = @plant.comments.create(comment_params.merge(user_id: current_user.id))
 
       # email to all other commenters
-      @plant.commenters.find_each do |email_to_user|
+      @plant.commenters.each do |email_to_user|
         unless email_to_user == current_user
           UserMailer.comment_created_email(@plant, email_to_user, current_user).deliver_now
         end
