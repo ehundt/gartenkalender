@@ -4,6 +4,6 @@
 User-agent: *
 Disallow: /users/
 Disallow: /startpage/index/
-Disallow: /plants/new
+Disallow: /plants/new/
 
 Sitemap: http://gartenkalender.herokuapp.com/sitemap.xml.gz
