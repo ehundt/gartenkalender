@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151226153652) do
+ActiveRecord::Schema.define(version: 20151226171036) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,10 +79,12 @@ ActiveRecord::Schema.define(version: 20151226153652) do
     t.string   "soil"
     t.float    "ph_from"
     t.float    "ph_to"
+    t.string   "slug"
   end
 
   add_index "plants", ["cached_votes_total"], name: "index_plants_on_cached_votes_total", using: :btree
   add_index "plants", ["deleted_at"], name: "index_plants_on_deleted_at", using: :btree
+  add_index "plants", ["slug"], name: "index_plants_on_slug", using: :btree
   add_index "plants", ["user_id"], name: "index_plants_on_user_id", using: :btree
 
   create_table "seasons", force: :cascade do |t|

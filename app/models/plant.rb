@@ -15,6 +15,9 @@ class Plant < ActiveRecord::Base
     :default_url => "/images/:style/missing_plant.png",
     :path        => '/:class/main_image/:id/:style/:filename'
 
+  extend FriendlyId
+  friendly_id :name, use: [:slugged, :finders]
+
   validates :name, presence: true
 
   validates_attachment :main_image,

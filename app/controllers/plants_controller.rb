@@ -63,7 +63,7 @@ class PlantsController < ApplicationController
   end
 
   def show
-    @plant = Plant.find(params[:id])
+    @plant = Plant.friendly.find(params[:id])
     @done_tasks = Array.new()
 
     # TODO: tasks sortieren nach Datum unabhängig vom Jahr: Januar, Februar, etc.
@@ -87,7 +87,7 @@ class PlantsController < ApplicationController
   end
 
   def edit
-    @plant = Plant.find(params[:id])
+    @plant = Plant.friendly.find(params[:id])
   end
 
   def create
@@ -106,7 +106,7 @@ class PlantsController < ApplicationController
   end
 
   def update
-    @plant = Plant.find(params[:id])
+    @plant = Plant.friendly.find(params[:id])
 
     success = true
     unless @plant.update(plant_params)
@@ -124,7 +124,7 @@ class PlantsController < ApplicationController
   end
 
   def clone
-    @plant = Plant.find(params[:id])
+    @plant = Plant.friendly.find(params[:id])
     if @plant
       redirect_to @plant.clone_for(current_user)
     else
@@ -133,7 +133,7 @@ class PlantsController < ApplicationController
   end
 
   def vote
-    @plant = Plant.find(params[:id])
+    @plant = Plant.friendly.find(params[:id])
     success = false
     if @plant && @plant.user_id != current_user
       @plant.liked_by current_user
@@ -147,7 +147,7 @@ class PlantsController < ApplicationController
   end
 
   def unvote
-    @plant = Plant.find(params[:id])
+    @plant = Plant.friendly.find(params[:id])
     success = false
     if (@plant && current_user.voted_for?(@plant))
       @plant.unliked_by current_user
@@ -161,7 +161,7 @@ class PlantsController < ApplicationController
   end
 
   def activate
-    @plant = Plant.find(params[:id])
+    @plant = Plant.friendly.find(params[:id])
     if @plant
       @plant.update(active: true)
     end
@@ -171,7 +171,7 @@ class PlantsController < ApplicationController
   end
 
   def inactivate
-    @plant = Plant.find(params[:id])
+    @plant = Plant.friendly.find(params[:id])
     if @plant
       @plant.update(active: false)
     end # TODO
@@ -181,13 +181,13 @@ class PlantsController < ApplicationController
   end
 
   def download_main_image
-    @plant = Plant.find(params[:id])
+    @plant = Plant.friendly.find(params[:id])
     size = params[:size] || :small
     redirect_to @plant.main_image.expiring_url(10, size)
   end
 
   def destroy
-    @plant = Plant.find(params[:id])
+    @plant = Plant.friendly.find(params[:id])
     @plant.destroy
 
     redirect_to plants_path
