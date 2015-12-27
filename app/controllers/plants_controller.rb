@@ -79,8 +79,8 @@ class PlantsController < ApplicationController
     @help_content_path = "/plants"
 
     # meta tags
-    @page_description = "#{@plant.name}: Pflegetipps und Infos rund um die Pflanze."
-    @page_keywords = "#{@plant.name}, #{@plant.subtitle}, #{@plant.category}" + I18n.t("page_keywords")
+    set_meta_tags description: "#{@plant.name}: Pflegetipps und Infos rund um die Pflanze."
+    set_meta_tags keywords:    "#{@plant.name}, #{@plant.subtitle}, #{@plant.category}" + I18n.t("page_keywords")
   end
 
   def new

@@ -15,6 +15,9 @@ class SearchController < ApplicationController
                       :creator  => params[:search_creator] }
 
     @help_content_path = "/search"
+
+    set_meta_tags description: "Alle veröffentlichten Pflanzen mit Pflegetipps im Überblick."
+    set_meta_tags keywords: "Pflanzen, Pflege, Garten, gärtnern, Gartenpraxis, Pflanzenlexikon, Pflanzenschutz"
   end
 
 private
