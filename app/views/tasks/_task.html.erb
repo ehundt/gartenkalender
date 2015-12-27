@@ -75,9 +75,9 @@
 
         <% if can? :manage, task %>
           <%= form_for :done_task, method: :post,
-             url: plant_done_tasks_path(plant) do |f| %>
+             url: plant_done_tasks_path(task.plant) do |f| %>
             <%= render partial: "done_tasks/modal",
-                    locals: { plant:     plant,
+                    locals: { plant:     task.plant,
                               task:      task,
                               modal_id:  task.id,
                               done_task: nil,
