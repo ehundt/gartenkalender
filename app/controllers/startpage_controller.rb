@@ -24,7 +24,7 @@ class StartpageController < ApplicationController
 
   def entry
     # meta tags
-    set_meta_tags description: "Persönlicher Garten-Organizer mit dynamischer TODO-Liste und sozialem Netzwerk zum Thema Garten."
+    set_meta_tags description: "Persönlicher Garten-Organizer mit dynamischer TODO-Liste sowie soziales Netzwerk zum Thema Pflanzenpflege."
     set_meta_tags keywords: "Pflanzen, Pflege, Garten, gärtnern, Gartenpraxis, Pflanzenlexikon, Pflanzenschutz, Netzwerk, Gartenkalender"
 
     render layout: "entry", template: "startpage/entry"
