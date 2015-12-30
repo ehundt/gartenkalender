@@ -9,7 +9,7 @@ SitemapGenerator::Sitemap.create do
   add '/static_pages/impressum'
   add '/static_pages/recommendations'
 
-  Plant.where(public: true).find_each do |plant|
+  Plant.friendly.where(public: true).find_each do |plant|
     images = []
     if plant.main_image.file?
       images.push({:loc  => download_main_image_plant_path(plant),
