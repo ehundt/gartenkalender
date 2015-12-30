@@ -31,6 +31,9 @@ gem "paperclip", "~> 4.2"
 # newer version is buggy, see:
 # http://ruby.awsblog.com/post/TxFKSK2QJE6RPZ/Upcoming-Stable-Release-of-AWS-SDK-for-Ruby-Version-2
 gem 'aws-sdk', '< 2.0'
+# Module for the 'fog' gem to support Amazon Web Services:
+gem 'fog', require: 'fog/aws'
+gem 'carrierwave'
 
 gem "paranoia", "~> 2.0"
 gem 'acts_as_votable', '~> 0.10.0'

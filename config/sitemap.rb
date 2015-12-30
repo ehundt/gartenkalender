@@ -1,5 +1,14 @@
 # Set the host name for URL creation
 SitemapGenerator::Sitemap.default_host = "http://gartenkalender.herokuapp.com"
+SitemapGenerator::Sitemap.sitemaps_host = "http://gartenkalender.s3.amazonaws.com"
+SitemapGenerator::Sitemap.public_path = 'tmp/'
+SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
+SitemapGenerator::Sitemap.adapter = SitemapGenerator::WaveAdapter.new(
+                                         fog_provider: 'AWS',
+                                         aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+                                         aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
+                                         fog_directory: ENV['S3_BUCKET_NAME'],
+                                         fog_region: 'us-east')
 
 SitemapGenerator::Sitemap.create do
 
