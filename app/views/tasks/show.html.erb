@@ -84,6 +84,17 @@
   </div>
 </div>
 
+<%= form_for :done_task,
+    url: plant_done_tasks_path(@task.plant, @task) do |f| %>
+  <%= render partial: "done_tasks/modal",
+               locals: { plant:     @task.plant,
+                         task:      @task,
+                         modal_id:  @task.id,
+                         done_task: nil,
+                         f:         f,
+                         skipped:   false } %>
+<% end %>
+
 <% if @task.plant.user == current_user %>
   <% unless @task.done_tasks.empty? %>
     <h4>Erledigte Aufgaben</h4>

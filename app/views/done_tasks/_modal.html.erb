@@ -12,7 +12,11 @@
             <%= f.text_area :notice, :class => "form-control", rows: "4" %>
           <br>
 
-          <% skipped = done_task.present? ? done_task.skipped : nil %>
+          <% if task and task.id %>
+            <%= f.hidden_field :task_id, :value => task.id %>
+          <% end %>
+
+          <% skipped = done_task.present? ? done_task.skipped : false %>
           <%= f.select :skipped,
               options_for_select([[ "erstellt am", nil   ],
                                   [ "übersprungen am", true  ],

@@ -14,7 +14,22 @@ class DoneTasksController < ApplicationController
   end
 
   def create
-    dt_params = done_task_params.merge( plant_id: params[:plant_id] )
+    @plant = Plant.friendly.find(params[:plant_id])
+    unless @plant && ( can? :manage, @plant )
+      redirect_to request.referer
+    end
+
+    if done_task_params[:task_id]
+      @task = Task.find(done_task_params[:task_id])
+      unless @task.nil? || ( can? :manage, @task)
+        redirect_to request.referer
+      end
+    end
+
+    dt_params = done_task_params.merge( plant_id: @plant.id )
+    if @task
+      dt_params = dt_params.merge( task_id: @task.id )
+    end
 
     @done_task = DoneTask.new(dt_params)
 
