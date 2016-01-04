@@ -1,0 +1,49 @@
+<div id="tasks" class="row">
+  <div class="col-md-3">
+    <div class="row">
+      <div class="col-md-12 huge-title">
+          Erste Schritte
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 first-steps-desc">
+        <%= image_tag "first_steps/grey_circle_tasks.png", class: "img-responsive" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9 first-steps-desc">
+    <h4>Aufgaben = Pflegeanweisungen</h4>
+    Beim Kopieren einer Pflanze werden auch die zugehörigen Aufgaben kopiert.
+    Du kannst die Aufgaben an Deine Bedürfnisse anpassen:
+    <br>
+    <%# TODO: image einer kopierten Pflanze verwenden und tab einkreisen %>
+    <%= image_tag "first_steps/edit_task.png", class: "img-rounded img-responsive carousel-image"  %>
+    <br>
+    Du kannst neue Aufgaben hinzufügen, bestehende Aufgaben bearbeiten oder löschen. Ist Deine Pflanze privat, so sind es auch die zugehörigen Aufgaben.
+    <br><br>
+    Du möchtest eine Übersicht über die anstehenden Aufgaben aller Deiner Pflanzen sehen?
+    <br>
+    <%= image_tag "first_steps/tasks_overview.png", class: "img-rounded img-responsive carousel-image" %>
+    <br>
+    <h4>
+      Was wird aufgelistet?
+    </h4>
+    <ul>
+      <li>nur Deine eigenen Aufgaben</li>
+      <li>nur aktuelle Aufgaben</li>
+      <li>nur noch nicht erledigte Aufgaben</li>
+      <li>nur Aufgaben von "aktiven" Pflanzen:&nbsp;
+      aktiv <%= image_tag "plant_active.gif", height: '42px', width: '30px' %> &nbsp; oder inaktiv
+      <%= image_tag "plant_inactive.gif" %></li>
+      <li>nur sichtbar geschaltete Aufgaben:&nbsp;
+          sichtbar <%= image_tag "eye_visible.jpg" %> &nbsp; oder unsichtbar
+          <%= image_tag "eye_not_visible.jpg" %>
+      </li>
+    </ul>
+    <h4>Jetzt zur
+      <%= link_to "Aufgabenliste", startpage_index_path() %>?&nbsp;
+      <%= link_to(image_tag("first_steps/todo.png", height: "60px", width: "60px", class: "carousel-image"), startpage_index_path()) %>
+    </h4>
+  </div>
+</div>

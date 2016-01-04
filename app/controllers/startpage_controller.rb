@@ -4,22 +4,12 @@ class StartpageController < ApplicationController
   load_and_authorize_resource
 
   def index
-    unless current_user.first_steps_seen?
-      render template: "/first_steps/copy_plant_carousel"
-      current_user.update_attribute(:first_steps_seen, true) and return
-    else
-      @upcoming_tasks = Task.upcoming_tasks_for_user(current_user)
-    end
+    @upcoming_tasks = Task.upcoming_tasks_for_user(current_user)
     @help_content_path = "/startpage"
   end
 
   def first_steps
-    @topic = params[:topic]
-    unless @topic =~ /^(copy_plant|tasks|comments|new_plant)$/
-      @topic = "copy_plant"
-    end
-
-    render template: "/first_steps/#{@topic}_carousel"
+    render layout: "first_steps", template: "startpage/first_steps"
   end
 
   def entry

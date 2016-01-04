@@ -1,0 +1,43 @@
+<div id="new_plant" class="row">
+  <div class="col-md-3">
+    <div class="row">
+      <div class="col-md-12 huge-title">
+          Erste Schritte
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 first-steps-desc">
+        <%= image_tag "first_steps/grey_circle_new_plant.png", class: "img-responsive" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9 first-steps-desc">
+    Hier kannst Du neue Pflanzen erstellen:<br>
+    <%= image_tag "first_steps/new_plant.png", "data-animation" => "animated bounceInRight", class: "img-rounded img-responsive carousel-image" %>
+    <br><br>
+    Die Pflanze inklusive Aufgaben kann privat oder öffentlich gemacht werden:
+    <br>
+    <%= image_tag "not-world-globe32x32.png" %>
+    oder
+    <%= image_tag "world-globe32x32.png" %>
+    <br><br>
+    Veröffentlichte Pflanzen können von jedem Gartenfreund für den privaten Gebrauch kopiert werden.
+    <br><br>
+    Nur von Dir selbst erstellte Pflanzen können veröffentlicht werden.
+    <br><br>
+    Die Pflanzenbeschreibung sollte nur die Pflanze an sich beschreiben und keine Pflegeanweisungen enthalten.
+    <br><br>
+    Für die Beschreibung kannst Du Mark Down verwenden:
+    <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Hilfe zu Mark Down</a>.
+    <br><br>
+    Es kommt hauptsächlich auf die Aufgaben bzw. Pflegeanweisungen an!
+    Nach dem Speichern der Pflanze kannst Du neue Aufgaben anlegen:<br>
+    <%= image_tag "first_steps/new_task.png", class: "img-rounded img-responsive carousel-image" %>
+
+    <h4>Jetzt starten?&nbsp;
+    <%= link_to "Neue Pflanze anlegen", new_plant_path() %>
+    </h4>
+    </br><br>
+  </div>
+</div>

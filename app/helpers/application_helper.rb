@@ -13,10 +13,4 @@ module ApplicationHelper
       #l date_time, :format => :default
     end
   end
-
-  def show_first_steps?
-    (( current_user.present? && !current_user.first_steps_seen? &&
-            current_page?(controller: 'startpage', action: 'index')) ||
-            current_page?(startpage_first_steps_path))
-  end
 end

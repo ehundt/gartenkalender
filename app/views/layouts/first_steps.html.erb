@@ -37,22 +37,7 @@
       </div>
     </div>
 
-    <div class="row">
-      <div id="sidebar" class="col-md-3 sidebar-container">
-        <%#= render 'seasons/current_season' %>
-        <%=  yield :sidebar %>
-      </div>
-      <div id="content" class="col-md-8 content-container">
-         <% flash.each do |name, msg| -%>
-           <%= content_tag :div, msg, class: "alert alert-#{name}" %>
-         <% end -%>
-
-         <%= yield %>
-      </div>
-      <div class="hidden-xs col-md-1">
-        <%= render partial: 'shared/iconbar' %>
-      </div>
-    </div>
+    <%= yield %>
   </div>
 
   <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">

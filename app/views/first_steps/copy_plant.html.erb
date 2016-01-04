@@ -1,0 +1,31 @@
+<div id="copy_plant" class="row">
+  <div class="col-md-3">
+    <div class="row">
+      <div class="col-md-12 huge-title">
+          Erste Schritte
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 first-steps-desc">
+        <%= image_tag "first_steps/grey_circle.png", class: "img-responsive" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-9 first-steps-desc">
+    Als allererstes kannst Du nachgucken, ob die Pflanze, die Dich interessiert, schon von einem anderen Gartenfreund beschrieben wurde:<br>
+    <%= image_tag "first_steps/plant_search.png", class: "img-rounded img-responsive carousel-image" %>
+    <br>
+    Wenn Du eine Pflanzenbeschreibung gefunden hast, kannst Du sie für Deinen privaten Gebrauch kopieren:
+    <br>
+    <%= image_tag "first_steps/copy_plant.png", class: "img-rounded img-responsive carousel-image" %>
+    <br>
+    Kopierte Pflanzen können nicht veröffentlicht werden und nur Du allein siehst Deine Kopie. Du kannst deine Pflanze nach Herzenslust bearbeiten. Die Originalversion der Pflanze wird dadurch nicht verändert.
+    <%= image_tag "first_steps/edit_plant.png", class: "img-rounded img-responsive carousel-image" %>
+    <br>
+    <h4>Jetzt starten?&nbsp;
+      <%= link_to "Pflanze suchen", search_index_path() %>&nbsp;
+      <%= link_to(image_tag("lupe.png", width: "80px", height: "80px"), search_index_path()) %>
+    </h4>
+  </div>
+</div>
