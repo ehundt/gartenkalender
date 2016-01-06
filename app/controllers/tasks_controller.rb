@@ -40,13 +40,12 @@ class TasksController < ApplicationController
       end_date = end_date.change(year: 2)
     end
 
-    @task = Task.new(task_params.merge( plant_id:   params[:plant_id],
+    @plant = Plant.find(params[:plant_id])
+
+    @task = Task.new(task_params.merge( plant_id:   @plant.id,
                                         user_id:    current_user.id,
                                         begin_date: begin_date,
                                         end_date:   end_date))
-
-    @plant = Plant.find(params[:plant_id])
-
     if @task.save
       flash[:success] = "Die Aufgabe wurde erfolgreich gespeichert."
       redirect_to plant_tasks_path(@plant)
