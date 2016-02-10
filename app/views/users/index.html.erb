@@ -8,6 +8,18 @@
 <h2><%= title "Gartenfreunde" %></h2>
 
 <table class="table">
+
+<% if current_user.admin? %>
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Last sign in</th>
+    <th>Anzahl Sign ins</th>
+    <th>Anzahl Pflanzen</th>
+    <th></th>
+  </tr>
+<% end %>
 <% @users.each do |user| %>
   <tr>
     <td>

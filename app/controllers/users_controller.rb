@@ -9,7 +9,7 @@ class UsersController < ApplicationController
       # TODO: split on spaces
       @users = User.where("first_name IN (?) OR last_name IN (?)", search_terms, search_terms).page params[:page]
     else
-      @users = User.all.page params[:page]
+      @users = User.all.order(last_sign_in_at: :desc).page params[:page]
     end
   end
 
