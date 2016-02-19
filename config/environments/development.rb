@@ -59,4 +59,5 @@ Rails.application.configure do
     }
   }
 
+  config.phaeno_url = 'http://localhost:10524/api/v1/seasons/current'
 end

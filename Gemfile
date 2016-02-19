@@ -27,6 +27,8 @@ gem 'autoprefixer-rails'
 
 gem "paperclip", "~> 4.2"
 
+gem "rest-client"
+
 # Amazon webservices S3
 # newer version is buggy, see:
 # http://ruby.awsblog.com/post/TxFKSK2QJE6RPZ/Upcoming-Stable-Release-of-AWS-SDK-for-Ruby-Version-2

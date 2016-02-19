@@ -1,0 +1,38 @@
+<h2><%= title "Aktuelle phaenologische Jahreszeit" %></h2>
+
+<h4>Bitte einen Standort wählen:</h4>
+
+<%= form_for :season, url: { action: "show" } do |f| %>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Breitengrad</span>
+          <%= f.text_field :latitude, :class => "form-control",
+             "aria-label" => "Breitengrad" %>
+      </div>
+    </div>
+  </div>
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Längengrad</span>
+          <%= f.text_field :longitude, :class => "form-control",
+             "aria-label" => "Längengrad" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row form-space">
+    <div class="col-xs-12">
+      <%= f.submit "Aktuelle phaenologische Jahreszeit an meinem Standort",
+          :class => "btn btn-success" %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  navigator.geolocation.getCurrentPosition(function(position) {
+    document.querySelector('#season_latitude').value = position.coords.latitude;
+    document.querySelector('#season_longitude').value = position.coords.longitude;
+  });
+</script>

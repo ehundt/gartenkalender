@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   get 'static_pages/contact'
   post 'static_pages/contact'
 
+  resources :seasons, only: :new
+  post 'seasons/show'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

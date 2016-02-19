@@ -39,4 +39,6 @@ Rails.application.configure do
 
   # Raises error for missing translations
   config.action_view.raise_on_missing_translations = true
+
+  config.phaeno_url = 'http://localhost:10524/api/v1/seasons/current'
 end

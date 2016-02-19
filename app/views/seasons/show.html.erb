@@ -1,0 +1,11 @@
+<h2><%= title "Aktuelle phaenologische Jahreszeit" %></h2>
+
+<h5>Die aktuelle phaenologische Jahreszeit am angegebenen Standort ist:</h5>
+<h4><%= @season.season %></h4>
+gemeldet am <%= @season.reporting_date %>
+am Standort "<%= @season.station %>":
+<br>
+<%= @season.plant %>:
+<%= @season.phase %>
+
+<%#= @season.description %>
