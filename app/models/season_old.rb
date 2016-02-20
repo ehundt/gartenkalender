@@ -1,4 +1,4 @@
-class Season < ActiveRecord::Base
+class SeasonOld < ActiveRecord::Base
   PHAENOLOG_SEASONS = [ :vorfrühling, :erstfrühling, :vollfrühling,
                       :frühsommer, :hochsommer, :spätsommer,
                       :frühherbst, :vollherbst, :spätherbst,
