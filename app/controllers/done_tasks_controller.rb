@@ -19,7 +19,7 @@ class DoneTasksController < ApplicationController
       redirect_to request.referer
     end
 
-    if done_task_params[:task_id]
+    if done_task_params[:task_id].to_i > 0
       @task = Task.find(done_task_params[:task_id])
       unless @task.nil? || ( can? :manage, @task)
         redirect_to request.referer
