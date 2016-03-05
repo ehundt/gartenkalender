@@ -2,9 +2,9 @@ module NavigationHelper
 
   def display_tabs
     output = "<ul class=\"nav nav-tabs\" role=\"tablist\">"
-    output += display_tab(search_index_path, "Pflanzensuche")
     output += display_tab(startpage_index_path, "Meine Aufgaben")
     output += display_tab(plants_path, "Meine Pflanzen")
+    output += display_tab(search_index_path, "Pflanzensuche")
     output += display_tab(new_plant_path, "Neue Pflanze")
     output += display_tab(users_path, "Gartenfreunde")
     output += "</ul>"
@@ -30,9 +30,9 @@ module NavigationHelper
 
     # plant is my plant
     if (user_signed_in? and plant.user == current_user)
-      output += display_tab(plant, "Meine Pflanze", "small-nav")
-      output += display_tab(plant_tasks_path(plant), "Meine Aufgaben", "small-nav")
-      output += display_tab(new_plant_task_path(plant), "Neue Aufgabe", "small-nav")
+      output += display_tab(plant, "Beschreibung", "small-nav")
+      output += display_tab(plant_tasks_path(plant), "Pflege", "small-nav")
+#      output += display_tab(new_plant_task_path(plant), "Neue Aufgabe", "small-nav")
       output += display_tab(plant_done_tasks_path(plant), "Erledigt", "small-nav")
 
       unless plant.original?
@@ -46,19 +46,19 @@ module NavigationHelper
     # plant is not my plant
     # i have copied plant
     elsif user_signed_in? && plant.copied_by?(current_user)
-      output += display_tab(plant.copy_of(current_user), "Meine Pflanze", "small-nav")
-      output += display_tab(plant_tasks_path(plant.copy_of(current_user)), "Meine Aufgaben", "small-nav")
-      output += display_tab(new_plant_task_path(plant), "Neue Aufgabe", "small-nav")
+      output += display_tab(plant.copy_of(current_user), "Beschreibung", "small-nav")
+      output += display_tab(plant_tasks_path(plant.copy_of(current_user)), "Pflege", "small-nav")
+#      output += display_tab(new_plant_task_path(plant), "Neue Aufgabe", "small-nav")
       output += display_tab(plant_done_tasks_path(plant.copy_of(current_user)), "Erledigt", "small-nav")
       output += display_tab(plant, "Original", "small-nav")
 
     # anonymous user or plant is not copied and not my plant
     else
       output += display_tab(plant, "Original", "small-nav")
-      output += display_tab(plant_tasks_path(plant), "Aufgaben", "small-nav")
+      output += display_tab(plant_tasks_path(plant), "Pflege", "small-nav")
     end
 
-    if plant.original.public
+    if plant.original.public || plant.comments.count > 0
       output += display_tab(plant_comments_path(plant.original), "Kommentare", "small-nav")
     end
 

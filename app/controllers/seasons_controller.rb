@@ -20,7 +20,8 @@ class SeasonsController < ApplicationController
         # TODO: error handling
         if response
           result = JSON.parse(response)
-
+# TODO: better error handling!
+          @error          = result["error"]
           @season.season         = result["season"]
           @season.plant          = result["plant"]
           @season.station        = result["station"]

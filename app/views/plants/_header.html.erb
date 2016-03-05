@@ -17,6 +17,8 @@
       <%= title @plant.name %>
       <% if @plant.user != current_user %>
         <small>von <%= link_to @plant.creator.display_name, user_path(@plant.creator) %></small>
+      <% elsif @plant.user != @plant.creator %>
+        <small><small>kopiert von <%= link_to @plant.creator.display_name, user_path(@plant.creator) %> am <%= l @plant.created_at, format: :very_short %></small></small>
       <% end %>
     </h2>
   </div>
