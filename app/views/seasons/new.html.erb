@@ -13,12 +13,12 @@
     myGeoPositionGeoPicker({
       startPositionLat : document.querySelector('#latitude').value,
       startPositionLng : document.querySelector('#longitude').value,
+      startAddress     : document.querySelector('#address').value,
       returnFieldMap   : {
                            'latitude'  : '<LAT>',
                            'longitude' : '<LNG>',
                            'address'   : '<ADDRESS>'
-                         },
-      showStartupInfoWindow    : 'false'
+                         }
     });
   }
 </script>
