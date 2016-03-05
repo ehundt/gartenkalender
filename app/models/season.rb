@@ -3,7 +3,7 @@ class Season
 
   attr_accessor :latitude, :longitude, :season, :plant, :station, :reporting_date, :phase
   validates :latitude, :longitude, presence: true,
-                                   format: { with: /\A\d+\.\d+\z/,
+                                   format: { with: /\A\d+(\.\d+)*\z/,
                                              message: "keine gültige Geolocation" }
 
   def deliver

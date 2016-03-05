@@ -9,37 +9,32 @@ class SeasonsController < ApplicationController
 #      redirect_to new_season_path
 #    end
 
-    @season = Season.new( latitude: params[:season][:latitude],
-                         longitude: params[:season][:longitude] )
+    begin
+      @season = Season.new( latitude: params[:season][:latitude],
+                            longitude: params[:season][:longitude] )
 
-    if @season.valid?
-      begin
+      if @season.valid?
         response = RestClient.get Rails.application.config.phaeno_url,
                   { :params => @season.geolocation,
                     :accept => :json }
         # TODO: error handling
         if response
           result = JSON.parse(response)
-# TODO: better error handling!
-          @error          = result["error"]
+          raise if result["error"]
           @season.season         = result["season"]
           @season.plant          = result["plant"]
           @season.station        = result["station"]
           @season.phase          = result["phase"]
-          @season.reporting_date = result["reporting_date"]
+          @season.reporting_date = Date.parse(result["reporting_date"])
         end
-
-      rescue => ex
-        Rails.logger.fatal ex
-        flash[:danger] = "Leider ist ein Fehler aufgetreten. Bitte kontaktiere gartenkalender@gmail.com bei wiederholtem Auftreten des Fehlers."
-        redirect_to new_season_path
+      else
+        raise "Invalid season parameters! Params = #{params.inspect}, season = #{@season.inspect}"
       end
-    else
-      flash[:danger] = "Fehler: #{@season.errors.messages}"
+
+    rescue => ex
+      Rails.logger.fatal ex
+      flash[:danger] = "Leider ist ein Fehler aufgetreten. Bitte kontaktiere gartenkalender@gmail.com. Vielen Dank."
+      redirect_to new_season_path
     end
-
-
-    require 'logger'
-    Logger.new("log/debug.log").debug(response.inspect)
   end
 end
