@@ -1,7 +1,7 @@
 <h2><%= title "Aktuelle phaenologische Jahreszeit" %></h2>
 
 <h4><%= @season.season %></h4>
-gemeldet am <%= l @season.reporting_date, format: :long %>
+Beim <a href="http://www.dwd.de">deutschen Wetterdienst</a> gemeldet am <%= l @season.reporting_date, format: :long %>
 am Standort "<%= @season.station %>":
 <br>
 <%= @season.plant %>:
