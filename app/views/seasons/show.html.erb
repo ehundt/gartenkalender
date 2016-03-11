@@ -8,7 +8,7 @@
 <% end %>
 
 Beim <a href="http://www.dwd.de" target="_blank">deutschen Wetterdienst</a> gemeldet am <%= l @season.reporting_date, format: :long %>
-am Standort "<%= @season.station %>":
+am Standort "<%= @season.station %>" (Entfernung: <%= @distance %>):
 <br>
 <%= @season.plant %>:
 <%= @season.phase %>

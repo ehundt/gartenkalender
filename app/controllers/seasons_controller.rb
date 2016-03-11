@@ -22,7 +22,14 @@ class SeasonsController < ApplicationController
           @season.phase          = result["phase"]
           @season.reporting_date = Date.parse(result["reporting_date"])
           @address               = params[:season][:address]
+          @distance              = result["distance"]
         end
+
+        # TODO: get address via gem geokit-rails
+        # @latlng = Geokit::LatLng.new(geolocation[:latitude],geolocation[:longitude])
+    # res = Geokit::Geocoders::GoogleGeocoder.reverse_geocode [geolocation[:latitude],geolocation[:longitude]].join(",")
+    # address = res.full_address
+
       rescue Errno::ECONNREFUSED => ex
         Rails.logger.fatal "FATAL: #{ex}"
         flash[:danger] = "Der Server antwortet nicht. Bitte kontakiere gartenkalender@gmail.com bei wiederholtem Auftreten. Danke."
