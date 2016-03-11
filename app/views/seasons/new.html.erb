@@ -1,71 +1,81 @@
-<h2><%= title "Phaenologische Jahreszeit" %></h2>
+<h2><%= title "Aktuelle phaenologische Jahreszeit" %></h2>
 
-<h4>Aktuelle phaenologische Jahreszeit am folgenden Standort:</h4>
+Die phaenologische Jahreszeit ist standortabhängig. Zur Bestimmung der aktuellen phaenologischen Jahreszeit wird die dem angegebenen Standort am nächsten
+  liegende Wetterstation des deutschen Wetterdienstes gesucht und deren aktuellste
+  phaenologische Meldung bestimmt.
 
 <script src="http://api.mygeoposition.com/api/geopicker/api.js" type="text/javascript"></script>
 
 <script type="text/javascript">
+
   navigator.geolocation.getCurrentPosition(function(position) {
-    document.querySelector('#latitude').value = position.coords.latitude;
+    document.querySelector('#latitude').value  = position.coords.latitude;
     document.querySelector('#longitude').value = position.coords.longitude;
+    window.appEvents.notify("geolocation.gotPositionFromBrowser");
   });
+
   function lookupGeoData() {
-    myGeoPositionGeoPicker({
+    var rv = myGeoPositionGeoPicker({
       startPositionLat : document.querySelector('#latitude').value,
       startPositionLng : document.querySelector('#longitude').value,
       startAddress     : document.querySelector('#address').value,
-      returnFieldMap   : {
-                           'latitude'  : '<LAT>',
-                           'longitude' : '<LNG>',
-                           'address'   : '<ADDRESS>'
-                         }
+      returnCallback   : 'onLookupGeoData'
     });
   }
+
+  function onLookupGeoData(e) {
+    window.appEvents.notify("geolocation.lookup", e);
+  }
+
+  window.appEvents.observe("geolocation.gotPositionFromBrowser", function(data) {
+    $('form[name="geolocation"] :submit').prop("disabled", false);
+  })
+
+  window.appEvents.observe("geolocation.lookup", function(data) {
+    console.log("geolocation.lookup", data);
+    document.getElementById('latitude').value = data.lat;
+    document.getElementById('longitude').value = data.lng;
+    document.getElementById('address').value = data.address;
+    document.forms["geolocation"].submit();
+  })
 </script>
 
-<%= form_for :season, url: { action: "show" } do |f| %>
+<%= form_for :season, url: { action: "show" }, html: { name: "geolocation" } do |f| %>
   <div class="row form-space">
     <div class="col-xs-12">
       <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Breitengrad</span>
-          <%= f.text_field :latitude, :class => "form-control",
-             :id => "latitude", "aria-label" => "Breitengrad" %>
+        <span class="input-group-addon">Breitengrad</span>
+        <%= f.text_field :latitude, :class => "geolocation-form",
+           :id => "latitude", "aria-label" => "Breitengrad" %>
       </div>
     </div>
   </div>
   <div class="row form-space">
     <div class="col-xs-12">
       <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Längengrad</span>
-          <%= f.text_field :longitude, :class => "form-control",
-             :id => "longitude", "aria-label" => "Längengrad" %>
-      </div>
-    </div>
-  </div>
-  <div class="row form-space">
-    <div class="col-xs-12">
-      <div class="input-group">
-        <span class="input-group-addon" id="basic-addon1">Adresse</span>
-          <%= f.text_field :address, :class => "form-control",
-             :id => "address", "aria-label" => "Adresse" %>
+        <span class="input-group-addon">Längengrad</span>
+        <%= f.text_field :longitude, :class => "geolocation-form",
+           :id => "longitude", "aria-label" => "Längengrad" %>
       </div>
     </div>
   </div>
 
+  <%= f.hidden_field :address, :class => "hidden-form-element",
+     :id => "address", "aria-label" => "Adresse" %>
 
   <div class="row form-space">
-    <div class="col-xs-12">
-      Einen anderen Standort wählen:
-      <button type="button" onclick="lookupGeoData();" class="btn btn-success">GeoPicker</button>
+    <div class="col-xs-2">
+      <button type="button" onclick="lookupGeoData();" class="btn">Standort wählen</button>
     </div>
-    <div class="col-xs-12">
-    </div>
-  </div>
-
-  <div class="row form-space">
-    <div class="col-xs-12">
+    <div class="col-xs-10">
       <%= f.submit "Abfragen",
-          :class => "btn btn-success" %>
+          :class => "btn btn-success",
+          :disabled => true %>
+    </div>
+  </div>
+
+  <div class="row form-space phaeno-go-button">
+    <div class="col-xs-12">
     </div>
   </div>
 <% end %>

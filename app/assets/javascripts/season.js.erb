@@ -1,0 +1,30 @@
+var onPageReady = function(){
+  window.appEvents = {
+    observers: { },
+    notify: function(name, data) {
+      var h = this.observers[name];
+      if (h) {
+        for (var i = 0; i < h.length; i++) {
+          h[i](data);
+        }
+      }
+    },
+    observe: function(name, observer) {
+      if (!this.observers[name]) this.observers[name] = [ ];
+      this.observers[name].push(observer);
+    },
+    unobserve: function(name, observer) {
+      if (!this.observers[name]) return;
+      var h = this.observers[name];
+      for (var i = 0; i < h.length; i++) {
+        if (h[i] == observer) {
+          h.splice(i, 1);
+        }
+      }
+    }
+  };
+};
+
+onPageReady();
+// $(document).ready(onPageReady);
+//$(document).on("page:load", onPageReady);

@@ -1,6 +1,12 @@
 <h2><%= title "Aktuelle phaenologische Jahreszeit" %></h2>
 
 <h4><%= @season.season %></h4>
+
+<% unless @address.empty? %>
+  Die nächste Station mit relevanten Daten von:<br><br>
+  <%= @address %><br><br>
+<% end %>
+
 Beim <a href="http://www.dwd.de" target="_blank">deutschen Wetterdienst</a> gemeldet am <%= l @season.reporting_date, format: :long %>
 am Standort "<%= @season.station %>":
 <br>

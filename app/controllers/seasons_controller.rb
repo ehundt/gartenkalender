@@ -4,20 +4,15 @@ class SeasonsController < ApplicationController
   end
 
   def show
-#    unless (/^\d+\.\d+$/ =~ params[:season][:latitude] && /^\d+\.\d+$/ =~ params[:season][:longitude])
-#      flash[:danger] = "Die phaenologische Jahreszeit ist abhängig vom Standort. Ohne korrekte Längen- und Breiteninformationen kann die Jahreszeit nicht bestimmt werden."
-#      redirect_to new_season_path
-#    end
+    @season = Season.new( latitude: params[:season][:latitude],
+                          longitude: params[:season][:longitude],
+                          address: params[:season][:address] )
 
-    begin
-      @season = Season.new( latitude: params[:season][:latitude],
-                            longitude: params[:season][:longitude] )
-
-      if @season.valid?
+    if @season.valid?
+      begin
         response = RestClient.get Rails.application.config.phaeno_url,
                   { :params => @season.geolocation,
                     :accept => :json }
-        # TODO: error handling
         if response
           result = JSON.parse(response)
           raise if result["error"]
@@ -26,14 +21,17 @@ class SeasonsController < ApplicationController
           @season.station        = result["station"]
           @season.phase          = result["phase"]
           @season.reporting_date = Date.parse(result["reporting_date"])
+          @address               = params[:season][:address]
         end
-      else
-        raise "Invalid season parameters! Params = #{params.inspect}, season = #{@season.inspect}"
+      rescue Errno::ECONNREFUSED => ex
+        Rails.logger.fatal "FATAL: #{ex}"
+        flash[:danger] = "Der Server antwortet nicht. Bitte kontakiere gartenkalender@gmail.com bei wiederholtem Auftreten. Danke."
+        redirect_to new_season_path
       end
 
-    rescue => ex
-      Rails.logger.fatal ex
-      flash[:danger] = "Leider ist ein Fehler aufgetreten. Bitte kontaktiere gartenkalender@gmail.com. Vielen Dank."
+    else
+      Rails.logger.warn "WARN: #{@season.errors.messages.values.join(", ")}"
+      flash[:danger] = "#{@season.errors.messages.values.join(", ")}"
       redirect_to new_season_path
     end
   end
