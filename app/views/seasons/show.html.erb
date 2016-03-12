@@ -1,14 +1,54 @@
 <h2><%= title "Aktuelle phaenologische Jahreszeit" %></h2>
 
-<h4><%= @season.season %></h4>
-
-<% unless @address.empty? %>
-  Die nächste Station mit relevanten Daten von:<br><br>
-  <%= @address %><br><br>
-<% end %>
-
-Beim <a href="http://www.dwd.de" target="_blank">deutschen Wetterdienst</a> gemeldet am <%= l @season.reporting_date, format: :long %>
-am Standort "<%= @season.station %>" (Entfernung: <%= @distance %>):
-<br>
-<%= @season.plant %>:
-<%= @season.phase %>
+<table class="table" id="season-metadata">
+  <tr>
+    <td colspan="2" class="season">
+      <%= @season.season %>
+    </td>
+  </tr>
+  <tr>
+    <td class="season-what">Quelle</td>
+    <td>
+      <a href="http://www.dwd.de" target="_blank">Deutscher Wetterdienst</a>
+    </td>
+  </tr>
+  <tr>
+    <td class="season-what">gemeldet am</td>
+    <td>
+      <%= l @season.reporting_date, format: :long %>
+    </td>
+  </tr>
+  <tr>
+    <td class="season-what">Indikator</td>
+    <td>
+      <b><%= @season.plant %></b>:
+      <%= @season.phase %>
+    </td>
+  </tr>
+  <tr>
+    <td class="season-what">
+      an der Wetterstation
+    </td>
+    <td>
+      "<%= @season.station %>"
+    </td>
+  </tr>
+  <% unless @address.empty? %>
+    <tr>
+      <td class="season-what">
+        Adresse
+      </td>
+      <td>
+        <%= @address %>
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <td class="season-what">
+      Entfernung vom gewünschten Standort
+    </td>
+    <td>
+      <%= @distance %>
+    </td>
+  </tr>
+</table>
