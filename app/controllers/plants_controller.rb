@@ -88,6 +88,14 @@ class PlantsController < ApplicationController
 
   def edit
     @plant = Plant.friendly.find(params[:id])
+
+    if @plant.duration % 7 == 0
+      @duration = @plant.duration / 7
+      @weeks_or_months = 7
+    else
+      @duration = @plant.duration / 30
+      @weeks_or_months = 30
+    end
   end
 
   def create
@@ -108,8 +116,10 @@ class PlantsController < ApplicationController
   def update
     @plant = Plant.friendly.find(params[:id])
 
+    duration = plant_params["duration"].to_i * plant_params["weeks_or_months"].to_i
+
     success = true
-    unless @plant.update(plant_params)
+    unless @plant.update(plant_params.update("duration" => duration).except("weeks_or_months"))
       success = false
       error_message = "Beim Speichern der Pflanze ist ein Fehler aufgetreten: "
       error_message += @plant.errors.full_messages.join(", ")
@@ -200,6 +210,7 @@ private
     params.require(:plant).permit(:name, :subtitle, :desc,
                                   :main_image, :tasks, :active,
                                   :public, :category, :private_notes,
-                                  :location, :ph_from, :ph_to, :soil)
+                                  :location, :ph_from, :ph_to, :soil,
+                                  :duration, :weeks_or_months)
   end
 end

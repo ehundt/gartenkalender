@@ -19,6 +19,7 @@ class Plant < ActiveRecord::Base
   friendly_id :name, use: [:slugged, :finders]
 
   validates :name, presence: true
+### TODO  validates :duration, check_duration()
 
   validates_attachment :main_image,
     :content_type => { :content_type => ["image/jpeg", "image/gif", "image/png"] },
@@ -81,5 +82,8 @@ class Plant < ActiveRecord::Base
 
   def commenters
     comments.map { |comment| comment.user }.uniq
+  end
+
+  def weeks_or_months
   end
 end

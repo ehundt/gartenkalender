@@ -20,4 +20,12 @@ module PlantsHelper
                                 #selection_param => 1,
                                 :order          => sort_options[sorting_param][:order])
   end
+
+  def display_duration(plant)
+    if plant.duration % 7 == 0
+      display_duration = "#{plant.duration / 7} Wochen"
+    else
+      display_duration = "#{plant.duration / 30} Monate"
+    end
+  end
 end

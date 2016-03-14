@@ -68,6 +68,15 @@
 <% end %>
 <br>
 
+<% if @plant.duration.present? %>
+<div class="row">
+  <div class="col-xs-12">
+    <strong>Kulturdauer:</strong> <%= display_duration(@plant) %>
+  </div>
+</div>
+<% end %>
+<br>
+
 <% if @plant.user != current_user %>
   <% unless @plant.tasks.empty? %>
     <div class="row">

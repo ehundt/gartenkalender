@@ -131,6 +131,20 @@
     </div>
   </div>
 </div>
+<div class="row form-space">
+  <div class="col-xs-12">
+    <div class="input-group">
+      <span class="input-group-addon" id="basic-addon1">Kulturdauer</span>
+
+        <input class="form-control" aria-label="Kulturdauer" type="text" value="<%= @duration %>" name="plant[duration]" id="plant_duration">
+
+        <%= f.select :weeks_or_months,
+          options_for_select([[ "Wochen", 7 ], [ "Monate", 30 ]], @weeks_or_months),
+          {},
+          { class: 'form-control'} %>
+    </div>
+  </div>
+</div>
 
 <%#
 <div class="row form-space">
