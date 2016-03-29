@@ -3,8 +3,8 @@
   für <%= @address %>
 <% end %>
 
-<% unless @error.empty? %>
-  Leider ist ein Fehler aufgetreten: <%= @error %>
+<% unless @error.nil? %>
+  <div>Leider ist ein Fehler aufgetreten: <%= @error %></div>
 <% else %>
 
 <table class="table" id="season-metadata">
