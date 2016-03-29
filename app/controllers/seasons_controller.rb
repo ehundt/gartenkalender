@@ -16,7 +16,7 @@ class SeasonsController < ApplicationController
                     :accept => :json }
         if response
           results = JSON.parse(response)
-          raise if results[0]["error"]
+          raise if results[0] && results[0]["error"]
           @address               = params[:season][:address]
 
           results.each do |result|
