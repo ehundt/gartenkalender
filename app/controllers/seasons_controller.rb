@@ -16,20 +16,26 @@ class SeasonsController < ApplicationController
                     :accept => :json }
         if response
           results = JSON.parse(response)
-          raise if results[0] && results[0]["error"]
+
+          if results[0] && results[0]["error"]
+            @error = results[0]["error"]
+          end
+
           @address               = params[:season][:address]
 
           results.each do |result|
-            # only take the first non-empty entry which is the most recent
-            if @season.nil? || @season.empty?
-              @season = result["season"]
+            unless result["error"].present?
+              # only take the first non-empty entry which is the most recent
+              if @season.nil? || @season.empty?
+                @season = result["season"]
+              end
+              @season_data.push({ plant:   result["plant"],
+                                  station: result["station"],
+                                  phase:   result["phase"],
+                                  reporting_date: Date.parse(result["reporting_date"]),
+                                  distance: result["distance"]
+                             })
             end
-            @season_data.push({ plant:   result["plant"],
-                                station: result["station"],
-                                phase:   result["phase"],
-                                reporting_date: Date.parse(result["reporting_date"]),
-                                distance: result["distance"]
-                           })
           end
         end
 

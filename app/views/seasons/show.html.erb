@@ -3,6 +3,10 @@
   für <%= @address %>
 <% end %>
 
+<% unless @error.empty? %>
+  Leider ist ein Fehler aufgetreten: <%= @error %>
+<% else %>
+
 <table class="table" id="season-metadata">
   <tr>
     <td colspan="2" class="season">
@@ -53,3 +57,4 @@
     </tr>
   <% end %>
 </table>
+<% end %>
