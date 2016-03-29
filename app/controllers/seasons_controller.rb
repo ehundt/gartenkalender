@@ -4,25 +4,33 @@ class SeasonsController < ApplicationController
   end
 
   def show
-    @season = Season.new( latitude: params[:season][:latitude],
-                          longitude: params[:season][:longitude],
-                          address: params[:season][:address] )
+    season = Season.new( latitude: params[:season][:latitude],
+                         longitude: params[:season][:longitude],
+                         address: params[:season][:address] )
+    @season_data = []
 
-    if @season.valid?
+    if season.valid?
       begin
         response = RestClient.get Rails.application.config.phaeno_url,
-                  { :params => @season.geolocation,
+                  { :params => season.geolocation,
                     :accept => :json }
         if response
-          result = JSON.parse(response)
-          raise if result["error"]
-          @season.season         = result["season"]
-          @season.plant          = result["plant"]
-          @season.station        = result["station"]
-          @season.phase          = result["phase"]
-          @season.reporting_date = Date.parse(result["reporting_date"])
+          results = JSON.parse(response)
+          raise if results[0]["error"]
           @address               = params[:season][:address]
-          @distance              = result["distance"]
+
+          results.each do |result|
+            # only take the first non-empty entry which is the most recent
+            if @season.nil? || @season.empty?
+              @season = result["season"]
+            end
+            @season_data.push({ plant:   result["plant"],
+                                station: result["station"],
+                                phase:   result["phase"],
+                                reporting_date: Date.parse(result["reporting_date"]),
+                                distance: result["distance"]
+                           })
+          end
         end
 
         # TODO: get address via gem geokit-rails

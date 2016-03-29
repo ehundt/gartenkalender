@@ -1,9 +1,12 @@
-<h2><%= title "Aktuelle phaenologische Jahreszeit" %></h2>
+<h2><%= title "Phaenologische Meldungen" %></h2>
+<% unless @address.empty? %>
+  für <%= @address %>
+<% end %>
 
 <table class="table" id="season-metadata">
   <tr>
     <td colspan="2" class="season">
-      <%= @season.season %>
+      <%= @season %>
     </td>
   </tr>
   <tr>
@@ -12,43 +15,41 @@
       <a href="http://www.dwd.de" target="_blank">Deutscher Wetterdienst</a>
     </td>
   </tr>
-  <tr>
-    <td class="season-what">gemeldet am</td>
-    <td>
-      <%= l @season.reporting_date, format: :long %>
-    </td>
-  </tr>
-  <tr>
-    <td class="season-what">Indikator</td>
-    <td>
-      <b><%= @season.plant %></b>:
-      <%= @season.phase %>
-    </td>
-  </tr>
-  <tr>
-    <td class="season-what">
-      an der Wetterstation
-    </td>
-    <td>
-      "<%= @season.station %>"
-    </td>
-  </tr>
-  <% unless @address.empty? %>
+
+  <% @season_data.each do |season| %>
+    <tr>
+      <td class="season-placeholder" colspan="2">
+        <%= image_tag "green_flower_icon.png", height: '20px', width: '20px' %>
+      </td>
+    </tr>
+    <tr>
+      <td class="season-what season-next">Indikator</td>
+      <td class="season-next">
+        <b><%= season[:plant] %></b>:
+        <%= season[:phase] %>
+      </td>
+    </tr>
+    <tr>
+      <td class="season-what">gemeldet am</td>
+      <td>
+        <%= l season[:reporting_date], format: :long %>
+      </td>
+    </tr>
     <tr>
       <td class="season-what">
-        angefragte Adresse
+        an der Wetterstation
       </td>
       <td>
-        <%= @address %>
+        "<%= season[:station] %>"
+      </td>
+    </tr>
+    <tr>
+      <td class="season-what">
+        Entfernung von der Station
+      </td>
+      <td>
+        <%= season[:distance] %>
       </td>
     </tr>
   <% end %>
-  <tr>
-    <td class="season-what">
-      Entfernung von der Station
-    </td>
-    <td>
-      <%= @distance %>
-    </td>
-  </tr>
 </table>
