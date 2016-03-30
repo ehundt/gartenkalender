@@ -21,7 +21,7 @@ class PlantsController < ApplicationController
       @searched = true
       @searched_text = params[:search_name]
       search_terms = params[:search_name].split(' ').collect { |term| '%' + term + '%' }
-      @searched_plants = Plant.where("name ILIKE ANY (array[?])", search_terms)
+      @searched_plants = Plant.where("name ILIKE ANY (array[?]) or subtitle ILIKE ANY (array[?])", search_terms, search_terms)
                               .where(user_id: current_user.id)
       if params[:only_active] == 1
         @searched_plants = @searched_plants.where(active: true)
