@@ -68,7 +68,7 @@
 <% end %>
 <br>
 
-<% if @plant.duration.present? %>
+<% if @plant.duration.present? && @plant.duration > 0 %>
 <div class="row">
   <div class="col-xs-12">
     <strong>Kulturdauer:</strong> <%= display_duration(@plant) %>
