@@ -89,12 +89,14 @@ class PlantsController < ApplicationController
   def edit
     @plant = Plant.friendly.find(params[:id])
 
-    if @plant.duration % 7 == 0
-      @duration = @plant.duration / 7
-      @weeks_or_months = 7
-    else
-      @duration = @plant.duration / 30
-      @weeks_or_months = 30
+    if @plant.duration
+      if @plant.duration % 7 == 0
+        @duration = @plant.duration / 7
+        @weeks_or_months = 7
+      else
+        @duration = @plant.duration / 30
+        @weeks_or_months = 30
+      end
     end
   end
 

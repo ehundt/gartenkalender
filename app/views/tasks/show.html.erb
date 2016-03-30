@@ -97,7 +97,7 @@
 
 <% if @task.plant.user == current_user %>
   <% unless @task.done_tasks.empty? %>
-    <h4>Erledigte Aufgaben</h4>
+    <h4>Tagebuch: <%= @task.title %></h4>
     <table class="table">
       <tr>
         <th>Aufgabe</th>

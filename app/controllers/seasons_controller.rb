@@ -32,6 +32,7 @@ class SeasonsController < ApplicationController
               @season_data.push({ plant:   result["plant"],
                                   station: result["station"],
                                   phase:   result["phase"],
+                                  season:  result["season"],
                                   reporting_date: Date.parse(result["reporting_date"]),
                                   distance: result["distance"]
                              })

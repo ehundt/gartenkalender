@@ -27,10 +27,15 @@
       </td>
     </tr>
     <tr>
-      <td class="season-what season-next">Indikator</td>
-      <td class="season-next">
+      <td class="season-phase" colspan="2">
         <b><%= season[:plant] %></b>:
         <%= season[:phase] %>
+      </td>
+    </tr>
+    <tr>
+      <td class="season-what">Phaenologische Jahreszeit</td>
+      <td>
+        <%= season[:season] %>
       </td>
     </tr>
     <tr>
@@ -49,7 +54,7 @@
     </tr>
     <tr>
       <td class="season-what">
-        Entfernung von der Station
+        Entfernung zur Station
       </td>
       <td>
         <%= season[:distance] %>

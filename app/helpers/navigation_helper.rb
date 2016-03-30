@@ -33,7 +33,7 @@ module NavigationHelper
       output += display_tab(plant, "Beschreibung", "small-nav")
       output += display_tab(plant_tasks_path(plant), "Pflege", "small-nav")
 #      output += display_tab(new_plant_task_path(plant), "Neue Aufgabe", "small-nav")
-      output += display_tab(plant_done_tasks_path(plant), "Erledigt", "small-nav")
+      output += display_tab(plant_done_tasks_path(plant), "Tagebuch", "small-nav")
 
       unless plant.original?
         if plant.original.public
@@ -49,7 +49,7 @@ module NavigationHelper
       output += display_tab(plant.copy_of(current_user), "Beschreibung", "small-nav")
       output += display_tab(plant_tasks_path(plant.copy_of(current_user)), "Pflege", "small-nav")
 #      output += display_tab(new_plant_task_path(plant), "Neue Aufgabe", "small-nav")
-      output += display_tab(plant_done_tasks_path(plant.copy_of(current_user)), "Erledigt", "small-nav")
+      output += display_tab(plant_done_tasks_path(plant.copy_of(current_user)), "Tagebuch", "small-nav")
       output += display_tab(plant, "Original", "small-nav")
 
     # anonymous user or plant is not copied and not my plant
