@@ -13,12 +13,6 @@
       <%= @season %>
     </td>
   </tr>
-  <tr>
-    <td class="season-what">Quelle</td>
-    <td>
-      <a href="http://www.dwd.de" target="_blank">Deutscher Wetterdienst</a>
-    </td>
-  </tr>
 
   <% @season_data.each do |season| %>
     <tr>
@@ -33,12 +27,6 @@
       </td>
     </tr>
     <tr>
-      <td class="season-what">Phaenologische Jahreszeit</td>
-      <td>
-        <%= season[:season] %>
-      </td>
-    </tr>
-    <tr>
       <td class="season-what">gemeldet am</td>
       <td>
         <%= l season[:reporting_date], format: :long %>
@@ -50,6 +38,12 @@
       </td>
       <td>
         "<%= season[:station] %>"
+      </td>
+    </tr>
+    <tr>
+      <td class="season-what">Quelle</td>
+      <td>
+        <a href="http://www.dwd.de" target="_blank">Deutscher Wetterdienst</a>
       </td>
     </tr>
     <tr>
