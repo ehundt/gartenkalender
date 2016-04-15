@@ -1,7 +1,9 @@
 <% content_for :sidebar do %>
-  <br>
-  <h4>Pflanzenstatistik</h4>
-  <%= render partial: "statistics" %>
+  <div class="hidden-xs">
+    <br>
+    <h4>Meine Pflanzen:</h4>
+    <%= render partial: "statistics" %>
+  </div>
 <% end %>
 
 <div class="row">

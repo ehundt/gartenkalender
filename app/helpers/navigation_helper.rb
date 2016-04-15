@@ -1,15 +1,16 @@
 module NavigationHelper
 
-  def display_tabs
-    output = "<ul class=\"nav nav-tabs\" role=\"tablist\">"
-    output += display_tab(startpage_index_path, "Meine Aufgaben")
-    output += display_tab(plants_path, "Meine Pflanzen")
-    output += display_tab(search_index_path, "Pflanzensuche")
-    output += display_tab(new_plant_path, "Neue Pflanze")
-    output += display_tab(users_path, "Gartenfreunde")
-    output += "</ul>"
-    output.html_safe
-  end
+  # def display_tabs
+  #   output =  "<nav role='navigation'>"
+  #   output += "<ul class=\"nav nav-tabs\" role=\"tablist\">"
+  #   output += display_tab(startpage_index_path, "Meine Aufgaben")
+  #   output += display_tab(plants_path, "Meine Pflanzen")
+  #   output += display_tab(search_index_path, "Pflanzensuche")
+  #   output += display_tab(new_plant_path, "Neue Pflanze")
+  #   output += display_tab(users_path, "Gartenfreunde")
+  #   output += "</ul></nav>"
+  #   output.html_safe
+  # end
 
   def display_tab(link_path, title, classes=nil, disabled=false)
     output = "<li "

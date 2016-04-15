@@ -27,29 +27,23 @@
     </div>
 
     <div class="row">
-      <div class="col-md-3">
-        <% if user_signed_in? %>
-          <%= render "shared/search_form" %>
-        <% end %>
-      </div>
-      <div class="col-md-8">
-         <%= display_tabs %>
+      <div class="col-md-12">
+        <%= render 'shared/top_navigation' %>
       </div>
     </div>
 
     <div class="row">
-      <div id="sidebar" class="col-md-3 sidebar-container">
-        <%#= render 'seasons/current_season' %>
+      <div id="sidebar" class="col-sm-3">
         <%=  yield :sidebar %>
       </div>
-      <div id="content" class="col-md-8 content-container">
+      <div id="content" class="col-sm-8 content-container">
          <% flash.each do |name, msg| -%>
            <%= content_tag :div, msg, class: "alert alert-#{name}" %>
          <% end -%>
 
          <%= yield %>
       </div>
-      <div class="hidden-xs col-md-1">
+      <div class="hidden-xs col-sm-1">
         <%= render partial: 'shared/iconbar' %>
       </div>
     </div>

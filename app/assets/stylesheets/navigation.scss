@@ -5,3 +5,31 @@
 .nav-tabs > li > a {
   font-size: 16px;
 }
+
+.navbar-default .navbar-nav > li > a {
+  color: #095;
+}
+
+.container-fluid {
+  padding-top: 0px;
+  margin-bottom: 0px;
+}
+
+.navbar-default {
+  background-color: #fff !important;
+  border-color: #fff !important;
+  border-bottom-color: #e7e7e7 !important;
+  border-width: thin !important;
+}
+
+.navbar-nav {
+  font-size: larger;
+}
+
+.navbar-nav > li > a {
+  color: #095 !important;
+}
+
+.navbar-nav > .active > a {
+  color: #555 !important;
+}

@@ -1,0 +1,46 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%#= active_link %>
+      <%#= link_to "Meine Aufgaben", startpage_index_path, class: "navbar-brand" %>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li<% if current_page?(startpage_index_path)%> class="active"<% end %>>
+          <%= link_to "Meine Aufgaben", startpage_index_path %>
+        </li>
+        <li<% if current_page?(plants_path)%> class="active"<% end %>>
+          <%= link_to "Meine Pflanzen", plants_path %>
+        </li>
+        <li<% if current_page?(search_index_path)%> class="active"<% end %>>
+          <%= link_to "Pflanzensuche", search_index_path %>
+        </li>
+        <li<% if current_page?(new_plant_path)%> class="active"<% end %>>
+          <%= link_to "Neue Pflanze", new_plant_path %>
+        </li>
+        <li<% if current_page?(users_path)%> class="active"<% end %>>
+          <%= link_to "Gartenfreunde", users_path %>
+        </li>
+
+        <% if user_signed_in? %>
+          <%= form_tag(plants_path, method: "get", class: "navbar-form navbar-left", role: "search") do %>
+            <div class="form-group">
+              <%= text_field_tag(:search_name, "", class: "form-control", placeholder: "Meine Pflanzen")  %>
+            </div>
+            <%= submit_tag("suchen", class: "btn btn-default", type: "button") %>
+          <% end %>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
