@@ -10,6 +10,8 @@
   ...noch keine erledigten Aufgaben.
 <% end %>
 
+
+  <%= render partial: "form" %>
 <table class="table">
   <tr>
     <th>Aufgabe</th>
@@ -19,9 +21,8 @@
     <th></th>
   </tr>
 
-  <%= render partial: "form" %>
-
   <% @done_tasks.each do |done_task| %>
     <%= render done_task %>
   <% end %>
 </table>
+
