@@ -22,6 +22,10 @@
   border-width: thin !important;
 }
 
+.navbar-default .navbar-form {
+  border-color: #fff !important;
+}
+
 .navbar-nav {
   font-size: larger;
 }
@@ -32,4 +36,8 @@
 
 .navbar-nav > .active > a {
   color: #555 !important;
+}
+
+.navbar-brand {
+  height: inherit !important;
 }

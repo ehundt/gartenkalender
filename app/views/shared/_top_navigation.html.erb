@@ -8,7 +8,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%#= active_link %>
+
+      <% if user_signed_in? %>
+        <%= form_tag(plants_path, method: "get", class: "navbar-brand navbar-form navbar-left", role: "search") do %>
+          <div class="form-group">
+            <%= text_field_tag(:search_name, "", class: "form-control", placeholder: "Meine Pflanzen")  %>
+          </div>
+          <%= submit_tag("suchen", class: "btn btn-default", type: "button") %>
+        <% end %>
+      <% end %>
+
       <%#= link_to "Meine Aufgaben", startpage_index_path, class: "navbar-brand" %>
     </div>
 
@@ -31,14 +40,6 @@
           <%= link_to "Gartenfreunde", users_path %>
         </li>
 
-        <% if user_signed_in? %>
-          <%= form_tag(plants_path, method: "get", class: "navbar-form navbar-left", role: "search") do %>
-            <div class="form-group">
-              <%= text_field_tag(:search_name, "", class: "form-control", placeholder: "Meine Pflanzen")  %>
-            </div>
-            <%= submit_tag("suchen", class: "btn btn-default", type: "button") %>
-          <% end %>
-        <% end %>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
