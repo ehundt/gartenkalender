@@ -13,7 +13,7 @@
     <small><b><%= plant.tasks.length %></b> <%= link_to I18n.t("tasks", count: plant.tasks.length), plant_tasks_path(plant) %></small><br>
   </td>
 
-  <td>
+  <td class="hidden-xs">
     <% if only_my_plants %>
       <% if plant.creator != plant.user %>
         <small>kopiert von</small><br>
@@ -37,7 +37,7 @@
   </td>
 
   <% if only_my_plants %>
-      <td class="active-button" data-id="<%= plant.id %>" data-path="plants/">
+      <td class="active-button hidden-xs" data-id="<%= plant.id %>" data-path="plants/">
       <% if plant.active %>
       <%# TODO: class: "img-rounded img-responsive" %>
         <%= image_tag "plant_active.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",

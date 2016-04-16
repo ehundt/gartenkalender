@@ -74,14 +74,18 @@
 
 <% unless @plants.empty? %>
   <br />
-  <table class="table">
+  <div class="table-responsive">
+    <table class="table">
 
-  <% @plants.each do |plant| %>
-    <%= render partial: "/plants/list_entry",
-               locals: { plant:          plant,
-                         other_user:     nil,
-                         only_my_plants: true } %>
-  <% end %>
-  </table>
+      <% @plants.each do |plant| %>
+        <%= render partial: "/plants/list_entry",
+                   locals: { plant:          plant,
+                             other_user:     nil,
+                             only_my_plants: true } %>
+      <% end %>
+
+    </table>
+  </div>
   <%= paginate @plants %>
+</br>
 <% end %>
