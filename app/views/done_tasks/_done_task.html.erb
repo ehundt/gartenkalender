@@ -4,11 +4,10 @@
   <td><%= I18n.l done_task.date.to_date %></td>
   <td><% if done_task.skipped? %>übersprungen<% elsif done_task.skipped == false %>erledigt<% end %></td>
   <td>
-    <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-    <%= link_to "löschen",
+    <%= link_to (image_tag "red_cross.jpg", width: "20px", height: "20px"),
                 plant_done_task_path(done_task.plant, done_task),
                 method: :delete,
-                class: "delete-link" %>
+                class: "btn btn-default" %>
   </td>
 
   <td>

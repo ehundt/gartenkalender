@@ -9,31 +9,26 @@
 <div class="row">
   <div class="col-xs-6">
     <h4>
-      <% if @task.upcoming? %>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= @task.id %>">
-          <%= image_tag "exclamation_mark.png", width: "20px", height: "20px" %>
-        </button>
-      <% else %>
-        <button type="button" class="btn btn-default task-ok" disabled="disabled">
-        <%= image_tag "ok.png", width: "20px", height: "20px" %>
-        </button>
-      <% end %>
-
-      <span class="task-visibility" data-task-id="<%= @task.id %>" data-plant-id="<%= @task.plant.id %>" data-path="/plants/">
-        <% if @task.hide %>
-            <%= image_tag "eye_not_visible.jpg" %>
-        <% else %>
-            <%= image_tag "eye_visible.jpg" %>
-        <% end %>
-      </span>
+      <button type="button" class="btn btn-default eye-button">
+        <span class="task-visibility" data-task-id="<%= @task.id %>" data-plant-id="<%= @task.plant.id %>" data-path="/plants/">
+          <% if @task.hide %>
+              <%= image_tag "eye_not_visible.jpg" %>
+          <% else %>
+              <%= image_tag "eye_visible.jpg" %>
+          <% end %>
+        </span>
+      </button>
     <%= @task.title %></h4>
   </div>
   <div class="col-xs-6 edit-plant-link">
     <% if can? :manage, @plant %>
       <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
       <%= link_to 'bearbeiten', edit_plant_task_path(@plant, @task) %>&nbsp;
-      <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-      <%= link_to 'Entfernen', plant_task_path(@task.plant, @task), method: :delete, data: { confirm: 'Sind Sie sicher?' }, class: "delete-link" %>
+      <%= link_to (image_tag "red_cross.jpg", width: "20px", height: "20px"),
+            plant_task_path(@task.plant, @task),
+            method: :delete,
+            data: { confirm: 'Diese Aufgabe löschen?' },
+            class: "btn btn-default" %>
     <% end %>
 
   </div>
@@ -49,6 +44,13 @@
 
   <% if task_time_frame(@task).present? %>
     <div class="col-xs-12">
+      <% if @task.upcoming? %>
+          <%= image_tag "exclamation_mark.png", width: "20px", height: "20px" %>
+      <% else %>
+        <button type="button" class="btn btn-default task-ok" disabled="disabled">
+        <%= image_tag "ok.png", width: "20px", height: "20px" %>
+        </button>
+      <% end %>
       <strong>Zeitraum:</strong>
       <%= task_time_frame(@task) %>
       &nbsp;<%= image_tag "green_flower_icon.png", width: "15px" %>&nbsp;
@@ -77,19 +79,9 @@
   </div>
   <div class="col-xs-6 task-action-links">
     <% if can? :manage, @task %>
-        <% if @task.upcoming? %>
-          <%= link_to "überspringen",
-                      plant_done_tasks_path({ plant_id: @task.plant.id,
-                                              done_task: { skipped: true } }),
-                      method: :post,
-                      class:  "btn btn-default",
-                      role:   "button" %>
-          &nbsp;
-        <% end %>
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= @task.id %>">
-          erledigt
-        </button>
-
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= @task.id %>">
+        <%= image_tag "schaufel.png", width: "25px", height: "25px" %>
+      </button>
     <% end %>
   </div>
 </div>
@@ -104,6 +96,12 @@
                          f:         f,
                          skipped:   false } %>
 <% end %>
+
+<div class="row">
+  <div class="col-xs-12 green-flower-separator">
+    <%= image_tag "green_flower_icon.png", width: "50px", height: "50px" %>
+  </div>
+</div>
 
 <% if @task.plant.user == current_user %>
   <% unless @task.done_tasks.empty? %>
@@ -120,3 +118,6 @@
     </table>
   <% end %>
 <% end %>
+</br>
+</br>
+</br>

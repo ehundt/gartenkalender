@@ -38,8 +38,11 @@
 </div>
 
 <% if f.object && f.object.persisted? %>
-  <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
-  <%= link_to 'Entfernen', plant_task_task_image_path(@plant, @task, f.object), method: :delete, data: { confirm: 'Wollen Sie dieses Bild mit Titel und Beschreibung wirklich löschen?' }, class: "delete-link" %>
+  <%= link_to (image_tag "red_cross.jpg", width: "20px", height: "20px"),
+        plant_task_task_image_path(@plant, @task, f.object),
+        method: :delete,
+        data: { confirm: 'Wollen Sie dieses Bild mit Titel und Beschreibung wirklich löschen?' },
+        class: "btn btn-default" %>
 <% end %>
 
 <div class="pull-right sidebar-form-space">

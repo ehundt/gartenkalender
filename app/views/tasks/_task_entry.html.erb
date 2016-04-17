@@ -1,45 +1,22 @@
       <tr>
-        <td>
-          <% if user_signed_in? %>
-            <% if task.upcoming? %>
-              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
-                <%= image_tag "exclamation_mark.png", width: "20px", height: "20px" %>
-              </button>
+        <td<% if include_plant %> class="hidden-xs"<% end %>>
+          <button type="button" class="btn btn-default eye-button">
+            <% if include_plant %>
+              <div class="visibility" data-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
+                <%= image_tag "eye_visible.jpg", width: "25px", height: "25px" %>
+              </div>
             <% else %>
-              <button type="button" class="btn btn-default task-ok" disabled="disabled">
-              <%= image_tag "ok.png", width: "20px", height: "20px" %>
-              </button>
-            <% end %>
-            <% if can? :manage, task %>
-              <%= form_for :done_task, method: :post,
-                 url: plant_done_tasks_path(task.plant) do |f| %>
-                <%= render partial: "done_tasks/modal",
-                        locals: { plant:     task.plant,
-                                  task:      task,
-                                  modal_id:  task.id,
-                                  done_task: nil,
-                                  f:         f,
-                                  skipped:   nil } %>
+              <% if task.hide %>
+                <div class="task-visibility" data-task-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
+                  <%= image_tag "eye_not_visible.jpg", width: "25px", height: "25px" %>
+                </div>
+              <% else %>
+                <div class="task-visibility" data-task-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
+                  <%= image_tag "eye_visible.jpg", width: "25px", height: "25px" %>
+                </div>
               <% end %>
             <% end %>
-          <% end %>
-        </td>
-        <td<% if include_plant %> class="hidden-xs"<% end %>>
-          <% if include_plant %>
-            <div class="visibility" data-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
-              <%= image_tag "eye_visible.jpg" %>
-            </div>
-          <% else %>
-            <% if task.hide %>
-              <div class="task-visibility" data-task-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
-                <%= image_tag "eye_not_visible.jpg" %>
-              </div>
-            <% else %>
-              <div class="task-visibility" data-task-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
-                <%= image_tag "eye_visible.jpg" %>
-              </div>
-            <% end %>
-          <% end %>
+          </button>
         </td>
         <td>
           <% if include_plant && task.plant.main_image.file? %>
@@ -59,8 +36,37 @@
         <td>
           <%= link_to task.title, plant_task_path(task.plant, task) %>
         </td>
+        <td>
+          <% if user_signed_in? %>
+            <button type="button" class="btn btn-default task-ok">
+              <% if task.upcoming? %>
+                <%= image_tag "exclamation_mark.png", width: "20px", height: "20px" %>
+              <% else %>
+                <%= image_tag "ok.png", width: "20px", height: "20px" %>
+              <% end %>
+            </button>
+          <% end %>
+        </td>
 
         <td class="hidden-xs">
           <%= task_time_frame(task) %>
+        </td>
+
+        <td>
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
+            <%= image_tag "schaufel.png", width: "25px", height: "25px" %>
+          </button>
+          <% if can? :manage, task %>
+            <%= form_for :done_task, method: :post,
+               url: plant_done_tasks_path(task.plant) do |f| %>
+              <%= render partial: "done_tasks/modal",
+                      locals: { plant:     task.plant,
+                                task:      task,
+                                modal_id:  task.id,
+                                done_task: nil,
+                                f:         f,
+                                skipped:   nil } %>
+            <% end %>
+          <% end %>
         </td>
       </tr>
