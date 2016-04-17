@@ -9,50 +9,12 @@
     <% end %>
 
   <% else %>
-    <table class="table table-responsive">
-    <% @upcoming_tasks.each do |task| %>
-    <tr>
-      <td>
-        <% if task.plant.main_image.file? %>
-          <%= link_to image_tag(download_main_image_plant_path(task.plant, {size: :thumb}), class: "img-rounded img-responsive"), task.plant %><% end %>
-      </td>
-      <td>
-        <%= link_to task.plant.name, task.plant %>
-      </td>
-      <td>
-        <%= link_to task.title, plant_task_path(task.plant, task) %>
-      </td>
-      <td>
-        <div class="visibility" data-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
-          <%= image_tag "eye_visible.jpg" %>
-        </div>
-      </td>
-      <td>
-        <%= form_for :done_task, method: :post,
-              url: plant_done_tasks_path(task.plant) do |f| %>
-          <%= render partial: "done_tasks/modal",
-                     locals: { plant:     task.plant,
-                               task:      task,
-                               modal_id:  task.id,
-                               done_task: nil,
-                               f:         f,
-                               skipped:   nil } %>
+    <div class="table-responsive">
+      <table class="table">
+        <% @upcoming_tasks.each do |task| %>
+          <%= render partial: "tasks/task_entry",
+                     locals: { task: task, include_plant: true } %>
         <% end %>
-
-
-        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
-          erledigt
-        </button>
-      </td>
-      <td>
-        <%= link_to "überspringen",
-              plant_done_tasks_path({
-                plant_id:   task.plant.id,
-                done_task:  { skipped: true, task_id: task.id } }),
-              method: :post, class: "btn btn-default", role: "button"  %>
-      </td>
-     </tr>
-    <% end %>
-
-    </table>
+      </table>
+    </div>
   <% end %>

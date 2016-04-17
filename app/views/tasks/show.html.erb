@@ -9,6 +9,16 @@
 <div class="row">
   <div class="col-xs-6">
     <h4>
+      <% if @task.upcoming? %>
+        <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= @task.id %>">
+          <%= image_tag "exclamation_mark.png", width: "20px", height: "20px" %>
+        </button>
+      <% else %>
+        <button type="button" class="btn btn-default task-ok" disabled="disabled">
+        <%= image_tag "ok.png", width: "20px", height: "20px" %>
+        </button>
+      <% end %>
+
       <span class="task-visibility" data-task-id="<%= @task.id %>" data-plant-id="<%= @task.plant.id %>" data-path="/plants/">
         <% if @task.hide %>
             <%= image_tag "eye_not_visible.jpg" %>

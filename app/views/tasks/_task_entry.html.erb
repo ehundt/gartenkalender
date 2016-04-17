@@ -1,0 +1,66 @@
+      <tr>
+        <td>
+          <% if user_signed_in? %>
+            <% if task.upcoming? %>
+              <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
+                <%= image_tag "exclamation_mark.png", width: "20px", height: "20px" %>
+              </button>
+            <% else %>
+              <button type="button" class="btn btn-default task-ok" disabled="disabled">
+              <%= image_tag "ok.png", width: "20px", height: "20px" %>
+              </button>
+            <% end %>
+            <% if can? :manage, task %>
+              <%= form_for :done_task, method: :post,
+                 url: plant_done_tasks_path(task.plant) do |f| %>
+                <%= render partial: "done_tasks/modal",
+                        locals: { plant:     task.plant,
+                                  task:      task,
+                                  modal_id:  task.id,
+                                  done_task: nil,
+                                  f:         f,
+                                  skipped:   nil } %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </td>
+        <td<% if include_plant %> class="hidden-xs"<% end %>>
+          <% if include_plant %>
+            <div class="visibility" data-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
+              <%= image_tag "eye_visible.jpg" %>
+            </div>
+          <% else %>
+            <% if task.hide %>
+              <div class="task-visibility" data-task-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
+                <%= image_tag "eye_not_visible.jpg" %>
+              </div>
+            <% else %>
+              <div class="task-visibility" data-task-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
+                <%= image_tag "eye_visible.jpg" %>
+              </div>
+            <% end %>
+          <% end %>
+        </td>
+        <td>
+          <% if include_plant && task.plant.main_image.file? %>
+              <%= link_to image_tag(download_main_image_plant_path(task.plant, {size: :thumb}), class: "img-rounded img-responsive"), task.plant %>
+          <% else %>
+            <% if !task.task_images.empty? && task.task_images[0].image.file? %>
+              <%= image_tag(download_task_image_plant_task_task_image_path(task.plant, task, task.task_images[0], {size: :thumb}), class: "img-rounded img-responsive") %>
+
+            <% end %>
+          <% end %>
+        </td>
+        <% if include_plant %>
+          <td>
+            <%= link_to task.plant.name, task.plant %>
+          </td>
+        <% end %>
+        <td>
+          <%= link_to task.title, plant_task_path(task.plant, task) %>
+        </td>
+
+        <td class="hidden-xs">
+          <%= task_time_frame(task) %>
+        </td>
+      </tr>

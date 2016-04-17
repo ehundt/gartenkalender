@@ -14,7 +14,7 @@ module TasksHelper
     time_frame = ""
     unless task.begin_date.blank? || task.end_date.blank?
       time_frame = humanize_date(task.begin_date.day, task.begin_date.month)
-      time_frame += " bis #{humanize_date(task.end_date.day, task.end_date.month)}"
+      time_frame += " - #{humanize_date(task.end_date.day, task.end_date.month)}"
     end
     time_frame
   end
