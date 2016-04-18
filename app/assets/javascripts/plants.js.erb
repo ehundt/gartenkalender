@@ -102,6 +102,25 @@ var onPageReady = function(){
         });
     };
   });
+
+  $('.plant-form-visibility').on('click', function(){
+    var world_globe = $(this).children("img");
+    var privacy_text = $(this).children("span");
+
+    var form = document.getElementById("plant-edit-form");
+    var input_field = $('#hidden_public_field');
+
+    if ($(world_globe).attr("src") == "<%= image_url('world-globe32x32.png') %>"){
+      $(world_globe).attr("src", "<%= image_url('not-world-globe32x32.png') %>");
+      privacy_text.text("privat");
+      input_field.val("false");
+
+    } else if ($(world_globe).attr("src") == "<%= image_url('not-world-globe32x32.png') %>"){
+      $(world_globe).attr("src", "<%= image_url('world-globe32x32.png') %>");
+      privacy_text.text("öffentlich");
+      input_field.val("true");
+    };
+  });
 };
 
 $(document).ready(onPageReady);
