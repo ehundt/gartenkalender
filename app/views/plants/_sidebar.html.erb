@@ -14,7 +14,7 @@
                  data-content="Nur der/die ursprüngliche AutorIn kann die Pflanzenbeschreibung veröffentlichen.">
           <% end %>
 
-          <div class="plant-visibility"
+          <button class="btn btn-default plant-visibility"
                data-plant-id="<%= @plant.id %>"
                data-switch-allowed="<% if @plant.creator == current_user %>1<% else %>0<% end %>"
                >
@@ -31,11 +31,11 @@
                 <%= image_tag("not-world-globe32x32_grey.png") %> <span>&nbsp;privat</span>
               <% end %>
             <% end %>
+          </button>
 
-            <% if current_user && @plant.creator != current_user %>
-              </div>
-            <% end %>
-          </div>
+          <% if current_user && @plant.creator != current_user %>
+            </div>
+          <% end %>
         </div>
       </div>
     <% end -%>

@@ -38,19 +38,20 @@
 
   <% if only_my_plants %>
       <td class="active-button hidden-xs" data-id="<%= plant.id %>" data-path="plants/">
-      <% if plant.active %>
-      <%# TODO: class: "img-rounded img-responsive" %>
-        <%= image_tag "plant_active.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
-             title: I18n.t("tooltip_plant_active")  %>
-      <% else %>
-        <%= image_tag "plant_inactive.gif", height: '42px', width: '30px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
-             title: I18n.t("tooltip_plant_inactive") %>
-      <% end %>
+        <button type="button" class="btn btn-default">
+        <% if plant.active %>
+          <%= image_tag "plant_active.gif", height: '35px', width: '24px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
+               title: I18n.t("tooltip_plant_active") %>
+        <% else %>
+          <%= image_tag "plant_inactive.gif", height: '35px', width: '24px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
+               title: I18n.t("tooltip_plant_inactive") %>
+        <% end %>
+      </button>
     </td>
   <% end %>
 
   <% if only_my_plants %>
-    <td>
+    <td class="hidden-xs">
       <% if plant.creator != current_user %>
         <div data-toggle="popover"
              data-container="body"
@@ -61,43 +62,43 @@
              data-content="Nur der/die ursprüngliche AutorIn kann die Pflanzenbeschreibung veröffentlichen.">
       <% end %>
 
-      <div class="plant-visibility world-globe"
+      <button type="button" class="btn btn-default plant-visibility world-globe<% if plant.creator != current_user && !plant.public %> no-button<% end %>"
          data-plant-id="<%= plant.id %>"
          data-switch-allowed="<% if plant.creator == current_user %>1<% else %>0<% end %>"
          >
-        <% if plant.public %>
-          <% if plant.creator != current_user %>
-            <%= image_tag "world-globe32x32_grey.png" %>
-          <% else %>
-            <%= image_tag "world-globe32x32.png" %>
-          <% end %>
+          <% if plant.public %>
+            <% if plant.creator != current_user %>
+              <%= image_tag "world-globe32x32_grey.png", height: "35px", width: "35px" %>
+            <% else %>
+              <%= image_tag "world-globe32x32.png", height: "35px", width: "35px" %>
+            <% end %>
 
-        <% else %>
-          <% if plant.creator != current_user %>
-            <%= image_tag "not-world-globe32x32_grey.png" %>
           <% else %>
-            <%= image_tag "not-world-globe32x32.png" %>
+            <% if plant.creator != current_user %>
+              <%= image_tag "not-world-globe32x32_grey.png", height: "35px", width: "35px" %>
+            <% else %>
+              <%= image_tag "not-world-globe32x32.png", height: "35px", width: "35px" %>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
+        </button>
       <% if plant.creator == current_user %>
         </div>
       <% end %>
     </td>
   <% end %>
 
-  <td class="hidden-xs">
+  <td>
     <% if user_signed_in? %>
       <% if plant.public %>
-        <div class="likes-counter" data-id=<%= plant.id %> data-path="/plants/" data-likeallowed="1">
+        <button type="button" class="btn btn-default likes-counter" data-id=<%= plant.id %> data-path="/plants/" data-likeallowed="1">
           <span class="likes-count"><%= plant.cached_votes_total %></span>
 
           <% if current_user && current_user.voted_for?(plant) %>
-            <%= image_tag "voted_thumb_up.png" %>
+            <%= image_tag "voted_thumb_up.png", height: "35px", width: "24px" %>
           <% else %>
-            <%= image_tag "unvoted_thumb_up.png" %>
+            <%= image_tag "unvoted_thumb_up.png", height: "35px", width: "24px" %>
           <% end %>
-        </div>
+        </button>
       <% end %>
     <% else %>
       <span class="likes-count"><%= plant.cached_votes_total %></span>

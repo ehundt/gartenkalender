@@ -4,14 +4,16 @@
       <% if can? :manage, @plant %>
       <%# if @plant.user == current_user %>
         <span class="active-button" data-id="<%= @plant.id %>" data-path="/plants/">
+          <button type="button" class="btn btn-default">
           <% if @plant.active %>
-            <%= image_tag "plant_active.gif", height: '42px', width: '30px',
+            <%= image_tag "plant_active.gif", height: '35px', width: '24px',
                  "data-toggle" => "tooltip", "data-placement" => "bottom",
                  title: I18n.t("tooltip_plant_active") %>
           <% else %>
-            <%= image_tag "plant_inactive.gif", height: '42px', width: '30px', "data-toggle" => "tooltip", "data-placement" => "bottom",
+            <%= image_tag "plant_inactive.gif", height: '35px', width: '24px', "data-toggle" => "tooltip", "data-placement" => "bottom",
                  title: I18n.t("tooltip_plant_inactive")  %>
           <% end %>
+          </button>
         </span>
       <% end %>
       <%= title @plant.name %>
