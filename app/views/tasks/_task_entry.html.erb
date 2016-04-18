@@ -36,7 +36,7 @@
         <td>
           <%= link_to task.title, plant_task_path(task.plant, task) %>
         </td>
-        <td>
+        <td<% if include_plant %> class="hidden-xs"<% end %>>
           <% if user_signed_in? %>
             <button type="button" class="btn btn-default task-ok">
               <% if task.upcoming? %>
