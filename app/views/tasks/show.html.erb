@@ -71,6 +71,15 @@
 
 <div class="task-action-links">
   <% if can? :manage, @task %>
+      <%= link_to (image_tag "skip.png", width: "25px", height: "25px"),
+                  { controller: "done_tasks",
+                    action:     "create",
+                    user_id:    current_user.id,
+                    params:      { done_task: { skipped: "true",
+                                                task_id: @task.id } } },
+                  method: "post",
+                  class: "btn btn-default"
+      %>
     <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= @task.id %>">
       <%= image_tag "schaufel.png", width: "25px", height: "25px" %>
     </button>
