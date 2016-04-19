@@ -87,28 +87,3 @@
                          f:         f,
                          skipped:   false } %>
 <% end %>
-
-<div class="row">
-  <div class="col-xs-12 green-flower-separator">
-    <%= image_tag "green_flower_icon.png", width: "50px", height: "50px" %>
-  </div>
-</div>
-
-<% if @task.plant.user == current_user %>
-  <% unless @task.done_tasks.empty? %>
-    <h4>Tagebuch: <%= @task.title %></h4>
-    <table class="table">
-      <tr>
-        <th>Aufgabe</th>
-        <th>Notiz</th>
-        <th>Datum</th>
-        <th></th>
-        <th></th>
-      </tr>
-        <%= render @task.done_tasks %>
-    </table>
-  <% end %>
-<% end %>
-</br>
-</br>
-</br>
