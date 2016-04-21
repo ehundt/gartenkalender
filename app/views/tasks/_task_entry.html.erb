@@ -18,23 +18,24 @@
             <% end %>
           </button>
         </td>
-        <td class="hidden-xs">
+        <td>
           <% if include_plant && task.plant.main_image.file? %>
               <%= link_to image_tag(download_main_image_plant_path(task.plant, {size: :thumb}), class: "img-rounded img-responsive"), task.plant %>
-          <% else %>
-            <% if !task.task_images.empty? && task.task_images[0].image.file? %>
+          <% elsif !task.task_images.empty? && task.task_images[0].image.file? %>
               <%= image_tag(download_task_image_plant_task_task_image_path(task.plant, task, task.task_images[0], {size: :thumb}), class: "img-rounded img-responsive") %>
-
-            <% end %>
+          <% else %>
+            <%= link_to task.plant.name, task.plant, class: "visible-sm-inline visible-xs-inline" %>
           <% end %>
         </td>
         <% if include_plant %>
-          <td>
+          <td class="hidden-sm hidden-xs">
             <%= link_to task.plant.name, task.plant %>
           </td>
         <% end %>
         <td>
-          <%= link_to task.title, plant_task_path(task.plant, task) %>
+
+          <%= link_to task.title, plant_task_path(task.plant, task), class: "wrap-title" %>
+
         </td>
         <td<% if include_plant %> class="hidden-xs"<% end %>>
           <% if user_signed_in? %>
