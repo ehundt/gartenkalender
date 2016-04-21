@@ -2,41 +2,35 @@
 <%= render partial: "plants/header" %>
 
 <div class="row">
-  <div class="col-xs-12 edit-plant-link">
+  <div class="col-xs-12 task-title-show">
+    <h4><%= @task.title %></h4>
+  </div>
+  <div class="col-xs-12 task-action-links">
+    <button type="button" class="btn btn-default eye-button">
+      <span class="task-visibility" data-task-id="<%= @task.id %>" data-plant-id="<%= @task.plant.id %>" data-path="/plants/">
+        <% if @task.hide %>
+            <%= image_tag "eye_not_visible.jpg", width: "25px", height: "25px" %>
+        <% else %>
+            <%= image_tag "eye_visible.jpg", width: "25px", height: "25px" %>
+        <% end %>
+      </span>
+    </button>
+  <% if can? :manage, @plant %>
+    <%= link_to (image_tag "edit_icon.jpg", width: "20px", height: "20px"),
+                 edit_plant_task_path(@plant, @task),
+                 class: "btn btn-default" %>
+    <%= link_to (image_tag "red_cross.jpg", width: "20px", height: "20px"),
+          plant_task_path(@task.plant, @task),
+          method: :delete,
+          data: { confirm: 'Diese Aufgabe löschen?' },
+          class: "btn btn-default" %>
+  <% end %>
   </div>
 </div>
 
-<div class="row">
-  <div class="col-xs-6">
-    <h4>
-      <button type="button" class="btn btn-default eye-button">
-        <span class="task-visibility" data-task-id="<%= @task.id %>" data-plant-id="<%= @task.plant.id %>" data-path="/plants/">
-          <% if @task.hide %>
-              <%= image_tag "eye_not_visible.jpg", width: "25px", height: "25px" %>
-          <% else %>
-              <%= image_tag "eye_visible.jpg", width: "25px", height: "25px" %>
-          <% end %>
-        </span>
-      </button>
-    <%= @task.title %></h4>
-  </div>
-  <div class="col-xs-6 edit-plant-link">
-    <% if can? :manage, @plant %>
-      <%= link_to (image_tag "edit_icon.jpg", width: "20px", height: "20px"),
-                   edit_plant_task_path(@plant, @task),
-                   class: "btn btn-default" %>
-      <%= link_to (image_tag "red_cross.jpg", width: "20px", height: "20px"),
-            plant_task_path(@task.plant, @task),
-            method: :delete,
-            data: { confirm: 'Diese Aufgabe löschen?' },
-            class: "btn btn-default" %>
-    <% end %>
-
-  </div>
-</div>
 
 <div class="row">
-  <div class="col-xs-12">
+  <div class="col-xs-12 task-description">
     <%= raw markdown.render(@task.desc) %>
   </div>
 </div>

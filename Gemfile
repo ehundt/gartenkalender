@@ -35,6 +35,11 @@ gem "rest-client"
 gem 'aws-sdk', '< 2.0'
 # Module for the 'fog' gem to support Amazon Web Services:
 gem 'fog', require: 'fog/aws'
+
+# TODO: use Refile instead of carrierwave? Refile is a modern file
+# upload library for Ruby applications, Refile is an attempt by
+# CarrierWave's original author to fix the design mistakes and
+# overengineering in CarrierWave.
 gem 'carrierwave'
 
 gem "paranoia", "~> 2.0"

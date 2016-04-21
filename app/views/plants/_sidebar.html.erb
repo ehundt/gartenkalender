@@ -14,7 +14,7 @@
                  data-content="Nur der/die ursprüngliche AutorIn kann die Pflanzenbeschreibung veröffentlichen.">
           <% end %>
 
-          <button class="btn btn-default plant-visibility"
+          <button class="btn btn-default plant-visibility sidebar-plant-public"
                data-plant-id="<%= @plant.id %>"
                data-switch-allowed="<% if @plant.creator == current_user %>1<% else %>0<% end %>"
                >

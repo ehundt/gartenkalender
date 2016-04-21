@@ -18,7 +18,7 @@
             <% end %>
           </button>
         </td>
-        <td>
+        <td class="hidden-xs">
           <% if include_plant && task.plant.main_image.file? %>
               <%= link_to image_tag(download_main_image_plant_path(task.plant, {size: :thumb}), class: "img-rounded img-responsive"), task.plant %>
           <% else %>

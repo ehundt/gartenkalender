@@ -6,14 +6,21 @@
   color: #ccc;
 }
 
+.task-title-show {
+  margin-left: 10px;
+}
+
 .task-desc {
   display: none;
 }
 
+.task-description {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
 .task-action-links {
   text-align: right;
-  font-size: 14px;
-  font-weight: normal;
 }
 
 .task-warning {
@@ -51,7 +58,7 @@
 }
 
 .eye-button {
-  padding: 6px 6px !important;
+  padding: 4px 6px !important;
 }
 
 .task-timespan {

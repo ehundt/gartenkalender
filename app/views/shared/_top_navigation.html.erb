@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navi-container">
   <div class="container-fluid nav-container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -11,10 +11,10 @@
 
       <% if user_signed_in? %>
         <%= form_tag(plants_path, method: "get", class: "navbar-brand navbar-form navbar-left", role: "search") do %>
-          <div class="form-group">
-            <%= text_field_tag(:search_name, "", class: "form-control", placeholder: "Meine Pflanzen")  %>
-          </div>
+          <span class="form-group">
+            <%= text_field_tag(:search_name, "", class: "form-control search-form-navbar", placeholder: "Meine Pflanzen")  %>
           <%= submit_tag("suchen", class: "btn btn-default", type: "button") %>
+          </span>
         <% end %>
       <% end %>
 

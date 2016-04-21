@@ -2,14 +2,8 @@
   <td id="task_title"><% if done_task.task && done_task.task.title %><%= link_to done_task.task.title, plant_task_path(done_task.plant, done_task.task) %><% end %></td>
   <td><%= done_task.notice %>
   <td><%= I18n.l done_task.date.to_date %></td>
-  <td><% if done_task.skipped? %>übersprungen<% elsif done_task.skipped == false %>erledigt<% end %></td>
-  <td>
-    <%= link_to (image_tag "red_cross.jpg", width: "20px", height: "20px"),
-                plant_done_task_path(done_task.plant, done_task),
-                method: :delete,
-                class: "btn btn-default" %>
+  <td class="hidden-xs"><% if done_task.skipped? %>übersprungen<% elsif done_task.skipped == false %>erledigt<% end %>
   </td>
-
   <td>
     <% skipped = done_task.skipped? ? 1 : 0 %>
     <%= form_for done_task, method: :patch,
@@ -26,8 +20,14 @@
     <button type="button" class="btn btn-default"
             data-toggle="modal"
             data-target="#taskDoneModal<%= done_task.id %>">
-      ändern
+      <%= image_tag "edit_icon.jpg", width: "20px", height: "20px" %>
     </button>
-      </td>
+  </td>
+  <td>
+    <%= link_to (image_tag "red_cross.jpg", width: "20px", height: "20px"),
+                plant_done_task_path(done_task.plant, done_task),
+                method: :delete,
+                class: "btn btn-default" %>
+  </td>
 </tr>
 
