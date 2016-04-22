@@ -75,8 +75,9 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    plant = @task.plant
     @task.destroy
-    redirect_to request.referer
+    redirect_to plant_tasks_path(plant)
   end
 
   def hide

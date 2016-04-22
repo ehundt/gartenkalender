@@ -23,7 +23,7 @@
               <%= link_to image_tag(download_main_image_plant_path(task.plant, {size: :thumb}), class: "img-rounded img-responsive"), task.plant %>
           <% elsif !task.task_images.empty? && task.task_images[0].image.file? %>
               <%= image_tag(download_task_image_plant_task_task_image_path(task.plant, task, task.task_images[0], {size: :thumb}), class: "img-rounded img-responsive") %>
-          <% else %>
+          <% elsif include_plant %>
             <%= link_to task.plant.name, task.plant, class: "visible-sm-inline visible-xs-inline" %>
           <% end %>
         </td>
