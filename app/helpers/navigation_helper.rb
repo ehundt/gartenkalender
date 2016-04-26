@@ -17,6 +17,8 @@ module NavigationHelper
     output += current_page?(link_path) ? "class=active" : ""
     output += disabled ? "class=disabled" : ""
     output += ">"
+
+    classes += " not-active" if disabled
     if classes.nil?
       output += link_to title, link_path
     else

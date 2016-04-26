@@ -54,3 +54,9 @@
 .navi-container {
   margin-bottom: -5px !important;
 }
+
+.not-active {
+   pointer-events: none;
+   cursor: default;
+}
+
