@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default navi-container">
+<nav class="navbar navbar-default">
   <div class="container-fluid nav-container">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -36,6 +36,11 @@
         <li<% if current_page?(new_plant_path)%> class="active"<% end %>>
           <%= link_to "Neue Pflanze", new_plant_path %>
         </li>
+        <% if current_user %>
+          <li class="visible-xs-block<% if current_page?(user_path(current_user))%> active<% end %>">
+            <%= link_to "Profil", user_path(current_user) %>
+          </li>
+        <% end %>
         <li<% if current_page?(users_path)%> class="active"<% end %>>
           <%= link_to "Gartenfreunde", users_path %>
         </li>

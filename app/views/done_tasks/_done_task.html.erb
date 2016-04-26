@@ -1,5 +1,13 @@
 <tr>
-  <td id="task_title"><% if done_task.task && done_task.task.title %><%= link_to done_task.task.title, plant_task_path(done_task.plant, done_task.task) %><% end %></td>
+  <td id="task_title">
+    <% if done_task.task && done_task.task.title %>
+      <% if done_task.task.deleted? %>
+        <%= done_task.task.title %>
+      <% else %>
+        <%= link_to done_task.task.title, plant_task_path(done_task.plant, done_task.task) %>
+      <% end %>
+    <% end %>
+  </td>
   <td><%= done_task.notice %>
   <td><%= I18n.l done_task.date.to_date %></td>
   <td class="hidden-xs"><% if done_task.skipped? %>übersprungen<% elsif done_task.skipped == false %>erledigt<% end %>

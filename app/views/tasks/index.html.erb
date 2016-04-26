@@ -9,8 +9,10 @@
 <% if @tasks.empty? %>
   ...noch keine Aufgaben.<br><br>
 
-  <h4>Neue Aufgabe anlegen</h4>
-  <%= render partial: "form" %>
+  <% if @plant.user == current_user %>
+    <h4>Neue Aufgabe anlegen</h4>
+    <%= render partial: "form" %>
+  <% end %>
 
 <% else %>
   <table class="table">
@@ -21,12 +23,12 @@
     <% end %>
   </table>
 
-
-  <div class="row">
-    <div class="col-xs-12">
-      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-        <%= link_to "Neue Aufgabe", new_plant_task_path(@plant) %>
+  <% if @plant.user == current_user %>
+    <div class="row">
+      <div class="col-xs-12">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+          <%= link_to "Neue Aufgabe", new_plant_task_path(@plant) %>
+      </div>
     </div>
-  </div>
-
+  <% end %>
 <% end %>
