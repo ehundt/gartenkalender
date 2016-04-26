@@ -28,4 +28,20 @@ module PlantsHelper
       display_duration = "#{plant.duration / 30} Monate"
     end
   end
+
+  def world_globe_icon(plant)
+    if can? :manage, plant
+      if plant.public
+        image_tag "world-globe32x32.png"
+      else
+        image_tag "not-world-globe32x32.png"
+      end
+    else
+      if plant.public
+        image_tag "world-globe32x32_grey.png"
+      else
+        image_tag "not-world-globe32x32_grey.png"
+      end
+    end
+  end
 end

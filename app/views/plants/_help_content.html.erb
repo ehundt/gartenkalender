@@ -3,43 +3,73 @@
   <% if user_signed_in? %>
     <tr>
       <td>
-        <%= image_tag "world-globe32x32.png" %>
+        <div class="btn btn-default disabled">
+           <% if @plant %>
+            <%= world_globe_icon(@plant) %>
+           <% else %>
+            <%= image_tag "not-world-globe32x32.png" %>
+           <% end %>
+        </div>
       </td>
       <td>
         <%= I18n.t "help_publish" %>
       </td>
     </tr>
-    <tr>
-      <td>
-        <%= image_tag "plant_active.gif", height: "42px", width: "35px" %>
-      </td>
-      <td>
-        <%= I18n.t "help_plant_active" %>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <%= image_tag "unvoted_thumb_up.png" %>
-      </td>
-      <td>
-        <%= I18n.t "help_thumb_up" %>
-      </td>
-    </tr>
 
-    <% unless @plant.blank? %>
+    <% if @plants || (@plant && @plant.public) %>
       <tr>
         <td>
-          <%= image_tag "eye_visible.jpg" %>
+          <div class="btn btn-default disabled">
+            <%= image_tag "unvoted_thumb_up.png" %>
+          </div>
         </td>
         <td>
-          Soll diese Aufgabe in der Aufgabenliste angezeigt werden? Durch Anklicken des Auges wird die Sichtbarkeit an- oder ausgeschaltet.
+          <%= I18n.t "help_thumb_up" %>
         </td>
       </tr>
     <% end %>
+
+    <% if @plants || (@plant && (@plant.user == current_user)) %>
+      <tr>
+        <td>
+          <div class="btn btn-default disabled">
+            <%= image_tag "plant_active.gif", height: "35px", width: "24px" %>
+          </div>
+        </td>
+        <td>
+          <%= I18n.t "help_plant_active" %>
+        </td>
+      </tr>
+      <% if @plant && (@plant.user == current_user) %>
+        <tr>
+          <td>
+            <div class="btn btn-default disabled">
+              <%= image_tag "edit_icon.jpg", width: "20px", height: "20px" %>
+            </div>
+          </td>
+          <td>
+            Hier kannst Du Deine Pflanzenbeschreibung bearbeiten.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="btn btn-default disabled">
+              <%= image_tag "red_cross.jpg", width: "20px", height: "20px" %>
+            </div>
+          </td>
+          <td>
+            Hier kannst Du die komplette Pflanze mit Aufgaben und zugehörigem Tagebuch löschen.
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+
   <% else %>
     <tr>
       <td>
-        <%= image_tag "unvoted_thumb_up.png" %>
+        <div class="btn btn-default disabled">
+          <%= image_tag "unvoted_thumb_up.png" %>
+        </div>
       </td>
       <td>
         Als registrierter Benutzer kannst Du hier Deine Meinung abgeben.

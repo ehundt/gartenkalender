@@ -1,7 +1,29 @@
 <table class="table">
   <tr>
     <td>
-      <%= image_tag "eye_visible.jpg" %>
+      <div class="btn btn-default disabled">
+        <%= image_tag "skip.png", width: "25px", height: "25px" %>
+      </div>
+    </td>
+    <td>
+      Dieses Mal diese Aufgabe überspringen.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="btn btn-default disabled">
+        <%= image_tag "schaufel.png", width: "25px", height: "25px" %>
+      </div>
+    </td>
+    <td>
+      Diese Aufgabe als erledigt markieren und eine Notiz dazu speichern.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="btn btn-default eye-button disabled">
+        <%= image_tag "eye_visible.jpg", width: "25px", height: "25px" %>
+      </div>
     </td>
     <td>
       Sichtbarkeit in der Aufgabenliste durch Anklicken des Auges an- oder ausschalten.
@@ -9,10 +31,35 @@
   </tr>
   <tr>
     <td>
-      <%= image_tag "world-globe32x32.png" %>
+      <div class="btn btn-default disabled">
+        <%= world_globe_icon(@plant) %>
+      </div>
     </td>
     <td>
-      Zum Veröffentlichen der zugehörigen Pflanze inklusive aller Aufgaben auf dieses Icon klicken.
+      <% if @plant.public && (can? :manage, @plant) %>
+        Soll die Pflanze inklusive aller Aufgaben nicht öffentlich sein, dann wird sie mit einem Klick auf dieses Icon privat und ist für niemand anderen mehr sichtbar.
+      <% end %>
+
+      <% if (can? :manage, @plant) && !@plant.public %>
+        Zum Veröffentlichen der zugehörigen Pflanze inklusive aller Aufgaben auf dieses Icon klicken.
+      <% end %>
+
+      <% unless can? :manage, @plant %>
+        Der ursprüngliche Autor kann die Pflanze hier veröffentlichen oder privatisieren.
+      <% end %>
     </td>
   </tr>
+
+  <% if @plant.user == current_user %>
+    <tr>
+      <td>
+        <div class="btn btn-default disabled">
+          <%= image_tag "plant_active.gif", height: "35px", width: "24px" %>
+        </div>
+      </td>
+      <td>
+        <%= I18n.t "help_plant_active" %>
+      </td>
+    </tr>
+  <% end %>
 </table>
