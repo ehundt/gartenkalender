@@ -3,9 +3,9 @@
     <div class="thumbnail">
       <%= link_to image_tag("entry1.jpg"), startpage_index_path %>
       <div class="caption">
-        <h3>Eigene Pflegetipps</h3>
+        <h3><%= link_to "Eigene Pflegetipps", startpage_index_path %></h3>
         <p>Hier kannst Du Deine eigenen Pflanzen beschreiben, Pflegetipps anlegen und Dich zur selbst gewählten Zeit daran erinnern lassen.</p>
-        <p class="hidden-xs logged-out-welcome">
+        <p class="logged-out-welcome">
           <%= link_to "weiter", startpage_index_path, class: "btn btn-default", role: "button" %>
         </p>
       </div>
@@ -17,9 +17,9 @@
       <%#= image_tag("SeestadtGarten_1-660x394.jpg") %>
       <%# zwei Gärtner, die sich die Hand geben %>
       <div class="caption">
-        <h3>Pflegetipps anderer GärtnerInnen nutzen</h3>
+        <h3><%= link_to "Pflegetipps anderer GärtnerInnen nutzen", search_index_path %></h3>
         <p>Du kannst die Pflegetipps anderer GärtnerInnen nutzen und sie bewerten.</p>
-        <p class="hidden-xs logged-out-welcome">
+        <p class="logged-out-welcome">
           <%= link_to "weiter", search_index_path, class: "btn btn-default", role: "button" %>
         </p>
       </div>
@@ -33,9 +33,9 @@
       <%#= image_tag("chili_2blatt.jpg") %>
       <%# Bild mit kleinen Pflänzchen und Schildchen dazu %>
       <div class="caption">
-        <h3>Wann habe ich was gesät?</h3>
+        <h3><%= link_to "Wann habe ich was gesät?", path %></h3>
         <p>Du kannst für jede Pflanze speichern, wann Du welche Arbeit wie erledigt hast und jederzeit darauf zugreifen.</p>
-        <p class="hidden-xs logged-out-welcome">
+        <p class="logged-out-welcome">
           <%= link_to "weiter", path, class: "btn btn-default", role: "button" %>
         </p>
       </div>
