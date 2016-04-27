@@ -1,29 +1,30 @@
 <% unless @help_content_path.blank? %>
-  <div class="help"
-     data-toggle="popover"
-     data-container="body"
-     data-trigger="focus"
-     title="Hilfe"
-     data-placement="left"
-     data-html="true"
-     data-content='<%= render partial: @help_content_path + "/help_content" %>'
-  >
-    <a href="#"><%= image_tag("help.jpg", class: "img-responsive", width: "30px", height: "30px") %></a>
-  </div>
+  <button type="button" class="btn btn-default">
+    <div class="help"
+       data-toggle="popover"
+       data-container="body"
+       data-trigger="focus"
+       title="Hilfe"
+       data-placement="left"
+       data-html="true"
+       data-content='<%= render partial: @help_content_path + "/help_content" %>'
+    >
+      <a href="#"><%= image_tag("help.jpg", class: "img-responsive", width: "30px", height: "30px") %></a>
+    </div>
+  </button>
 <% end %>
 
 <% if @plant && @plant.public %>
   <div class="icon-bar">
-    <span class="likes-counter" data-id=<%= @plant.id %> data-path="/plants/" data-likeallowed="1">
+    <button type="button" class="btn btn-default likes-counter" data-id=<%= @plant.id %> data-path="/plants/" data-likeallowed="1">
 
-      <% if signed_in? && current_user.voted_for?(@plant) %>
-        <%= image_tag("voted_thumb_up.png") %>
-      <% else %>
-        <%= image_tag("unvoted_thumb_up.png") %>
-      <% end %>
+        <% if signed_in? && current_user.voted_for?(@plant) %>
+          <%= image_tag("voted_thumb_up.png") %>
+        <% else %>
+          <%= image_tag("unvoted_thumb_up.png") %>
+        <% end %>
 
-      <span class="likes-count-small"><%= @plant.cached_votes_total %></span>
-
-    </span>
+    </button>
+    <div class="likes-count-small"><%= @plant.cached_votes_total %></div>
   </div>
 <% end %>

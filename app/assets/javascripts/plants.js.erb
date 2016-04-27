@@ -12,7 +12,7 @@ var onPageReady = function(){
     var plant_id  = $(this).data("id");
     var likesIcon = $(this).children("img");
     var path      = $(this).data("path");
-    var likesText = $(this).children("span");
+    var likesText = $(this).next();
     var likesInt  = parseInt(likesText.text());
     var likeAllowed = $(this).data("likeallowed");
 

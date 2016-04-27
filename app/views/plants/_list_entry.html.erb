@@ -87,11 +87,10 @@
     </td>
   <% end %>
 
-  <td>
+  <td class="likes-count-small">
     <% if user_signed_in? %>
       <% if plant.public %>
         <button type="button" class="btn btn-default likes-counter" data-id=<%= plant.id %> data-path="/plants/" data-likeallowed="1">
-          <span class="likes-count"><%= plant.cached_votes_total %></span>
 
           <% if current_user && current_user.voted_for?(plant) %>
             <%= image_tag "voted_thumb_up.png", height: "35px", width: "24px" %>
@@ -99,6 +98,8 @@
             <%= image_tag "unvoted_thumb_up.png", height: "35px", width: "24px" %>
           <% end %>
         </button>
+         <div class="likes-count-small"><%= plant.cached_votes_total %></div>
+
       <% end %>
     <% else %>
       <span class="likes-count"><%= plant.cached_votes_total %></span>
