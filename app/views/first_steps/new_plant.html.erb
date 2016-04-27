@@ -18,9 +18,14 @@
     <br><br>
     Die Pflanze inklusive Aufgaben kann privat oder öffentlich gemacht werden:
     <br>
-    <%= image_tag "not-world-globe32x32.png" %>
+    <br>
+    <button type="button" class="btn btn-default disabled">
+      <%= image_tag "not-world-globe32x32.png" %>
+    </button>
     oder
-    <%= image_tag "world-globe32x32.png" %>
+    <button type="button" class="btn btn-default disabled">
+      <%= image_tag "world-globe32x32.png" %>
+    </button>
     <br><br>
     Veröffentlichte Pflanzen können von jedem Gartenfreund für den privaten Gebrauch kopiert werden.
     <br><br>
@@ -33,8 +38,9 @@
     <br><br>
     Es kommt hauptsächlich auf die Aufgaben bzw. Pflegeanweisungen an!
     Nach dem Speichern der Pflanze kannst Du neue Aufgaben anlegen:<br>
-    <%= image_tag "first_steps/new_task.png", class: "img-rounded img-responsive carousel-image" %>
+    <%= image_tag "first_steps/new_plant_new_task.png", class: "img-rounded img-responsive carousel-image" %>
 
+    <br>
     <h4>Jetzt starten?&nbsp;
     <%= link_to "Neue Pflanze anlegen", new_plant_path() %>
     </h4>

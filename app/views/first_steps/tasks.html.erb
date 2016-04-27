@@ -14,13 +14,17 @@
 
   <div class="col-md-9 first-steps-desc">
     <h4>Aufgaben = Pflegeanweisungen</h4>
-    Beim Kopieren einer Pflanze werden auch die zugehörigen Aufgaben kopiert.
-    Du kannst die Aufgaben an Deine Bedürfnisse anpassen:
+    Beim Kopieren einer Pflanze werden auch die zugehörigen Pflegeanweisungen kopiert.
+    Du kannst neue hinzufügen:
+    <br>
+    <%= image_tag "first_steps/new_task.jpg", class: "img-rounded img-responsive carousel-image"  %>
+    <br>
+    oder vorhandene Aufgaben bearbeiten oder löschen:
     <br>
     <%# TODO: image einer kopierten Pflanze verwenden und tab einkreisen %>
     <%= image_tag "first_steps/edit_task.png", class: "img-rounded img-responsive carousel-image"  %>
     <br>
-    Du kannst neue Aufgaben hinzufügen, bestehende Aufgaben bearbeiten oder löschen. Ist Deine Pflanze privat, so sind es auch die zugehörigen Aufgaben.
+    Ist Deine Pflanze privat, so sind es auch die zugehörigen Aufgaben.
     <br><br>
     Du möchtest eine Übersicht über die anstehenden Aufgaben aller Deiner Pflanzen sehen?
     <br>
@@ -30,15 +34,27 @@
       Was wird aufgelistet?
     </h4>
     <ul>
-      <li>nur Deine eigenen Aufgaben</li>
-      <li>nur aktuelle Aufgaben</li>
-      <li>nur noch nicht erledigte Aufgaben</li>
-      <li>nur Aufgaben von "aktiven" Pflanzen:&nbsp;
-      aktiv <%= image_tag "plant_active.gif", height: '35px', width: '24px' %> &nbsp; oder inaktiv
-      <%= image_tag "plant_inactive.gif", height: '35px', width: '24px' %></li>
-      <li>nur sichtbar geschaltete Aufgaben:&nbsp;
-          sichtbar <%= image_tag "eye_visible.jpg" %> &nbsp; oder unsichtbar
+      <li class="first-steps-tasks-overview">nur Deine eigenen Aufgaben</li>
+      <li class="first-steps-tasks-overview">nur aktuelle Aufgaben</li>
+      <li class="first-steps-tasks-overview">nur noch nicht erledigte Aufgaben</li>
+      <li class="first-steps-tasks-overview">nur Aufgaben von "aktiven" Pflanzen:&nbsp;
+      aktiv
+        <button type="button" class="btn btn-default disabled">
+          <%= image_tag "plant_active.gif", height: '35px', width: '24px' %>
+        </button>
+        &nbsp; oder inaktiv
+        <button type="button" class="btn btn-default disabled">
+          <%= image_tag "plant_inactive.gif", height: '35px', width: '24px' %>
+        </button>
+      </li>
+      <li class="first-steps-tasks-overview">nur sichtbar geschaltete Aufgaben:&nbsp;
+          sichtbar
+        <button type="button" class="btn btn-default eye-button disabled">
+          <%= image_tag "eye_visible.jpg" %>
+        </button> &nbsp; oder unsichtbar
+        <button type="button" class="btn btn-default eye-button disabled">
           <%= image_tag "eye_not_visible.jpg" %>
+        </button>
       </li>
     </ul>
     <h4>Jetzt zur
