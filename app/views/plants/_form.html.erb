@@ -2,23 +2,33 @@
   <div class="row">
     <div class="col-xs-12">
 
-      <input type="hidden" name="plant[public]" id="hidden_public_field" value="true">
+      <input type="hidden" name="plant[public]" id="hidden_public_field" value="false">
 
-      <button type="button" class="btn btn-default plant-form-visibility">
         <% if @plant.public %>
           <% if current_user && @plant.creator == current_user %>
-            <%= image_tag("world-globe32x32.png") %> <span>&nbsp;öffentlich</span>
+            <button type="button" class="btn btn-default plant-form-visibility">
+              <%= image_tag("world-globe32x32.png") %>
+            </button>
+            <span class="plant-form-public">öffentlich</span>
           <% else %>
-            <%= image_tag("world-globe32x32_grey.png") %> <span>&nbsp;öffentlich</span>
+            <button type="button" class="btn btn-default plant-form-visibility">
+              <%= image_tag("world-globe32x32_grey.png") %>
+            </button>
+            <span class="plant-form-public">öffentlich</span>
           <% end %>
         <% else %>
-          <% if current_user && @plant.creator == current_user %>
-            <%= image_tag("not-world-globe32x32.png") %> <span>&nbsp;privat</span>
+          <% if current_user && ( @plant.creator == current_user || @plant.creator.nil? ) %>
+            <button type="button" class="btn btn-default plant-form-visibility">
+              <%= image_tag("not-world-globe32x32.png") %>
+            </button>
+            <span class="plant-form-public">privat</span>
           <% else %>
-            <%= image_tag("not-world-globe32x32_grey.png") %> <span>&nbsp;privat</span>
+            <button type="button" class="btn btn-default plant-form-visibility">
+              <%= image_tag("not-world-globe32x32_grey.png") %>
+            </button>
+            <span class="plant-form-public">privat</span>
           <% end %>
         <% end %>
-      </button>
 
       <% if @plant.public || @plant.id.nil? %>
         <%#= image_tag("world-globe32x32.png", class: "img-responsive") %>

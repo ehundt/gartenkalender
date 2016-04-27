@@ -105,7 +105,7 @@ var onPageReady = function(){
 
   $('.plant-form-visibility').on('click', function(){
     var world_globe = $(this).children("img");
-    var privacy_text = $(this).children("span");
+    var privacy_text = $(this).next();
 
     var form = document.getElementById("plant-edit-form");
     var input_field = $('#hidden_public_field');
