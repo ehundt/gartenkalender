@@ -69,7 +69,7 @@
                   { controller: "done_tasks",
                     action:     "create",
                     user_id:    current_user.id,
-                    params:      { done_task: { skipped: "true",
+                    params:      { done_task: { skipped: 1,
                                                 task_id: @task.id } } },
                   method: "post",
                   class: "btn btn-default"
@@ -88,5 +88,5 @@
                          modal_id:  @task.id,
                          done_task: nil,
                          f:         f,
-                         skipped:   false } %>
+                         skipped:   :erledigt } %>
 <% end %>

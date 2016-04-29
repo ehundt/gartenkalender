@@ -16,11 +16,11 @@
             <%= f.hidden_field :task_id, :value => task.id %>
           <% end %>
 
-          <% skipped = done_task.present? ? done_task.skipped : false %>
+          <% skipped = done_task.present? ? done_task.skipped : :erledigt %>
           <%= f.select :skipped,
               options_for_select([[ "erstellt am", nil   ],
-                                  [ "übersprungen am", true  ],
-                                  [ "erledigt am", false ]], skipped ),
+                                  [ "übersprungen am", :ueberspringen  ],
+                                  [ "erledigt am", :erledigt ]], skipped ),
               {},
               { class: 'form-control'} %>
 

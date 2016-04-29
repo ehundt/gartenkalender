@@ -4,5 +4,7 @@ class DoneTask < ActiveRecord::Base
   belongs_to :task,  -> { with_deleted }
   belongs_to :plant, -> { with_deleted }
 
+  enum skipped: ["...", :ueberspringen, :erledigt]
+
   default_value_for :date, DateTime.now
 end

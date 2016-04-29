@@ -1,34 +1,37 @@
 <table class="table">
-  <tr>
-    <td>
-      <div class="btn btn-default disabled">
-        <%= image_tag "skip.png", width: "25px", height: "25px" %>
-      </div>
-    </td>
-    <td>
-      Dieses Mal diese Aufgabe überspringen.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <div class="btn btn-default disabled">
-        <%= image_tag "schaufel.png", width: "25px", height: "25px" %>
-      </div>
-    </td>
-    <td>
-      Diese Aufgabe als erledigt markieren und eine Notiz dazu speichern.
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <div class="btn btn-default eye-button disabled">
-        <%= image_tag "eye_visible.jpg", width: "25px", height: "25px" %>
-      </div>
-    </td>
-    <td>
-      Sichtbarkeit in der Aufgabenliste durch Anklicken des Auges an- oder ausschalten.
-    </td>
-  </tr>
+  <% if can? :manage, @plant %>
+    <tr>
+      <td>
+        <div class="btn btn-default disabled">
+          <%= image_tag "skip.png", width: "25px", height: "25px" %>
+        </div>
+      </td>
+      <td>
+        Dieses Mal diese Aufgabe überspringen.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="btn btn-default disabled">
+          <%= image_tag "schaufel.png", width: "25px", height: "25px" %>
+        </div>
+      </td>
+      <td>
+        Diese Aufgabe als erledigt markieren und eine Notiz dazu speichern.
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="btn btn-default eye-button disabled">
+          <%= image_tag "eye_visible.jpg", width: "25px", height: "25px" %>
+        </div>
+      </td>
+      <td>
+        Sichtbarkeit in der Aufgabenliste durch Anklicken des Auges an- oder ausschalten.
+      </td>
+    </tr>
+  <% end %>
+
   <tr>
     <td>
       <div class="btn btn-default disabled">
@@ -50,7 +53,7 @@
     </td>
   </tr>
 
-  <% if @plant.user == current_user %>
+  <% if can? :manage, @plant %>
     <tr>
       <td>
         <div class="btn btn-default disabled">

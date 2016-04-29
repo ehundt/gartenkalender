@@ -3,7 +3,6 @@ class Task < ActiveRecord::Base
 
   belongs_to :plant
   has_many :done_tasks
-  has_many :skipped_tasks, -> {where(skipped: true)}, class_name: "DoneTask"
   has_many :task_images, :dependent => :destroy
 
   enum repeat: [:einmalig, :täglich, :wöchentlich, :monatlich, :halbjährlich, :jährlich]
@@ -118,11 +117,11 @@ class Task < ActiveRecord::Base
   end
 
   def done?
-    !current_done_task.nil? && ( current_done_task.skipped == false )
+    !current_done_task.nil? && ( current_done_task.skipped == "erledigt" )
   end
 
   def skipped?
-    !current_done_task.nil? && current_done_task.skipped
+    !current_done_task.nil? && current_done_task.skipped == "ueberspringen"
   end
 
   def upcoming?

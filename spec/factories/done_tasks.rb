@@ -3,7 +3,7 @@ FactoryGirl.define do
     task_id    1
 #    season     2
 #    year       Date.today.year
-    skipped    false
+    skipped    :erledigt
     date       DateTime.now
   end
 end

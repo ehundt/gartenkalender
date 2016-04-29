@@ -10,10 +10,10 @@
   </td>
   <td><%= done_task.notice %>
   <td><%= I18n.l done_task.date.to_date %></td>
-  <td class="hidden-xs"><% if done_task.skipped? %>übersprungen<% elsif done_task.skipped == false %>erledigt<% end %>
+  <td class="hidden-xs"><% if done_task.skipped == "ueberspringen" %>übersprungen<% elsif done_task.skipped == "erledigt" %>erledigt<% end %>
   </td>
   <td>
-    <% skipped = done_task.skipped? ? 1 : 0 %>
+    <% skipped = done_task.skipped? ? :ueberspringen : :erledigt %>
     <%= form_for done_task, method: :patch,
             url: plant_done_task_path(done_task.plant, done_task) do |f| %>
       <%= render partial: "done_tasks/modal",

@@ -34,7 +34,7 @@ class DoneTasksController < ApplicationController
     @done_task = DoneTask.new(dt_params)
 
     if @done_task.save
-      if done_task_params[:skipped] == "true"
+      if done_task_params[:skipped] == :skipped
         flash[:success] = "Aufgabe erfolgreich übersprungen."
       else
         flash[:success] = "Aufgabe erfolgreich erledigt!"

@@ -1,11 +1,15 @@
       <tr>
         <td<% if include_plant %> class="hidden-xs"<% end %>>
-          <button type="button" class="btn btn-default eye-button">
-            <% if include_plant %>
+
+          <% if include_plant %>
+            <button type="button" class="btn btn-default eye-button">
               <div class="visibility" data-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
                 <%= image_tag "eye_visible.jpg", width: "25px", height: "25px" %>
               </div>
-            <% else %>
+            </button>
+
+          <% elsif can? :manage, task %>
+            <button type="button" class="btn btn-default eye-button">
               <% if task.hide %>
                 <div class="task-visibility" data-task-id="<%= task.id %>" data-plant-id="<%= task.plant.id %>" data-path="/plants/">
                   <%= image_tag "eye_not_visible.jpg", width: "25px", height: "25px" %>
@@ -15,8 +19,9 @@
                   <%= image_tag "eye_visible.jpg", width: "25px", height: "25px" %>
                 </div>
               <% end %>
-            <% end %>
-          </button>
+            </button>
+          <% end %>
+
         </td>
         <td>
           <% if include_plant && task.plant.main_image.file? %>
@@ -32,13 +37,13 @@
             <%= link_to task.plant.name, task.plant %>
           </td>
         <% end %>
+
         <td>
-
           <%= link_to task.title, plant_task_path(task.plant, task), class: "wrap-title" %>
-
         </td>
+
         <td<% if include_plant %> class="hidden-xs"<% end %>>
-          <% if user_signed_in? %>
+          <% if can? :manage, task %>
             <button type="button" class="btn btn-default task-ok">
               <% if task.upcoming? %>
                 <%= image_tag "exclamation_mark.png", width: "20px", height: "20px" %>
@@ -53,24 +58,25 @@
           <%= task_time_frame(task) %>
         </td>
 
-        <td class="hidden-xs">
-          <%= link_to (image_tag "skip.png", width: "25px", height: "25px"),
-                  { controller: "done_tasks",
-                    action:     "create",
-                    user_id:    current_user.id,
-                    task_id:    task.id,
-                    plant_id:      task.plant.id,
-                    params:      { done_task: { skipped: "true",
-                                                task_id: task.id } } },
-                  method: "post",
-                  class: "btn btn-default"
-          %>
-        </td>
-        <td>
-          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
-            <%= image_tag "schaufel.png", width: "25px", height: "25px" %>
-          </button>
-          <% if can? :manage, task %>
+        <% if can? :manage, task %>
+          <td class="hidden-xs">
+            <%= link_to (image_tag "skip.png", width: "25px", height: "25px"),
+                    { controller: "done_tasks",
+                      action:     "create",
+                      user_id:    current_user.id,
+                      task_id:    task.id,
+                      plant_id:      task.plant.id,
+                      params:      { done_task: { skipped: :ueberspringen,
+                                                  task_id: task.id } } },
+                    method: "post",
+                    class: "btn btn-default"
+            %>
+          </td>
+
+          <td>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
+              <%= image_tag "schaufel.png", width: "25px", height: "25px" %>
+            </button>
             <%= form_for :done_task, method: :post,
                url: plant_done_tasks_path(task.plant) do |f| %>
               <%= render partial: "done_tasks/modal",
@@ -81,6 +87,6 @@
                                 f:         f,
                                 skipped:   nil } %>
             <% end %>
-          <% end %>
-        </td>
+          </td>
+        <% end %>
       </tr>
