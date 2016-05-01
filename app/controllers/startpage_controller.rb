@@ -12,6 +12,11 @@ class StartpageController < ApplicationController
     render layout: "first_steps", template: "startpage/first_steps"
   end
 
+  def welcome
+    @welcome = true
+    render layout: "first_steps", template: "startpage/first_steps"
+  end
+
   def entry
     # meta tags
     set_meta_tags description: "Persönlicher Garten-Organizer mit dynamischer TODO-Liste sowie soziales Netzwerk zum Thema Pflanzenpflege."

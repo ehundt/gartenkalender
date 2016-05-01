@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'startpage/index'
   get 'startpage/entry'
   get 'startpage/first_steps'
+  get 'startpage/welcome'
 
   # You can have the root of your site routed with "root"
   root 'startpage#entry'

@@ -68,7 +68,7 @@
     <% @plants = @searched_plants %>
   <% end %>
 <% elsif @plants.empty? %>
-  <%= render partial: "../startpage/welcome" %>
+  <%= render partial: "../startpage/no_plants" %>
 <% end %>
 
 <% unless @plants.empty? %>
