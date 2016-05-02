@@ -13,8 +13,8 @@
 <% options = @plant.tasks.collect { |t| [t.title.humanize.titleize, t.id] }
    options.unshift(["Keine", nil]) %>
 <%#= form_for :done_task, url: plant_done_tasks_path(@plant) do |f| %>
-<table class="table">
-  <%= form_for :done_task, url: plant_done_tasks_path(@plant), method: "post" do |f| %>
+<%= form_for :done_task, url: plant_done_tasks_path(@plant), method: "post" do |f| %>
+  <table class="table">
     <tr>
       <th>Aufgabe</th>
       <th>Notiz</th>
@@ -48,8 +48,10 @@
         <%= f.submit "neu", class: "btn btn-default" %>
       </td>
     </tr>
-  <% end %>
+  </table>
+<% end %>
 
+<table class="table">
   <% @done_tasks.each do |done_task| %>
     <%= render done_task %>
   <% end %>
