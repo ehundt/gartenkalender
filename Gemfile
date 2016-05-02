@@ -118,6 +118,7 @@ gem 'sitemap_generator'
 
 gem 'friendly_id', '~> 5.1.0'
 
+gem 'newrelic_rpm'
 # changes in Rails 5:
 # this is to monitor the file system for changes in dev mode to know
 # when the Rails application has to be reloaded during development

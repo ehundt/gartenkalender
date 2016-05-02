@@ -2,8 +2,8 @@
 #
 # To ban all spiders from the entire site uncomment the next two lines:
 User-agent: *
-Disallow: /users/
-Disallow: /startpage/index/
-Disallow: /plants/new/
+Disallow: /users
+Disallow: /startpage/index
+Disallow: /plants/new
 
 Sitemap: http://gartenkalender.s3.amazonaws.com/sitemaps/sitemap.xml.gz
