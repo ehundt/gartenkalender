@@ -1,3 +1,12 @@
 == README
 
-Only the beginning of a website which implements a personal calendar for gardening tasks.
+== Mein Garten
+=== Informationsmanagement rund um den Garten
+
+Dies ist der Code für http://gartenkalender.herokuapp.com/
+
+[Soziales Netzwerk] Austausch über Pflanzenpflege unter Gartenfreunden
+
+[Gartentagebuch] Alles auf einen Blick: wann habe ich was gesät, gedüngt, etc.?
+
+[Dynamische TODO-Liste] Welche Arbeiten in meinem persönlichen Garten müssen jetzt erledigt werden?
