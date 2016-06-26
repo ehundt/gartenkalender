@@ -126,3 +126,6 @@ gem 'newrelic_rpm'
 # group :development do
 #   gem 'listen', '~> 3.0.4'
 # end
+
+# RuboCop is a Ruby static code analyzer. Out of the box it will enforce many of the guidelines outlined in the community Ruby Style Guide.
+# gem 'rubocop', '~> 0.40.0', require: false

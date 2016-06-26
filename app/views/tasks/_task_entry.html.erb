@@ -42,17 +42,19 @@
           <%= link_to task.title, plant_task_path(task.plant, task), class: "wrap-title" %>
         </td>
 
-        <td<% if include_plant %> class="hidden-xs"<% end %>>
-          <% if can? :manage, task %>
-            <button type="button" class="btn btn-default task-ok">
-              <% if task.upcoming? %>
-                <%= image_tag "exclamation_mark.png", width: "20px", height: "20px" %>
-              <% else %>
-                <%= image_tag "ok.png", width: "20px", height: "20px" %>
-              <% end %>
-            </button>
-          <% end %>
-        </td>
+        <% unless @my_tasks %>
+          <td<% if include_plant %> class="hidden-xs"<% end %>>
+            <% if can? :manage, task %>
+              <button type="button" class="btn btn-default task-ok">
+                <% if task.upcoming? %>
+                  <%= image_tag "exclamation_mark.png", width: "20px", height: "20px" %>
+                <% else %>
+                  <%= image_tag "ok.png", width: "20px", height: "20px" %>
+                <% end %>
+              </button>
+            <% end %>
+          </td>
+        <% end %>
 
         <td class="hidden-xs">
           <%= task_time_frame(task) %>

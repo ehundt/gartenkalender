@@ -6,6 +6,7 @@ class StartpageController < ApplicationController
   def index
     @upcoming_tasks = Task.upcoming_tasks_for_user(current_user)
     @help_content_path = "/startpage"
+    @my_tasks = true
   end
 
   def first_steps

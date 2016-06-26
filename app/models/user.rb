@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   friendly_id :display_name, use: [:slugged, :finders]
 
   has_many :plants
+  has_many :tasks
 
   has_attached_file :picture,
     :styles         => { :medium => "300x300>", :small => "100x100", :thumb => "50x50>" },

@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <% if @plant %>
+  <% if @plant && @plant.id.present? %>
     <% if user_signed_in? %>
       <div class="row">
         <div class="col-xs-12">
@@ -54,5 +54,10 @@
         </div>
       </div>
     <% end %>
+  <% else %>
+    <%= image_tag "",
+          id: "image_preview",
+          class: "img-rounded img-responsive",
+          width: "300px" %>
   <% end %>
 <% end %>

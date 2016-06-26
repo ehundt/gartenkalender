@@ -21,37 +21,30 @@ class Task < ActiveRecord::Base
   }
 
   def self.all_for_user(user, hide=false)
-    self.where(hide: hide).where('tasks.plant_id IN (?)', user.plants.where(active: true).select(:id))
+    user.tasks.where(hide: hide).includes(:plant).references(:plant).where('plants.active = ?', true)
   end
 
   def self.upcoming_tasks_for_user(user)
-
     current_tasks = self.all_for_user(user).in_time_frame
-                    .includes(:done_tasks, :plant)
-                    .references(:done_tasks)
-                    .order(:order)
+                        .includes(:done_tasks, :plant)
+                        .references(:done_tasks)
+                        .order(:order)
 
-# this is the sql that's created by the above ... performant??
-# I only need the tasks from active plants...
-
-#  SELECT ... FROM "tasks"
-#  LEFT OUTER JOIN "done_tasks"
-#              ON "done_tasks"."task_id" = "tasks"."id"
-#              AND "done_tasks"."deleted_at" IS NULL
-#  LEFT OUTER JOIN "plants" ON "plants"."id" = "tasks"."plant_id"
-#             AND "plants"."deleted_at" IS NULL
-#
-#  WHERE "tasks"."deleted_at" IS NULL
-#  AND "tasks"."hide" = 'f'
-#  AND (plant_id IN
-#         (SELECT "plants"."id" FROM "plants"
-#             WHERE "plants"."deleted_at" IS NULL
-#             AND "plants"."user_id" = 4
-#             AND "plants"."active" = 't'))
-#  AND ( ( begin_date <= '0001-10-13'
-#         AND end_date >= '0001-10-03')
-#      OR ( begin_date <= '0002-10-13'
-#           AND end_date >= '0002-10-03'))
+# this is the sql that's created by the above:
+# SELECT plants.name, tasks.title, done_tasks.id FROM "tasks"
+# LEFT OUTER JOIN "plants"
+#     ON "plants"."id" = "tasks"."plant_id"
+#     AND "plants"."deleted_at" IS NULL
+# LEFT OUTER JOIN "done_tasks"
+#     ON "done_tasks"."task_id" = "tasks"."id"
+#     AND "done_tasks"."deleted_at" IS NULL
+# WHERE "tasks"."deleted_at" IS NULL
+# AND "tasks"."user_id" = 1
+# AND "tasks"."hide" = 'f'
+# AND (plants.active = 't')
+# AND (    (begin_date <= '0001-06-26' AND end_date >= '0001-06-16')
+#       OR (begin_date <= '0002-06-26' AND end_date >= '0002-06-16'))
+# ORDER BY "tasks"."order" ASC
 
     upcoming_tasks = []
     current_tasks.each do |task|
@@ -60,68 +53,83 @@ class Task < ActiveRecord::Base
     upcoming_tasks
   end
 
-  def current_done_task
-    current_done_task = case repeat
-      when "einmalig"     then single_done_task
-      when "jährlich"     then yearly_done_task
-      when "täglich"      then daily_done_task
-      when "wöchentlich"  then weekly_done_task
-      when "monatlich"    then monthly_done_task
-      when "halbjährlich" then half_yearly_done_task
+  def current_done_tasks
+    current_done_tasks = case repeat
+      when "einmalig"     then single_done_tasks
+      when "jährlich"     then yearly_done_tasks
+      when "täglich"      then daily_done_tasks
+      when "wöchentlich"  then weekly_done_tasks
+      when "monatlich"    then monthly_done_tasks
+      when "halbjährlich" then half_yearly_done_tasks
     end
-    current_done_task
+    current_done_tasks
   end
 
-  def single_done_task
+  def single_done_tasks
     if done_tasks.empty?
-      nil
+      []
     else
-      done_tasks.first
+      done_tasks
     end
   end
 
-  def yearly_done_task
+  def yearly_done_tasks
+    current_done_tasks = []
     done_tasks.each do |done_task|
-      return done_task if done_task.date.year == Date.today.year
+      current_done_tasks.push(done_task) if done_task.date.year == Date.today.year
       # TODO: not correct in winter!!
     end
-    nil
+    return current_done_tasks
   end
 
-  def daily_done_task
+  def daily_done_tasks
+    current_done_tasks = []
     done_tasks.each do |done_task|
-      return done_task if done_task.date.to_date == Date.today
+      current_done_tasks.push(done_task) if done_task.date.to_date == Date.today
     end
-    nil
+    return current_done_tasks
   end
 
-  def weekly_done_task
+  def weekly_done_tasks
+    current_done_tasks = []
     done_tasks.each do |done_task|
-      return done_task if done_task.date + 7.days >= Date.today
+      current_done_tasks.push(done_task) if done_task.date + 7.days >= Date.today
     end
-    nil
+    return current_done_tasks
   end
 
-  def monthly_done_task
+  def monthly_done_tasks
+    current_done_tasks = []
     done_tasks.each do |done_task|
-      return done_task if done_task.date + 1.month >= Date.today
+      current_done_tasks.push(done_task) if done_task.date + 1.month >= Date.today
     end
-    nil
+    return current_done_tasks
   end
 
-  def half_yearly_done_task
+  def half_yearly_done_tasks
+    current_done_tasks = []
     done_tasks.each do |done_task|
-      return done_task if done_task.date + 6.months >= Date.today
+      current_done_tasks.push(done_task) if done_task.date + 6.months >= Date.today
     end
-    nil
+    return current_done_tasks
   end
 
   def done?
-    !current_done_task.nil? && ( current_done_task.skipped == "erledigt" )
+    return false if current_done_tasks.empty?
+
+    current_done_tasks.each do |dt|
+      return true if dt.skipped == "erledigt"
+    end
+    return false
   end
 
   def skipped?
-    !current_done_task.nil? && current_done_task.skipped == "ueberspringen"
+    return false if current_done_tasks.empty?
+
+    current_done_tasks.each do |dt|
+      return true if dt.skipped == "ueberspringen"
+    end
+    return false
   end
 
   def upcoming?
@@ -131,7 +139,7 @@ class Task < ActiveRecord::Base
     this_day  = Date.today.change(year: 1)
     this_day2 = Date.today.change(year: 2)
 
-    current_done_task.nil? &&
-    (( begin_date <= this_day && end_date >= this_day) || (begin_date <= this_day2 && end_date >= this_day2))
+    !done? && !skipped? &&
+    ((( begin_date <= this_day) && (end_date >= this_day - 10.days)) || ((begin_date <= this_day2) && (end_date >= this_day2 - 10.days)))
   end
 end
