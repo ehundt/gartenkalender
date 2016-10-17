@@ -56,7 +56,7 @@
         <div data-toggle="popover"
              data-container="body"
              data-trigger="focus"
-             role="button"
+             role="popover"
              tabindex="0"
              data-placement="bottom"
              data-content="Nur der/die ursprüngliche AutorIn kann die Pflanzenbeschreibung veröffentlichen.">
@@ -81,7 +81,7 @@
             <% end %>
           <% end %>
         </button>
-      <% if plant.creator == current_user %>
+      <% if plant.creator != current_user %>
         </div>
       <% end %>
     </td>
@@ -104,7 +104,7 @@
     <% else %>
       <span class="likes-count"><%= plant.cached_votes_total %></span>
       <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus"
-         data-content="Hier kannst Du mit abstimmen, wenn Du eingeloggt bist."
+         data-content="Als registrierter und eingeloggter Benutzer kannst Du hier abstimmen."
          data-placement="left">
          <%= image_tag "unvoted_thumb_up.png" %>
        </a>

@@ -1,9 +1,9 @@
 <% if current_user %>
   <%= link_to "Profil", user_path(current_user) %>&nbsp;
-  <%= image_tag("green_flower_icon.png", height: '15px', width: '15px') %>
+  <%= image_tag("green_flower_icon.png", height: '15', width: '15') %>
   <%= current_user.display_name %>
   <% if current_user.admin? %> (Administrator)<% end %>
-  <%= image_tag("green_flower_icon.png", height: '15px', width: '15px') %>
+  <%= image_tag("green_flower_icon.png", height: '15', width: '15') %>
   <%= link_to "Ausloggen", destroy_user_session_path, :method => :delete %>
 <% else %>
   <%= link_to 'Einloggen', new_user_session_path %>

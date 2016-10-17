@@ -15,6 +15,7 @@
       <div class="input-group search-form"><small>oder</small>
         <select name="search_category" id="search_category" class="form-control">
           <ul class="dropdown-menu" role="menu">
+            <%# TODO: stray start tag <ul>: either do not use ul or use li around the options! %>
             <option value="keine">Kategorie</option>
             <%= options_for_select(options) %>
           </ul>

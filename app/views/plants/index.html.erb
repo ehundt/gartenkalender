@@ -82,7 +82,11 @@
                              other_user:     nil,
                              only_my_plants: true } %>
       <% end %>
-
+      <%# TODO: use partial _plants like the following instead of the thing above!!
+      => list_entry is not needed any more
+      I could also use list_entry but the the plant objects from the array would
+      be stored in the variable list_entry instead of plant %>
+      <%#= render @plants, { other_user: nil, only_my_plants: true } %>
     </table>
   </div>
   <%= paginate @plants %>
