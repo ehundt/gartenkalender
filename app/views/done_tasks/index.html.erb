@@ -33,10 +33,10 @@
         <% end %>
       </td>
       <td>
-        <%= f.text_field :notice, :class => "form-control" %>
+        <%= f.text_area :notice, :class => "form-control" %>
       </td>
       <td>
-        <%= I18n.l Date.today %>
+        <%= f.date_select :date %>
       </td>
       <td>
         <%= f.select :skipped,
