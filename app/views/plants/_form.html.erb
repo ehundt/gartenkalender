@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-xs-12">
 
-      <input type="hidden" name="plant[public]" id="hidden_public_field" value="false">
+      <input type="hidden" name="plant[public]" id="hidden_public_field" value="<%= @plant.public %>">
 
         <% if @plant.public %>
           <% if current_user && @plant.creator == current_user %>
