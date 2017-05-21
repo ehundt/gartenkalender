@@ -1,0 +1,114 @@
+<%= debug only_my_plants %>
+<tr>
+  <td>
+    <% if plant.main_image.file? %>
+      <%= link_to image_tag(download_main_image_plant_path(plant, {size: :thumb}), class: "img-rounded img-responsive",
+         alt: plant.name,
+         title: plant.name), plant %>
+      <%#= link_to image_tag(plant.main_image.expiring_url(10, :thumb), class: "img-rounded img-responsive"), plant %>
+    <% end %>
+  </td>
+
+  <td>
+    <%= link_to plant.name, plant, class: "plant-name" %><br>
+    <small><b><%= plant.tasks.length %></b> <%= link_to I18n.t("tasks", count: plant.tasks.length), plant_tasks_path(plant) %></small><br>
+  </td>
+
+  <td class="hidden-xs">
+    <% if only_my_plants %>
+      <% if plant.creator != plant.user %>
+        <small>kopiert von</small><br>
+        <%= link_to plant.creator.display_name, plant.creator %><br>
+      <% end %>
+
+    <% elsif other_user.blank? %><%# means: search result %>
+      <small>von</small><br>
+      <%= link_to plant.user.display_name, plant.user %><br>
+      <% if plant.creator != plant.user %>
+        <small>kopiert von</small><br>
+        <%= link_to plant.creator.display_name, plant.creator %><br>
+      <% end %>
+    <%# if other user, copied plants should not be visible %>
+    <% end %>
+
+    <%# TODO: performance %>
+    <% if (plant.public || !plant.original?) %>
+    <small><b><%= plant.original.comments.count %></b> <%= link_to "Kommentare", plant_comments_path(plant.original) %></small>
+    <% end %>
+  </td>
+
+  <% if only_my_plants %>
+      <td class="active-button hidden-xs" data-id="<%= plant.id %>" data-path="plants/">
+        <button type="button" class="btn btn-default">
+        <% if plant.active %>
+          <%= image_tag "plant_active.gif", height: '35px', width: '24px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
+               title: I18n.t("tooltip_plant_active") %>
+        <% else %>
+          <%= image_tag "plant_inactive.gif", height: '35px', width: '24px',  "data-toggle" => "tooltip", "data-placement" => "bottom",
+               title: I18n.t("tooltip_plant_inactive") %>
+        <% end %>
+      </button>
+    </td>
+  <% end %>
+
+  <% if only_my_plants %>
+    <td class="hidden-xs">
+      <% if plant.creator != current_user %>
+        <div data-toggle="popover"
+             data-container="body"
+             data-trigger="focus"
+             role="popover"
+             tabindex="0"
+             data-placement="bottom"
+             data-content="Nur der/die ursprüngliche AutorIn kann die Pflanzenbeschreibung veröffentlichen.">
+      <% end %>
+
+      <button type="button" class="btn btn-default plant-visibility world-globe<% if plant.creator != current_user && !plant.public %> no-button<% end %>"
+         data-plant-id="<%= plant.id %>"
+         data-switch-allowed="<% if plant.creator == current_user %>1<% else %>0<% end %>"
+         >
+          <% if plant.public %>
+            <% if plant.creator != current_user %>
+              <%= image_tag "world-globe32x32_grey.png", height: "35px", width: "35px" %>
+            <% else %>
+              <%= image_tag "world-globe32x32.png", height: "35px", width: "35px" %>
+            <% end %>
+
+          <% else %>
+            <% if plant.creator != current_user %>
+              <%= image_tag "not-world-globe32x32_grey.png", height: "35px", width: "35px" %>
+            <% else %>
+              <%= image_tag "not-world-globe32x32.png", height: "35px", width: "35px" %>
+            <% end %>
+          <% end %>
+        </button>
+      <% if plant.creator != current_user %>
+        </div>
+      <% end %>
+    </td>
+  <% end %>
+
+  <td class="likes-count-small">
+    <% if user_signed_in? %>
+      <% if plant.public %>
+        <button type="button" class="btn btn-default likes-counter" data-id=<%= plant.id %> data-path="/plants/" data-likeallowed="1">
+
+          <% if current_user && current_user.voted_for?(plant) %>
+            <%= image_tag "voted_thumb_up.png", height: "35px", width: "24px" %>
+          <% else %>
+            <%= image_tag "unvoted_thumb_up.png", height: "35px", width: "24px" %>
+          <% end %>
+        </button>
+         <div class="likes-count-small"><%= plant.cached_votes_total %></div>
+
+      <% end %>
+    <% else %>
+      <span class="likes-count"><%= plant.cached_votes_total %></span>
+      <a tabindex="0" role="button" data-toggle="popover" data-trigger="focus"
+         data-content="Als registrierter und eingeloggter Benutzer kannst Du hier abstimmen."
+         data-placement="left">
+         <%= image_tag "unvoted_thumb_up.png" %>
+       </a>
+    <% end %>
+  </td>
+</tr>
