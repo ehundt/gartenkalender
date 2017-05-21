@@ -65,7 +65,17 @@
         <div class="col-xs-6 task-action-links">
           <% if can? :manage, task %>
               <% if task.upcoming? %>
-                <%= link_to "überspringen", plant_task_done_tasks_path({task_id: task.id, plant_id: task.plant.id, done_task: { skipped: true } }), method: :post, class: "btn btn-default", role: "button" %>&nbsp;
+                  <%= link_to (image_tag "skip.png", width: "25px", height: "25px"),
+                    { controller: "done_tasks",
+                      action:     "create",
+                      user_id:    current_user.id,
+                      task_id:    task.id,
+                      plant_id:      task.plant.id,
+                      params:      { done_task: { skipped: :ueberspringen,
+                                                  task_id: task.id } } },
+                    method: "post",
+                    class: "btn btn-default"
+                  %>
               <% end %>
               <button type="button" class="btn btn-default" data-toggle="modal" data-target="#taskDoneModal<%= task.id %>">
                 erledigt
