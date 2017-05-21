@@ -69,7 +69,7 @@
                   { controller: "done_tasks",
                     action:     "create",
                     user_id:    current_user.id,
-                    params:      { done_task: { skipped: 1,
+                    params:      { done_task: { skipped: :ueberspringen,
                                                 task_id: @task.id } } },
                   method: "post",
                   class: "btn btn-default"
