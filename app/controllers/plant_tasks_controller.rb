@@ -1,0 +1,2 @@
+class PlantTasksController < TasksController
+end

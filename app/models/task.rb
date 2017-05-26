@@ -21,7 +21,7 @@ class Task < ActiveRecord::Base
   }
 
   def self.all_for_user(user, hide=false)
-    user.tasks.where(hide: hide).includes(:plant).references(:plant).where('plants.active = ?', true)
+    user.tasks.where(hide: hide).includes(:plant).references(:plant).where('organisms.active = ?', true)
   end
 
   def self.upcoming_tasks_for_user(user)

@@ -1,0 +1,2 @@
+class PlantTask < Task
+end

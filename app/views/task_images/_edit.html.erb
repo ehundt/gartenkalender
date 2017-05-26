@@ -18,8 +18,9 @@
 <% end %>
 
 <h5>Neues Bild:</h5>
-<%= form_for([@plant, @task, @task.task_images.build],
-             html: { multipart: true }) do |f| %>
+
+<%= form_for :task_image, url: plant_task_task_images_path(@plant, @task),
+      html: { multipart: true } do |f| %>
   <%= render partial: "/task_images/form",
              locals: { f: f, show_file_input_field: true } %>
 <% end %>

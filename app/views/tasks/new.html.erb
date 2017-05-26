@@ -6,4 +6,6 @@
   </div>
 </div>
 
-<%= render partial: "form" %>
+<%= form_for :task, url: {action: "create"} do |f| %>
+  <%= render partial: "form", locals: { f: f } %>
+<% end %>

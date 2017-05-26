@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428133006) do
+ActiveRecord::Schema.define(version: 20170525200714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20160428133006) do
   add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
-  create_table "plants", force: :cascade do |t|
+  create_table "organisms", force: :cascade do |t|
     t.string   "name"
     t.string   "image_url"
     t.text     "desc"
@@ -66,12 +66,12 @@ ActiveRecord::Schema.define(version: 20160428133006) do
     t.integer  "main_image_file_size"
     t.datetime "main_image_updated_at"
     t.string   "subtitle"
-    t.boolean  "active",                  default: true,  null: false
+    t.boolean  "active",                  default: true,    null: false
     t.integer  "user_id"
     t.integer  "creator_id"
     t.datetime "deleted_at"
     t.integer  "orig_id"
-    t.boolean  "public",                  default: false, null: false
+    t.boolean  "public",                  default: false,   null: false
     t.integer  "category",                default: 0
     t.integer  "cached_votes_total",      default: 0
     t.text     "private_notes",           default: ""
@@ -81,12 +81,30 @@ ActiveRecord::Schema.define(version: 20160428133006) do
     t.float    "ph_to"
     t.string   "slug"
     t.integer  "duration"
+    t.string   "type",                    default: "Plant", null: false
   end
 
-  add_index "plants", ["cached_votes_total"], name: "index_plants_on_cached_votes_total", using: :btree
-  add_index "plants", ["deleted_at"], name: "index_plants_on_deleted_at", using: :btree
-  add_index "plants", ["slug"], name: "index_plants_on_slug", using: :btree
-  add_index "plants", ["user_id"], name: "index_plants_on_user_id", using: :btree
+  add_index "organisms", ["cached_votes_total"], name: "index_organisms_on_cached_votes_total", using: :btree
+  add_index "organisms", ["deleted_at"], name: "index_organisms_on_deleted_at", using: :btree
+  add_index "organisms", ["slug"], name: "index_organisms_on_slug", using: :btree
+  add_index "organisms", ["user_id"], name: "index_organisms_on_user_id", using: :btree
+
+  create_table "pests", force: :cascade do |t|
+    t.string   "name",                                    null: false
+    t.string   "desc",                                    null: false
+    t.integer  "creator_id",                              null: false
+    t.boolean  "public",                  default: false, null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.string   "main_image_file_name"
+    t.string   "main_image_content_type"
+    t.integer  "main_image_file_size"
+    t.datetime "main_image_updated_at"
+    t.datetime "deleted_at"
+  end
+
+  add_index "pests", ["creator_id"], name: "index_pests_on_creator_id", using: :btree
+  add_index "pests", ["deleted_at"], name: "index_pests_on_deleted_at", using: :btree
 
   create_table "seasons", force: :cascade do |t|
     t.integer  "season",     null: false
@@ -117,15 +135,16 @@ ActiveRecord::Schema.define(version: 20160428133006) do
     t.integer  "stop",       default: 0
     t.text     "desc"
     t.integer  "repeat"
-    t.integer  "plant_id",                   null: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-    t.boolean  "hide",       default: false, null: false
+    t.integer  "plant_id",                         null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.boolean  "hide",       default: false,       null: false
     t.integer  "user_id"
     t.datetime "deleted_at"
     t.date     "begin_date"
     t.date     "end_date"
     t.integer  "order"
+    t.string   "type",       default: "PlantTask", null: false
   end
 
   add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree

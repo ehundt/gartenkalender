@@ -9,5 +9,6 @@
 <h4>
 <span class="task-title">Bearbeiten: <%= link_to @task.title, plant_task_path(@task.plant, @task) %></span></h4>
 
-<%= render partial: "form" %>
-
+<%= form_for :task, method: :patch, url: plant_task_path(@task.plant, @task) do |f| %>
+  <%= render partial: "form", locals: { f: f } %>
+<% end %>
