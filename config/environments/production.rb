@@ -89,7 +89,7 @@ Rails.application.configure do
   }
 
   # for devise
-  config.action_mailer.default_url_options = { host: 'gartenkalender.heroku.com' }
+  config.action_mailer.default_url_options = { host: 'gartenkalender.herokuapp.com' }
 
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
