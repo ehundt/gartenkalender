@@ -1,4 +1,4 @@
-class TaskImage < ActiveRecord::Base
+class TaskImage < ApplicationRecord
   belongs_to :task
   has_attached_file :image, styles: { medium: "350x350>", thumb: "100x100>"},
                             :default_url => "/task_images/:style/missing.png",

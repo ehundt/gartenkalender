@@ -1,4 +1,4 @@
-class Plant < ActiveRecord::Base
+class Plant < ApplicationRecord
   acts_as_paranoid
   acts_as_votable
 

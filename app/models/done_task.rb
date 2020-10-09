@@ -1,4 +1,4 @@
-class DoneTask < ActiveRecord::Base
+class DoneTask < ApplicationRecord
   acts_as_paranoid
 
   belongs_to :task,  -> { with_deleted }

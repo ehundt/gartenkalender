@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-ruby '2.2.0'
+ruby '2.7.2'
 # on heroku: Old: ruby 2.0.0p645 (2015-04-13 revision 50299) [x86_64-linux]
 #            New: ruby 2.2.0p0 (2014-12-25 revision 49005) [x86_64-linux]
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.0'
+gem 'rails', '5.0.7'
 
 gem 'rails-i18n'
 
@@ -18,14 +18,14 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2'
 
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-gem "paperclip", "~> 4.2"
+gem "paperclip", "~> 4"
 
 gem "rest-client"
 
@@ -40,9 +40,9 @@ gem 'fog', require: 'fog/aws'
 # upload library for Ruby applications, Refile is an attempt by
 # CarrierWave's original author to fix the design mistakes and
 # overengineering in CarrierWave.
-gem 'carrierwave'
+gem 'carrierwave', "~> 0.11"
 
-gem "paranoia", "~> 2.0"
+gem "paranoia", "~> 2.4.2"
 gem 'acts_as_votable', '~> 0.10.0'
 
 # Use jquery as the JavaScript library
@@ -52,9 +52,10 @@ gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', '~> 0.4', group: :doc
 
-gem 'devise', '~> 3.4.1'
+
+gem 'devise', '~> 4.0'
 gem 'devise-i18n'
 
 # Use ActiveModel has_secure_password
@@ -68,14 +69,14 @@ gem 'puma' # used by Heroku instead of WebRick as Rails server
 
 gem 'meta-tags'
 
-gem 'default_value_for', '~> 3.0.0'
+gem 'default_value_for', '~> 3'
 
 group :development, :test do
 #  gem 'sunspot_rails'
 #  gem 'sunspot_solr' # is the pre-packaged development version of Solr
 
-  gem 'rspec-rails',        '~> 3.0',   :require => false
-  gem 'factory_girl_rails', '~> 4.5.0', :require => false
+  gem 'rspec-rails',        '~> 3',   :require => false
+  gem 'factory_girl_rails', '~> 4', :require => false
   gem 'database_cleaner'
   gem 'faker'
   gem 'cucumber-rails',                 :require => false
@@ -116,7 +117,7 @@ end
 
 gem 'sitemap_generator'
 
-gem 'friendly_id', '~> 5.1.0'
+gem 'friendly_id', '~> 5.2'
 
 gem 'newrelic_rpm'
 # changes in Rails 5:

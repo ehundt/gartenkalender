@@ -1,4 +1,4 @@
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
 # TODO?  acts_as_paranoid
 
   belongs_to :plant
