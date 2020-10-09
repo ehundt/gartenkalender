@@ -1,9 +1,9 @@
 class TasksController < ApplicationController
 
-  before_filter :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
 
   # TODO: should it be a different type of filter?
-  # used after_filter instead of before_filter because I need to
+  # used after_filter instead of before_action because I need to
   # load the plant first in order to know whether it s public or not
   after_filter :authenticate_user_for_private_plants, only: [:index, :show]
 

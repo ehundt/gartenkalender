@@ -1,5 +1,5 @@
 class PlantsController < ApplicationController
-  before_filter :authenticate_user!, except: [:show, :download_main_image]
+  before_action :authenticate_user!, except: [:show, :download_main_image]
 
   load_and_authorize_resource
 

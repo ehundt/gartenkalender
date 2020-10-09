@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -22,25 +21,23 @@ ActiveRecord::Schema.define(version: 20160428133006) do
     t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["plant_id"], name: "index_comments_on_plant_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
-
-  add_index "comments", ["plant_id"], name: "index_comments_on_plant_id", using: :btree
-  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "done_tasks", force: :cascade do |t|
     t.integer  "task_id"
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
-    t.datetime "date",       default: '2015-05-04 09:32:25', null: false
+    t.datetime "date",       default: '2020-10-09 15:46:46', null: false
     t.datetime "deleted_at"
     t.string   "notice"
     t.integer  "plant_id"
     t.integer  "skipped"
+    t.index ["deleted_at"], name: "index_done_tasks_on_deleted_at", using: :btree
+    t.index ["plant_id"], name: "index_done_tasks_on_plant_id", using: :btree
+    t.index ["task_id"], name: "index_done_tasks_on_task_id", using: :btree
   end
-
-  add_index "done_tasks", ["deleted_at"], name: "index_done_tasks_on_deleted_at", using: :btree
-  add_index "done_tasks", ["plant_id"], name: "index_done_tasks_on_plant_id", using: :btree
-  add_index "done_tasks", ["task_id"], name: "index_done_tasks_on_task_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -48,12 +45,11 @@ ActiveRecord::Schema.define(version: 20160428133006) do
     t.string   "sluggable_type", limit: 50
     t.string   "scope"
     t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
-
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "plants", force: :cascade do |t|
     t.string   "name"
@@ -81,12 +77,11 @@ ActiveRecord::Schema.define(version: 20160428133006) do
     t.float    "ph_to"
     t.string   "slug"
     t.integer  "duration"
+    t.index ["cached_votes_total"], name: "index_plants_on_cached_votes_total", using: :btree
+    t.index ["deleted_at"], name: "index_plants_on_deleted_at", using: :btree
+    t.index ["slug"], name: "index_plants_on_slug", using: :btree
+    t.index ["user_id"], name: "index_plants_on_user_id", using: :btree
   end
-
-  add_index "plants", ["cached_votes_total"], name: "index_plants_on_cached_votes_total", using: :btree
-  add_index "plants", ["deleted_at"], name: "index_plants_on_deleted_at", using: :btree
-  add_index "plants", ["slug"], name: "index_plants_on_slug", using: :btree
-  add_index "plants", ["user_id"], name: "index_plants_on_user_id", using: :btree
 
   create_table "seasons", force: :cascade do |t|
     t.integer  "season",     null: false
@@ -107,9 +102,8 @@ ActiveRecord::Schema.define(version: 20160428133006) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.index ["task_id"], name: "index_task_images_on_task_id", using: :btree
   end
-
-  add_index "task_images", ["task_id"], name: "index_task_images_on_task_id", using: :btree
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title"
@@ -126,24 +120,23 @@ ActiveRecord::Schema.define(version: 20160428133006) do
     t.date     "begin_date"
     t.date     "end_date"
     t.integer  "order"
+    t.index ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree
+    t.index ["plant_id"], name: "index_tasks_on_plant_id", using: :btree
+    t.index ["user_id"], name: "index_tasks_on_user_id", using: :btree
   end
-
-  add_index "tasks", ["deleted_at"], name: "index_tasks_on_deleted_at", using: :btree
-  add_index "tasks", ["plant_id"], name: "index_tasks_on_plant_id", using: :btree
-  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.integer  "admin",                  default: 0
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.string   "email",                  default: "",   null: false
-    t.string   "encrypted_password",     default: "",   null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,    null: false
+    t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -154,27 +147,24 @@ ActiveRecord::Schema.define(version: 20160428133006) do
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
     t.datetime "picture_updated_at"
-    t.boolean  "show_welcome_page",      default: true
     t.string   "slug"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["slug"], name: "index_users_on_slug", using: :btree
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["slug"], name: "index_users_on_slug", using: :btree
-
   create_table "votes", force: :cascade do |t|
-    t.integer  "votable_id"
     t.string   "votable_type"
-    t.integer  "voter_id"
+    t.integer  "votable_id"
     t.string   "voter_type"
+    t.integer  "voter_id"
     t.boolean  "vote_flag"
     t.string   "vote_scope"
     t.integer  "vote_weight"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+    t.index ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
   end
-
-  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
-  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
 
 end

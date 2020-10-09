@@ -50,11 +50,22 @@ GEM
     arel (7.1.4)
     autoprefixer-rails (10.0.1.0)
       execjs
-    aws-sdk (1.67.0)
-      aws-sdk-v1 (= 1.67.0)
-    aws-sdk-v1 (1.67.0)
-      json (~> 1.4)
-      nokogiri (~> 1)
+    aws-eventstream (1.1.0)
+    aws-partitions (1.380.0)
+    aws-sdk-core (3.109.1)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.239.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1.0)
+    aws-sdk-kms (1.39.0)
+      aws-sdk-core (~> 3, >= 3.109.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.83.0)
+      aws-sdk-core (~> 3, >= 3.109.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.1)
+    aws-sigv4 (1.2.2)
+      aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.16)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
@@ -82,8 +93,6 @@ GEM
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
     climate_control (0.2.0)
-    cocaine (0.5.8)
-      climate_control (>= 0.0.3, < 1.0)
     coderay (1.1.3)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -321,6 +330,7 @@ GEM
     ipaddress (0.8.3)
     jbuilder (2.10.1)
       activesupport (>= 5.0.0)
+    jmespath (1.4.0)
     jquery-rails (4.4.0)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -363,12 +373,12 @@ GEM
       mini_portile2 (~> 2.4.0)
     optimist (3.0.1)
     orm_adapter (0.5.0)
-    paperclip (4.3.7)
-      activemodel (>= 3.2.0)
-      activesupport (>= 3.2.0)
-      cocaine (~> 0.5.5)
+    paperclip (6.1.0)
+      activemodel (>= 4.2.0)
+      activesupport (>= 4.2.0)
       mime-types
-      mimemagic (= 0.3.0)
+      mimemagic (~> 0.3.0)
+      terrapin (~> 0.6.0)
     paranoia (2.4.2)
       activerecord (>= 4.0, < 6.1)
     pg (1.2.3)
@@ -481,6 +491,8 @@ GEM
       sprockets (>= 3.0.0)
     sys-uname (1.2.1)
       ffi (>= 1.0.0)
+    terrapin (0.6.0)
+      climate_control (>= 0.0.3, < 1.0)
     thor (1.0.1)
     thread_safe (0.3.6)
     tilt (2.0.10)
@@ -520,7 +532,7 @@ DEPENDENCIES
   acts_as_votable (~> 0.10.0)
   animate-rails
   autoprefixer-rails
-  aws-sdk (< 2.0)
+  aws-sdk-s3
   better_errors (~> 2.1.1)
   bootstrap-sass (~> 3.2.0)
   byebug
@@ -539,10 +551,11 @@ DEPENDENCIES
   friendly_id (~> 5.2)
   jbuilder (~> 2.0)
   jquery-rails
+  json (~> 1.8)
   kaminari
   meta-tags
   newrelic_rpm
-  paperclip (~> 4)
+  paperclip (>= 5.0)
   paranoia (~> 2.4.2)
   pg
   pry-rails

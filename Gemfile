@@ -25,14 +25,16 @@ gem 'autoprefixer-rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-gem "paperclip", "~> 4"
+gem "paperclip", ">= 5.0"
 
 gem "rest-client"
 
 # Amazon webservices S3
 # newer version is buggy, see:
 # http://ruby.awsblog.com/post/TxFKSK2QJE6RPZ/Upcoming-Stable-Release-of-AWS-SDK-for-Ruby-Version-2
-gem 'aws-sdk', '< 2.0'
+# gem 'aws-sdk', ">= 2.0"
+gem 'aws-sdk-s3'
+
 # Module for the 'fog' gem to support Amazon Web Services:
 gem 'fog', require: 'fog/aws'
 
@@ -53,7 +55,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4', group: :doc
-
+gem 'json', '~> 1.8'
 
 gem 'devise', '~> 4.0'
 gem 'devise-i18n'

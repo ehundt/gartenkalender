@@ -1,5 +1,5 @@
 class StartpageController < ApplicationController
-  before_filter :authenticate_user!, only: [:index]
+  before_action :authenticate_user!, only: [:index]
 
   load_and_authorize_resource
 
