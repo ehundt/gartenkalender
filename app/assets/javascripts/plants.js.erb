@@ -1,4 +1,5 @@
-var onPageReady = function(){
+$(document).on('turbolinks:load', function(){
+
   $('#plant-public').on('click', function(){
     var icon = $(this).parent().parent().parent().parent().children("div").children("img");
     if ($(icon).attr("src") == "<%= image_url('world-globe32x32.png') %>"){
@@ -121,7 +122,6 @@ var onPageReady = function(){
       input_field.val("true");
     };
   });
-};
 
-$(document).ready(onPageReady);
-$(document).on("page:load", onPageReady);
+});
+
