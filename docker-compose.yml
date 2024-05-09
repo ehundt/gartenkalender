@@ -1,0 +1,24 @@
+services:
+  web:
+    image: "socialgardener"
+    build:
+      context: .
+      args:
+        RAILS_ENV: "development"
+    volumes:
+      - .:/gartenkalender:delegated
+      - /gartenkalender/tmp/db/
+      - /gartenkalender/tmp/db-test/
+    command: ["bundle exec rails server -b 0.0.0.0"]
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    env_file:
+      - ".env-dev"
+  postgres:
+    image: mdillon/postgis:9.6-alpine
+    env_file:
+      - ".env-dev"
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data:delegated

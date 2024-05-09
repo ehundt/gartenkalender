@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.7.2'
+ruby '2.7.8'
 # on heroku: Old: ruby 2.0.0p645 (2015-04-13 revision 50299) [x86_64-linux]
 #            New: ruby 2.2.0p0 (2014-12-25 revision 49005) [x86_64-linux]
 
